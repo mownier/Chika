@@ -1,0 +1,1038 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		218ABF5ED4E1B2C9500A1F95 /* Pods_ChikaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */; };
+		4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2551FBBE10F0096E403 /* UserMock.swift */; };
+		4803C2591FBC00280096E403 /* SignInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2581FBC00280096E403 /* SignInScene.swift */; };
+		4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */; };
+		4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2621FBC2D6D0096E403 /* SignInSceneWorker.swift */; };
+		4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2641FBC2DA80096E403 /* SignInSceneTheme.swift */; };
+		4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2671FBC2FBA0096E403 /* AppError.swift */; };
+		4803C26B1FBC33960096E403 /* SignInSceneWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C26A1FBC33960096E403 /* SignInSceneWorkerTests.swift */; };
+		4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C26C1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift */; };
+		4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */; };
+		4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9781FBD702F0020A594 /* SignInSceneMock.swift */; };
+		4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */; };
+		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
+		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
+		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
+		483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483FC2F11FBAD25300545269 /* AppDelegate.swift */; };
+		483FC2F71FBAD25300545269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F51FBAD25300545269 /* Main.storyboard */; };
+		483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F81FBAD25300545269 /* Assets.xcassets */; };
+		483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */; };
+		489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DA18F1FBD7BB600918AD9 /* ViewMock.swift */; };
+		48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */; };
+		48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */; };
+		48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */; };
+		48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0191FBADC60008C78F6 /* Service.swift */; };
+		48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D01C1FBADD2B008C78F6 /* Access.swift */; };
+		48B4D0211FBAE86C008C78F6 /* ServiceErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0201FBAE86C008C78F6 /* ServiceErrorTests.swift */; };
+		48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */; };
+		48B4D0251FBAEA43008C78F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */; };
+		48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0291FBAEE64008C78F6 /* AuthMock.swift */; };
+		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
+		48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */; };
+		48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */; };
+		48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019981FBD5D93008D94DE /* HomeScene.swift */; };
+		48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */; };
+		48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */; };
+		48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */; };
+		620CB63C900C763D99FB09E3 /* Pods_ChikaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */; };
+		865BCCCA239C091FAECE69DB /* Pods_Chika.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E0275EFC771ED20D1C73BF /* Pods_Chika.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		483FC3031FBAD25300545269 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 483FC2E61FBAD25300545269 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483FC2ED1FBAD25300545269;
+			remoteInfo = Chika;
+		};
+		483FC30E1FBAD25300545269 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 483FC2E61FBAD25300545269 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 483FC2ED1FBAD25300545269;
+			remoteInfo = Chika;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChikaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4803C2551FBBE10F0096E403 /* UserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
+		4803C2581FBC00280096E403 /* SignInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScene.swift; sourceTree = "<group>"; };
+		4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneTests.swift; sourceTree = "<group>"; };
+		4803C2621FBC2D6D0096E403 /* SignInSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorker.swift; sourceTree = "<group>"; };
+		4803C2641FBC2DA80096E403 /* SignInSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneTheme.swift; sourceTree = "<group>"; };
+		4803C2671FBC2FBA0096E403 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		4803C26A1FBC33960096E403 /* SignInSceneWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerTests.swift; sourceTree = "<group>"; };
+		4803C26C1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerOutputMock.swift; sourceTree = "<group>"; };
+		4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowMock.swift; sourceTree = "<group>"; };
+		4806E9781FBD702F0020A594 /* SignInSceneMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneMock.swift; sourceTree = "<group>"; };
+		4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactory.swift; sourceTree = "<group>"; };
+		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
+		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
+		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
+		483FC2EE1FBAD25300545269 /* Chika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chika.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		483FC2F11FBAD25300545269 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		483FC2F61FBAD25300545269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		483FC2F81FBAD25300545269 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		483FC2FB1FBAD25300545269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		483FC2FD1FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		483FC3021FBAD25300545269 /* ChikaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChikaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		483FC3081FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		483FC30D1FBAD25300545269 /* ChikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		483FC3131FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		489DA18F1FBD7BB600918AD9 /* ViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
+		48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceMock.swift; sourceTree = "<group>"; };
+		48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlow.swift; sourceTree = "<group>"; };
+		48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteService.swift; sourceTree = "<group>"; };
+		48B4D0191FBADC60008C78F6 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		48B4D01C1FBADD2B008C78F6 /* Access.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Access.swift; sourceTree = "<group>"; };
+		48B4D0201FBAE86C008C78F6 /* ServiceErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceErrorTests.swift; sourceTree = "<group>"; };
+		48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
+		48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		48B4D0291FBAEE64008C78F6 /* AuthMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMock.swift; sourceTree = "<group>"; };
+		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
+		48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerMock.swift; sourceTree = "<group>"; };
+		48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowTests.swift; sourceTree = "<group>"; };
+		48E019981FBD5D93008D94DE /* HomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScene.swift; sourceTree = "<group>"; };
+		48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactory.swift; sourceTree = "<group>"; };
+		48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationControllerFactory.swift; sourceTree = "<group>"; };
+		48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlow.swift; sourceTree = "<group>"; };
+		50E0275EFC771ED20D1C73BF /* Pods_Chika.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chika.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A512F3683C0D2FADD0A0F36 /* Pods-ChikaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaTests/Pods-ChikaTests.release.xcconfig"; sourceTree = "<group>"; };
+		6287BE7AF4D15C2D7B64EDF5 /* Pods-ChikaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaUITests/Pods-ChikaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		736389749CAE4CA289A2FD74 /* Pods-ChikaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaUITests/Pods-ChikaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		773B13B919FD6275F27DB1DD /* Pods-ChikaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaTests/Pods-ChikaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChikaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A86A709744EB3DDB3866A37F /* Pods-Chika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chika.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chika/Pods-Chika.release.xcconfig"; sourceTree = "<group>"; };
+		F03EB2AB9E52B74626195FBD /* Pods-Chika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chika.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chika/Pods-Chika.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		483FC2EB1FBAD25300545269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				865BCCCA239C091FAECE69DB /* Pods_Chika.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC2FF1FBAD25300545269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				620CB63C900C763D99FB09E3 /* Pods_ChikaTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC30A1FBAD25300545269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				218ABF5ED4E1B2C9500A1F95 /* Pods_ChikaUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4803C2571FBBFFE20096E403 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				48E019971FBD5D93008D94DE /* Home */,
+				48B4D0141FBAD86A008C78F6 /* Sign In */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		4803C25F1FBC2CA80096E403 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				483D0C631FBD74D7004BDB3F /* Home */,
+				4803C2691FBC30260096E403 /* Sign In */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		4803C2691FBC30260096E403 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */,
+				48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */,
+				4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */,
+				4803C26A1FBC33960096E403 /* SignInSceneWorkerTests.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		483D0C631FBD74D7004BDB3F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */,
+				483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		483FC2E51FBAD25300545269 = {
+			isa = PBXGroup;
+			children = (
+				483FC2F01FBAD25300545269 /* Chika */,
+				483FC3051FBAD25300545269 /* ChikaTests */,
+				483FC3101FBAD25300545269 /* ChikaUITests */,
+				483FC2EF1FBAD25300545269 /* Products */,
+				C041E7F997C048EBF3375AFC /* Pods */,
+				D29AD6C636C573662AC1883D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		483FC2EF1FBAD25300545269 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				483FC2EE1FBAD25300545269 /* Chika.app */,
+				483FC3021FBAD25300545269 /* ChikaTests.xctest */,
+				483FC30D1FBAD25300545269 /* ChikaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		483FC2F01FBAD25300545269 /* Chika */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */,
+				483FC2FD1FBAD25300545269 /* Info.plist */,
+				48B4D0121FBAD7D3008C78F6 /* Resources */,
+				48B4D0111FBAD79C008C78F6 /* Source */,
+			);
+			path = Chika;
+			sourceTree = "<group>";
+		};
+		483FC3051FBAD25300545269 /* ChikaTests */ = {
+			isa = PBXGroup;
+			children = (
+				483FC3081FBAD25300545269 /* Info.plist */,
+				48B4D0261FBAEE40008C78F6 /* Mocks */,
+				4803C25F1FBC2CA80096E403 /* Scenes */,
+				48B4D01E1FBAE845008C78F6 /* Services */,
+			);
+			path = ChikaTests;
+			sourceTree = "<group>";
+		};
+		483FC3101FBAD25300545269 /* ChikaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				483FC3131FBAD25300545269 /* Info.plist */,
+			);
+			path = ChikaUITests;
+			sourceTree = "<group>";
+		};
+		48B4D0111FBAD79C008C78F6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0131FBAD83B008C78F6 /* Application */,
+				48B4D01B1FBADD12008C78F6 /* Models */,
+				4803C2571FBBFFE20096E403 /* Scenes */,
+				48B4D0151FBAD897008C78F6 /* Services */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		48B4D0121FBAD7D3008C78F6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				483FC2F81FBAD25300545269 /* Assets.xcassets */,
+				483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */,
+				483FC2F51FBAD25300545269 /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		48B4D0131FBAD83B008C78F6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				483FC2F11FBAD25300545269 /* AppDelegate.swift */,
+				4803C2671FBC2FBA0096E403 /* AppError.swift */,
+				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		48B4D0141FBAD86A008C78F6 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				4803C2581FBC00280096E403 /* SignInScene.swift */,
+				4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */,
+				48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */,
+				4803C2641FBC2DA80096E403 /* SignInSceneTheme.swift */,
+				4803C2621FBC2D6D0096E403 /* SignInSceneWorker.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		48B4D0151FBAD897008C78F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0191FBADC60008C78F6 /* Service.swift */,
+				48B4D0161FBAD8AD008C78F6 /* Remote */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		48B4D0161FBAD8AD008C78F6 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		48B4D01B1FBADD12008C78F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D01C1FBADD2B008C78F6 /* Access.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		48B4D01E1FBAE845008C78F6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0201FBAE86C008C78F6 /* ServiceErrorTests.swift */,
+				48B4D01F1FBAE84F008C78F6 /* Remote */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		48B4D01F1FBAE84F008C78F6 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		48B4D0261FBAEE40008C78F6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				48B4D0291FBAEE64008C78F6 /* AuthMock.swift */,
+				48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */,
+				4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */,
+				48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */,
+				48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */,
+				4803C26C1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift */,
+				4803C2551FBBE10F0096E403 /* UserMock.swift */,
+				4806E9781FBD702F0020A594 /* SignInSceneMock.swift */,
+				489DA18F1FBD7BB600918AD9 /* ViewMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		48E019971FBD5D93008D94DE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				48E019981FBD5D93008D94DE /* HomeScene.swift */,
+				48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */,
+				48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		C041E7F997C048EBF3375AFC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F03EB2AB9E52B74626195FBD /* Pods-Chika.debug.xcconfig */,
+				A86A709744EB3DDB3866A37F /* Pods-Chika.release.xcconfig */,
+				773B13B919FD6275F27DB1DD /* Pods-ChikaTests.debug.xcconfig */,
+				5A512F3683C0D2FADD0A0F36 /* Pods-ChikaTests.release.xcconfig */,
+				736389749CAE4CA289A2FD74 /* Pods-ChikaUITests.debug.xcconfig */,
+				6287BE7AF4D15C2D7B64EDF5 /* Pods-ChikaUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D29AD6C636C573662AC1883D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50E0275EFC771ED20D1C73BF /* Pods_Chika.framework */,
+				294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */,
+				798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		483FC2ED1FBAD25300545269 /* Chika */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 483FC3161FBAD25300545269 /* Build configuration list for PBXNativeTarget "Chika" */;
+			buildPhases = (
+				2671EB23C77956187E002259 /* [CP] Check Pods Manifest.lock */,
+				483FC2EA1FBAD25300545269 /* Sources */,
+				483FC2EB1FBAD25300545269 /* Frameworks */,
+				483FC2EC1FBAD25300545269 /* Resources */,
+				7F780512B523E5B514BB9409 /* [CP] Embed Pods Frameworks */,
+				99BD54DBFAA9E6A660A99253 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chika;
+			productName = Chika;
+			productReference = 483FC2EE1FBAD25300545269 /* Chika.app */;
+			productType = "com.apple.product-type.application";
+		};
+		483FC3011FBAD25300545269 /* ChikaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 483FC3191FBAD25300545269 /* Build configuration list for PBXNativeTarget "ChikaTests" */;
+			buildPhases = (
+				C2C4D719A0A290AA8574D96E /* [CP] Check Pods Manifest.lock */,
+				483FC2FE1FBAD25300545269 /* Sources */,
+				483FC2FF1FBAD25300545269 /* Frameworks */,
+				483FC3001FBAD25300545269 /* Resources */,
+				9F23F8C0656A32D1045BD087 /* [CP] Embed Pods Frameworks */,
+				67D7D324ECF85026AF60EC15 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				483FC3041FBAD25300545269 /* PBXTargetDependency */,
+			);
+			name = ChikaTests;
+			productName = ChikaTests;
+			productReference = 483FC3021FBAD25300545269 /* ChikaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		483FC30C1FBAD25300545269 /* ChikaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 483FC31C1FBAD25300545269 /* Build configuration list for PBXNativeTarget "ChikaUITests" */;
+			buildPhases = (
+				3CFDBB2AC4FC378199C9A27E /* [CP] Check Pods Manifest.lock */,
+				483FC3091FBAD25300545269 /* Sources */,
+				483FC30A1FBAD25300545269 /* Frameworks */,
+				483FC30B1FBAD25300545269 /* Resources */,
+				4919C393D535E1427AF9E840 /* [CP] Embed Pods Frameworks */,
+				9DE349CEECD02053E764E43A /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				483FC30F1FBAD25300545269 /* PBXTargetDependency */,
+			);
+			name = ChikaUITests;
+			productName = ChikaUITests;
+			productReference = 483FC30D1FBAD25300545269 /* ChikaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		483FC2E61FBAD25300545269 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = Nir;
+				TargetAttributes = {
+					483FC2ED1FBAD25300545269 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
+					483FC3011FBAD25300545269 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 483FC2ED1FBAD25300545269;
+					};
+					483FC30C1FBAD25300545269 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 483FC2ED1FBAD25300545269;
+					};
+				};
+			};
+			buildConfigurationList = 483FC2E91FBAD25300545269 /* Build configuration list for PBXProject "Chika" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 483FC2E51FBAD25300545269;
+			productRefGroup = 483FC2EF1FBAD25300545269 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				483FC2ED1FBAD25300545269 /* Chika */,
+				483FC3011FBAD25300545269 /* ChikaTests */,
+				483FC30C1FBAD25300545269 /* ChikaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		483FC2EC1FBAD25300545269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */,
+				48B4D0251FBAEA43008C78F6 /* GoogleService-Info.plist in Resources */,
+				483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */,
+				483FC2F71FBAD25300545269 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC3001FBAD25300545269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC30B1FBAD25300545269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2671EB23C77956187E002259 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chika-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CFDBB2AC4FC378199C9A27E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChikaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4919C393D535E1427AF9E840 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChikaUITests/Pods-ChikaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67D7D324ECF85026AF60EC15 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChikaTests/Pods-ChikaTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F780512B523E5B514BB9409 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Chika/Pods-Chika-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTools.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chika/Pods-Chika-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99BD54DBFAA9E6A660A99253 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chika/Pods-Chika-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DE349CEECD02053E764E43A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChikaUITests/Pods-ChikaUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F23F8C0656A32D1045BD087 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChikaTests/Pods-ChikaTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2C4D719A0A290AA8574D96E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChikaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		483FC2EA1FBAD25300545269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
+				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
+				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
+				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
+				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
+				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
+				4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */,
+				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
+				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
+				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
+				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
+				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
+				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
+				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC2FE1FBAD25300545269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */,
+				483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */,
+				48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */,
+				48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */,
+				48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */,
+				483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */,
+				483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */,
+				4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */,
+				4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */,
+				4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */,
+				48B4D0211FBAE86C008C78F6 /* ServiceErrorTests.swift in Sources */,
+				48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */,
+				4803C26B1FBC33960096E403 /* SignInSceneWorkerTests.swift in Sources */,
+				489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */,
+				48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */,
+				4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */,
+				4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		483FC3091FBAD25300545269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		483FC3041FBAD25300545269 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483FC2ED1FBAD25300545269 /* Chika */;
+			targetProxy = 483FC3031FBAD25300545269 /* PBXContainerItemProxy */;
+		};
+		483FC30F1FBAD25300545269 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 483FC2ED1FBAD25300545269 /* Chika */;
+			targetProxy = 483FC30E1FBAD25300545269 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		483FC2F51FBAD25300545269 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				483FC2F61FBAD25300545269 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				483FC2FB1FBAD25300545269 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		483FC3141FBAD25300545269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		483FC3151FBAD25300545269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		483FC3171FBAD25300545269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F03EB2AB9E52B74626195FBD /* Pods-Chika.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				INFOPLIST_FILE = Chika/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.Chika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		483FC3181FBAD25300545269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A86A709744EB3DDB3866A37F /* Pods-Chika.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				INFOPLIST_FILE = Chika/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.Chika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		483FC31A1FBAD25300545269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 773B13B919FD6275F27DB1DD /* Pods-ChikaTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
+				INFOPLIST_FILE = ChikaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.ChikaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chika.app/Chika";
+			};
+			name = Debug;
+		};
+		483FC31B1FBAD25300545269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A512F3683C0D2FADD0A0F36 /* Pods-ChikaTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseStorage\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
+				INFOPLIST_FILE = ChikaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.ChikaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chika.app/Chika";
+			};
+			name = Release;
+		};
+		483FC31D1FBAD25300545269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 736389749CAE4CA289A2FD74 /* Pods-ChikaUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				INFOPLIST_FILE = ChikaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.ChikaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chika;
+			};
+			name = Debug;
+		};
+		483FC31E1FBAD25300545269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6287BE7AF4D15C2D7B64EDF5 /* Pods-ChikaUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
+				INFOPLIST_FILE = ChikaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nir.ChikaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chika;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		483FC2E91FBAD25300545269 /* Build configuration list for PBXProject "Chika" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483FC3141FBAD25300545269 /* Debug */,
+				483FC3151FBAD25300545269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		483FC3161FBAD25300545269 /* Build configuration list for PBXNativeTarget "Chika" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483FC3171FBAD25300545269 /* Debug */,
+				483FC3181FBAD25300545269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		483FC3191FBAD25300545269 /* Build configuration list for PBXNativeTarget "ChikaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483FC31A1FBAD25300545269 /* Debug */,
+				483FC31B1FBAD25300545269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		483FC31C1FBAD25300545269 /* Build configuration list for PBXNativeTarget "ChikaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				483FC31D1FBAD25300545269 /* Debug */,
+				483FC31E1FBAD25300545269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 483FC2E61FBAD25300545269 /* Project object */;
+}
