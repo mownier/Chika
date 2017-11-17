@@ -36,6 +36,7 @@
 		48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */; };
 		48B4D0251FBAEA43008C78F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */; };
 		48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0291FBAEE64008C78F6 /* AuthMock.swift */; };
+		48CDD7611FBEB552009269A6 /* ChikaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7601FBEB552009269A6 /* ChikaUITests.swift */; };
 		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
 		48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */; };
 		48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */; };
@@ -100,6 +101,7 @@
 		48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		48B4D0291FBAEE64008C78F6 /* AuthMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMock.swift; sourceTree = "<group>"; };
+		48CDD7601FBEB552009269A6 /* ChikaUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChikaUITests.swift; sourceTree = "<group>"; };
 		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
 		48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerMock.swift; sourceTree = "<group>"; };
 		48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		483FC3101FBAD25300545269 /* ChikaUITests */ = {
 			isa = PBXGroup;
 			children = (
+				48CDD7601FBEB552009269A6 /* ChikaUITests.swift */,
 				483FC3131FBAD25300545269 /* Info.plist */,
 			);
 			path = ChikaUITests;
@@ -455,6 +458,7 @@
 					};
 					483FC30C1FBAD25300545269 = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 483FC2ED1FBAD25300545269;
 					};
@@ -718,6 +722,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48CDD7611FBEB552009269A6 /* ChikaUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,6 +969,7 @@
 			baseConfigurationReference = 736389749CAE4CA289A2FD74 /* Pods-ChikaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
 				HEADER_SEARCH_PATHS = (
@@ -984,6 +990,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nir.ChikaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Chika;
@@ -995,6 +1002,7 @@
 			baseConfigurationReference = 6287BE7AF4D15C2D7B64EDF5 /* Pods-ChikaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4WBRGV5Z9M;
 				HEADER_SEARCH_PATHS = (
