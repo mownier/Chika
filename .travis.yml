@@ -1,8 +1,22 @@
-osx_image: xcode9.0.1
 language: swift
 
-xcode_project: Chika.xcodeproj
+osx_image: xcode9
+
+cache:
+  - cocoapods
 
 branches:
-only:
-- master
+  only:
+    - master
+
+env:
+  - LC_TYPE=en_US.UTF-8 LANG=en_US.UTF-8
+
+before_install:
+  - rvm install ruby
+  - gem install cocoapods
+  - gem install xcpretty -N
+
+script:
+  - set -o pipefail
+  - xcodebuild -workspace Chika.xcworkspace -scheme Chika -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone SE" | xcpretty -c
