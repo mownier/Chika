@@ -17,6 +17,15 @@ before_install:
   - gem install xcpretty -N
   - pod repo update
 
+before_script:
+  - |
+    echo "<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+</dict>
+</plist>" > GoogleService-Info.plist
+
 script:
   - set -o pipefail
   - xcodebuild build test -workspace Chika.xcworkspace -scheme Chika -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone SE" | xcpretty -c
