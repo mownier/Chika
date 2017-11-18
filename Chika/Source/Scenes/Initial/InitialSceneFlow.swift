@@ -21,6 +21,7 @@ extension InitialScene {
         struct Waypoint {
             
             var signIn: AppEntryWaypoint
+            var register: AppEntryWaypoint
         }
         
         var waypoint: Waypoint
@@ -32,7 +33,8 @@ extension InitialScene {
         
         convenience init() {
             let signIn = SignInScene.EntryWaypoint()
-            let waypoint = Waypoint(signIn: signIn)
+            let register = RegisterScene.EntryWaypoint()
+            let waypoint = Waypoint(signIn: signIn, register: register)
             self.init(waypoint: waypoint)
         }
         
@@ -45,7 +47,11 @@ extension InitialScene {
         }
         
         func goToRegister() -> Bool {
-            return false
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.register.enter(from: scene)
         }
     }
 }
