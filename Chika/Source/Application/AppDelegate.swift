@@ -17,11 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        let scene = SignInScene.Factory().build()
-        window?.rootViewController = scene
+        let scene = InitialScene()
+        let root = UINavigationController(rootViewController: scene)
+        root.isNavigationBarHidden = true
+        window?.rootViewController = root
         
+        handleUITesting()
 
         return true
+    }
+    
+    private func handleUITesting() {
+        if ProcessInfo.processInfo.arguments.contains("ForceInitialScene") {
+            let scene = InitialScene()
+            let root = UINavigationController(rootViewController: scene)
+            root.isNavigationBarHidden = true
+            window?.rootViewController = root
+        }
     }
 }
 

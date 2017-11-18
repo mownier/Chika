@@ -10,7 +10,4 @@ import UIKit
 
 class HomeScene: UIViewController {
 
-    override func loadView() {
-        
-    }
 }
