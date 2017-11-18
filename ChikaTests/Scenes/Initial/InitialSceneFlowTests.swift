@@ -23,7 +23,16 @@ class InitialSceneFlowTests: XCTestCase {
     // given that scene is nil
     func testGoToSignInA() {
         let flow = InitialScene.Flow()
+        flow.scene = nil
         let ok = flow.goToSignIn()
+        XCTAssertFalse(ok)
+    }
+    // CONTEXT: register function should return false
+    // given that scene is nil
+    func testRegisterA() {
+        let flow = InitialScene.Flow()
+        flow.scene = nil
+        let ok = flow.goToRegister()
         XCTAssertFalse(ok)
     }
 }
