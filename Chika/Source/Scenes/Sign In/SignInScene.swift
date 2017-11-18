@@ -11,6 +11,7 @@ import UIKit
 @objc protocol SignInSceneInteraction: class {
     
     func didTapGo()
+    func didTapBack()
 }
 
 class SignInScene: UIViewController {
@@ -19,15 +20,18 @@ class SignInScene: UIViewController {
     var emailInput: UITextField!
     var goButton: UIButton!
     var titleLabel: UILabel!
+    var backButton: UIButton!
     
     var worker: SignInSceneWorker!
     var theme: SignInSceneTheme!
     var flow: SignInSceneFlow!
+    var waypoint: AppExitWaypoint!
     
-    init(theme: SignInSceneTheme, worker: SignInSceneWorker, flow: SignInSceneFlow) {
+    init(theme: SignInSceneTheme, worker: SignInSceneWorker, flow: SignInSceneFlow, waypoint: AppExitWaypoint) {
         self.worker = worker
         self.theme = theme
         self.flow = flow
+        self.waypoint = waypoint
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,24 +39,29 @@ class SignInScene: UIViewController {
         let theme = Theme()
         let worker = Worker()
         let flow = Flow()
-        self.init(theme: theme, worker: worker, flow: flow)
+        let waypoint = ExitWaypoint()
+        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
         worker.output = self
         flow.scene = self
+        waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
         let theme = Theme()
         let worker = Worker()
         let flow = Flow()
-        self.init(theme: theme, worker: worker, flow: flow)
+        let waypoint = ExitWaypoint()
+        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
         worker.output = self
         flow.scene = self
+        waypoint.scene = self
     }
     
     override func loadView() {
         super.loadView()
         
         view.backgroundColor = theme.bgColor
+        view.accessibilityLabel = "Sign In Scene View"
         
         passInput = UITextField()
         passInput.font = theme.inputFont
@@ -65,6 +74,7 @@ class SignInScene: UIViewController {
         passInput.layer.borderWidth = 1
         passInput.layer.borderColor = passInput.tintColor.cgColor
         passInput.autocapitalizationType = .none
+        passInput.accessibilityLabel = "Pass Input"
         
         emailInput = UITextField()
         emailInput.font = theme.inputFont
@@ -76,6 +86,7 @@ class SignInScene: UIViewController {
         emailInput.layer.borderWidth = 1
         emailInput.layer.borderColor = emailInput.tintColor.cgColor
         emailInput.autocapitalizationType = .none
+        emailInput.accessibilityLabel = "Email Input"
         
         goButton = UIButton()
         goButton.titleLabel?.font = theme.buttonFont
@@ -84,17 +95,29 @@ class SignInScene: UIViewController {
         goButton.addTarget(self, action: #selector(self.didTapGo), for: .touchUpInside)
         goButton.backgroundColor = theme.buttonBGColor
         goButton.layer.cornerRadius = 4
+        goButton.accessibilityLabel = "Sign In Button"
         
         titleLabel = UILabel()
         titleLabel.text = "Chika"
         titleLabel.textAlignment = .center
         titleLabel.font = theme.titleLabelFont
         titleLabel.textColor = theme.titleLabelTextColor
+        titleLabel.accessibilityLabel = "Title Label"
+        
+        backButton = UIButton()
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(.black, for: .normal)
+        backButton.addTarget(self, action: #selector(self.didTapBack), for: .touchUpInside)
+        backButton.tintColor = .black
+        backButton.layer.borderColor = UIColor.black.cgColor
+        backButton.layer.borderWidth = 1
+        backButton.accessibilityLabel = "Back Button"
         
         view.addSubview(passInput)
         view.addSubview(emailInput)
         view.addSubview(goButton)
         view.addSubview(titleLabel)
+        view.addSubview(backButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,6 +125,7 @@ class SignInScene: UIViewController {
         let topInset: CGFloat = 20 + spacing
         let inputHeight: CGFloat = 52
         let buttonHeight: CGFloat = 52
+        let backButtonHeight: CGFloat = 52
         
         var (rect, rem) = view.bounds.divided(atDistance: topInset, from: .minYEdge)
         
@@ -119,6 +143,9 @@ class SignInScene: UIViewController {
         (rect, rem) = rem.divided(atDistance: spacing * 4, from: .minYEdge)
         (rect, rem) = rem.divided(atDistance: buttonHeight, from: .minYEdge)
         goButton.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        
+        backButton.frame = CGRect(x: spacing * 2, y: topInset + spacing, width: backButtonHeight, height: backButtonHeight)
+        backButton.layer.cornerRadius = backButtonHeight / 2
     }
 }
 
@@ -132,6 +159,10 @@ extension SignInScene: SignInSceneInteraction {
         passInput.text = ""
         emailInput.text = ""
         worker.signIn(email: email, pass: pass)
+    }
+    
+    func didTapBack() {
+        let _ = waypoint.exit()
     }
 }
 
