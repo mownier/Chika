@@ -18,11 +18,22 @@ extension SignInScene {
     
     class Flow: SignInSceneFlow {
         
-        weak var scene: UIViewController?
-        var homeSceneFlow: HomeSceneFlow
+        struct Waypoint {
+            
+            var homeScene: AppEntryWaypoint
+        }
         
-        init(homeSceneFlow: HomeSceneFlow = HomeScene.Flow()) {
-            self.homeSceneFlow = homeSceneFlow
+        weak var scene: UIViewController?
+        var waypoint: Waypoint
+        
+        init(waypoint: Waypoint) {
+            self.waypoint = waypoint
+        }
+        
+        convenience init() {
+            let homeScene = HomeScene.EntryWaypoint()
+            let waypoint = Waypoint(homeScene: homeScene)
+            self.init(waypoint: waypoint)
         }
         
         func goToHome() -> Bool {
@@ -34,7 +45,7 @@ extension SignInScene {
                 scene.dismiss(animated: true, completion: nil)
             }
             
-            return homeSceneFlow.connect(from: scene)
+            return waypoint.homeScene.enter(from: scene)
         }
         
         func showError(_ error: Error) {
