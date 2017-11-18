@@ -19,6 +19,11 @@
 		4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */; };
 		4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9781FBD702F0020A594 /* SignInSceneMock.swift */; };
 		4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */; };
+		482FDF031FBFE52F00ABA372 /* InitialSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */; };
+		482FDF051FBFE74F00ABA372 /* InitialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF041FBFE74F00ABA372 /* InitialUITests.swift */; };
+		482FDF071FBFEAB500ABA372 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF061FBFEAB500ABA372 /* UITestHelper.swift */; };
+		482FDF091FBFEBBE00ABA372 /* InitialSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */; };
+		482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */; };
 		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
 		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
 		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
@@ -26,6 +31,12 @@
 		483FC2F71FBAD25300545269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F51FBAD25300545269 /* Main.storyboard */; };
 		483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F81FBAD25300545269 /* Assets.xcassets */; };
 		483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */; };
+		48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED71FBFB895008F090F /* ExitWaypointMock.swift */; };
+		48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */; };
+		48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EDF1FBFD6B4008F090F /* SignInUITests.swift */; };
+		48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */; };
+		48920EE81FBFE034008F090F /* SignInSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE71FBFE034008F090F /* SignInSceneEntryWaypointTests.swift */; };
+		48920EED1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */; };
 		489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DA18F1FBD7BB600918AD9 /* ViewMock.swift */; };
 		48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */; };
 		48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */; };
@@ -36,7 +47,13 @@
 		48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */; };
 		48B4D0251FBAEA43008C78F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */; };
 		48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0291FBAEE64008C78F6 /* AuthMock.swift */; };
-		48CDD7611FBEB552009269A6 /* ChikaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7601FBEB552009269A6 /* ChikaUITests.swift */; };
+		48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */; };
+		48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */; };
+		48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */; };
+		48C051631FBF3A22009DDFC8 /* EntryWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */; };
+		48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7631FBEC2D7009269A6 /* InitialScene.swift */; };
+		48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */; };
+		48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */; };
 		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
 		48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */; };
 		48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */; };
@@ -78,6 +95,11 @@
 		4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowMock.swift; sourceTree = "<group>"; };
 		4806E9781FBD702F0020A594 /* SignInSceneMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneMock.swift; sourceTree = "<group>"; };
 		4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactory.swift; sourceTree = "<group>"; };
+		482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneTests.swift; sourceTree = "<group>"; };
+		482FDF041FBFE74F00ABA372 /* InitialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUITests.swift; sourceTree = "<group>"; };
+		482FDF061FBFEAB500ABA372 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
+		482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlowTests.swift; sourceTree = "<group>"; };
+		482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
 		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -91,6 +113,12 @@
 		483FC3081FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		483FC30D1FBAD25300545269 /* ChikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		483FC3131FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48920ED71FBFB895008F090F /* ExitWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitWaypointMock.swift; sourceTree = "<group>"; };
+		48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMock.swift; sourceTree = "<group>"; };
+		48920EDF1FBFD6B4008F090F /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
+		48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneExitWaypointTests.swift; sourceTree = "<group>"; };
+		48920EE71FBFE034008F090F /* SignInSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
+		48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerFactoryTests.swift; sourceTree = "<group>"; };
 		489DA18F1FBD7BB600918AD9 /* ViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
 		48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceMock.swift; sourceTree = "<group>"; };
 		48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlow.swift; sourceTree = "<group>"; };
@@ -101,7 +129,13 @@
 		48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		48B4D0291FBAEE64008C78F6 /* AuthMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMock.swift; sourceTree = "<group>"; };
-		48CDD7601FBEB552009269A6 /* ChikaUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChikaUITests.swift; sourceTree = "<group>"; };
+		48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWaypoint.swift; sourceTree = "<group>"; };
+		48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWaypoint.swift; sourceTree = "<group>"; };
+		48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneWaypoint.swift; sourceTree = "<group>"; };
+		48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWaypointMock.swift; sourceTree = "<group>"; };
+		48CDD7631FBEC2D7009269A6 /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
+		48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneTheme.swift; sourceTree = "<group>"; };
+		48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlow.swift; sourceTree = "<group>"; };
 		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
 		48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerMock.swift; sourceTree = "<group>"; };
 		48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -150,6 +184,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				48CDD7621FBEC2C5009269A6 /* Initial */,
 				48E019971FBD5D93008D94DE /* Home */,
 				48B4D0141FBAD86A008C78F6 /* Sign In */,
 			);
@@ -160,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				483D0C631FBD74D7004BDB3F /* Home */,
+				482FDF011FBFE51E00ABA372 /* Initial */,
 				4803C2691FBC30260096E403 /* Sign In */,
 			);
 			path = Scenes;
@@ -172,8 +208,19 @@
 				48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */,
 				4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */,
 				4803C26A1FBC33960096E403 /* SignInSceneWorkerTests.swift */,
+				48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */,
+				48920EE71FBFE034008F090F /* SignInSceneEntryWaypointTests.swift */,
 			);
 			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		482FDF011FBFE51E00ABA372 /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */,
+				482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */,
+			);
+			path = Initial;
 			sourceTree = "<group>";
 		};
 		483D0C631FBD74D7004BDB3F /* Home */ = {
@@ -181,6 +228,7 @@
 			children = (
 				483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */,
 				483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */,
+				482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -222,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				483FC3081FBAD25300545269 /* Info.plist */,
+				48920EE91FBFE356008F090F /* Application */,
 				48B4D0261FBAEE40008C78F6 /* Mocks */,
 				4803C25F1FBC2CA80096E403 /* Scenes */,
 				48B4D01E1FBAE845008C78F6 /* Services */,
@@ -232,10 +281,28 @@
 		483FC3101FBAD25300545269 /* ChikaUITests */ = {
 			isa = PBXGroup;
 			children = (
-				48CDD7601FBEB552009269A6 /* ChikaUITests.swift */,
 				483FC3131FBAD25300545269 /* Info.plist */,
+				482FDF061FBFEAB500ABA372 /* UITestHelper.swift */,
+				48920EDE1FBFD69A008F090F /* Scene */,
 			);
 			path = ChikaUITests;
+			sourceTree = "<group>";
+		};
+		48920EDE1FBFD69A008F090F /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				48920EDF1FBFD6B4008F090F /* SignInUITests.swift */,
+				482FDF041FBFE74F00ABA372 /* InitialUITests.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		48920EE91FBFE356008F090F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		48B4D0111FBAD79C008C78F6 /* Source */ = {
@@ -265,6 +332,7 @@
 				483FC2F11FBAD25300545269 /* AppDelegate.swift */,
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
+				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -276,6 +344,7 @@
 				4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */,
 				48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */,
 				4803C2641FBC2DA80096E403 /* SignInSceneTheme.swift */,
+				48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */,
 				4803C2621FBC2D6D0096E403 /* SignInSceneWorker.swift */,
 			);
 			path = "Sign In";
@@ -328,15 +397,28 @@
 			children = (
 				48B4D0291FBAEE64008C78F6 /* AuthMock.swift */,
 				48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */,
+				48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */,
+				48920ED71FBFB895008F090F /* ExitWaypointMock.swift */,
 				4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */,
 				48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */,
+				4806E9781FBD702F0020A594 /* SignInSceneMock.swift */,
 				48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */,
 				4803C26C1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift */,
 				4803C2551FBBE10F0096E403 /* UserMock.swift */,
-				4806E9781FBD702F0020A594 /* SignInSceneMock.swift */,
 				489DA18F1FBD7BB600918AD9 /* ViewMock.swift */,
+				48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		48CDD7621FBEC2C5009269A6 /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				48CDD7631FBEC2D7009269A6 /* InitialScene.swift */,
+				48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */,
+				48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */,
+			);
+			path = Initial;
 			sourceTree = "<group>";
 		};
 		48E019971FBD5D93008D94DE /* Home */ = {
@@ -345,6 +427,7 @@
 				48E019981FBD5D93008D94DE /* HomeScene.swift */,
 				48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */,
 				48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */,
+				48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -677,20 +760,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
 				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
 				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
+				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
 				4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
+				48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */,
 				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
 				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
+				48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */,
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
+				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
+				48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,15 +793,24 @@
 				48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */,
 				48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */,
 				483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */,
+				48920EE81FBFE034008F090F /* SignInSceneEntryWaypointTests.swift in Sources */,
 				483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */,
+				48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */,
 				4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */,
+				48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */,
 				4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */,
 				4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */,
+				48C051631FBF3A22009DDFC8 /* EntryWaypointMock.swift in Sources */,
 				48B4D0211FBAE86C008C78F6 /* ServiceErrorTests.swift in Sources */,
+				482FDF091FBFEBBE00ABA372 /* InitialSceneFlowTests.swift in Sources */,
 				48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */,
+				482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */,
 				4803C26B1FBC33960096E403 /* SignInSceneWorkerTests.swift in Sources */,
+				48920EED1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift in Sources */,
 				489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */,
+				48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */,
 				48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */,
+				482FDF031FBFE52F00ABA372 /* InitialSceneTests.swift in Sources */,
 				4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */,
 				4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */,
 			);
@@ -722,7 +820,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48CDD7611FBEB552009269A6 /* ChikaUITests.swift in Sources */,
+				482FDF071FBFEAB500ABA372 /* UITestHelper.swift in Sources */,
+				482FDF051FBFE74F00ABA372 /* InitialUITests.swift in Sources */,
+				48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
