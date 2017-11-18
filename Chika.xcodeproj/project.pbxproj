@@ -24,6 +24,9 @@
 		482FDF071FBFEAB500ABA372 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF061FBFEAB500ABA372 /* UITestHelper.swift */; };
 		482FDF091FBFEBBE00ABA372 /* InitialSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */; };
 		482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */; };
+		482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */; };
+		482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */; };
+		482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */; };
 		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
 		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
 		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
@@ -100,6 +103,9 @@
 		482FDF061FBFEAB500ABA372 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlowTests.swift; sourceTree = "<group>"; };
 		482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
+		482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneWaypoint.swift; sourceTree = "<group>"; };
+		482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFactory.swift; sourceTree = "<group>"; };
+		482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusBarFrameGetter.swift; sourceTree = "<group>"; };
 		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -333,6 +339,7 @@
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
 				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
+				482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -415,8 +422,10 @@
 			isa = PBXGroup;
 			children = (
 				48CDD7631FBEC2D7009269A6 /* InitialScene.swift */,
-				48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */,
+				482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */,
 				48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */,
+				48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */,
+				482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */,
 			);
 			path = Initial;
 			sourceTree = "<group>";
@@ -774,7 +783,10 @@
 				48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */,
 				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
 				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
+				482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */,
+				482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
+				482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */,
 				48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */,
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
