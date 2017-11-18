@@ -17,7 +17,13 @@ class AuthRemoteServiceMock: AuthRemoteService {
     }
     
     func register(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
+        guard isOK else {
+            completion(.err(ServiceError("Auth remote service forced error")))
+            return
+        }
         
+        let access = Access(token: "accessToken", userID: "userID", email: "me@me.com", refreshToken: "refreshToken")
+        completion(.ok(access))
     }
     
     func signIn(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
