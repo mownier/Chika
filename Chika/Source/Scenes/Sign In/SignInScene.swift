@@ -20,7 +20,6 @@ class SignInScene: UIViewController {
     var emailInput: UITextField!
     var goButton: UIButton!
     var titleLabel: UILabel!
-    var backButton: UIButton!
     
     var worker: SignInSceneWorker!
     var theme: SignInSceneTheme!
@@ -104,28 +103,25 @@ class SignInScene: UIViewController {
         titleLabel.textColor = theme.titleLabelTextColor
         titleLabel.accessibilityLabel = "Title Label"
         
-        backButton = UIButton()
-        backButton.setTitle("Back", for: .normal)
-        backButton.setTitleColor(.black, for: .normal)
-        backButton.addTarget(self, action: #selector(self.didTapBack), for: .touchUpInside)
-        backButton.tintColor = .black
-        backButton.layer.borderColor = UIColor.black.cgColor
-        backButton.layer.borderWidth = 1
-        backButton.accessibilityLabel = "Back Button"
-        
         view.addSubview(passInput)
         view.addSubview(emailInput)
         view.addSubview(goButton)
         view.addSubview(titleLabel)
-        view.addSubview(backButton)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back") , style: .plain, target: self, action: #selector(self.didTapBack))
+        back.accessibilityLabel = "Back Button"
+        navigationItem.leftBarButtonItem = back
     }
     
     override func viewDidLayoutSubviews() {
         let spacing: CGFloat = 8
-        let topInset: CGFloat = 20 + spacing
+        let topInset: CGFloat = view.statusBarFrame().height
         let inputHeight: CGFloat = 52
         let buttonHeight: CGFloat = 52
-        let backButtonHeight: CGFloat = 52
         
         var (rect, rem) = view.bounds.divided(atDistance: topInset, from: .minYEdge)
         
@@ -143,9 +139,6 @@ class SignInScene: UIViewController {
         (rect, rem) = rem.divided(atDistance: spacing * 4, from: .minYEdge)
         (rect, rem) = rem.divided(atDistance: buttonHeight, from: .minYEdge)
         goButton.frame = rect.insetBy(dx: spacing * 2, dy: 0)
-        
-        backButton.frame = CGRect(x: spacing * 2, y: topInset + spacing, width: backButtonHeight, height: backButtonHeight)
-        backButton.layer.cornerRadius = backButtonHeight / 2
     }
 }
 
