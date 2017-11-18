@@ -15,7 +15,7 @@ class SignInSceneFlowTests: XCTestCase {
     // property with default class HomeScene.Flow
     func testInitA() {
         let flow = SignInScene.Flow()
-        XCTAssertTrue(flow.homeSceneFlow is HomeScene.Flow)
+        XCTAssertTrue(flow.waypoint.homeScene is HomeScene.EntryWaypoint)
     }
     
     // CONTEXT: showError function should show an alert
@@ -37,27 +37,43 @@ class SignInSceneFlowTests: XCTestCase {
         XCTAssertEqual(alert.message, "\(error)")
     }
     
-    // CONTEXT: goToHome function should not be connected given
+    // CONTEXT: goToHome function should return false given
     // that scene is nil
     func testGoToHomeA() {
-        let homeSceneFlow = HomeSceneFlowMock()
-        let flow = SignInScene.Flow(homeSceneFlow: homeSceneFlow)
+        let flow = SignInScene.Flow()
+        flow.scene = nil
         let ok = flow.goToHome()
         XCTAssertFalse(ok)
-        XCTAssertFalse(homeSceneFlow.isConnected)
     }
     
-    // CONTEXT: goToHome function should be connected and the
+    // CONTEXT: goToHome function should return true given that
+    // the waypoint.homeScene.enter returns true and the
     // scene should be dismissed given that it is presented
     func testGoToHomeB() {
-        let homeSceneFlow = HomeSceneFlowMock()
-        let flow = SignInScene.Flow(homeSceneFlow: homeSceneFlow)
+        let entry = EntryWaypointMock()
+        let waypoint = SignInScene.Flow.Waypoint(homeScene: entry)
+        let flow = SignInScene.Flow(waypoint: waypoint)
         let scene = SignInSceneMock()
-        scene.isPresented = true
         flow.scene = scene
+        scene.isPresented = true
+        entry.isEnterOK = true
         let ok = flow.goToHome()
         XCTAssertTrue(ok)
-        XCTAssertTrue(homeSceneFlow.isConnected)
         XCTAssertFalse(scene.isBeingPresented)
+    }
+    
+    // CONTEXT: goToHome function should return true given that
+    // the waypoint.homeScene.enter returns true and the scene
+    // is not being presented
+    func testGoToHomeC() {
+        let entry = EntryWaypointMock()
+        let waypoint = SignInScene.Flow.Waypoint(homeScene: entry)
+        let flow = SignInScene.Flow(waypoint: waypoint)
+        let scene = SignInSceneMock()
+        flow.scene = scene
+        scene.isPresented = false
+        entry.isEnterOK = true
+        let ok = flow.goToHome()
+        XCTAssertTrue(ok)
     }
 }
