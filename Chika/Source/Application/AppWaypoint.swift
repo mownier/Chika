@@ -17,3 +17,8 @@ protocol AppExitWaypoint: class {
     
     func exit() -> Bool
 }
+
+protocol AppRootWaypoint: class {
+    
+    func makeRoot(from window: UIWindow?) -> Bool
+}
