@@ -34,7 +34,8 @@ class SignInSceneTests: XCTestCase {
         let worker = SignInSceneWorkerMock(service: service)
         let theme = SignInScene.Theme()
         let flow = SignInSceneFlowMock()
-        let scene = SignInScene(theme: theme, worker: worker, flow: flow)
+        let waypoint = SignInScene.ExitWaypoint()
+        let scene = SignInScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
         let _ = scene.view
         
         worker.exp = exp
@@ -49,39 +50,6 @@ class SignInSceneTests: XCTestCase {
         
         scene.emailInput.text = "me@me.com"
         scene.passInput.text = "12345"
-        scene.goButton.sendActions(for: .touchUpInside)
-        wait(for: [exp], timeout: 2.0)
-    }
-    
-    // CONTEXT: didTapGo function should present
-    // an alert controller with title "Error" and message as
-    // string equivalent of an error.
-    func testDidTapGoB() {
-        let exp = expectation(description: "testDidTapGoB")
-        let service = AuthRemoteServiceMock()
-        let worker = SignInSceneWorkerMock(service: service)
-        let theme = SignInScene.Theme()
-        let flow = SignInScene.Flow()
-        let scene = SignInScene(theme: theme, worker: worker, flow: flow)
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        let _ = scene.view
-        
-        flow.scene = scene
-        window.rootViewController = scene
-        window.makeKeyAndVisible()
-        worker.isOK = false
-        worker.exp = exp
-        worker.output = scene
-        worker.callback.workerDidSignInOK = { XCTFail() }
-        worker.callback.workerDidSignInWithError = { error in
-            XCTAssertNotNil(scene.presentedViewController)
-            XCTAssertTrue(scene.presentedViewController is UIAlertController)
-            
-            let alert = scene.presentedViewController as! UIAlertController
-            XCTAssertEqual(alert.title, "Error")
-            XCTAssertEqual(alert.message, "\(error)")
-        }
-        
         scene.goButton.sendActions(for: .touchUpInside)
         wait(for: [exp], timeout: 2.0)
     }
