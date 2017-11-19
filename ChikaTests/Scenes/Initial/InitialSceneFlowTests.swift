@@ -27,6 +27,21 @@ class InitialSceneFlowTests: XCTestCase {
         let ok = flow.goToSignIn()
         XCTAssertFalse(ok)
     }
+    
+    // CONTEXT: goToSignIn function should call the enter
+    // function in waypoint.signIn given that there is a scene
+    func testGoToSignInB() {
+        let signIn = AppEntryWaypointMock()
+        let register = AppEntryWaypointMock()
+        let waypoint = InitialScene.Flow.Waypoint(signIn: signIn, register: register)
+        let flow = InitialScene.Flow(waypoint: waypoint)
+        let scene = UIViewController()
+        flow.scene = scene
+        signIn.isEnterCalled = false
+        let _ = flow.goToSignIn()
+        XCTAssertTrue(signIn.isEnterCalled)
+    }
+    
     // CONTEXT: register function should return false
     // given that scene is nil
     func testRegisterA() {
@@ -34,5 +49,19 @@ class InitialSceneFlowTests: XCTestCase {
         flow.scene = nil
         let ok = flow.goToRegister()
         XCTAssertFalse(ok)
+    }
+    
+    // CONTEXT: goToRegister function should call the enter
+    // function in waypoint.register given that there is a scene
+    func testGoToRegisterB() {
+        let signIn = AppEntryWaypointMock()
+        let register = AppEntryWaypointMock()
+        let waypoint = InitialScene.Flow.Waypoint(signIn: signIn, register: register)
+        let flow = InitialScene.Flow(waypoint: waypoint)
+        let scene = UIViewController()
+        flow.scene = scene
+        register.isEnterCalled = false
+        let _ = flow.goToRegister()
+        XCTAssertTrue(register.isEnterCalled)
     }
 }
