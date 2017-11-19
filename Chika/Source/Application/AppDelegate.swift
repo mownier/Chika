@@ -19,16 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let waypoint = InitialScene.RootWaypoint()
         let _ = waypoint.makeRoot(from: window)
-        handleUITesting()
+        let _ = handleUITesting()
 
         return true
     }
     
-    private func handleUITesting() {
-        if ProcessInfo.processInfo.arguments.contains("ForceInitialScene") {
+    func handleUITesting(info: ProcessInfo = ProcessInfo.processInfo) -> Bool {
+        if info.arguments.contains("ForceInitialScene") {
             let waypoint = InitialScene.RootWaypoint()
             let _ = waypoint.makeRoot(from: window)
+            return true
         }
+        
+        return false
     }
 }
 
