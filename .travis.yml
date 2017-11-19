@@ -14,6 +14,7 @@ env:
 
 before_install:
   - gem install cocoapods
+  - gem install xcpretty -N
   - pod repo update
 
 after_success:
@@ -24,4 +25,4 @@ before_script:
 
 script:
   - set -o pipefail
-  - xcodebuild build test -workspace Chika.xcworkspace -scheme Chika -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone SE"
+  - xcodebuild build test -workspace Chika.xcworkspace -scheme Chika -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone SE" | xcpretty -c
