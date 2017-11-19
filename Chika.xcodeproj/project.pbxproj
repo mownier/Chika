@@ -30,6 +30,11 @@
 		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
 		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
 		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
+		483F8FBA1FC162A00058CC56 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */; };
+		483F8FBC1FC163AD0058CC56 /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FBB1FC163AD0058CC56 /* ProcessInfoMock.swift */; };
+		483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FBD1FC165740058CC56 /* InitialSceneFlowMock.swift */; };
+		483F8FC21FC166D70058CC56 /* AppEntryWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */; };
+		483F8FC41FC167130058CC56 /* AppExitWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FC31FC167130058CC56 /* AppExitWaypointMock.swift */; };
 		483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483FC2F11FBAD25300545269 /* AppDelegate.swift */; };
 		483FC2F71FBAD25300545269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F51FBAD25300545269 /* Main.storyboard */; };
 		483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F81FBAD25300545269 /* Assets.xcassets */; };
@@ -129,6 +134,11 @@
 		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
+		483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
+		483F8FBB1FC163AD0058CC56 /* ProcessInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoMock.swift; sourceTree = "<group>"; };
+		483F8FBD1FC165740058CC56 /* InitialSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlowMock.swift; sourceTree = "<group>"; };
+		483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryWaypointMock.swift; sourceTree = "<group>"; };
+		483F8FC31FC167130058CC56 /* AppExitWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppExitWaypointMock.swift; sourceTree = "<group>"; };
 		483FC2EE1FBAD25300545269 /* Chika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		483FC2F11FBAD25300545269 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		483FC2F61FBAD25300545269 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -353,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */,
+				483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -474,12 +485,16 @@
 		48B4D0261FBAEE40008C78F6 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */,
+				483F8FC31FC167130058CC56 /* AppExitWaypointMock.swift */,
 				48B4D0291FBAEE64008C78F6 /* AuthMock.swift */,
 				48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */,
 				48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */,
 				48920ED71FBFB895008F090F /* ExitWaypointMock.swift */,
 				4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */,
+				483F8FBD1FC165740058CC56 /* InitialSceneFlowMock.swift */,
 				48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */,
+				483F8FBB1FC163AD0058CC56 /* ProcessInfoMock.swift */,
 				489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */,
 				489FE1E01FC065C60062E1AB /* RegisterSceneMock.swift */,
 				489FE1E21FC066820062E1AB /* RegisterSceneWorkerMock.swift */,
@@ -883,6 +898,7 @@
 			files = (
 				48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */,
 				483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */,
+				483F8FC21FC166D70058CC56 /* AppEntryWaypointMock.swift in Sources */,
 				48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */,
 				48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */,
 				48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */,
@@ -896,7 +912,9 @@
 				4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */,
 				489FE1E91FC06EA20062E1AB /* InitialSceneWaypointTests.swift in Sources */,
 				489FE1D71FC062F90062E1AB /* RegisterSceneTests.swift in Sources */,
+				483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */,
 				489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */,
+				483F8FBA1FC162A00058CC56 /* AppDelegateTests.swift in Sources */,
 				489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */,
 				4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */,
 				489FE1D51FC062F00062E1AB /* RegisterSceneFlowTests.swift in Sources */,
@@ -906,6 +924,7 @@
 				489FE1DD1FC0633A0062E1AB /* RegisterSceneEntryWaypointTests.swift in Sources */,
 				48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */,
 				489FE1E11FC065C60062E1AB /* RegisterSceneMock.swift in Sources */,
+				483F8FC41FC167130058CC56 /* AppExitWaypointMock.swift in Sources */,
 				489FE1EB1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift in Sources */,
 				482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */,
 				489FE1D31FC062E40062E1AB /* RegisterSceneFactoryTests.swift in Sources */,
@@ -918,6 +937,7 @@
 				489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */,
 				48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */,
 				482FDF031FBFE52F00ABA372 /* InitialSceneTests.swift in Sources */,
+				483F8FBC1FC163AD0058CC56 /* ProcessInfoMock.swift in Sources */,
 				4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */,
 				4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */,
 			);
