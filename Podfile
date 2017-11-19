@@ -29,6 +29,7 @@ end
 
 post_install do |installer|
   installer.pods_project.build_configurations.each do |config|
+    config.build_settings['CLANG_ENABLE_CODE_COVERAGE'] = 'NO'
     if config.name == 'Release'
       config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
     end
