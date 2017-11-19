@@ -17,10 +17,12 @@ class RegisterSceneFlowMock: RegisterSceneFlow {
         var showError: ((Error) -> Void)?
     }
     
+    var isShowErrorCalled: Bool
     var callback: Callback
     
     init() {
         self.callback = Callback()
+        self.isShowErrorCalled = false
     }
     
     func goToHome() -> Bool {
@@ -30,5 +32,6 @@ class RegisterSceneFlowMock: RegisterSceneFlow {
     
     func showError(_ error: Error) {
         callback.showError?(error)
+        isShowErrorCalled = true
     }
 }

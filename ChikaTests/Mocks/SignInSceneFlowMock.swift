@@ -18,9 +18,11 @@ class SignInSceneFlowMock: SignInSceneFlow {
     }
     
     var callback: Callback
+    var isShowErrorCalled: Bool
     
     init() {
         self.callback = Callback()
+        self.isShowErrorCalled = false
     }
     
     func goToHome() -> Bool {
@@ -30,5 +32,6 @@ class SignInSceneFlowMock: SignInSceneFlow {
     
     func showError(_ error: Error) {
         callback.showError?(error)
+        isShowErrorCalled = true
     }
 }
