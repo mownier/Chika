@@ -18,7 +18,7 @@ before_install:
   - pod repo update
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'Chika' -t 85d11916-33fd-4ec9-baa4-b5cd073b53c8
+  - bash <(curl -s https://codecov.io/bash)
 
 before_script:
   - cp CI/Dummy_GoogleService-Info.plist GoogleService-Info.plist
