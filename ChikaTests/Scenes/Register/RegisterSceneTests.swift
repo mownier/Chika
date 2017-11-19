@@ -54,6 +54,44 @@ class RegisterSceneTests: XCTestCase {
         wait(for: [exp], timeout: 2.0)
     }
     
+    // CONTEXT: didTapBack function should call the exit
+    // function in waypoint given that the left bar button
+    // item is tapped
+    func testDidTapBackA() {
+        let theme = RegisterScene.Theme()
+        let worker = RegisterScene.Worker()
+        let flow = RegisterScene.Flow()
+        let waypoint = AppExitWaypointMock()
+        let scene = RegisterScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
+        let view = scene.view
+        let target = scene.navigationItem.leftBarButtonItem!.target!
+        let selector = scene.navigationItem.leftBarButtonItem!.action!
+        view?.setNeedsLayout()
+        view?.layoutIfNeeded()
+        waypoint.isExitCalled = false
+        target.performSelector(onMainThread: selector, with: nil, waitUntilDone: true)
+        XCTAssertTrue(waypoint.isExitCalled)
+    }
+    
+    // CONTEXT: workerDidRegisterWithError should call the
+    // showError function in flow given that the worker
+    // produces an error
+    func testWorkerDidRegisterWithErrorA() {
+        let theme = RegisterScene.Theme()
+        let worker = RegisterSceneWorkerMock()
+        let flow = RegisterSceneFlowMock()
+        let waypoint = RegisterScene.ExitWaypoint()
+        let scene = RegisterScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
+        let view = scene.view
+        view?.setNeedsLayout()
+        view?.layoutIfNeeded()
+        worker.output = scene
+        worker.isOK = false
+        flow.isShowErrorCalled = false
+        scene.goButton.sendActions(for: .touchUpInside)
+        XCTAssertTrue(flow.isShowErrorCalled)
+    }
+    
     private func constructorTest(withType type: String = "init") {
         let scene: RegisterScene
         

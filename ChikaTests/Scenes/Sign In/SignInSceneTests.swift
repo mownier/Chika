@@ -54,6 +54,44 @@ class SignInSceneTests: XCTestCase {
         wait(for: [exp], timeout: 2.0)
     }
     
+    // CONTEXT: didTapBack function should call the exit
+    // function in waypoint given that the left bar button
+    // item is tapped
+    func testDidTapBackA() {
+        let theme = SignInScene.Theme()
+        let worker = SignInScene.Worker()
+        let flow = SignInScene.Flow()
+        let waypoint = AppExitWaypointMock()
+        let scene = SignInScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
+        let view = scene.view
+        let target = scene.navigationItem.leftBarButtonItem!.target!
+        let selector = scene.navigationItem.leftBarButtonItem!.action!
+        view?.setNeedsLayout()
+        view?.layoutIfNeeded()
+        waypoint.isExitCalled = false
+        target.performSelector(onMainThread: selector, with: nil, waitUntilDone: true)
+        XCTAssertTrue(waypoint.isExitCalled)
+    }
+    
+    // CONTEXT: workerDidSignInWithError should call the
+    // showError function in flow given that the worker
+    // produces an error
+    func testWorkerDidSignInWithErrorA() {
+        let theme = SignInScene.Theme()
+        let worker = SignInSceneWorkerMock()
+        let flow = SignInSceneFlowMock()
+        let waypoint = SignInScene.ExitWaypoint()
+        let scene = SignInScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
+        let view = scene.view
+        view?.setNeedsLayout()
+        view?.layoutIfNeeded()
+        worker.output = scene
+        worker.isOK = false
+        flow.isShowErrorCalled = false
+        scene.goButton.sendActions(for: .touchUpInside)
+        XCTAssertTrue(flow.isShowErrorCalled)
+    }
+    
     private func constructorTest(withType type: String = "init") {
         let scene: SignInScene
         
