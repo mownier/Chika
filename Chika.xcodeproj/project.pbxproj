@@ -39,6 +39,25 @@
 		483FC2F71FBAD25300545269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F51FBAD25300545269 /* Main.storyboard */; };
 		483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F81FBAD25300545269 /* Assets.xcassets */; };
 		483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */; };
+		4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4881FC2854100611DA3 /* HomeSceneTheme.swift */; };
+		4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B48A1FC2871B00611DA3 /* HomeSceneTabSetup.swift */; };
+		4879B48D1FC28C3F00611DA3 /* HomeSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */; };
+		4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B48F1FC28DD100611DA3 /* InboxScene.swift */; };
+		4879B4921FC28E1600611DA3 /* InboxSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4911FC28E1600611DA3 /* InboxSceneTheme.swift */; };
+		4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4951FC28FB000611DA3 /* InboxSceneFactory.swift */; };
+		4879B4981FC29A4A00611DA3 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4971FC29A4A00611DA3 /* Chat.swift */; };
+		4879B49A1FC29A7C00611DA3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4991FC29A7C00611DA3 /* Message.swift */; };
+		4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49B1FC29B0D00611DA3 /* Person.swift */; };
+		4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49D1FC29C4500611DA3 /* InboxSceneData.swift */; };
+		4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49F1FC29EC500611DA3 /* InboxSceneCell.swift */; };
+		488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730C81FC2A497001F9876 /* InboxSceneSetup.swift */; };
+		488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730CD1FC2AF44001F9876 /* InboxSceneCellManager.swift */; };
+		488730D11FC2B914001F9876 /* ChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D01FC2B914001F9876 /* ChatTests.swift */; };
+		488730D41FC2BAAC001F9876 /* InboxSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D31FC2BAAC001F9876 /* InboxSceneTests.swift */; };
+		488730D61FC2BCB9001F9876 /* InboxSceneSetupMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D51FC2BCB9001F9876 /* InboxSceneSetupMock.swift */; };
+		488730D81FC2BEB9001F9876 /* InboxSceneDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D71FC2BEB9001F9876 /* InboxSceneDataTests.swift */; };
+		488730DA1FC2C013001F9876 /* InboxSceneSetupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D91FC2C013001F9876 /* InboxSceneSetupTests.swift */; };
+		488730DC1FC2C225001F9876 /* InboxSceneCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DB1FC2C225001F9876 /* InboxSceneCellTests.swift */; };
 		48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED71FBFB895008F090F /* ExitWaypointMock.swift */; };
 		48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */; };
 		48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EDF1FBFD6B4008F090F /* SignInUITests.swift */; };
@@ -149,6 +168,25 @@
 		483FC3081FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		483FC30D1FBAD25300545269 /* ChikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		483FC3131FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4879B4881FC2854100611DA3 /* HomeSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTheme.swift; sourceTree = "<group>"; };
+		4879B48A1FC2871B00611DA3 /* HomeSceneTabSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTabSetup.swift; sourceTree = "<group>"; };
+		4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTests.swift; sourceTree = "<group>"; };
+		4879B48F1FC28DD100611DA3 /* InboxScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScene.swift; sourceTree = "<group>"; };
+		4879B4911FC28E1600611DA3 /* InboxSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneTheme.swift; sourceTree = "<group>"; };
+		4879B4951FC28FB000611DA3 /* InboxSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneFactory.swift; sourceTree = "<group>"; };
+		4879B4971FC29A4A00611DA3 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		4879B4991FC29A7C00611DA3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		4879B49B1FC29B0D00611DA3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		4879B49D1FC29C4500611DA3 /* InboxSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneData.swift; sourceTree = "<group>"; };
+		4879B49F1FC29EC500611DA3 /* InboxSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCell.swift; sourceTree = "<group>"; };
+		488730C81FC2A497001F9876 /* InboxSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetup.swift; sourceTree = "<group>"; };
+		488730CD1FC2AF44001F9876 /* InboxSceneCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCellManager.swift; sourceTree = "<group>"; };
+		488730D01FC2B914001F9876 /* ChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTests.swift; sourceTree = "<group>"; };
+		488730D31FC2BAAC001F9876 /* InboxSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneTests.swift; sourceTree = "<group>"; };
+		488730D51FC2BCB9001F9876 /* InboxSceneSetupMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetupMock.swift; sourceTree = "<group>"; };
+		488730D71FC2BEB9001F9876 /* InboxSceneDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneDataTests.swift; sourceTree = "<group>"; };
+		488730D91FC2C013001F9876 /* InboxSceneSetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetupTests.swift; sourceTree = "<group>"; };
+		488730DB1FC2C225001F9876 /* InboxSceneCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCellTests.swift; sourceTree = "<group>"; };
 		48920ED71FBFB895008F090F /* ExitWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitWaypointMock.swift; sourceTree = "<group>"; };
 		48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMock.swift; sourceTree = "<group>"; };
 		48920EDF1FBFD6B4008F090F /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
@@ -240,6 +278,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4879B48E1FC28DC300611DA3 /* Inbox */,
 				48E019971FBD5D93008D94DE /* Home */,
 				48CDD7621FBEC2C5009269A6 /* Initial */,
 				489FE1C41FC05A7A0062E1AB /* Register */,
@@ -252,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				483D0C631FBD74D7004BDB3F /* Home */,
+				488730D21FC2BA9B001F9876 /* Inbox */,
 				482FDF011FBFE51E00ABA372 /* Initial */,
 				489FE1D11FC062BD0062E1AB /* Register */,
 				4803C2691FBC30260096E403 /* Sign In */,
@@ -287,9 +327,10 @@
 		483D0C631FBD74D7004BDB3F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */,
 				483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */,
 				483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */,
-				482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */,
+				4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -330,9 +371,10 @@
 		483FC3051FBAD25300545269 /* ChikaTests */ = {
 			isa = PBXGroup;
 			children = (
-				483FC3081FBAD25300545269 /* Info.plist */,
 				48920EE91FBFE356008F090F /* Application */,
+				483FC3081FBAD25300545269 /* Info.plist */,
 				48B4D0261FBAEE40008C78F6 /* Mocks */,
+				488730CF1FC2B8FB001F9876 /* Models */,
 				4803C25F1FBC2CA80096E403 /* Scenes */,
 				48B4D01E1FBAE845008C78F6 /* Services */,
 			);
@@ -347,6 +389,39 @@
 				48920EDE1FBFD69A008F090F /* Scene */,
 			);
 			path = ChikaUITests;
+			sourceTree = "<group>";
+		};
+		4879B48E1FC28DC300611DA3 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				4879B48F1FC28DD100611DA3 /* InboxScene.swift */,
+				4879B49F1FC29EC500611DA3 /* InboxSceneCell.swift */,
+				488730CD1FC2AF44001F9876 /* InboxSceneCellManager.swift */,
+				4879B49D1FC29C4500611DA3 /* InboxSceneData.swift */,
+				4879B4951FC28FB000611DA3 /* InboxSceneFactory.swift */,
+				488730C81FC2A497001F9876 /* InboxSceneSetup.swift */,
+				4879B4911FC28E1600611DA3 /* InboxSceneTheme.swift */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		488730CF1FC2B8FB001F9876 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				488730D01FC2B914001F9876 /* ChatTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		488730D21FC2BA9B001F9876 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				488730DB1FC2C225001F9876 /* InboxSceneCellTests.swift */,
+				488730D71FC2BEB9001F9876 /* InboxSceneDataTests.swift */,
+				488730D91FC2C013001F9876 /* InboxSceneSetupTests.swift */,
+				488730D31FC2BAAC001F9876 /* InboxSceneTests.swift */,
+			);
+			path = Inbox;
 			sourceTree = "<group>";
 		};
 		48920EDE1FBFD69A008F090F /* Scene */ = {
@@ -461,6 +536,9 @@
 			isa = PBXGroup;
 			children = (
 				48B4D01C1FBADD2B008C78F6 /* Access.swift */,
+				4879B4971FC29A4A00611DA3 /* Chat.swift */,
+				4879B4991FC29A7C00611DA3 /* Message.swift */,
+				4879B49B1FC29B0D00611DA3 /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -505,6 +583,7 @@
 				4803C26C1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift */,
 				4803C2551FBBE10F0096E403 /* UserMock.swift */,
 				489DA18F1FBD7BB600918AD9 /* ViewMock.swift */,
+				488730D51FC2BCB9001F9876 /* InboxSceneSetupMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -527,6 +606,8 @@
 				48E019981FBD5D93008D94DE /* HomeScene.swift */,
 				48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */,
 				48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */,
+				4879B48A1FC2871B00611DA3 /* HomeSceneTabSetup.swift */,
+				4879B4881FC2854100611DA3 /* HomeSceneTheme.swift */,
 				48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */,
 			);
 			path = Home;
@@ -860,29 +941,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
+				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
 				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				489FE1D01FC05FE30062E1AB /* RegisterSceneFactory.swift in Sources */,
 				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
 				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
 				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
+				4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */,
 				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
+				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,
+				4879B4921FC28E1600611DA3 /* InboxSceneTheme.swift in Sources */,
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
 				4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
+				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
+				4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */,
 				48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */,
 				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
 				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
 				489FE1C81FC05BC80062E1AB /* RegisterSceneWorker.swift in Sources */,
+				4879B49A1FC29A7C00611DA3 /* Message.swift in Sources */,
 				482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */,
 				482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */,
+				4879B4981FC29A4A00611DA3 /* Chat.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
 				489FE1C61FC05A9F0062E1AB /* RegisterScene.swift in Sources */,
 				482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */,
 				48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */,
+				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
+				4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */,
+				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
 				489FE1CA1FC05DCA0062E1AB /* RegisterSceneTheme.swift in Sources */,
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
@@ -899,6 +992,7 @@
 				48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */,
 				483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */,
 				483F8FC21FC166D70058CC56 /* AppEntryWaypointMock.swift in Sources */,
+				488730DA1FC2C013001F9876 /* InboxSceneSetupTests.swift in Sources */,
 				48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */,
 				48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */,
 				48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */,
@@ -910,10 +1004,14 @@
 				4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */,
 				48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */,
 				4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */,
+				4879B48D1FC28C3F00611DA3 /* HomeSceneTests.swift in Sources */,
 				489FE1E91FC06EA20062E1AB /* InitialSceneWaypointTests.swift in Sources */,
 				489FE1D71FC062F90062E1AB /* RegisterSceneTests.swift in Sources */,
 				483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */,
+				488730DC1FC2C225001F9876 /* InboxSceneCellTests.swift in Sources */,
 				489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */,
+				488730D81FC2BEB9001F9876 /* InboxSceneDataTests.swift in Sources */,
+				488730D11FC2B914001F9876 /* ChatTests.swift in Sources */,
 				483F8FBA1FC162A00058CC56 /* AppDelegateTests.swift in Sources */,
 				489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */,
 				4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */,
@@ -926,6 +1024,7 @@
 				489FE1E11FC065C60062E1AB /* RegisterSceneMock.swift in Sources */,
 				483F8FC41FC167130058CC56 /* AppExitWaypointMock.swift in Sources */,
 				489FE1EB1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift in Sources */,
+				488730D41FC2BAAC001F9876 /* InboxSceneTests.swift in Sources */,
 				482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */,
 				489FE1D31FC062E40062E1AB /* RegisterSceneFactoryTests.swift in Sources */,
 				4803C26B1FBC33960096E403 /* SignInSceneWorkerTests.swift in Sources */,
@@ -938,6 +1037,7 @@
 				48A9635F1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift in Sources */,
 				482FDF031FBFE52F00ABA372 /* InitialSceneTests.swift in Sources */,
 				483F8FBC1FC163AD0058CC56 /* ProcessInfoMock.swift in Sources */,
+				488730D61FC2BCB9001F9876 /* InboxSceneSetupMock.swift in Sources */,
 				4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */,
 				4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */,
 			);
