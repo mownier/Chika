@@ -21,11 +21,24 @@ extension RegisterScene {
     
     class Worker: RegisterSceneWorker {
         
-        weak var output: RegisterSceneWorkerOutput?
-        var service: AuthRemoteService
+        struct Service {
+            
+            var auth: AuthRemoteService
+            var person: PersonRemoteService
+        }
         
-        init(service: AuthRemoteService = AuthRemoteServiceProvider()) {
+        weak var output: RegisterSceneWorkerOutput?
+        var service: Service
+        
+        init(service: Service) {
             self.service = service
+        }
+        
+        convenience init() {
+            let person = PersonRemoteServiceProvider()
+            let auth = AuthRemoteServiceProvider()
+            let service = Service(auth: auth, person: person)
+            self.init(service: service)
         }
         
         func register(email: String?, pass: String?) {
@@ -35,13 +48,21 @@ extension RegisterScene {
                 return
             }
             
-            service.register(email: email!, pass: pass!) { [weak self] result in
+            service.auth.register(email: email!, pass: pass!) { [weak self] result in
                 switch result {
-                case .ok:
-                    self?.output?.workerDidRegisterOK()
-                
                 case .err(let info):
                     self?.output?.workerDidRegisterWithError(info)
+                    
+                case .ok(let access):
+                    self?.service.person.add(email: access.email, id: access.userID) { result in
+                        switch result {
+                        case .err(let info):
+                            self?.output?.workerDidRegisterWithError(info)
+                            
+                        case .ok:
+                            self?.output?.workerDidRegisterOK()
+                        }
+                    }
                 }
             }
         }
