@@ -15,7 +15,7 @@ class RegisterSceneWorkerTests: XCTestCase {
     func testInitA() {
         let worker = RegisterScene.Worker()
         XCTAssertNil(worker.output)
-        XCTAssertTrue(worker.service is AuthRemoteServiceProvider)
+        XCTAssertTrue(worker.service.auth is AuthRemoteServiceProvider)
     }
     
     // CONTEXT: Register function has nil email and pass and it should
@@ -39,10 +39,12 @@ class RegisterSceneWorkerTests: XCTestCase {
     // from the service
     func testRegisterB() {
         let exp = expectation(description: "testRegisterB")
-        let service = AuthRemoteServiceMock()
+        let auth = AuthRemoteServiceMock()
+        let person = PersonRemoteServiceProvider()
+        let service = RegisterScene.Worker.Service(auth: auth, person: person)
         let output = RegisterSceneWorkerOutputMock(exp: exp)
         let worker = RegisterScene.Worker(service: service)
-        service.isOK = false
+        auth.isOK = false
         output.ok = { XCTFail() }
         output.err =  { error in
             XCTAssertTrue(error is ServiceError)
@@ -57,11 +59,37 @@ class RegisterSceneWorkerTests: XCTestCase {
     // CONTEXT: Register function should return ok from the service
     func testRegisterC() {
         let exp = expectation(description: "testRegisterC")
-        let mockService = AuthRemoteServiceMock()
+        let auth = AuthRemoteServiceMock()
+        let person = PersonRemoteServiceMock()
+        let service = RegisterScene.Worker.Service(auth: auth, person: person)
         let output = RegisterSceneWorkerOutputMock(exp: exp)
-        let worker = RegisterScene.Worker(service: mockService)
+        let worker = RegisterScene.Worker(service: service)
+        auth.isOK = true
+        person.isOK = true
         output.ok = { }
         output.err =  { _ in XCTFail() }
+        worker.output = output
+        worker.register(email: "me@me.com", pass: "12345")
+        wait(for: [exp], timeout: 2.0)
+    }
+    
+    // CONTEXT: Register function should return error from the
+    // person remote service given that it produces an error
+    func testRegisterD() {
+        let exp = expectation(description: "testRegisterC")
+        let auth = AuthRemoteServiceMock()
+        let person = PersonRemoteServiceMock()
+        let service = RegisterScene.Worker.Service(auth: auth, person: person)
+        let output = RegisterSceneWorkerOutputMock(exp: exp)
+        let worker = RegisterScene.Worker(service: service)
+        auth.isOK = true
+        person.isOK = false
+        output.ok = { XCTFail() }
+        output.err =  { error in
+            XCTAssertTrue(error is ServiceError)
+            let msg = (error as! ServiceError).message
+            XCTAssertEqual(msg, "Person Remote Service Error")
+        }
         worker.output = output
         worker.register(email: "me@me.com", pass: "12345")
         wait(for: [exp], timeout: 2.0)
