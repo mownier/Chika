@@ -40,16 +40,6 @@
                ReferencedContainer = "container:Chika.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "483FC30C1FBAD25300545269"
-               BuildableName = "ChikaUITests.xctest"
-               BlueprintName = "ChikaUITests"
-               ReferencedContainer = "container:Chika.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
