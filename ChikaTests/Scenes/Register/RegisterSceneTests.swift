@@ -30,7 +30,9 @@ class RegisterSceneTests: XCTestCase {
     // Texts of inputs should be empty.
     func testDidTapGoA() {
         let exp = expectation(description: "testDidTapGoA")
-        let service = AuthRemoteServiceMock()
+        let auth = AuthRemoteServiceMock()
+        let person = PersonRemoteServiceProvider()
+        let service = RegisterScene.Worker.Service(auth: auth, person: person)
         let worker = RegisterSceneWorkerMock(service: service)
         let theme = RegisterScene.Theme()
         let flow = RegisterSceneFlowMock()
