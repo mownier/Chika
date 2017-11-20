@@ -44,7 +44,7 @@ extension HomeScene {
                 return true
             }
             
-            nav.popToRootViewController(animated: true)
+            nav.popToRootViewController(animated: false)
             nav.viewControllers[0] = scene
             return true
         }
