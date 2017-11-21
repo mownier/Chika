@@ -23,7 +23,7 @@ class PersonRemoteServiceProvider: PersonRemoteService {
     
     func add(email: String, id: String, completion: @escaping (ServiceResult<String>) -> Void) {
         let ref = database.reference()
-        let values = ["person/\(id)": ["email": email, "id": id]]
+        let values = ["persons/\(id)": ["email": email, "id": id]]
         ref.updateChildValues(values) { error, _ in
             guard error == nil else {
                 completion(.err(error!))
