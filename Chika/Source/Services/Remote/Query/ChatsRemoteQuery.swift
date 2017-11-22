@@ -13,23 +13,49 @@ protocol ChatsRemoteQuery: class {
     func getChats(for keys: [String], completion: @escaping ([Chat]) -> Void)
 }
 
+protocol ChatsSort: class {
+    
+    func by(_ keys: [String], _ chats: inout [Chat])
+}
+
+class ChatsSortProvider: ChatsSort {
+    
+    func by(_ keys: [String], _ chats: inout [Chat]) {
+        chats.sort { chat1, chat2 -> Bool in
+            guard let index1 = keys.index(of: chat1.id),
+                let index2 = keys.index(of: chat2.id) else {
+                    return false
+            }
+            
+            return index1 < index2
+        }
+    }
+}
+
 class ChatsRemoteQueryProvider: ChatsRemoteQuery {
     
     var recentMessageQuery: RecentMessageRemoteQuery
-    var personQuery: PersonsRemoteQuery
+    var personsQuery: PersonsRemoteQuery
     var database: Database
     var path: String
+    var sort: ChatsSort
     
-    init(database: Database = Database.database(), path: String = "chats", personQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), recentMessageQuery: RecentMessageRemoteQuery = RecentMessageRemoteQueryProvider()) {
+    init(database: Database = Database.database(), path: String = "chats", personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), recentMessageQuery: RecentMessageRemoteQuery = RecentMessageRemoteQueryProvider(), sort: ChatsSort = ChatsSortProvider()) {
         self.database = database
         self.path = path
-        self.personQuery = personQuery
+        self.personsQuery = personsQuery
         self.recentMessageQuery = recentMessageQuery
+        self.sort = sort
     }
     
     func getChats(for keys: [String], completion: @escaping ([Chat]) -> Void) {
+        guard !keys.isEmpty else {
+            completion([])
+            return
+        }
+        
         let rootRef = database.reference()
-        let personQuery = self.personQuery
+        let personsQuery = self.personsQuery
         let recentMessageQuery = self.recentMessageQuery
         
         var chats = [Chat]()
@@ -39,15 +65,7 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
                     return
                 }
                 
-                chats.sort { chat1, chat2 -> Bool in
-                    guard let index1 = keys.index(of: chat1.id),
-                        let index2 = keys.index(of: chat2.id) else {
-                            return false
-                    }
-                    
-                    return index1 < index2
-                }
-                
+                sort.by(keys, &chats)
                 completion(chats)
             }
         }
@@ -69,7 +87,7 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
                 
                 let personKeys: [String] = participants.flatMap({ $0.key })
                 
-                personQuery.getPersons(for: personKeys) { persons in
+                personsQuery.getPersons(for: personKeys) { persons in
                     guard personKeys.count == persons.count,
                         personKeys == persons.map({ $0.id }) else {
                             chatCounter += 1
