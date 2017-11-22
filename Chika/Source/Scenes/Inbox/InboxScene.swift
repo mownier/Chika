@@ -10,17 +10,18 @@ import UIKit
 
 class InboxScene: UITableViewController {
 
-    var theme: InboxSceneTheme!
-    var data: InboxSceneData!
-    var setup: InboxSceneSetup!
-    
+    var theme: InboxSceneTheme
+    var data: InboxSceneData
+    var setup: InboxSceneSetup
     var cellManager: InboxSceneCellManager
+    var worker: InboxSceneWorker
     
-    init(theme: InboxSceneTheme, data: InboxSceneData, setup: InboxSceneSetup, cellManager: InboxSceneCellManager) {
+    init(theme: InboxSceneTheme, data: InboxSceneData, setup: InboxSceneSetup, cellManager: InboxSceneCellManager, worker: InboxSceneWorker) {
         self.theme = theme
         self.data = data
         self.setup = setup
         self.cellManager = cellManager
+        self.worker = worker
         super.init(style: .plain)
     }
     
@@ -29,7 +30,9 @@ class InboxScene: UITableViewController {
         let data = Data()
         let setup = InboxScene.Setup()
         let cellManager = InboxScene.CellManager()
-        self.init(theme: theme, data: data, setup: setup, cellManager: cellManager)
+        let worker = InboxScene.Worker()
+        self.init(theme: theme, data: data, setup: setup, cellManager: cellManager, worker: worker)
+        worker.output = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -45,6 +48,12 @@ class InboxScene: UITableViewController {
         tableView.separatorStyle = .none
         
         cellManager.register(in: tableView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        worker.fetchInbox()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,5 +77,18 @@ class InboxScene: UITableViewController {
         }
         
         return UITableViewCell()
+    }
+}
+
+extension InboxScene: InboxSceneWorkerOutput {
+    
+    func workerDidFetch(chats: [Chat]) {
+        data.removeAll()
+        data.append(list: chats)
+        tableView.reloadData()
+    }
+    
+    func workerDidFetchWithError(_ error: Error) {
+        print(error)
     }
 }

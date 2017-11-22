@@ -13,6 +13,7 @@ protocol InboxSceneData: class {
     func chatCount(in section: Int) -> Int
     func chat(at indexPath: IndexPath) -> Chat?
     func append(list: [Chat])
+    func removeAll()
 }
 
 extension InboxScene {
@@ -23,16 +24,6 @@ extension InboxScene {
         
         init() {
             chats = []
-            
-            // TODO: Delete this
-            var chat = Chat()
-            chat.title = "Chat 1"
-            chat.recent.content = "Chat Message Content 1"
-            chats.append(chat)
-            
-            chat.title = "Chat 2"
-            chat.recent.content = "Chat Message Content 2"
-            chats.append(chat)
         }
         
         func chat(at indexPath: IndexPath) -> Chat? {
@@ -45,6 +36,10 @@ extension InboxScene {
         
         func append(list: [Chat]) {
             chats.append(contentsOf: list)
+        }
+        
+        func removeAll() {
+            chats.removeAll()
         }
         
         func chatCount(in section: Int) -> Int {
