@@ -18,27 +18,27 @@ protocol PersonsSort: class {
     func by(_ keys: [String], _ persons: inout [Person])
 }
 
-class PersonsRemoteQueryProvider: PersonsRemoteQuery {
+class PersonsSortProvider: PersonsSort {
     
-    class Sort: PersonsSort {
-        
-        func by(_ keys: [String], _ persons: inout [Person]) {
-            persons.sort { person1, person2 -> Bool in
-                guard let index1 = keys.index(of: person1.id),
-                    let index2 = keys.index(of: person2.id) else {
-                        return false
-                }
-                
-                return index1 < index2
+    func by(_ keys: [String], _ persons: inout [Person]) {
+        persons.sort { person1, person2 -> Bool in
+            guard let index1 = keys.index(of: person1.id),
+                let index2 = keys.index(of: person2.id) else {
+                    return false
             }
+            
+            return index1 < index2
         }
     }
+}
+
+class PersonsRemoteQueryProvider: PersonsRemoteQuery {
     
     var database: Database
     var path: String
     var sort: PersonsSort
     
-    init(database: Database = Database.database(), path: String = "persons", sort: PersonsSort = Sort()) {
+    init(database: Database = Database.database(), path: String = "persons", sort: PersonsSort = PersonsSortProvider()) {
         self.database = database
         self.path = path
         self.sort = sort
