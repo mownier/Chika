@@ -33,19 +33,3 @@ struct Chat {
     }
 }
 
-extension Chat: CustomDebugStringConvertible {
-    
-    var debugDescription: String {
-        return """
-        
-        id          : \(id)
-        title       : \(title)
-        recent      : \(recent)
-        creator     : \(creator)
-        participants: \(participants)
-        
-        """
-    }
-}
-
-
