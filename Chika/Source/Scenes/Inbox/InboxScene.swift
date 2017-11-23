@@ -89,6 +89,6 @@ extension InboxScene: InboxSceneWorkerOutput {
     }
     
     func workerDidFetchWithError(_ error: Error) {
-        print(error)
+        tableView.reloadData()
     }
 }
