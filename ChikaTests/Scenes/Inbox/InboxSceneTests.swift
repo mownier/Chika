@@ -38,4 +38,64 @@ class InboxSceneTests: XCTestCase {
         let cell = scene.tableView(scene.tableView, cellForRowAt: IndexPath())
         XCTAssertNil(cell.reuseIdentifier)
     }
+    
+    // CONTEXT: heightForRow function should
+    //   - return a non-zero height
+    // GIVEN:
+    //   - a single chat
+    func testHeightForRowA() {
+        let scene = InboxScene()
+        let worker = InboxSceneWorkerMock()
+        var chat = Chat()
+        chat.id = "chat:1"
+        chat.title = "Title 1"
+        chat.recent.content = "Hello World!"
+        scene.data.append(list: [chat])
+        scene.worker = worker
+        let view = scene.view
+        view?.setNeedsLayout()
+        view?.layoutIfNeeded()
+        let height = scene.tableView(scene.tableView, heightForRowAt: IndexPath(row: 0, section: 0))
+        XCTAssertTrue(height != 0)
+    }
+    
+    // CONTEXT: workerDidFetch function should
+    //   - remove all chats in data
+    //   - append the new Chat array into data
+    //   - tableView calls the reloadData
+    // GIVEN:
+    //   - an initial Chat array appended to data
+    //   - a tableView mock
+    func testWorkerDidFetchA() {
+        let scene = InboxScene()
+        let tableView = TableViewMock()
+        var chat1 = Chat()
+        var chat2 = Chat()
+        var chat3 = Chat()
+        var chat4 = Chat()
+        chat1.id = "chat:1"
+        chat2.id = "chat:2"
+        chat3.id = "chat:3"
+        chat4.id = "chat:4"
+        let initialChats = [chat1, chat2]
+        let outputChats = [chat3, chat4]
+        scene.data.append(list: initialChats)
+        scene.tableView = tableView
+        scene.workerDidFetch(chats: outputChats)
+        XCTAssertEqual(scene.data.chatCount(in: 0), 2)
+        XCTAssertEqual(scene.data.chat(at: IndexPath(row: 0, section: 0))?.id, "chat:3")
+        XCTAssertEqual(scene.data.chat(at: IndexPath(row: 1, section: 0))?.id, "chat:4")
+        XCTAssertTrue(tableView.isReloadDataCalled)
+    }
+    
+    // CONTEXT: workerDidFetchWithError function should
+    //   - tableView calls the reloadData
+    func testWorkerDidFetchWithErrorA() {
+        let scene = InboxScene()
+        let tableView = TableViewMock()
+        let error = ServiceError("inbox is empty")
+        scene.tableView = tableView
+        scene.workerDidFetchWithError(error)
+        XCTAssertTrue(tableView.isReloadDataCalled)
+    }
 }
