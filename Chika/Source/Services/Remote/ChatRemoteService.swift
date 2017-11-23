@@ -24,7 +24,7 @@ class ChatRemoteServiceProvider: ChatRemoteService {
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void) {
         inboxQuery.getInbox(for: userID) { chats in
             guard !chats.isEmpty else {
-                completion(.err(ServiceError("inbox is empty")))
+                completion(.err(ServiceError("can not get inbox")))
                 return
             }
             
