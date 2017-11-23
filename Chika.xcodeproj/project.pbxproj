@@ -47,7 +47,7 @@
 		4852060A1FC55A6300DFD68D /* MessagesSortMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206091FC55A6300DFD68D /* MessagesSortMock.swift */; };
 		4852060C1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */; };
 		4874AE021FC3129C00096BA8 /* ChatRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4874AE011FC3129C00096BA8 /* ChatRemoteService.swift */; };
-		487766EB1FC67CAB008E865F /* InboxRemoteQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487766EA1FC67CAB008E865F /* InboxRemoteQueryTests.swift */; };
+		487766EB1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487766EA1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift */; };
 		487766ED1FC6863F008E865F /* ChatsRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487766EC1FC6863F008E865F /* ChatsRemoteQueryMock.swift */; };
 		487766EF1FC68CE0008E865F /* ChatsRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487766EE1FC68CE0008E865F /* ChatsRemoteServiceProviderTests.swift */; };
 		487766F11FC68F90008E865F /* InboxRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487766F01FC68F90008E865F /* InboxRemoteQueryMock.swift */; };
@@ -209,7 +209,7 @@
 		485206091FC55A6300DFD68D /* MessagesSortMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSortMock.swift; sourceTree = "<group>"; };
 		4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRemoteQueryMock.swift; sourceTree = "<group>"; };
 		4874AE011FC3129C00096BA8 /* ChatRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteService.swift; sourceTree = "<group>"; };
-		487766EA1FC67CAB008E865F /* InboxRemoteQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteQueryTests.swift; sourceTree = "<group>"; };
+		487766EA1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		487766EC1FC6863F008E865F /* ChatsRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRemoteQueryMock.swift; sourceTree = "<group>"; };
 		487766EE1FC68CE0008E865F /* ChatsRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		487766F01FC68F90008E865F /* InboxRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteQueryMock.swift; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 			children = (
 				48AB2B611FC5691C00B3A253 /* ChatsRemoteQueryProviderTests.swift */,
 				489DE79B1FC5B9EA00B6C960 /* ChatsSortProviderTests.swift */,
-				487766EA1FC67CAB008E865F /* InboxRemoteQueryTests.swift */,
+				487766EA1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift */,
 				485206071FC557BB00DFD68D /* MessagesRemoteQueryProviderTests.swift */,
 				489DE7A11FC5C96E00B6C960 /* MessagesSortProviderTests.swift */,
 				485205FF1FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift */,
@@ -1143,7 +1143,7 @@
 				489FE1E91FC06EA20062E1AB /* InitialSceneWaypointTests.swift in Sources */,
 				489FE1D71FC062F90062E1AB /* RegisterSceneTests.swift in Sources */,
 				483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */,
-				487766EB1FC67CAB008E865F /* InboxRemoteQueryTests.swift in Sources */,
+				487766EB1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift in Sources */,
 				488730DC1FC2C225001F9876 /* InboxSceneCellTests.swift in Sources */,
 				489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */,
 				488730D81FC2BEB9001F9876 /* InboxSceneDataTests.swift in Sources */,
