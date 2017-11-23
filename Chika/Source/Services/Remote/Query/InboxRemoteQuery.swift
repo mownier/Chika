@@ -26,12 +26,17 @@ class InboxRemoteQueryProvider: InboxRemoteQuery {
     }
     
     func getInbox(for personID: String, completion: @escaping ([Chat]) -> Void) {
+        guard !personID.isEmpty else {
+            completion([])
+            return
+        }
+        
         let rootRef = database.reference()
         let ref = rootRef.child("\(path)/\(personID)")
         let chatsQuery = self.chatsQuery
         
-        ref.queryOrdered(byChild: "updated_on").observe(.value) { snapshot in
-            guard snapshot.exists(), let info = snapshot.value as? [String : Any] else {
+        ref.queryOrdered(byChild: "updated_on").observeSingleEvent(of: .value) { snapshot in
+            guard let info = snapshot.value as? [String : Any] else {
                 completion([])
                 return
             }
@@ -39,12 +44,6 @@ class InboxRemoteQueryProvider: InboxRemoteQuery {
             let chatKeys: [String] = info.flatMap({ $0.key })
             
             chatsQuery.getChats(for: chatKeys) { chats in
-                guard chatKeys.count == chats.count,
-                    chatKeys == chats.map({ $0.id }) else {
-                        completion([])
-                        return
-                }
-                
                 completion(chats)
             }
         }
