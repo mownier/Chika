@@ -12,13 +12,15 @@ import UIKit
 class AppEntryWaypointMock: AppEntryWaypoint {
 
     var isEnterCalled: Bool
+    var isEnterOK: Bool
     
     init() {
         isEnterCalled = false
+        isEnterOK = false
     }
     
     func enter(from parent: UIViewController) -> Bool {
         isEnterCalled = true
-        return true
+        return isEnterOK
     }
 }
