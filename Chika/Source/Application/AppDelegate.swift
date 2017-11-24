@@ -17,21 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        let waypoint = InitialScene.RootWaypoint()
+        let waypoint = RootWaypoint()
         let _ = waypoint.makeRoot(from: window)
-        let _ = handleUITesting()
-
+        
         return true
     }
-    
-    func handleUITesting(info: ProcessInfo = ProcessInfo.processInfo) -> Bool {
-        if info.arguments.contains("ForceInitialScene") {
-            let waypoint = InitialScene.RootWaypoint()
-            let _ = waypoint.makeRoot(from: window)
-            return true
-        }
-        
-        return false
-    }
 }
-
