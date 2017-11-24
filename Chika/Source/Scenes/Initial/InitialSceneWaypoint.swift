@@ -10,12 +10,12 @@ import UIKit
 
 extension InitialScene {
     
-    class Waypoint {
+    class RootWaypoint: AppRootWaypoint {
         
         struct Factory {
             
-            var initialScene: InitialSceneFactory
-            var navController: AppNavigationControllerFactory
+            var initial: InitialSceneFactory
+            var nav: AppNavigationControllerFactory
         }
         
         var factory: Factory
@@ -25,41 +25,9 @@ extension InitialScene {
         }
         
         convenience init() {
-            let initialScene = InitialScene.Factory()
-            let navController = UINavigationController.Factory()
-            let factory = Factory(initialScene: initialScene, navController: navController)
-            self.init(factory: factory)
-        }
-    }
-
-    
-    class EntryWaypoint: Waypoint, AppEntryWaypoint {
-        
-        func enter(from parent: UIViewController) -> Bool {
-            guard let window = parent.view.window else {
-                return false
-            }
-            
-            let scene = factory.initialScene.build()
-            
-            guard let nav = window.rootViewController as? UINavigationController else {
-                let nav = factory.navController.build(root: scene)
-                window.rootViewController = nav
-                return true
-            }
-            
-            nav.popToRootViewController(animated: true)
-            nav.viewControllers[0] = scene
-            return true
-        }
-    }
-    
-    class RootWaypoint: Waypoint, AppRootWaypoint {
-        
-        convenience init() {
-            let initialScene = InitialScene.Factory()
-            let navController = UINavigationController.Factory(navBarTheme: UINavigationBar.Theme.Empty())
-            let factory = Factory(initialScene: initialScene, navController: navController)
+            let initial = InitialScene.Factory()
+            let nav = UINavigationController.Factory(navBarTheme: UINavigationBar.Theme.Empty())
+            let factory = Factory(initial: initial, nav: nav)
             self.init(factory: factory)
         }
         
@@ -68,8 +36,8 @@ extension InitialScene {
                 return false
             }
             
-            let scene = factory.initialScene.build()
-            let nav = factory.navController.build(root: scene)
+            let scene = factory.initial.build()
+            let nav = factory.nav.build(root: scene)
             window.rootViewController = nav
             return true
         }
