@@ -20,7 +20,7 @@ extension RegisterScene {
         
         struct Waypoint {
             
-            var homeScene: AppEntryWaypoint
+            var home: AppRootWaypoint
         }
         
         weak var scene: UIViewController?
@@ -31,8 +31,8 @@ extension RegisterScene {
         }
         
         convenience init() {
-            let homeScene = HomeScene.EntryWaypoint()
-            let waypoint = Waypoint(homeScene: homeScene)
+            let home = HomeScene.RootWaypoint()
+            let waypoint = Waypoint(home: home)
             self.init(waypoint: waypoint)
         }
         
@@ -41,11 +41,7 @@ extension RegisterScene {
                 return false
             }
             
-            if scene.isBeingPresented {
-                scene.dismiss(animated: true, completion: nil)
-            }
-            
-            return waypoint.homeScene.enter(from: scene)
+            return waypoint.home.makeRoot(from: scene.view.window)
         }
         
         func showError(_ error: Error) {
