@@ -22,4 +22,8 @@ class ChatRemoteServiceMock: ChatRemoteService {
         let error = ServiceError("ChatRemoteService forced error")
         completion(.err(error))
     }
+    
+    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void) {
+        
+    }
 }
