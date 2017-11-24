@@ -11,14 +11,17 @@ import FirebaseDatabase
 protocol ChatRemoteService: class {
 
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void)
+    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void)
 }
 
 class ChatRemoteServiceProvider: ChatRemoteService {
     
     var inboxQuery: InboxRemoteQuery
+    var chatMessagesQuery: ChatMessagesRemoteQuery
     
-    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider()) {
+    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider(), chatMessagesQuery: ChatMessagesRemoteQuery = ChatMessagesRemoteQueryProvider()) {
         self.inboxQuery = inboxQuery
+        self.chatMessagesQuery = chatMessagesQuery
     }
     
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void) {
@@ -29,6 +32,17 @@ class ChatRemoteServiceProvider: ChatRemoteService {
             }
             
             completion(.ok(chats.reversed()))
+        }
+    }
+    
+    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void) {
+        chatMessagesQuery.getMessages(for: chatID, offset: offset, limit: limit) { messages in
+            guard !messages.isEmpty else {
+                completion(.err(ServiceError("no chat messages")))
+                return
+            }
+            
+            completion(.ok(messages.reversed()))
         }
     }
 }
