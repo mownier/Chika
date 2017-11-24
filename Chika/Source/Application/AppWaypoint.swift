@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol AppEntryWaypoint: class {
     
@@ -21,4 +22,34 @@ protocol AppExitWaypoint: class {
 protocol AppRootWaypoint: class {
     
     func makeRoot(from window: UIWindow?) -> Bool
+}
+
+extension AppDelegate {
+    
+    class RootWaypoint: AppRootWaypoint {
+        
+        var userID: String?
+        var initial: AppRootWaypoint
+        var home: AppRootWaypoint
+        var isForceInitialScene: Bool
+        
+        init(userID: String? = Auth.auth().currentUser?.uid, initial: AppRootWaypoint = InitialScene.RootWaypoint(), home: AppRootWaypoint = HomeScene.RootWaypoint(), processInfo: ProcessInfo = ProcessInfo.processInfo) {
+            self.userID = userID
+            self.initial = initial
+            self.home = home
+            self.isForceInitialScene = processInfo.arguments.contains("ForceInitialScene")
+        }
+        
+        func makeRoot(from window: UIWindow?) -> Bool {
+            guard let window = window else {
+                return false
+            }
+            
+            guard let userID = userID, !userID.isEmpty, !isForceInitialScene else {
+                return initial.makeRoot(from: window)
+            }
+            
+            return home.makeRoot(from: window)
+        }
+    }
 }
