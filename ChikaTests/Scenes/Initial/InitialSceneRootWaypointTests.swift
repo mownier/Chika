@@ -12,16 +12,16 @@ import XCTest
 class InitialSceneRootWaypointTests: XCTestCase {
     
     // CONTEXT: Constructor should have a factory for
-    // initialScene and navController as instance of
+    // initial scene and nav controller as instance of
     // InitialScene.Factory and UINavigationController.Factory
     // and the navController.navBarTheme is an instance
     // of UINavigationBar.Theme.Empty
     func testInitA() {
         let waypoint = InitialScene.RootWaypoint()
-        XCTAssertTrue(waypoint.factory.initialScene is InitialScene.Factory)
-        XCTAssertTrue(waypoint.factory.navController is UINavigationController.Factory)
+        XCTAssertTrue(waypoint.factory.initial is InitialScene.Factory)
+        XCTAssertTrue(waypoint.factory.nav is UINavigationController.Factory)
         
-        let nav = waypoint.factory.navController as! UINavigationController.Factory
+        let nav = waypoint.factory.nav as! UINavigationController.Factory
         XCTAssertTrue(nav.navBarTheme is UINavigationBar.Theme.Empty)
     }
     

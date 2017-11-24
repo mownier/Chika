@@ -15,7 +15,7 @@ class SignInSceneFlowTests: XCTestCase {
     // property with default class HomeScene.Flow
     func testInitA() {
         let flow = SignInScene.Flow()
-        XCTAssertTrue(flow.waypoint.homeScene is HomeScene.EntryWaypoint)
+        XCTAssertTrue(flow.waypoint.home is HomeScene.RootWaypoint)
     }
     
     // CONTEXT: showError function should show an alert
@@ -44,36 +44,5 @@ class SignInSceneFlowTests: XCTestCase {
         flow.scene = nil
         let ok = flow.goToHome()
         XCTAssertFalse(ok)
-    }
-    
-    // CONTEXT: goToHome function should return true given that
-    // the waypoint.homeScene.enter returns true and the
-    // scene should be dismissed given that it is presented
-    func testGoToHomeB() {
-        let entry = EntryWaypointMock()
-        let waypoint = SignInScene.Flow.Waypoint(homeScene: entry)
-        let flow = SignInScene.Flow(waypoint: waypoint)
-        let scene = SignInSceneMock()
-        flow.scene = scene
-        scene.isPresented = true
-        entry.isEnterOK = true
-        let ok = flow.goToHome()
-        XCTAssertTrue(ok)
-        XCTAssertFalse(scene.isBeingPresented)
-    }
-    
-    // CONTEXT: goToHome function should return true given that
-    // the waypoint.homeScene.enter returns true and the scene
-    // is not being presented
-    func testGoToHomeC() {
-        let entry = EntryWaypointMock()
-        let waypoint = SignInScene.Flow.Waypoint(homeScene: entry)
-        let flow = SignInScene.Flow(waypoint: waypoint)
-        let scene = SignInSceneMock()
-        flow.scene = scene
-        scene.isPresented = false
-        entry.isEnterOK = true
-        let ok = flow.goToHome()
-        XCTAssertTrue(ok)
     }
 }
