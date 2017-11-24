@@ -11,13 +11,15 @@
 class AppExitWaypointMock: AppExitWaypoint {
 
     var isExitCalled: Bool
+    var isExitOK: Bool
     
     init() {
         isExitCalled = false
+        isExitOK = false
     }
     
     func exit() -> Bool {
         isExitCalled = true
-        return true
+        return isExitOK
     }
 }
