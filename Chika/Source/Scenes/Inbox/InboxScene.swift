@@ -15,13 +15,15 @@ class InboxScene: UITableViewController {
     var setup: InboxSceneSetup
     var cellManager: InboxSceneCellManager
     var worker: InboxSceneWorker
+    var flow: InboxSceneFlow
     
-    init(theme: InboxSceneTheme, data: InboxSceneData, setup: InboxSceneSetup, cellManager: InboxSceneCellManager, worker: InboxSceneWorker) {
+    init(theme: InboxSceneTheme, data: InboxSceneData, setup: InboxSceneSetup, cellManager: InboxSceneCellManager, worker: InboxSceneWorker, flow: InboxSceneFlow) {
         self.theme = theme
         self.data = data
         self.setup = setup
         self.cellManager = cellManager
         self.worker = worker
+        self.flow = flow
         super.init(style: .plain)
     }
     
@@ -31,8 +33,10 @@ class InboxScene: UITableViewController {
         let setup = InboxScene.Setup()
         let cellManager = InboxScene.CellManager()
         let worker = InboxScene.Worker()
-        self.init(theme: theme, data: data, setup: setup, cellManager: cellManager, worker: worker)
+        let flow = InboxScene.Flow()
+        self.init(theme: theme, data: data, setup: setup, cellManager: cellManager, worker: worker, flow: flow)
         worker.output = self
+        flow.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -77,6 +81,12 @@ class InboxScene: UITableViewController {
         }
         
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let _ = flow.goToConvo(chat: data.chat(at: indexPath))
     }
 }
 
