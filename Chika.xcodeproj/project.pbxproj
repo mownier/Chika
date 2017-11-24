@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		218ABF5ED4E1B2C9500A1F95 /* Pods_ChikaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */; };
+		4802BFA41FC85FF00018D15C /* AppRootWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */; };
 		4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2551FBBE10F0096E403 /* UserMock.swift */; };
 		4803C2591FBC00280096E403 /* SignInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2581FBC00280096E403 /* SignInScene.swift */; };
 		4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */; };
@@ -23,14 +24,13 @@
 		482FDF051FBFE74F00ABA372 /* InitialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF041FBFE74F00ABA372 /* InitialUITests.swift */; };
 		482FDF071FBFEAB500ABA372 /* UITestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF061FBFEAB500ABA372 /* UITestHelper.swift */; };
 		482FDF091FBFEBBE00ABA372 /* InitialSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */; };
-		482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */; };
+		482FDF0B1FBFED2000ABA372 /* HomeSceneRootWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0A1FBFED2000ABA372 /* HomeSceneRootWaypointTests.swift */; };
 		482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */; };
 		482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */; };
 		482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */; };
 		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
 		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
 		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
-		483F8FBA1FC162A00058CC56 /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */; };
 		483F8FBC1FC163AD0058CC56 /* ProcessInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FBB1FC163AD0058CC56 /* ProcessInfoMock.swift */; };
 		483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FBD1FC165740058CC56 /* InitialSceneFlowMock.swift */; };
 		483F8FC21FC166D70058CC56 /* AppEntryWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */; };
@@ -91,7 +91,6 @@
 		488730E01FC2CD89001F9876 /* PersonRemoteServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */; };
 		488730E21FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */; };
 		488730E41FC2CF96001F9876 /* FirebaseDatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */; };
-		48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED71FBFB895008F090F /* ExitWaypointMock.swift */; };
 		48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */; };
 		48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EDF1FBFD6B4008F090F /* SignInUITests.swift */; };
 		48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */; };
@@ -119,8 +118,6 @@
 		489FE1E31FC066820062E1AB /* RegisterSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E21FC066820062E1AB /* RegisterSceneWorkerMock.swift */; };
 		489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */; };
 		489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */; };
-		489FE1E91FC06EA20062E1AB /* InitialSceneWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E81FC06EA20062E1AB /* InitialSceneWaypointTests.swift */; };
-		489FE1EB1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1EA1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift */; };
 		489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */; };
 		48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */; };
 		48A743B81FC7F0A90019EDD8 /* ConvoSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */; };
@@ -141,7 +138,6 @@
 		48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */; };
 		48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */; };
 		48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */; };
-		48C051631FBF3A22009DDFC8 /* EntryWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */; };
 		48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7631FBEC2D7009269A6 /* InitialScene.swift */; };
 		48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */; };
 		48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */; };
@@ -175,6 +171,7 @@
 
 /* Begin PBXFileReference section */
 		294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChikaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootWaypointMock.swift; sourceTree = "<group>"; };
 		4803C2551FBBE10F0096E403 /* UserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
 		4803C2581FBC00280096E403 /* SignInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScene.swift; sourceTree = "<group>"; };
 		4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneTests.swift; sourceTree = "<group>"; };
@@ -190,14 +187,13 @@
 		482FDF041FBFE74F00ABA372 /* InitialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUITests.swift; sourceTree = "<group>"; };
 		482FDF061FBFEAB500ABA372 /* UITestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelper.swift; sourceTree = "<group>"; };
 		482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlowTests.swift; sourceTree = "<group>"; };
-		482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
+		482FDF0A1FBFED2000ABA372 /* HomeSceneRootWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneRootWaypointTests.swift; sourceTree = "<group>"; };
 		482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneWaypoint.swift; sourceTree = "<group>"; };
 		482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFactory.swift; sourceTree = "<group>"; };
 		482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusBarFrameGetter.swift; sourceTree = "<group>"; };
 		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
-		483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		483F8FBB1FC163AD0058CC56 /* ProcessInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessInfoMock.swift; sourceTree = "<group>"; };
 		483F8FBD1FC165740058CC56 /* InitialSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlowMock.swift; sourceTree = "<group>"; };
 		483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryWaypointMock.swift; sourceTree = "<group>"; };
@@ -264,7 +260,6 @@
 		488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceMock.swift; sourceTree = "<group>"; };
 		488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseMock.swift; sourceTree = "<group>"; };
-		48920ED71FBFB895008F090F /* ExitWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitWaypointMock.swift; sourceTree = "<group>"; };
 		48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMock.swift; sourceTree = "<group>"; };
 		48920EDF1FBFD6B4008F090F /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
 		48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneExitWaypointTests.swift; sourceTree = "<group>"; };
@@ -292,8 +287,6 @@
 		489FE1E21FC066820062E1AB /* RegisterSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneWorkerMock.swift; sourceTree = "<group>"; };
 		489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneFlowMock.swift; sourceTree = "<group>"; };
 		489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneWorkerOutputMock.swift; sourceTree = "<group>"; };
-		489FE1E81FC06EA20062E1AB /* InitialSceneWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneWaypointTests.swift; sourceTree = "<group>"; };
-		489FE1EA1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
 		489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneRootWaypointTests.swift; sourceTree = "<group>"; };
 		48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneFlow.swift; sourceTree = "<group>"; };
 		48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneCell.swift; sourceTree = "<group>"; };
@@ -314,7 +307,6 @@
 		48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWaypoint.swift; sourceTree = "<group>"; };
 		48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWaypoint.swift; sourceTree = "<group>"; };
 		48C051601FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneWaypoint.swift; sourceTree = "<group>"; };
-		48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryWaypointMock.swift; sourceTree = "<group>"; };
 		48CDD7631FBEC2D7009269A6 /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
 		48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneTheme.swift; sourceTree = "<group>"; };
 		48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlow.swift; sourceTree = "<group>"; };
@@ -405,11 +397,9 @@
 		482FDF011FBFE51E00ABA372 /* Initial */ = {
 			isa = PBXGroup;
 			children = (
-				489FE1EA1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift */,
 				482FDF081FBFEBBE00ABA372 /* InitialSceneFlowTests.swift */,
 				489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */,
 				482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */,
-				489FE1E81FC06EA20062E1AB /* InitialSceneWaypointTests.swift */,
 			);
 			path = Initial;
 			sourceTree = "<group>";
@@ -417,7 +407,7 @@
 		483D0C631FBD74D7004BDB3F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				482FDF0A1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift */,
+				482FDF0A1FBFED2000ABA372 /* HomeSceneRootWaypointTests.swift */,
 				483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */,
 				483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */,
 				4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */,
@@ -567,7 +557,6 @@
 			isa = PBXGroup;
 			children = (
 				48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */,
-				483F8FB91FC162A00058CC56 /* AppDelegateTests.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -625,8 +614,8 @@
 				483FC2F11FBAD25300545269 /* AppDelegate.swift */,
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
-				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
 				482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */,
+				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -700,13 +689,12 @@
 			children = (
 				483F8FC11FC166D70058CC56 /* AppEntryWaypointMock.swift */,
 				483F8FC31FC167130058CC56 /* AppExitWaypointMock.swift */,
+				4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */,
 				48B4D0291FBAEE64008C78F6 /* AuthMock.swift */,
 				48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */,
 				487766FA1FC69BFB008E865F /* ChatRemoteServiceMock.swift */,
 				487766EC1FC6863F008E865F /* ChatsRemoteQueryMock.swift */,
 				489DE79F1FC5C65F00B6C960 /* ChatsSortMock.swift */,
-				48C051621FBF3A22009DDFC8 /* EntryWaypointMock.swift */,
-				48920ED71FBFB895008F090F /* ExitWaypointMock.swift */,
 				488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */,
 				4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */,
 				487766F01FC68F90008E865F /* InboxRemoteQueryMock.swift */,
@@ -1194,13 +1182,12 @@
 				488730E41FC2CF96001F9876 /* FirebaseDatabaseMock.swift in Sources */,
 				485206021FC5526900DFD68D /* PersonsSortMock.swift in Sources */,
 				487766FB1FC69BFB008E865F /* ChatRemoteServiceMock.swift in Sources */,
-				48920ED81FBFB895008F090F /* ExitWaypointMock.swift in Sources */,
 				4803C26D1FBC36DC0096E403 /* SignInSceneWorkerOutputMock.swift in Sources */,
 				48AB2B621FC5691C00B3A253 /* ChatsRemoteQueryProviderTests.swift in Sources */,
 				4879B48D1FC28C3F00611DA3 /* HomeSceneTests.swift in Sources */,
+				4802BFA41FC85FF00018D15C /* AppRootWaypointMock.swift in Sources */,
 				485206061FC554CE00DFD68D /* PersonsSortProviderTests.swift in Sources */,
 				487766F51FC69613008E865F /* TableViewMock.swift in Sources */,
-				489FE1E91FC06EA20062E1AB /* InitialSceneWaypointTests.swift in Sources */,
 				489FE1D71FC062F90062E1AB /* RegisterSceneTests.swift in Sources */,
 				483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */,
 				487766EB1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift in Sources */,
@@ -1209,11 +1196,9 @@
 				488730D81FC2BEB9001F9876 /* InboxSceneDataTests.swift in Sources */,
 				489DE7A21FC5C96E00B6C960 /* MessagesSortProviderTests.swift in Sources */,
 				488730D11FC2B914001F9876 /* ChatTests.swift in Sources */,
-				483F8FBA1FC162A00058CC56 /* AppDelegateTests.swift in Sources */,
 				489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */,
 				4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */,
 				489FE1D51FC062F00062E1AB /* RegisterSceneFlowTests.swift in Sources */,
-				48C051631FBF3A22009DDFC8 /* EntryWaypointMock.swift in Sources */,
 				48B4D0211FBAE86C008C78F6 /* ServiceErrorTests.swift in Sources */,
 				482FDF091FBFEBBE00ABA372 /* InitialSceneFlowTests.swift in Sources */,
 				488730E01FC2CD89001F9876 /* PersonRemoteServiceMock.swift in Sources */,
@@ -1222,12 +1207,11 @@
 				489FE1E11FC065C60062E1AB /* RegisterSceneMock.swift in Sources */,
 				483F8FC41FC167130058CC56 /* AppExitWaypointMock.swift in Sources */,
 				487766F31FC694E7008E865F /* InboxSceneWorkerMock.swift in Sources */,
-				489FE1EB1FC06FA40062E1AB /* InitialSceneEntryWaypointTests.swift in Sources */,
 				488730D41FC2BAAC001F9876 /* InboxSceneTests.swift in Sources */,
 				4852060A1FC55A6300DFD68D /* MessagesSortMock.swift in Sources */,
 				487766F91FC69B50008E865F /* InboxSceneWorkerOutputMock.swift in Sources */,
 				4852060C1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift in Sources */,
-				482FDF0B1FBFED2000ABA372 /* HomeSceneEntryWaypointTests.swift in Sources */,
+				482FDF0B1FBFED2000ABA372 /* HomeSceneRootWaypointTests.swift in Sources */,
 				489FE1D31FC062E40062E1AB /* RegisterSceneFactoryTests.swift in Sources */,
 				4803C26B1FBC33960096E403 /* SignInSceneWorkerTests.swift in Sources */,
 				489DE79C1FC5B9EA00B6C960 /* ChatsSortProviderTests.swift in Sources */,
