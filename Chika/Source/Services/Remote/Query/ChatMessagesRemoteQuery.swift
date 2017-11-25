@@ -55,12 +55,20 @@ class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
         }
         
         query.observeSingleEvent(of: .value) { snapshot in
-            guard let info = snapshot.value as? [String : Any] else {
+            guard snapshot.exists(), snapshot.hasChildren() else {
                 completion([])
                 return
             }
             
-            let messageKeys: [String] = info.flatMap({ $0.key })
+            var messageKeys: [String] = []
+            
+            for child in snapshot.children {
+                guard let child = child as? DataSnapshot, !child.key.isEmpty else {
+                    continue
+                }
+                
+                messageKeys.append(child.key)
+            }
             
             messagesQuery.getMessages(for: messageKeys) { messages in
                 var messages = messages
