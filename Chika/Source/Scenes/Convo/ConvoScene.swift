@@ -25,8 +25,9 @@ class ConvoScene: UIViewController {
     var chat: Chat
     var cellManager: ConvoSceneCellManager
     var data: ConvoSceneData
+    var setup: ConvoSceneSetup
     
-    init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: AppExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData) {
+    init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: AppExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData, setup: ConvoSceneSetup) {
         self.theme = theme
         self.worker = worker
         self.flow = flow
@@ -34,6 +35,7 @@ class ConvoScene: UIViewController {
         self.chat = chat
         self.cellManager = cellManager
         self.data = data
+        self.setup = setup
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +46,8 @@ class ConvoScene: UIViewController {
         let waypoint = ExitWaypoint()
         let cellManager = ConvoScene.CellManager()
         let data = Data()
-        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint, chat: chat, cellManager: cellManager, data: data)
+        let setup = Setup()
+        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint, chat: chat, cellManager: cellManager, data: data, setup: setup)
         waypoint.scene = self
         worker.output = self
     }
@@ -98,41 +101,22 @@ extension ConvoScene: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let uid = Auth.auth().currentUser?.uid ?? ""
-        let message = data.message(at: indexPath)!
-        
-        let cell: ConvoSceneCell
-        if uid == message.author.id {
-            cell = cellManager.dequeueRightCell() as! ConvoSceneCell
-        } else {
-            cell = cellManager.dequeueLeftCell() as! ConvoSceneCell
-        }
-        
-        cell.contentLabel.text = message.content
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-        return cell
+        let message = data.message(at: indexPath)
+        var nextIndexPath = indexPath
+        nextIndexPath.row -= 1
+        let prevMessage = data.message(at: nextIndexPath)
+        return setup.formatCell(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
     }
 }
 
 extension ConvoScene: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let uid = Auth.auth().currentUser?.uid ?? ""
-        let message = data.message(at: indexPath)!
-        
-        let cell: ConvoSceneCell
-        if uid == message.author.id {
-            cell = cellManager.rightPrototype as! ConvoSceneCell
-        } else {
-            cell = cellManager.leftPrototype as! ConvoSceneCell
-        }
-        
-        cell.contentLabel.text = message.content
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-        let height = cell.contentBGView.frame.maxY + cell.contentBGView.frame.origin.y
-        return height
+        let message = data.message(at: indexPath)
+        var nextIndexPath = indexPath
+        nextIndexPath.row -= 1
+        let prevMessage = data.message(at: nextIndexPath)
+        return setup.cellHeight(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
     }
 }
 
