@@ -42,7 +42,7 @@ class ChatRemoteServiceProvider: ChatRemoteService {
                 return
             }
             
-            completion(.ok(messages.reversed()))
+            completion(.ok(messages))
         }
     }
 }
