@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		218ABF5ED4E1B2C9500A1F95 /* Pods_ChikaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */; };
 		4802BFA41FC85FF00018D15C /* AppRootWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */; };
+		4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */; };
 		4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2551FBBE10F0096E403 /* UserMock.swift */; };
 		4803C2591FBC00280096E403 /* SignInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2581FBC00280096E403 /* SignInScene.swift */; };
 		4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */; };
@@ -172,6 +173,7 @@
 /* Begin PBXFileReference section */
 		294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChikaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootWaypointMock.swift; sourceTree = "<group>"; };
+		4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneSetup.swift; sourceTree = "<group>"; };
 		4803C2551FBBE10F0096E403 /* UserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
 		4803C2581FBC00280096E403 /* SignInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScene.swift; sourceTree = "<group>"; };
 		4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneTests.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				487767001FC6AC4F008E865F /* ConvoSceneTheme.swift */,
 				487767061FC6AE28008E865F /* ConvoSceneWaypoint.swift */,
 				487767021FC6ADD8008E865F /* ConvoSceneWorker.swift */,
+				4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */,
 			);
 			path = Convo;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
+				4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */,
 				489FE1D01FC05FE30062E1AB /* RegisterSceneFactory.swift in Sources */,
 				487767051FC6AE01008E865F /* ConvoSceneFlow.swift in Sources */,
 				4877BF801FC4610700885C60 /* PersonsRemoteQuery.swift in Sources */,
