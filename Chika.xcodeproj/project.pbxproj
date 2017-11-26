@@ -80,6 +80,9 @@
 		4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49B1FC29B0D00611DA3 /* Person.swift */; };
 		4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49D1FC29C4500611DA3 /* InboxSceneData.swift */; };
 		4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B49F1FC29EC500611DA3 /* InboxSceneCell.swift */; };
+		487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */; };
+		487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */; };
+		487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B536A1FC9C094006D072F /* RemoteWriterResult.swift */; };
 		488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730C81FC2A497001F9876 /* InboxSceneSetup.swift */; };
 		488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730CD1FC2AF44001F9876 /* InboxSceneCellManager.swift */; };
 		488730D11FC2B914001F9876 /* ChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730D01FC2B914001F9876 /* ChatTests.swift */; };
@@ -250,6 +253,9 @@
 		4879B49B1FC29B0D00611DA3 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		4879B49D1FC29C4500611DA3 /* InboxSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneData.swift; sourceTree = "<group>"; };
 		4879B49F1FC29EC500611DA3 /* InboxSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCell.swift; sourceTree = "<group>"; };
+		487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneComposerView.swift; sourceTree = "<group>"; };
+		487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRemoteWriter.swift; sourceTree = "<group>"; };
+		487B536A1FC9C094006D072F /* RemoteWriterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWriterResult.swift; sourceTree = "<group>"; };
 		488730C81FC2A497001F9876 /* InboxSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetup.swift; sourceTree = "<group>"; };
 		488730CD1FC2AF44001F9876 /* InboxSceneCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCellManager.swift; sourceTree = "<group>"; };
 		488730D01FC2B914001F9876 /* ChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTests.swift; sourceTree = "<group>"; };
@@ -493,6 +499,7 @@
 				487767061FC6AE28008E865F /* ConvoSceneWaypoint.swift */,
 				487767021FC6ADD8008E865F /* ConvoSceneWorker.swift */,
 				4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */,
+				487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */,
 			);
 			path = Convo;
 			sourceTree = "<group>";
@@ -524,6 +531,15 @@
 				48BFF7701FC4756F00BAE311 /* InboxSceneWorker.swift */,
 			);
 			path = Inbox;
+			sourceTree = "<group>";
+		};
+		487B53671FC9BB76006D072F /* Writer */ = {
+			isa = PBXGroup;
+			children = (
+				487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */,
+				487B536A1FC9C094006D072F /* RemoteWriterResult.swift */,
+			);
+			path = Writer;
 			sourceTree = "<group>";
 		};
 		488730CF1FC2B8FB001F9876 /* Models */ = {
@@ -648,10 +664,11 @@
 		48B4D0161FBAD8AD008C78F6 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				4877BF7E1FC4609300885C60 /* Query */,
 				48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */,
-				488730DD1FC2C7B8001F9876 /* PersonRemoteService.swift */,
 				4874AE011FC3129C00096BA8 /* ChatRemoteService.swift */,
+				488730DD1FC2C7B8001F9876 /* PersonRemoteService.swift */,
+				4877BF7E1FC4609300885C60 /* Query */,
+				487B53671FC9BB76006D072F /* Writer */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -1099,6 +1116,7 @@
 				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,
+				487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */,
 				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
 				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
@@ -1121,6 +1139,8 @@
 				48A743B81FC7F0A90019EDD8 /* ConvoSceneCell.swift in Sources */,
 				4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */,
 				48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */,
+				487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */,
+				487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
