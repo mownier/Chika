@@ -120,17 +120,21 @@ class ConvoSceneCell: UITableViewCell {
             timeLabel.frame = rect
             
         case ReuseID.right.rawValue:
+            if authorLabel.isHidden {
+                rect.origin.y = spacing
+            } else {
+                rect.origin.y = spacing * 2
+            }
             rect.size.width = bounds.width * 0.8 - spacing * 2
             rect.size.height = contentLabel.sizeThatFits(rect.size).height
-            rect.origin.y = spacing * 2
             contentLabel.frame = rect
             rect.size.width = min(rect.width, contentLabel.intrinsicContentSize.width)
             rect.origin.x = bounds.width - rect.width - spacing * 2
             contentLabel.frame = rect
             
+            rect.origin.y -= spacing
             rect.size.width += (spacing * 2)
-            rect.size.height = rect.maxY
-            rect.origin.y = spacing
+            rect.size.height += (spacing * 2)
             rect.origin.x = bounds.width - rect.width - spacing
             contentBGView.frame = rect
          
