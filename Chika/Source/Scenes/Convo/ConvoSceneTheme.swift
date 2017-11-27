@@ -31,6 +31,13 @@ protocol ConvoSceneTheme: class {
     var leftCellAuthorFont: UIFont? { get }
     var leftCellTimeTextColor: UIColor { get }
     var leftCellTimeFont: UIFont? { get }
+    
+    var composerViewStripColor: UIColor { get }
+    var composerViewBGColor: UIColor { get }
+    var composerViewContentTextColor: UIColor { get }
+    var composerViewTintColor: UIColor { get }
+    var composerViewContentFont: UIFont? { get }
+    var composerViewSendFont: UIFont? { get }
 }
 
 extension ConvoScene {
@@ -58,5 +65,12 @@ extension ConvoScene {
         var leftCellAuthorFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 12.0)
         var leftCellTimeTextColor: UIColor = .gray
         var leftCellTimeFont: UIFont? = UIFont(name: "AvenirNext-Regular", size: 12.0)
+    
+        var composerViewStripColor: UIColor = UIColor.gray.withAlphaComponent(0.5)
+        var composerViewBGColor: UIColor = .white
+        var composerViewContentTextColor: UIColor = .black
+        var composerViewTintColor: UIColor = .black
+        var composerViewContentFont: UIFont? = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        var composerViewSendFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
     }
 }
