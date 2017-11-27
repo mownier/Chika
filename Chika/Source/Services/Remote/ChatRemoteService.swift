@@ -12,16 +12,19 @@ protocol ChatRemoteService: class {
 
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void)
     func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void)
+    func writeMessage(for chatID: String, content: String, completion: @escaping (ServiceResult<Message>) -> Void)
 }
 
 class ChatRemoteServiceProvider: ChatRemoteService {
     
     var inboxQuery: InboxRemoteQuery
     var chatMessagesQuery: ChatMessagesRemoteQuery
+    var messageWriter: MessageRemoteWriter
     
-    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider(), chatMessagesQuery: ChatMessagesRemoteQuery = ChatMessagesRemoteQueryProvider()) {
+    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider(), chatMessagesQuery: ChatMessagesRemoteQuery = ChatMessagesRemoteQueryProvider(), messageWriter: MessageRemoteWriter = MessageRemoteWriterProvider()) {
         self.inboxQuery = inboxQuery
         self.chatMessagesQuery = chatMessagesQuery
+        self.messageWriter = messageWriter
     }
     
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void) {
@@ -43,6 +46,18 @@ class ChatRemoteServiceProvider: ChatRemoteService {
             }
             
             completion(.ok(messages))
+        }
+    }
+    
+    func writeMessage(for chatID: String, content: String, completion: @escaping (ServiceResult<Message>) -> Void) {
+        messageWriter.postMessage(for: chatID, content: content) { result in
+            switch result {
+            case .err(let info):
+                completion(.err(info))
+            
+            case .ok(let message):
+                completion(.ok(message))
+            }
         }
     }
 }
