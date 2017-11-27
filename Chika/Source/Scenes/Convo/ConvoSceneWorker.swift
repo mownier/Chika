@@ -10,6 +10,7 @@ protocol ConvoSceneWorker: class {
 
     func fetchNewMessages() -> Bool
     func fetchNextMessages() -> Bool
+    func sendMessage(_ content: String) -> Bool
 }
 
 protocol ConvoSceneWorkerOutput: class {
@@ -17,6 +18,8 @@ protocol ConvoSceneWorkerOutput: class {
     func workerDidFetchNew(messages: [Message])
     func workerDidFetchNext(messages: [Message])
     func workerDidFetchWithError(_ error: Error)
+    func workerDidSend(message: Message)
+    func workerDidSendWithError(_ error: Error)
 }
 
 extension ConvoScene {
@@ -47,6 +50,24 @@ extension ConvoScene {
             let service = ChatRemoteServiceProvider()
             let limit: UInt = 50
             self.init(chatID: chatID, service: service, limit: limit)
+        }
+        
+        func sendMessage(_ content: String) -> Bool {
+            guard !content.isEmpty else {
+                return false
+            }
+            // TODO: Pass also the participants' ID
+            service.writeMessage(for: chatID, content: content) { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidSendWithError(info)
+                
+                case .ok(let message):
+                    self?.output?.workerDidSend(message: message)
+                }
+            }
+            
+            return true
         }
         
         func fetchNewMessages() -> Bool {
