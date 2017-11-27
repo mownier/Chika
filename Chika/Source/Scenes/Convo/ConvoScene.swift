@@ -12,11 +12,13 @@ import FirebaseAuth
 @objc protocol ConvoSceneInteraction: class {
     
     func didTapBack()
+    func didTapSend()
 }
 
 class ConvoScene: UIViewController {
 
     var tableView: UITableView!
+    var composerView: ConvoSceneComposerView!
     
     var theme: ConvoSceneTheme
     var worker: ConvoSceneWorker
@@ -74,7 +76,21 @@ class ConvoScene: UIViewController {
         cellManager.registerLeftCell()
         cellManager.registerRightCell()
         
+        composerView = ConvoSceneComposerView()
+        composerView.backgroundColor = theme.composerViewBGColor
+        composerView.strip.backgroundColor = theme.composerViewStripColor
+        composerView.contentInput.tintColor = theme.composerViewTintColor
+        composerView.contentInput.textColor = theme.composerViewContentTextColor
+        composerView.contentInput.font = theme.composerViewContentFont
+        composerView.placeholderLabel.font = theme.composerViewContentFont
+        composerView.placeholderLabel.textColor = theme.composerViewContentTextColor
+        composerView.sendButton.addTarget(self, action: #selector(self.didTapSend), for: .touchUpInside)
+        composerView.sendButton.tintColor = theme.composerViewTintColor
+        composerView.sendButton.setTitleColor(theme.composerViewContentTextColor, for: .normal)
+        composerView.sendButton.titleLabel?.font = theme.composerViewSendFont
+        
         view.addSubview(tableView)
+        view.addSubview(composerView)
     }
     
     override func viewDidLoad() {
@@ -88,7 +104,17 @@ class ConvoScene: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        tableView.frame = view.bounds
+        var rect = CGRect.zero
+        
+        rect.size.width = view.bounds.width
+        rect.size.height = 59 + view.safeAreaInsets.bottom
+        rect.origin.y = view.bounds.height - rect.height
+        composerView.frame = rect
+        
+        rect.origin.y = 0
+        rect.size.height = view.bounds.height - rect.height
+        tableView.frame = rect
+        
         cellManager.leftPrototype?.bounds.size.width = tableView.frame.width
         cellManager.rightPrototype?.bounds.size.width = tableView.frame.width
     }
@@ -105,7 +131,8 @@ extension ConvoScene: UITableViewDataSource {
         var nextIndexPath = indexPath
         nextIndexPath.row -= 1
         let prevMessage = data.message(at: nextIndexPath)
-        return setup.formatCell(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
+        let cell = setup.formatCell(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
+        return cell
     }
 }
 
@@ -136,11 +163,26 @@ extension ConvoScene: ConvoSceneWorkerOutput {
     func workerDidFetchWithError(_ error: Error) {
         tableView.reloadData()
     }
+    
+    func workerDidSend(message: Message) {
+        data.append(list: [message])
+        tableView.reloadData()
+    }
+    
+    func workerDidSendWithError(_ error: Error) {
+        
+    }
 }
 
 extension ConvoScene: ConvoSceneInteraction {
     
     func didTapBack() {
         let _ = waypoint.exit()
+    }
+    
+    func didTapSend() {
+        let _ = worker.sendMessage(composerView.contentInput.text)
+        composerView.updateContent("")
+        composerView.contentInput.resignFirstResponder()
     }
 }
