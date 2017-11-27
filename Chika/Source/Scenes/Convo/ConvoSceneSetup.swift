@@ -30,7 +30,7 @@ extension ConvoScene {
         convenience init(user: User? = Auth.auth().currentUser) {
             let meID = user?.uid ?? ""
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM dd, yyyy hh:mm a"
+            dateFormatter.dateFormat = "EE MMM dd, yyyy hh:mm a"
             dateFormatter.pmSymbol = "PM"
             dateFormatter.amSymbol = "AM"
             self.init(meID: meID, dateFormatter: dateFormatter)
@@ -90,7 +90,7 @@ extension ConvoScene {
             setup(cell, theme, message, prevMessage, isRight)
             
             if isRight {
-                return cell.timeLabel.frame.maxY + cell.contentBGView.frame.origin.y
+                return cell.timeLabel.frame.maxY + 8
             } else {
                 return cell.timeLabel.frame.maxY + cell.avatarImageView.frame.origin.y
             }
@@ -118,14 +118,15 @@ extension ConvoScene {
                 cell.authorLabel.font = theme.leftCellAuthorFont
                 cell.timeLabel.textColor = theme.leftCellTimeTextColor
                 cell.timeLabel.font = theme.leftCellTimeFont
-                if prevMessage == nil || prevMessage!.author.id != message.author.id {
-                    cell.avatarImageView.isHidden = false
-                    cell.authorLabel.isHidden = false
-                    
-                } else {
-                    cell.avatarImageView.isHidden = true
-                    cell.authorLabel.isHidden = true
-                }
+            }
+            
+            if prevMessage == nil || prevMessage!.author.id != message.author.id {
+                cell.avatarImageView.isHidden = false
+                cell.authorLabel.isHidden = false
+                
+            } else {
+                cell.avatarImageView.isHidden = true
+                cell.authorLabel.isHidden = true
             }
             
             cell.contentLabel.text = message.content
