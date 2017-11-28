@@ -30,7 +30,8 @@ class InboxSceneWorkerTests: XCTestCase {
     func testFetchInboxA() {
         let personID = "person:1"
         let service = ChatRemoteServiceMock()
-        let worker = InboxScene.Worker(personID: personID, service: service)
+        let listener = InboxRemoteListenerMock()
+        let worker = InboxScene.Worker(personID: personID, service: service, listener: listener)
         let output = InboxSceneWorkerOutputMock()
         service.isForcedError = true
         worker.output = output
@@ -48,7 +49,8 @@ class InboxSceneWorkerTests: XCTestCase {
     func testFetchInboxB() {
         let personID = "person:1"
         let service = ChatRemoteServiceMock()
-        let worker = InboxScene.Worker(personID: personID, service: service)
+        let listener = InboxRemoteListenerMock()
+        let worker = InboxScene.Worker(personID: personID, service: service, listener: listener)
         let output = InboxSceneWorkerOutputMock()
         var chat = Chat()
         chat.id = "chat:1"

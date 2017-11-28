@@ -49,23 +49,25 @@ class InboxRemoteQueryProviderTests: XCTestCase {
     //   - return a Chat array that has 2 items
     // GIVEN:
     //   - personID is not empty
-    //   - snapshot.value is of type [String : Any]
-    //   - snapshot.value has 3 items
-    //   - chatKeys are "chat:1", "chat:2", "chat:3"
-    //   - chatsQuery did not found a Chat whose
-    //     id is "chat:3"
+    //   - two existing snapshot children
+    //   - parent snapshot is existing
     func testGetInboxC() {
         let exp = expectation(description: "testGetInboxC")
         let database = FirebaseDatabaseMock()
         let chatsQuery = ChatsRemoteQueryMock()
         let query = InboxRemoteQueryProvider(database: database, chatsQuery: chatsQuery)
         let personID = "person:1"
-        let snapshot1: [String : Any] = ["chat:1" : true, "chat:2" : true, "chat:3" : true]
+        let snapshotChild1 = FirebaseDataSnapshot(value: "")
+        let snapshotChild2 = FirebaseDataSnapshot(value: "")
+        snapshotChild1.mockKey = "chat:1"
+        snapshotChild2.mockKey = "chat:2"
         var chat1 = Chat()
         var chat2 = Chat()
         chat1.id = "chat:1"
         chat2.id = "chat:2"
-        database.mockReference.query.snapshotValue = snapshot1
+        database.mockReference.query.snapshotExists = true
+        database.mockReference.query.snapshotChildren = [snapshotChild1, snapshotChild2]
+        database.mockReference.query.snapshotValue = ""
         chatsQuery.mockChats = ["chat:1" : chat1, "chat:2" : chat2]
         query.getInbox(for: personID) { chats in
             XCTAssertEqual(chats.count, 2)
