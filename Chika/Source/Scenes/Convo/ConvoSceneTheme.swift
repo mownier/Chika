@@ -38,6 +38,10 @@ protocol ConvoSceneTheme: class {
     var composerViewTintColor: UIColor { get }
     var composerViewContentFont: UIFont? { get }
     var composerViewSendFont: UIFont? { get }
+    
+    var newMessageCountTextColor: UIColor { get }
+    var newMessageCountFont: UIFont? { get }
+    var newMessageCountBGColor: UIColor { get }
 }
 
 extension ConvoScene {
@@ -72,5 +76,9 @@ extension ConvoScene {
         var composerViewTintColor: UIColor = .black
         var composerViewContentFont: UIFont? = UIFont(name: "AvenirNext-Regular", size: 16.0)
         var composerViewSendFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
+        
+        var newMessageCountTextColor: UIColor = .white
+        var newMessageCountFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
+        var newMessageCountBGColor: UIColor = UIColor(red: 0 / 255, green: 122 / 255, blue: 255 / 255, alpha: 1.0)
     }
 }
