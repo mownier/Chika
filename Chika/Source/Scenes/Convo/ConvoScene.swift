@@ -13,12 +13,14 @@ import FirebaseAuth
     
     func didTapBack()
     func didTapSend()
+    func didTapNewMessageCount()
 }
 
 class ConvoScene: UIViewController {
 
     var tableView: UITableView!
     var composerView: ConvoSceneComposerView!
+    var newMessageCountLabel: UILabel!
     
     var theme: ConvoSceneTheme
     var worker: ConvoSceneWorker
@@ -28,6 +30,23 @@ class ConvoScene: UIViewController {
     var cellManager: ConvoSceneCellManager
     var data: ConvoSceneData
     var setup: ConvoSceneSetup
+    
+    var isAtBottom: Bool = false
+    var newMessageCount: UInt = 0 {
+        didSet {
+            guard newMessageCount > 0 else {
+                newMessageCountLabel.isHidden = true
+                return
+            }
+            
+            var info = "new messages"
+            if newMessageCount == 1 {
+                info = "new message"
+            }
+            newMessageCountLabel.text = "\(newMessageCount) \(info)"
+            newMessageCountLabel.isHidden = false
+        }
+    }
     
     init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: AppExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData, setup: ConvoSceneSetup) {
         self.theme = theme
@@ -43,7 +62,7 @@ class ConvoScene: UIViewController {
     
     convenience init(chat: Chat) {
         let theme = Theme()
-        let worker = Worker(chatID: chat.id)
+        let worker = Worker(chatID: chat.id, participantIDs: chat.participants.map({ $0.id }))
         let flow = Flow()
         let waypoint = ExitWaypoint()
         let cellManager = ConvoScene.CellManager()
@@ -89,18 +108,33 @@ class ConvoScene: UIViewController {
         composerView.sendButton.setTitleColor(theme.composerViewContentTextColor, for: .normal)
         composerView.sendButton.titleLabel?.font = theme.composerViewSendFont
         
+        newMessageCountLabel = UILabel()
+        newMessageCountLabel.textColor = theme.newMessageCountTextColor
+        newMessageCountLabel.font = theme.newMessageCountFont
+        newMessageCountLabel.textAlignment = .center
+        newMessageCountLabel.isHidden = true
+        newMessageCountLabel.backgroundColor = theme.newMessageCountBGColor
+        newMessageCountLabel.layer.masksToBounds = true
+        newMessageCountLabel.isUserInteractionEnabled = true
+        
         view.addSubview(tableView)
         view.addSubview(composerView)
+        view.addSubview(newMessageCountLabel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didTapNewMessageCount))
+        tap.numberOfTapsRequired = 1
+        newMessageCountLabel.addGestureRecognizer(tap)
         
         let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back"), style: .plain, target: self, action: #selector(self.didTapBack))
         navigationItem.leftBarButtonItem = back
         navigationItem.title = chat.title
         
         let _ = worker.fetchNewMessages()
+        worker.listenForUpdates()
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,8 +149,38 @@ class ConvoScene: UIViewController {
         rect.size.height = view.bounds.height - rect.height
         tableView.frame = rect
         
+        rect.size.width = 200
+        rect.size.height = 44
+        rect.origin.y = tableView.bounds.height - rect.height - 24
+        rect.origin.x = (tableView.bounds.width - rect.width) / 2
+        newMessageCountLabel.frame = rect
+        newMessageCountLabel.layer.cornerRadius = rect.height / 2
+        
         cellManager.leftPrototype?.bounds.size.width = tableView.frame.width
         cellManager.rightPrototype?.bounds.size.width = tableView.frame.width
+    }
+    
+    func scrollToBottom(_ animated: Bool = true) {
+        let section: Int = 0
+        
+        guard data.messageCount(in: section) > 0 else {
+            return
+        }
+        
+        guard animated else {
+            let indexPath = IndexPath(row: data.messageCount(in: section) - 1, section: section)
+            tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+            return
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let scene = self else {
+                return
+            }
+            
+            let indexPath = IndexPath(row: scene.data.messageCount(in: section) - 1, section: section)
+            scene.tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+        }
     }
 }
 
@@ -145,6 +209,17 @@ extension ConvoScene: UITableViewDelegate {
         let prevMessage = data.message(at: nextIndexPath)
         return setup.cellHeight(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.bounds.height
+        let contentHeight = scrollView.contentSize.height
+        let bottomInset = scrollView.contentInset.bottom
+        let bottomOffset = contentHeight + bottomInset - height
+        isAtBottom = scrollView.contentOffset.y >= bottomOffset
+        if isAtBottom {
+            newMessageCount = 0
+        }
+    }
 }
 
 extension ConvoScene: ConvoSceneWorkerOutput {
@@ -153,6 +228,7 @@ extension ConvoScene: ConvoSceneWorkerOutput {
         data.removeAll()
         data.append(list: messages)
         tableView.reloadData()
+        scrollToBottom(false)
     }
     
     func workerDidFetchNext(messages: [Message]) {
@@ -167,10 +243,27 @@ extension ConvoScene: ConvoSceneWorkerOutput {
     func workerDidSend(message: Message) {
         data.append(list: [message])
         tableView.reloadData()
+        scrollToBottom()
     }
     
     func workerDidSendWithError(_ error: Error) {
+        tableView.reloadData()
+    }
+    
+    func workerDidUpdateConvo(message: Message) {
+        data.append(list: [message])
         
+        if isAtBottom {
+            tableView.reloadData()
+            scrollToBottom()
+        
+        } else {
+            let row = IndexPath(row: data.messageCount(in: 0) - 1, section: 0)
+            tableView.beginUpdates()
+            tableView.insertRows(at: [row], with: .none)
+            tableView.endUpdates()
+            newMessageCount += 1
+        }
     }
 }
 
@@ -184,5 +277,9 @@ extension ConvoScene: ConvoSceneInteraction {
         let _ = worker.sendMessage(composerView.contentInput.text)
         composerView.updateContent("")
         composerView.contentInput.resignFirstResponder()
+    }
+    
+    func didTapNewMessageCount() {
+        scrollToBottom()
     }
 }
