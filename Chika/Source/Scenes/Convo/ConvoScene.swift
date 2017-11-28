@@ -30,6 +30,7 @@ class ConvoScene: UIViewController {
     var cellManager: ConvoSceneCellManager
     var data: ConvoSceneData
     var setup: ConvoSceneSetup
+    var loadMoreRowThreshold: Int
     
     var isAtBottom: Bool = false
     var newMessageCount: UInt = 0 {
@@ -57,6 +58,7 @@ class ConvoScene: UIViewController {
         self.cellManager = cellManager
         self.data = data
         self.setup = setup
+        self.loadMoreRowThreshold = 10
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -90,6 +92,8 @@ class ConvoScene: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 0
+        tableView.rowHeight = 0
         
         cellManager.assignTableView(tableView)
         cellManager.registerLeftCell()
@@ -210,6 +214,12 @@ extension ConvoScene: UITableViewDelegate {
         return setup.cellHeight(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == loadMoreRowThreshold {
+            let _ = worker.fetchNextMessages()
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let height = scrollView.bounds.height
         let contentHeight = scrollView.contentSize.height
@@ -226,14 +236,23 @@ extension ConvoScene: ConvoSceneWorkerOutput {
     
     func workerDidFetchNew(messages: [Message]) {
         data.removeAll()
-        data.append(list: messages)
+        data.pushFront(list: messages)
         tableView.reloadData()
         scrollToBottom(false)
     }
     
     func workerDidFetchNext(messages: [Message]) {
-        data.append(list: messages)
+        data.pushFront(list: messages)
+        
+        let oldOffset = tableView.contentOffset
+        let oldSize = tableView.contentSize
+        
         tableView.reloadData()
+        tableView.layoutIfNeeded()
+        
+        let newSize = tableView.contentSize
+        let newOffset = CGPoint(x: oldOffset.x, y: newSize.height - oldSize.height + oldOffset.y)
+        tableView.setContentOffset(newOffset, animated: false)
     }
     
     func workerDidFetchWithError(_ error: Error) {
@@ -241,7 +260,7 @@ extension ConvoScene: ConvoSceneWorkerOutput {
     }
     
     func workerDidSend(message: Message) {
-        data.append(list: [message])
+        data.pushRear(list: [message])
         tableView.reloadData()
         scrollToBottom()
     }
@@ -251,7 +270,7 @@ extension ConvoScene: ConvoSceneWorkerOutput {
     }
     
     func workerDidUpdateConvo(message: Message) {
-        data.append(list: [message])
+        data.pushRear(list: [message])
         
         if isAtBottom {
             tableView.reloadData()
