@@ -36,12 +36,20 @@ class InboxRemoteQueryProvider: InboxRemoteQuery {
         let chatsQuery = self.chatsQuery
         
         ref.queryOrdered(byChild: "updated_on").observeSingleEvent(of: .value) { snapshot in
-            guard let info = snapshot.value as? [String : Any] else {
+            guard snapshot.exists(), snapshot.childrenCount > 0 else {
                 completion([])
                 return
             }
             
-            let chatKeys: [String] = info.flatMap({ $0.key })
+            var chatKeys: [String] = []
+            
+            for child in snapshot.children {
+                guard let child = child as? DataSnapshot else {
+                    continue
+                }
+                
+                chatKeys.append(child.key)
+            }
             
             chatsQuery.getChats(for: chatKeys) { chats in
                 completion(chats)
