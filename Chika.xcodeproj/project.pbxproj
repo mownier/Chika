@@ -83,6 +83,8 @@
 		487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */; };
 		487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */; };
 		487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B536A1FC9C094006D072F /* RemoteWriterResult.swift */; };
+		48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */; };
+		48803F351FCDBE23007F56DC /* InboxRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F341FCDBE23007F56DC /* InboxRemoteListenerMock.swift */; };
 		488639311FCBAE4A003108A1 /* RemoteListenerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */; };
 		488639331FCBAE99003108A1 /* InboxRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488639321FCBAE99003108A1 /* InboxRemoteListener.swift */; };
 		488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730C81FC2A497001F9876 /* InboxSceneSetup.swift */; };
@@ -259,6 +261,8 @@
 		487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneComposerView.swift; sourceTree = "<group>"; };
 		487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRemoteWriter.swift; sourceTree = "<group>"; };
 		487B536A1FC9C094006D072F /* RemoteWriterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWriterResult.swift; sourceTree = "<group>"; };
+		48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageRemoteListenerMock.swift; sourceTree = "<group>"; };
+		48803F341FCDBE23007F56DC /* InboxRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteListenerMock.swift; sourceTree = "<group>"; };
 		488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteListenerResult.swift; sourceTree = "<group>"; };
 		488639321FCBAE99003108A1 /* InboxRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteListener.swift; sourceTree = "<group>"; };
 		488730C81FC2A497001F9876 /* InboxSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetup.swift; sourceTree = "<group>"; };
@@ -729,11 +733,13 @@
 				4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */,
 				48B4D0291FBAEE64008C78F6 /* AuthMock.swift */,
 				48A9635E1FBD2DE4002DBB1C /* AuthRemoteServiceMock.swift */,
+				48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */,
 				487766FA1FC69BFB008E865F /* ChatRemoteServiceMock.swift */,
 				487766EC1FC6863F008E865F /* ChatsRemoteQueryMock.swift */,
 				489DE79F1FC5C65F00B6C960 /* ChatsSortMock.swift */,
 				488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */,
 				4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */,
+				48803F341FCDBE23007F56DC /* InboxRemoteListenerMock.swift */,
 				487766F01FC68F90008E865F /* InboxRemoteQueryMock.swift */,
 				488730D51FC2BCB9001F9876 /* InboxSceneSetupMock.swift */,
 				487766F21FC694E7008E865F /* InboxSceneWorkerMock.swift */,
@@ -1237,6 +1243,7 @@
 				487766EB1FC67CAB008E865F /* InboxRemoteQueryProviderTests.swift in Sources */,
 				488730DC1FC2C225001F9876 /* InboxSceneCellTests.swift in Sources */,
 				489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */,
+				48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */,
 				488730D81FC2BEB9001F9876 /* InboxSceneDataTests.swift in Sources */,
 				489DE7A21FC5C96E00B6C960 /* MessagesSortProviderTests.swift in Sources */,
 				488730D11FC2B914001F9876 /* ChatTests.swift in Sources */,
@@ -1275,6 +1282,7 @@
 				488730D61FC2BCB9001F9876 /* InboxSceneSetupMock.swift in Sources */,
 				485206081FC557BB00DFD68D /* MessagesRemoteQueryProviderTests.swift in Sources */,
 				4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */,
+				48803F351FCDBE23007F56DC /* InboxRemoteListenerMock.swift in Sources */,
 				4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
