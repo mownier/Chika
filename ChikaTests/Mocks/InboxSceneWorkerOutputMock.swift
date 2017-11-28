@@ -20,4 +20,8 @@ class InboxSceneWorkerOutputMock: InboxSceneWorkerOutput {
     func workerDidFetchWithError(_ error: Error) {
         self.error = error
     }
+    
+    func workerDidUpdateInbox(chat: Chat) {
+        
+    }
 }

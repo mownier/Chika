@@ -10,7 +10,11 @@ import UIKit
 @testable import Chika
 
 class InboxSceneWorkerMock: InboxSceneWorker {
-
+    
+    func listenForInboxUpdates() {
+        
+    }
+    
     func fetchInbox() {
         
     }
