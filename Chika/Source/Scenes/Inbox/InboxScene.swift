@@ -96,9 +96,16 @@ extension InboxScene: InboxSceneWorkerOutput {
         data.removeAll()
         data.append(list: chats)
         tableView.reloadData()
+        
+        worker.listenForInboxUpdates()
     }
     
     func workerDidFetchWithError(_ error: Error) {
+        tableView.reloadData()
+    }
+    
+    func workerDidUpdateInbox(chat: Chat) {
+        data.update(chat)
         tableView.reloadData()
     }
 }
