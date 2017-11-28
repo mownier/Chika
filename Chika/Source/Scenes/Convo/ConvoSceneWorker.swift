@@ -11,6 +11,7 @@ protocol ConvoSceneWorker: class {
     func fetchNewMessages() -> Bool
     func fetchNextMessages() -> Bool
     func sendMessage(_ content: String) -> Bool
+    func listenForUpdates()
 }
 
 protocol ConvoSceneWorkerOutput: class {
@@ -20,6 +21,7 @@ protocol ConvoSceneWorkerOutput: class {
     func workerDidFetchWithError(_ error: Error)
     func workerDidSend(message: Message)
     func workerDidSendWithError(_ error: Error)
+    func workerDidUpdateConvo(message: Message)
 }
 
 extension ConvoScene {
@@ -33,31 +35,49 @@ extension ConvoScene {
         
         weak var output: ConvoSceneWorkerOutput?
         var service: ChatRemoteService
+        var listener: ChatMessageRemoteListener
         var chatID: String
-        var offset: String
+        var participantIDs: [String]
+        var offset: Double?
         var limit: UInt
         var isFetching: Bool
+        var isListening: Bool
         
-        init(chatID: String, service: ChatRemoteService, limit: UInt) {
+        init(chatID: String, participantIDs: [String], service: ChatRemoteService, listener: ChatMessageRemoteListener, limit: UInt) {
             self.chatID = chatID
+            self.participantIDs = participantIDs
             self.service = service
-            self.offset = ""
+            self.listener = listener
+            self.offset = 0
             self.limit = limit
             self.isFetching = false
+            self.isListening = false
         }
         
-        convenience init(chatID: String) {
+        convenience init(chatID: String, participantIDs: [String]) {
             let service = ChatRemoteServiceProvider()
+            let listener = ChatMessageRemoteListenerProvider(chatID: chatID)
             let limit: UInt = 50
-            self.init(chatID: chatID, service: service, limit: limit)
+            self.init(chatID: chatID, participantIDs: participantIDs, service: service, listener: listener, limit: limit)
+        }
+        
+        func listenForUpdates() {
+            guard !isListening, !chatID.isEmpty else {
+                return
+            }
+            
+            isListening = true
+            listener.listen { [weak self] message in
+                self?.output?.workerDidUpdateConvo(message: message)
+            }
         }
         
         func sendMessage(_ content: String) -> Bool {
             guard !content.isEmpty else {
                 return false
             }
-            // TODO: Pass also the participants' ID
-            service.writeMessage(for: chatID, content: content) { [weak self] result in
+            
+            service.writeMessage(for: chatID, participantIDs: participantIDs, content: content) { [weak self] result in
                 switch result {
                 case .err(let info):
                     self?.output?.workerDidSendWithError(info)
@@ -85,24 +105,33 @@ extension ConvoScene {
             
             switch fetch {
             case .new:
-                offset = ""
+                offset = 0
             
-            default:
-                break
+            case .next:
+                if offset == nil {
+                    return false
+                }
             }
             
-            service.getMessages(for: chatID, offset: offset, limit: limit) { [weak self] result in
+            isFetching = true
+            service.getMessages(for: chatID, offset: offset!, limit: limit) { [weak self] result in
                 switch result {
                 case .err(let info):
                     self?.output?.workerDidFetchWithError(info)
+                    self?.isFetching = false
                     
-                case .ok(let messages):
-                    guard let offset = self?.offset, !offset.isEmpty else {
+                case .ok(let (messages, nextOffset)):
+                    let currentOffset = self?.offset
+                    self?.offset = nextOffset
+                    
+                    guard currentOffset != nil, currentOffset! > 0 else {
                         self?.output?.workerDidFetchNew(messages: messages)
+                        self?.isFetching = false
                         return
                     }
                     
                     self?.output?.workerDidFetchNext(messages: messages)
+                    self?.isFetching = false
                 }
             }
             
