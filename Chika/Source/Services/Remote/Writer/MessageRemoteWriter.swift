@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol MessageRemoteWriter: class {
 
-    func postMessage(for chatID: String, content: String, completion: @escaping (RemoteWriterResult<Message>) -> Void)
+    func postMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (RemoteWriterResult<Message>) -> Void)
 }
 
 class MessageRemoteWriterProvider: MessageRemoteWriter {
@@ -26,9 +26,14 @@ class MessageRemoteWriterProvider: MessageRemoteWriter {
         self.messagesQuery = messagesQuery
     }
     
-    func postMessage(for chatID: String, content: String, completion: @escaping (RemoteWriterResult<Message>) -> Void) {
+    func postMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (RemoteWriterResult<Message>) -> Void) {
         guard !chatID.isEmpty, !content.isEmpty, !meID.isEmpty else {
             completion(.err(RemoteWriterError("chat ID, content, and author ID should not be empty")))
+            return
+        }
+        
+        guard participantIDs.count > 1 else {
+            completion(.err(RemoteWriterError("participantIDs should contain more than 1")))
             return
         }
         
@@ -43,10 +48,14 @@ class MessageRemoteWriterProvider: MessageRemoteWriter {
             "author": meID,
             "created_on": createdOn
         ]
-        let updates: [String: Any] = [
+        var updates: [String: Any] = [
             "messages/\(key)": message,
             "chat:messages/\(chatID)/\(key)": ["created_on": createdOn]
         ]
+        
+        for personID in participantIDs {
+            updates["person:inbox/\(personID)/\(chatID)"] = ["updated_on": createdOn]
+        }
         
         rootRef.updateChildValues(updates) { error, _ in
             guard error == nil else {
