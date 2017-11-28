@@ -10,6 +10,7 @@ import FirebaseAuth
 
 protocol InboxSceneWorker: class {
 
+    func listenForInboxUpdates()
     func fetchInbox()
 }
 
@@ -17,6 +18,7 @@ protocol InboxSceneWorkerOutput: class {
     
     func workerDidFetch(chats: [Chat])
     func workerDidFetchWithError(_ error: Error)
+    func workerDidUpdateInbox(chat: Chat)
 }
 
 extension InboxScene {
@@ -26,16 +28,19 @@ extension InboxScene {
         weak var output: InboxSceneWorkerOutput?
         var personID: String
         var service: ChatRemoteService
+        var listener: InboxRemoteListener
         
-        init(personID: String, service: ChatRemoteService) {
+        init(personID: String, service: ChatRemoteService, listener: InboxRemoteListener) {
             self.personID = personID
             self.service = service
+            self.listener = listener
         }
         
         convenience init(user: User? = Auth.auth().currentUser) {
             let personID = user?.uid ?? ""
             let service = ChatRemoteServiceProvider()
-            self.init(personID: personID, service: service)
+            let listener = InboxRemoteListenerProvider(personID: personID)
+            self.init(personID: personID, service: service, listener: listener)
         }
         
         func fetchInbox() {
@@ -47,6 +52,12 @@ extension InboxScene {
                 case .ok(let chats):
                     self?.output?.workerDidFetch(chats: chats)
                 }
+            }
+        }
+        
+        func listenForInboxUpdates() {
+            listener.listen { [weak self] chat in
+                self?.output?.workerDidUpdateInbox(chat: chat)
             }
         }
     }
