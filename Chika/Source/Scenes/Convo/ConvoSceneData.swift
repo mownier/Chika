@@ -12,8 +12,10 @@ protocol ConvoSceneData: class {
     
     func messageCount(in section: Int) -> Int
     func message(at indexPath: IndexPath) -> Message?
-    func append(list: [Message])
+    func pushFront(list: [Message])
+    func pushRear(list: [Message])
     func removeAll()
+    func update(_ message: Message)
 }
 
 extension ConvoScene {
@@ -38,12 +40,26 @@ extension ConvoScene {
             return messages[indexPath.row]
         }
         
-        func append(list: [Message]) {
+        func pushFront(list: [Message]) {
+            messages.insert(contentsOf: list, at: 0)
+        }
+        
+        func pushRear(list: [Message]) {
             messages.append(contentsOf: list)
         }
         
         func removeAll() {
             messages.removeAll()
+        }
+        
+        func update(_ newMessage: Message) {
+            guard let index = messages.index(where: { $0.id == newMessage.id }) else {
+                messages.append(newMessage)
+                return
+            }
+            
+            messages[index] = newMessage
+            messages.sort(by: { $0.date.timeIntervalSince1970 < $1.date.timeIntervalSince1970 })
         }
     }
 }
