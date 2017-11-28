@@ -69,6 +69,8 @@ class FirebaseDatabaseQueryMock: DatabaseQuery {
     var limitToLast: UInt = 0
     var observerEventType: DataEventType?
     var snapshotValue: Any?
+    var snapshotChildren: [FirebaseDataSnapshot] = []
+    var snapshotExists: Bool = true
     
     override init() {
         super.init()
@@ -82,6 +84,8 @@ class FirebaseDatabaseQueryMock: DatabaseQuery {
     override func observeSingleEvent(of eventType: DataEventType, with block: @escaping (DataSnapshot) -> Void) {
         observerEventType = eventType
         let snapshot = FirebaseDataSnapshot(value: snapshotValue)
+        snapshot.isExisting = snapshotExists
+        snapshot.mockChildren = snapshotChildren
         block(snapshot)
     }
 }
@@ -89,6 +93,9 @@ class FirebaseDatabaseQueryMock: DatabaseQuery {
 class FirebaseDataSnapshot: DataSnapshot {
     
     var val: Any?
+    var isExisting: Bool = true
+    var mockChildren: [FirebaseDataSnapshot] = []
+    var mockKey: String = ""
     
     override var value: Any? {
         return val
@@ -96,5 +103,43 @@ class FirebaseDataSnapshot: DataSnapshot {
     
     init(value: Any?) {
         self.val = value
+    }
+    
+    override var key: String {
+        return mockKey
+    }
+    
+    override func exists() -> Bool {
+        return isExisting
+    }
+    
+    override func hasChildren() -> Bool {
+        return !mockChildren.isEmpty
+    }
+    
+    override var childrenCount: UInt {
+        return UInt(mockChildren.count)
+    }
+    
+    override var children: NSEnumerator {
+        let mock = EnumeratorMock()
+        mock.mockChildren = mockChildren
+        return mock
+    }
+    
+    class EnumeratorMock: NSEnumerator {
+        
+        var mockChildren: [FirebaseDataSnapshot] = []
+        var counter: Int = -1
+        
+        override func nextObject() -> Any? {
+            counter += 1
+            
+            guard counter >= 0, counter < mockChildren.count else {
+                return nil
+            }
+            
+            return mockChildren[counter]
+        }
     }
 }
