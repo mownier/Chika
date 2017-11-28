@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 protocol ChatMessagesRemoteQuery: class {
     
-    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping ([Message]) -> Void)
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping ([Message], Double?) -> Void)
 }
 
 class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
@@ -35,9 +35,9 @@ class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
         self.init(database: database, path: path, messagesQuery: messagesQuery, sort: sort)
     }
     
-    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping ([Message]) -> Void) {
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping ([Message], Double?) -> Void) {
         guard !chatID.isEmpty else {
-            completion([])
+            completion([], nil)
             return
         }
         
@@ -46,7 +46,7 @@ class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
         let messagesQuery = self.messagesQuery
         var query = ref.queryOrdered(byChild: "created_on")
         
-        if offset.isEmpty {
+        if offset > 0 {
             query = query.queryEnding(atValue: offset)
         }
         
@@ -56,7 +56,7 @@ class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
         
         query.observeSingleEvent(of: .value) { snapshot in
             guard snapshot.exists(), snapshot.hasChildren() else {
-                completion([])
+                completion([], nil)
                 return
             }
             
@@ -72,10 +72,12 @@ class ChatMessagesRemoteQueryProvider: ChatMessagesRemoteQuery {
             
             messagesQuery.getMessages(for: messageKeys) { messages in
                 var messages = messages
+                var nextOffset: Double?
                 if messages.count == Int(limit + 1) {
-                    let _ = messages.removeFirst()
+                    let msg = messages.removeFirst()
+                    nextOffset = msg.date.timeIntervalSince1970 * 1000
                 }
-                completion(messages)
+                completion(messages, nextOffset)
             }
         }
     }
