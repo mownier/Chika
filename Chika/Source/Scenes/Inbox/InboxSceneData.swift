@@ -13,6 +13,7 @@ protocol InboxSceneData: class {
     func chatCount(in section: Int) -> Int
     func chat(at indexPath: IndexPath) -> Chat?
     func append(list: [Chat])
+    func update(_ chat: Chat)
     func removeAll()
 }
 
@@ -44,6 +45,16 @@ extension InboxScene {
         
         func chatCount(in section: Int) -> Int {
             return chats.count
+        }
+        
+        func update(_ newChat: Chat) {
+            guard let index = chats.index(where: { $0.id == newChat.id }) else {
+                chats.insert(newChat, at: 0)
+                return
+            }
+            
+            chats[index] = newChat
+            chats.sort(by: { $0.recent.date.timeIntervalSince1970 > $1.recent.date.timeIntervalSince1970 })
         }
     }
 }
