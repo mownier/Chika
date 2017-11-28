@@ -11,8 +11,8 @@ import FirebaseDatabase
 protocol ChatRemoteService: class {
 
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void)
-    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void)
-    func writeMessage(for chatID: String, content: String, completion: @escaping (ServiceResult<Message>) -> Void)
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (ServiceResult<([Message], Double?)>) -> Void)
+    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (ServiceResult<Message>) -> Void)
 }
 
 class ChatRemoteServiceProvider: ChatRemoteService {
@@ -38,19 +38,19 @@ class ChatRemoteServiceProvider: ChatRemoteService {
         }
     }
     
-    func getMessages(for chatID: String, offset: String, limit: UInt, completion: @escaping (ServiceResult<[Message]>) -> Void) {
-        chatMessagesQuery.getMessages(for: chatID, offset: offset, limit: limit) { messages in
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (ServiceResult<([Message], Double?)>) -> Void) {
+        chatMessagesQuery.getMessages(for: chatID, offset: offset, limit: limit) { messages, nextOffset in
             guard !messages.isEmpty else {
                 completion(.err(ServiceError("no chat messages")))
                 return
             }
             
-            completion(.ok(messages))
+            completion(.ok((messages, nextOffset)))
         }
     }
     
-    func writeMessage(for chatID: String, content: String, completion: @escaping (ServiceResult<Message>) -> Void) {
-        messageWriter.postMessage(for: chatID, content: content) { result in
+    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (ServiceResult<Message>) -> Void) {
+        messageWriter.postMessage(for: chatID, participantIDs: participantIDs, content: content) { result in
             switch result {
             case .err(let info):
                 completion(.err(info))
