@@ -20,3 +20,14 @@ struct Person {
         isOnline = false
     }
 }
+
+extension Person: Hashable {
+    
+    var hashValue: Int {
+        return id.hashValue
+    }
+    
+    static func ==(lhs: Person, rhs: Person) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
