@@ -42,6 +42,9 @@ protocol ConvoSceneTheme: class {
     var newMessageCountTextColor: UIColor { get }
     var newMessageCountFont: UIFont? { get }
     var newMessageCountBGColor: UIColor { get }
+    
+    var typingStatusTextColor: UIColor { get }
+    var typingStatusFont: UIFont? { get }
 }
 
 extension ConvoScene {
@@ -80,5 +83,8 @@ extension ConvoScene {
         var newMessageCountTextColor: UIColor = .white
         var newMessageCountFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
         var newMessageCountBGColor: UIColor = UIColor(red: 0 / 255, green: 122 / 255, blue: 255 / 255, alpha: 1.0)
+        
+        var typingStatusTextColor: UIColor = .gray
+        var typingStatusFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 14.0)
     }
 }
