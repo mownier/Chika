@@ -49,6 +49,59 @@ class ConvoScene: UIViewController {
         }
     }
     
+    var isTypingViewHidden: Bool = true {
+        didSet {
+            guard oldValue != isTypingViewHidden else {
+                if !isTypingViewHidden {
+                    tableView.reloadSections([1], with: .none)
+                }
+                return
+            }
+            
+            isTypingViewHidden ? hideTypingView() : showTypingView()
+        }
+    }
+    
+    var typingStatusText: String = "" {
+        didSet {
+            isTypingViewHidden = typingStatus.isEmpty
+        }
+    
+    }
+    
+    var typingStatus: [Person: Bool] = [:] {
+        didSet {
+            let typingPersons: [Person] = typingStatus.filter({ $0.value }).flatMap({ $0.key })
+            
+            guard typingPersons.count > 0 else {
+                typingStatusText = ""
+                return
+            }
+            
+            if typingPersons.count == 1 {
+                typingStatusText = "\(typingPersons[0].name) is typing..."
+                return
+            }
+            
+            if typingPersons.count == 2 {
+                typingStatusText = "\(typingPersons[0].name) and \(typingPersons[1].name) are typing..."
+                return
+            }
+            
+            var personText = ""
+            for (index, person) in typingPersons.enumerated() {
+                if index == typingPersons.count - 1 {
+                    personText.append("and \(person.name)")
+                    continue
+                }
+                
+                personText.append("\(person.name), ")
+            }
+            
+            typingStatusText = "\(personText) are typing..."
+        }
+    }
+    
     init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: AppExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData, setup: ConvoSceneSetup) {
         self.theme = theme
         self.worker = worker
@@ -95,6 +148,8 @@ class ConvoScene: UIViewController {
         tableView.estimatedRowHeight = 0
         tableView.rowHeight = 0
         
+        tableView.register(ConvoSceneTypingView.self, forCellReuseIdentifier: "TypingView")
+        
         cellManager.assignTableView(tableView)
         cellManager.registerLeftCell()
         cellManager.registerRightCell()
@@ -111,6 +166,7 @@ class ConvoScene: UIViewController {
         composerView.sendButton.tintColor = theme.composerViewTintColor
         composerView.sendButton.setTitleColor(theme.composerViewContentTextColor, for: .normal)
         composerView.sendButton.titleLabel?.font = theme.composerViewSendFont
+        composerView.contentInput.delegate = self
         
         newMessageCountLabel = UILabel()
         newMessageCountLabel.textColor = theme.newMessageCountTextColor
@@ -139,6 +195,7 @@ class ConvoScene: UIViewController {
         
         let _ = worker.fetchNewMessages()
         worker.listenForUpdates()
+        worker.changeTypingStatus(isTyping: false, forced: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -171,8 +228,16 @@ class ConvoScene: UIViewController {
             return
         }
         
+        let indexPath: IndexPath
+        
+        if isTypingViewHidden {
+            indexPath = IndexPath(row: data.messageCount(in: 0) - 1, section: 0)
+            
+        } else {
+            indexPath = IndexPath(row: 0, section: 1)
+        }
+        
         guard animated else {
-            let indexPath = IndexPath(row: data.messageCount(in: section) - 1, section: section)
             tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
             return
         }
@@ -182,41 +247,102 @@ class ConvoScene: UIViewController {
                 return
             }
             
-            let indexPath = IndexPath(row: scene.data.messageCount(in: section) - 1, section: section)
             scene.tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
         }
+    }
+    
+    func showTypingView() {
+        tableView.reloadData()
+        if isAtBottom {
+            scrollToBottom()
+        }
+    }
+    
+    func hideTypingView() {
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: UIViewAnimationOptions.curveEaseOut,
+            animations: { [weak self] in
+                self?.tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .bottom)
+        }) { _ in }
     }
 }
 
 extension ConvoScene: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.messageCount(in: section)
+        switch section {
+        case 0:
+            return data.messageCount(in: 0)
+        
+        case 1:
+            if isTypingViewHidden {
+                return 0
+            }
+            return 1
+            
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = data.message(at: indexPath)
-        var nextIndexPath = indexPath
-        nextIndexPath.row -= 1
-        let prevMessage = data.message(at: nextIndexPath)
-        let cell = setup.formatCell(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
-        return cell
+        switch indexPath.section {
+        case 0:
+            let message = data.message(at: indexPath)
+            var nextIndexPath = indexPath
+            nextIndexPath.row -= 1
+            let prevMessage = data.message(at: nextIndexPath)
+            let cell = setup.formatCell(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
+            return cell
+        
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TypingView") as! ConvoSceneTypingView
+            cell.infoLabel.font = theme.typingStatusFont
+            cell.infoLabel.textColor = theme.typingStatusTextColor
+            cell.infoLabel.text = typingStatusText
+            return cell
+            
+        default:
+            return UITableViewCell()
+        }
     }
 }
 
 extension ConvoScene: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let message = data.message(at: indexPath)
-        var nextIndexPath = indexPath
-        nextIndexPath.row -= 1
-        let prevMessage = data.message(at: nextIndexPath)
-        return setup.cellHeight(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
+        switch indexPath.section {
+        case 0:
+            let message = data.message(at: indexPath)
+            var nextIndexPath = indexPath
+            nextIndexPath.row -= 1
+            let prevMessage = data.message(at: nextIndexPath)
+            return setup.cellHeight(using: cellManager, theme: theme, message: message, prevMessage: prevMessage)
+        
+        case 1:
+            return 44
+        
+        default:
+            return 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == loadMoreRowThreshold {
-            let _ = worker.fetchNextMessages()
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == loadMoreRowThreshold {
+                let _ = worker.fetchNextMessages()
+            }
+        
+        default:
+            break
         }
     }
     
@@ -284,6 +410,15 @@ extension ConvoScene: ConvoSceneWorkerOutput {
             newMessageCount += 1
         }
     }
+    
+    func workerDidUpdateTypingStatus(for person: Person, isTyping: Bool) {
+        if isTyping {
+            typingStatus[person] = isTyping
+        
+        } else {
+            typingStatus.removeValue(forKey: person)
+        }
+    }
 }
 
 extension ConvoScene: ConvoSceneInteraction {
@@ -293,6 +428,7 @@ extension ConvoScene: ConvoSceneInteraction {
     }
     
     func didTapSend() {
+        worker.changeTypingStatus(isTyping: false, forced: true)
         let _ = worker.sendMessage(composerView.contentInput.text)
         composerView.updateContent("")
         composerView.contentInput.resignFirstResponder()
@@ -300,5 +436,12 @@ extension ConvoScene: ConvoSceneInteraction {
     
     func didTapNewMessageCount() {
         scrollToBottom()
+    }
+}
+
+extension ConvoScene: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        worker.changeTypingStatus(isTyping: !textView.text.isEmpty, forced: false)
     }
 }
