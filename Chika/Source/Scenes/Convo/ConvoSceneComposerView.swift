@@ -20,6 +20,7 @@ class ConvoSceneComposerView: UIView {
     var sendButton: UIButton!
     var contentInput: UITextView!
     var placeholderLabel: UILabel!
+    var isKeyboardShown: Bool = false
     
     deinit {
         removeContentObserver()
@@ -63,13 +64,21 @@ class ConvoSceneComposerView: UIView {
         rect.size.width = 44
         rect.size.height = rect.width
         rect.origin.x = bounds.width - rect.width - spacing
-        rect.origin.y = (bounds.height - rect.height - safeAreaInsets.bottom) / 2
+        if !isKeyboardShown {
+            rect.origin.y = (bounds.height - rect.height - safeAreaInsets.bottom) / 2
+        } else {
+            rect.origin.y = sendButton.frame.origin.y
+        }
         sendButton.frame = rect
         
         rect.origin.y = spacing
         rect.origin.x = spacing
         rect.size.width = bounds.width - sendButton.frame.width - spacing * 2
-        rect.size.height = bounds.height - spacing * 2 - safeAreaInsets.bottom
+        if !isKeyboardShown {
+            rect.size.height = bounds.height - spacing * 2 - safeAreaInsets.bottom
+        } else {
+            rect.size.height = contentInput.frame.height
+        }
         contentInput.frame = rect
         
         rect.size = placeholderLabel.sizeThatFits(rect.size)
@@ -120,6 +129,8 @@ extension ConvoSceneComposerView: ConvoSceneComposerViewInteraction {
     }
     
     func didTapPlaceholder() {
-        contentInput.becomeFirstResponder()
+        if !contentInput.isFirstResponder {
+            contentInput.becomeFirstResponder()
+        }
     }
 }
