@@ -53,7 +53,9 @@ extension ConvoScene {
         func enter(from parent: UIViewController, chat: Chat) -> Bool {
             let scene = factory.scene.build(chat: chat)
             let nav = factory.nav.build(root: scene)
-            parent.present(nav, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                parent.present(nav, animated: true, completion: nil)
+            }
             return true
         }
     }
