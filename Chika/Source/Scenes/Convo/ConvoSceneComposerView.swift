@@ -22,6 +22,8 @@ class ConvoSceneComposerView: UIView {
     var placeholderLabel: UILabel!
     var isKeyboardShown: Bool = false
     
+    var notifCenter: NotificationCenter = NotificationCenter.default
+    
     deinit {
         removeContentObserver()
     }
@@ -90,13 +92,13 @@ class ConvoSceneComposerView: UIView {
     
     func updateContent(_ content: String) {
         contentInput.text = content
-        NotificationCenter.default.post(
+        notifCenter.post(
             name: NSNotification.Name.UITextViewTextDidChange,
             object: contentInput)
     }
     
     func addContentObserver() {
-        NotificationCenter.default.addObserver(
+        notifCenter.addObserver(
             self,
             selector: #selector(self.contentDidChangeText),
             name: NSNotification.Name.UITextViewTextDidChange,
@@ -104,7 +106,7 @@ class ConvoSceneComposerView: UIView {
     }
     
     func removeContentObserver() {
-        NotificationCenter.default.removeObserver(
+        notifCenter.removeObserver(
             self,
             name: NSNotification.Name.UITextViewTextDidChange,
             object: nil)
