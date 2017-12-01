@@ -14,8 +14,8 @@ class InboxSceneDataTests: XCTestCase {
     // CONTEXT: append function should append list of chats
     func testAppendA() {
         let data = InboxScene.Data()
-        data.chats = []
-        XCTAssertTrue(data.chats.isEmpty)
+        data.items = []
+        XCTAssertTrue(data.items.isEmpty)
         
         var chat = Chat()
         chat.id = "chatID"
@@ -23,8 +23,8 @@ class InboxSceneDataTests: XCTestCase {
         
         data.append(list: list)
         
-        XCTAssertFalse(data.chats.isEmpty)
-        XCTAssertEqual(data.chats.count, 1)
-        XCTAssertEqual(data.chats[0].id, "chatID")
+        XCTAssertFalse(data.items.isEmpty)
+        XCTAssertEqual(data.items.count, 1)
+        XCTAssertEqual(data.items[0].chat.id, "chatID")
     }
 }

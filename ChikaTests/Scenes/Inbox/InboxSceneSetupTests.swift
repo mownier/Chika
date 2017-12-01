@@ -13,40 +13,40 @@ class InboxSceneSetupTests: XCTestCase {
     
     // CONTEXT: format function should return false given
     // that cell is not an instance of InboxSceneCell or
-    // chat is nil
+    // item is nil
     func testFormatA() {
-        var chat: Chat?
+        var item: InboxSceneItem?
         var cell: InboxSceneCell?
         let theme = InboxScene.Theme()
         let setup = InboxScene.Setup()
         
-        chat = Chat()
+        item = InboxSceneItem(chat: Chat())
         cell = nil
-        var ok = setup.format(cell: cell, theme: theme, chat: chat)
+        var ok = setup.format(cell: cell, theme: theme, item: item, isLast: false)
         XCTAssertFalse(ok)
         
-        chat = nil
+        item = nil
         cell = InboxSceneCell()
-        ok = setup.format(cell: cell, theme: theme, chat: chat)
+        ok = setup.format(cell: cell, theme: theme, item: item, isLast: false)
         XCTAssertFalse(ok)
     }
     
     // CONTEXT: height function should return 0 given
-    // that cell or chat is nil
+    // that cell or item is nil
     func testHeightA() {
-        var chat: Chat?
+        var item: InboxSceneItem?
         var cell: InboxSceneCell?
         let theme = InboxScene.Theme()
         let setup = InboxScene.Setup()
         
-        chat = Chat()
+        item = InboxSceneItem(chat: Chat())
         cell = nil
-        var height = setup.height(for: cell, theme: theme, chat: chat)
+        var height = setup.height(for: cell, theme: theme, item: item, isLast: false)
         XCTAssertEqual(height, 0)
         
-        chat = nil
+        item = nil
         cell = InboxSceneCell()
-        height = setup.height(for: cell, theme: theme, chat: chat)
+        height = setup.height(for: cell, theme: theme, item: item, isLast: false)
         XCTAssertEqual(height, 0)
     }
 }

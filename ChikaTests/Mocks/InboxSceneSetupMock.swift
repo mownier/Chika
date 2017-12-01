@@ -14,11 +14,11 @@ class InboxSceneSetupMock: InboxSceneSetup {
     var isFormatOK: Bool = false
     var cellHeight: CGFloat = 0
     
-    func format(cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> Bool {
+    func format(cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> Bool {
         return isFormatOK
     }
     
-    func height(for cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> CGFloat {
+    func height(for cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> CGFloat {
         return cellHeight
     }
 }

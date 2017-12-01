@@ -35,7 +35,7 @@ class InboxSceneTests: XCTestCase {
     func testCellForRowA() {
         let scene = InboxScene()
         scene.setup = InboxSceneSetupMock()
-        let cell = scene.tableView(scene.tableView, cellForRowAt: IndexPath())
+        let cell = scene.tableView(scene.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
         XCTAssertNil(cell.reuseIdentifier)
     }
     
@@ -82,9 +82,9 @@ class InboxSceneTests: XCTestCase {
         scene.data.append(list: initialChats)
         scene.tableView = tableView
         scene.workerDidFetch(chats: outputChats)
-        XCTAssertEqual(scene.data.chatCount(in: 0), 2)
-        XCTAssertEqual(scene.data.chat(at: IndexPath(row: 0, section: 0))?.id, "chat:3")
-        XCTAssertEqual(scene.data.chat(at: IndexPath(row: 1, section: 0))?.id, "chat:4")
+        XCTAssertEqual(scene.data.itemCount, 2)
+        XCTAssertEqual(scene.data.item(at: 0)?.chat.id, "chat:3")
+        XCTAssertEqual(scene.data.item(at: 1)?.chat.id, "chat:4")
         XCTAssertTrue(tableView.isReloadDataCalled)
     }
     
