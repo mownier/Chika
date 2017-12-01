@@ -221,7 +221,7 @@ class ConvoScene: UIViewController {
         
         rect.size.width = view.bounds.width
         rect.size.height = 59 + view.safeAreaInsets.bottom
-        rect.origin.y = view.bounds.height - rect.height
+        rect.origin.y = composerView.isKeyboardShown ? composerView.frame.origin.y : view.bounds.height - rect.height
         composerView.frame = rect
         
         rect.origin.y = 0
@@ -338,6 +338,7 @@ class ConvoScene: UIViewController {
         
         composerView.frame.origin.y = prevOriginY
         tableView.contentInset.bottom = prevBottomOffset
+        tableView.scrollIndicatorInsets.bottom = prevBottomOffset
     }
     
     func addKeyboardObserer() {
