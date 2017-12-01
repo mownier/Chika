@@ -15,6 +15,7 @@ protocol InboxSceneData: class {
     func item(at index: Int) -> InboxSceneItem?
     func append(list: [Chat])
     func update(_ chat: Chat)
+    func updateMessageCount(for item: InboxSceneItem)
     func removeAll()
 }
 
@@ -50,12 +51,23 @@ extension InboxScene {
         
         func update(_ newChat: Chat) {
             guard let index = items.index(where: { $0.chat.id == newChat.id }) else {
-                items.insert(InboxSceneItem(chat: newChat), at: 0)
+                var item = InboxSceneItem(chat: newChat)
+                item.unreadMessageCount += 1
+                items.insert(item, at: 0)
                 return
             }
             
             items[index].chat = newChat
+            items[index].unreadMessageCount += 1
             items.sort(by: { $0.chat.recent.date.timeIntervalSince1970 > $1.chat.recent.date.timeIntervalSince1970 })
+        }
+        
+        func updateMessageCount(for item: InboxSceneItem) {
+            guard let index = items.index(where: { $0.chat.id == item.chat.id }) else {
+                return
+            }
+            
+            items[index].unreadMessageCount = item.unreadMessageCount
         }
     }
 }

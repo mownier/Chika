@@ -17,6 +17,8 @@ class InboxScene: UITableViewController {
     var worker: InboxSceneWorker
     var flow: InboxSceneFlow
     
+    var currentItem: InboxSceneItem?
+    
     init(theme: InboxSceneTheme, data: InboxSceneData, setup: InboxSceneSetup, cellManager: InboxSceneCellManager, worker: InboxSceneWorker, flow: InboxSceneFlow) {
         self.theme = theme
         self.data = data
@@ -60,6 +62,19 @@ class InboxScene: UITableViewController {
         worker.fetchInbox()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard currentItem != nil else {
+            return
+        }
+        
+        currentItem!.unreadMessageCount = 0
+        data.updateMessageCount(for: currentItem!)
+        tableView.reloadData()
+        currentItem = nil
+    }
+    
     override func viewDidLayoutSubviews() {
         cellManager.prototype?.bounds.size.width = tableView.bounds.width
     }
@@ -86,9 +101,14 @@ class InboxScene: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        guard var item = data.item(at: indexPath.row), flow.goToConvo(chat: item.chat) else {
+            return
+        }
         
-        let _ = flow.goToConvo(chat: data.item(at: indexPath.row)?.chat)
+        item.unreadMessageCount = 0
+        data.updateMessageCount(for: item)
+        tableView.reloadRows(at: [indexPath], with: .fade)
+        currentItem = item
     }
 }
 
