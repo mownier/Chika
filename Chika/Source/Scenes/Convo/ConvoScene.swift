@@ -293,14 +293,39 @@ class ConvoScene: UIViewController {
         
         composerView.isKeyboardShown = true
         
-        let frameEnd = (notif.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         prevOriginY = composerView.frame.origin.y
-        composerView.frame.origin.y -= frameEnd.height
+        prevBottomOffset = tableView.contentInset.bottom
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] _ in
             guard let this = self else { return }
             let keyboardSize = UIApplication.shared.windows[1].subviews[0].subviews[0].bounds.size
-            this.composerView.frame.origin.y = this.view.bounds.height - this.composerView.bounds.height - keyboardSize.height
+            
+            let prevY = this.composerView.frame.origin.y
+            let newY = this.view.bounds.height - this.composerView.bounds.height - keyboardSize.height + this.view.safeAreaInsets.bottom
+            
+            if newY != prevY {
+                UIView.animate(
+                    withDuration: 0.25,
+                    delay: 0,
+                    options: UIViewAnimationOptions(rawValue: 7 << 16),
+                    animations: {
+                        this.composerView.frame.origin.y = newY
+                }) { _ in }
+            }
+            
+            let prevBottom = this.tableView.contentInset.bottom
+            let newBottom = this.prevBottomOffset + keyboardSize.height - this.view.safeAreaInsets.bottom
+            if newBottom != prevBottom {
+                UIView.animate(
+                    withDuration: 0.25,
+                    delay: 0,
+                    options: UIViewAnimationOptions(rawValue: 7 << 16),
+                    animations: {
+                        this.tableView.contentOffset.y += (newBottom - prevBottom)
+                        this.tableView.contentInset.bottom = newBottom
+                        this.tableView.scrollIndicatorInsets.bottom = newBottom
+                }) { _ in }
+            }
         })
         timer?.fire()
     }
@@ -312,6 +337,7 @@ class ConvoScene: UIViewController {
         timer = nil
         
         composerView.frame.origin.y = prevOriginY
+        tableView.contentInset.bottom = prevBottomOffset
     }
     
     func addKeyboardObserer() {
@@ -325,6 +351,7 @@ class ConvoScene: UIViewController {
     }
     
     var prevOriginY: CGFloat = 0
+    var prevBottomOffset: CGFloat = 0
     var timer: Timer?
 }
 
