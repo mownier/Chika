@@ -31,12 +31,16 @@ class InboxRemoteListenerProvider: InboxRemoteListener {
         }
         
         let rootRef = database.reference()
-        
+        var isCallbackEnabled: Bool = false
         rootRef.child("person:inbox/\(personID)").queryOrdered(byChild: "updated_on").queryLimited(toLast: 1).observe(.childChanged) { [weak self] snapshot in
             self?.handleSnapshot(snapshot, callback)
         }
         
         rootRef.child("person:inbox/\(personID)").queryOrdered(byChild: "updated_on").queryLimited(toLast: 1).observe(.childAdded) { [weak self] snapshot in
+            guard isCallbackEnabled else {
+                isCallbackEnabled = true
+                return
+            }
             self?.handleSnapshot(snapshot, callback)
         }
     }
