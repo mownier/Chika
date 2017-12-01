@@ -483,7 +483,6 @@ extension ConvoScene: ConvoSceneWorkerOutput {
 extension ConvoScene: ConvoSceneInteraction {
     
     func didTapBack() {
-        composerView.removeContentObserver()
         let _ = waypoint.exit()
     }
     
