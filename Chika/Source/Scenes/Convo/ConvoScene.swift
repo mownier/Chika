@@ -286,118 +286,46 @@ class ConvoScene: UIViewController {
         }) { _ in }
     }
     
-    @objc func keyboardWillChangeFrame(_ notif: Notification) {
-        guard let userInfo = notif.userInfo,
-            let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt,
-            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
-            let frameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue,
-            let frameBegin = userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
-                return
-        }
-        
-        let rectEnd = frameEnd.cgRectValue
-        let rectBegin = frameBegin.cgRectValue
-        
-        guard rectEnd != rectBegin else {
+    @objc func keyboardWillShow(_ notif: Notification) {
+        guard !composerView.isKeyboardShown else {
             return
         }
         
-        let options = UIViewAnimationOptions(rawValue: curve << 16)
-        var deltaY: CGFloat = rectEnd.origin.y - rectBegin.origin.y
-        
-        if rectBegin.origin.y < rectEnd.origin.y {
-            deltaY -= view.safeAreaInsets.bottom
-            
-        } else if rectBegin.origin.y > rectEnd.origin.y {
-            deltaY += view.safeAreaInsets.bottom
-        }
-        
-        UIView.animate(
-            withDuration: duration,
-            delay: 0,
-            options: options,
-            animations: { [weak self] in
-                guard let this = self else { return }
-                this.composerView.frame.origin.y += deltaY
-        }) { _ in }
-    }
-    
-    @objc func keyboardWillShow() {
         composerView.isKeyboardShown = true
+        
+        let frameEnd = (notif.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        prevOriginY = composerView.frame.origin.y
+        composerView.frame.origin.y -= frameEnd.height
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] _ in
+            guard let this = self else { return }
+            let keyboardSize = UIApplication.shared.windows[1].subviews[0].subviews[0].bounds.size
+            this.composerView.frame.origin.y = this.view.bounds.height - this.composerView.bounds.height - keyboardSize.height
+        })
+        timer?.fire()
     }
     
     @objc func keyboardWillHide() {
-        additionalKeyboardHeight = 0
         composerView.isKeyboardShown = false
-    }
-    
-    @objc func inputModeDidChange() {
-        if view.safeAreaInsets.bottom > 0 {
-            composerView.backgroundColor = .green
-            let prev = additionalKeyboardHeight
-            additionalKeyboardHeight = composerView.contentInput.textInputMode == nil ? 42 : willEnterForeground || ConvoScene.isConvoSceneExited ? -42 : prev == 42 ? -view.safeAreaInsets.bottom : 0
-            composerView.frame.origin.y -= additionalKeyboardHeight
-
-        } else {
-            if willEnterForeground {
-                if ConvoScene.keyboardChangeCount == 0 {
-                    ConvoScene.keyboardChangeCount = 1
-                    
-                } else if ConvoScene.keyboardChangeCount == 1  {
-                    ConvoScene.keyboardChangeCount = 2
-                }
-                additionalKeyboardHeight = -42
-                composerView.frame.origin.y -= additionalKeyboardHeight
-                return
-            }
-            
-            if ConvoScene.keyboardChangeCount == 0 && composerView.contentInput.textInputMode == nil {
-                ConvoScene.keyboardChangeCount = 1
-                return
-            }
-
-            if ConvoScene.keyboardChangeCount == 1 && composerView.contentInput.textInputMode != nil {
-                ConvoScene.keyboardChangeCount = 2
-                return
-            }
-
-            if ConvoScene.keyboardChangeCount == 2 {
-                additionalKeyboardHeight = composerView.contentInput.textInputMode == nil ? 42 : 0
-                composerView.frame.origin.y -= additionalKeyboardHeight
-            }
-        }
-    }
-    
-    @objc func appDidBecomeActive() {
-        willEnterForeground = false
-    }
-    
-    @objc func appWillEnterForeground() {
-        willEnterForeground = true
+        
+        timer?.invalidate()
+        timer = nil
+        
+        composerView.frame.origin.y = prevOriginY
     }
     
     func addKeyboardObserer() {
-        notifCenter.addObserver(self, selector: #selector(self.appWillEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
-        notifCenter.addObserver(self, selector: #selector(self.appDidBecomeActive), name: .UIApplicationDidBecomeActive, object: nil)
         notifCenter.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
         notifCenter.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-        notifCenter.addObserver(self, selector: #selector(self.keyboardWillChangeFrame(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
-        notifCenter.addObserver(self, selector: #selector(self.inputModeDidChange), name: .UITextInputCurrentInputModeDidChange, object: nil)
     }
     
     func removeKeyboardObserver() {
-        notifCenter.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
-        notifCenter.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
         notifCenter.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         notifCenter.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-        notifCenter.removeObserver(self, name: .UIKeyboardWillChangeFrame, object: nil)
-        notifCenter.removeObserver(self, name: .UITextInputCurrentInputModeDidChange, object: nil)
     }
     
-    var willEnterForeground: Bool = false
-    var additionalKeyboardHeight: CGFloat = 0
-    static var keyboardChangeCount: UInt = 0
-    static var isConvoSceneExited: Bool = false
+    var prevOriginY: CGFloat = 0
+    var timer: Timer?
 }
 
 extension ConvoScene: UITableViewDataSource {
@@ -555,8 +483,8 @@ extension ConvoScene: ConvoSceneWorkerOutput {
 extension ConvoScene: ConvoSceneInteraction {
     
     func didTapBack() {
+        composerView.removeContentObserver()
         let _ = waypoint.exit()
-        ConvoScene.isConvoSceneExited = true
     }
     
     func didTapSend() {
