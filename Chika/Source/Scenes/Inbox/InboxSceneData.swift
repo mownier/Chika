@@ -10,8 +10,9 @@ import Foundation
 
 protocol InboxSceneData: class {
 
-    func chatCount(in section: Int) -> Int
-    func chat(at indexPath: IndexPath) -> Chat?
+    var itemCount: Int { get }
+    
+    func item(at index: Int) -> InboxSceneItem?
     func append(list: [Chat])
     func update(_ chat: Chat)
     func removeAll()
@@ -21,40 +22,40 @@ extension InboxScene {
     
     class Data: InboxSceneData {
         
-        var chats: [Chat]
+        var items: [InboxSceneItem]
         
-        init() {
-            chats = []
+        var itemCount: Int {
+            return items.count
         }
         
-        func chat(at indexPath: IndexPath) -> Chat? {
-            guard !indexPath.isEmpty, indexPath.row >= 0, indexPath.row < chats.count else {
+        init() {
+            items = []
+        }
+        
+        func item(at index: Int) -> InboxSceneItem? {
+            guard index >= 0 && index < items.count else {
                 return nil
             }
             
-            return chats[indexPath.row]
+            return items[index]
         }
         
         func append(list: [Chat]) {
-            chats.append(contentsOf: list)
+            items.append(contentsOf: list.map({ InboxSceneItem(chat: $0) }))
         }
         
         func removeAll() {
-            chats.removeAll()
-        }
-        
-        func chatCount(in section: Int) -> Int {
-            return chats.count
+            items.removeAll()
         }
         
         func update(_ newChat: Chat) {
-            guard let index = chats.index(where: { $0.id == newChat.id }) else {
-                chats.insert(newChat, at: 0)
+            guard let index = items.index(where: { $0.chat.id == newChat.id }) else {
+                items.insert(InboxSceneItem(chat: newChat), at: 0)
                 return
             }
             
-            chats[index] = newChat
-            chats.sort(by: { $0.recent.date.timeIntervalSince1970 > $1.recent.date.timeIntervalSince1970 })
+            items[index].chat = newChat
+            items.sort(by: { $0.chat.recent.date.timeIntervalSince1970 > $1.chat.recent.date.timeIntervalSince1970 })
         }
     }
 }

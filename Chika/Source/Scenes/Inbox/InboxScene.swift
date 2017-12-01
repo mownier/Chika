@@ -65,16 +65,18 @@ class InboxScene: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return setup.height(for: cellManager.prototype, theme: theme, chat: data.chat(at: indexPath))
+        let isLast = indexPath.row == data.itemCount - 1
+        return setup.height(for: cellManager.prototype, theme: theme, item: data.item(at: indexPath.row), isLast: isLast)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.chatCount(in: section)
+        return data.itemCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cellManager.dequeue()
-        let ok = setup.format(cell: cell, theme: theme, chat: data.chat(at: indexPath))
+        let isLast = indexPath.row == data.itemCount - 1
+        let ok = setup.format(cell: cell, theme: theme, item: data.item(at: indexPath.row), isLast: isLast)
         
         if ok {
             return cell!
@@ -86,7 +88,7 @@ class InboxScene: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let _ = flow.goToConvo(chat: data.chat(at: indexPath))
+        let _ = flow.goToConvo(chat: data.item(at: indexPath.row)?.chat)
     }
 }
 

@@ -6,27 +6,41 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
-import UIKit
+import DateTools
 
 protocol InboxSceneSetup: class {
 
-    func format(cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> Bool
-    func height(for cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> CGFloat
+    func format(cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> Bool
+    func height(for cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> CGFloat
 }
 
 extension InboxScene {
     
     class Setup: InboxSceneSetup {
         
-        func format(cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> Bool {
-            guard let cell = cell as? InboxSceneCell, let chat = chat else {
+        func format(cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> Bool {
+            guard let cell = cell as? InboxSceneCell, let item = item else {
                 return false
             }
             
-            cell.chatTitleLabel.font = theme.chatTitleLabelFont
-            cell.chatRecentMessageLabel.font = theme.chatRecentMessageLabelFont
-            cell.chatTitleLabel.text = chat.title
-            cell.chatRecentMessageLabel.text = chat.recent.content
+            cell.chatTitleLabel.font = theme.chatTitleFont
+            cell.chatTitleLabel.textColor = theme.chatTitleTextColor
+            cell.chatRecentMessageLabel.font = theme.chatRecentMessageFont
+            cell.chatRecentMessageLabel.textColor = theme.chatRecentMessageTextColor
+            cell.timeLabel.textColor = theme.chatTimeTextColor
+            cell.timeLabel.font = theme.chatTimeFont
+            cell.strip.backgroundColor = isLast ? UIColor.clear : theme.stripColor
+            cell.unreadMessageCountLabel.textColor = theme.unreadMessageCountTextColor
+            cell.unreadMessageCountLabel.backgroundColor = theme.unreadMessageBGColor
+            cell.unreadMessageCountLabel.font = theme.unreadMessaegCountFont
+            cell.onlineStatusView.backgroundColor = theme.onlineStatusColor
+            
+            cell.chatTitleLabel.text = item.chat.title
+            cell.chatRecentMessageLabel.text = item.chat.recent.content
+            cell.avatarView.style = InboxSceneCellAvatar.Style(count: UInt(item.chat.participants.count))
+            cell.timeLabel.text = "\((item.chat.recent.date as NSDate).timeAgoSinceNow()!)".lowercased()
+            cell.unreadMessageCountLabel.text = item.unreadMessageCount == 0 ? "" : "\(item.unreadMessageCount)"
+            cell.onlineStatusView.isHidden = !item.isOnline
             
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
@@ -34,13 +48,13 @@ extension InboxScene {
             return true
         }
         
-        func height(for cell: UITableViewCell?, theme: InboxSceneTheme, chat: Chat?) -> CGFloat {
-            guard format(cell: cell, theme: theme, chat: chat) else {
+        func height(for cell: UITableViewCell?, theme: InboxSceneTheme, item: InboxSceneItem?, isLast: Bool) -> CGFloat {
+            guard format(cell: cell, theme: theme, item: item, isLast: isLast) else {
                 return 0
             }
             
             let chatCell = cell as! InboxSceneCell
-            return chatCell.chatRecentMessageLabel.frame.maxY + chatCell.chatTitleLabel.frame.origin.y
+            return max(chatCell.avatarView.frame.maxY, chatCell.chatRecentMessageLabel.frame.maxY) + chatCell.avatarView.frame.origin.y
         }
     }
 }
