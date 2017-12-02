@@ -145,6 +145,8 @@
 		48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */; };
 		48B4D0251FBAEA43008C78F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */; };
 		48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0291FBAEE64008C78F6 /* AuthMock.swift */; };
+		48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5CEF51FD283E5000C70FA /* PresenceRemoteWriter.swift */; };
+		48B5CEF81FD28E6A000C70FA /* PresenceRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */; };
 		48BFF7711FC4756F00BAE311 /* InboxSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF7701FC4756F00BAE311 /* InboxSceneWorker.swift */; };
 		48BFF7741FC47A2B00BAE311 /* RecentMessageRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BFF7731FC47A2B00BAE311 /* RecentMessageRemoteQueryProviderTests.swift */; };
 		48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */; };
@@ -328,6 +330,8 @@
 		48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		48B4D0241FBAEA43008C78F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		48B4D0291FBAEE64008C78F6 /* AuthMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMock.swift; sourceTree = "<group>"; };
+		48B5CEF51FD283E5000C70FA /* PresenceRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteWriter.swift; sourceTree = "<group>"; };
+		48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteListener.swift; sourceTree = "<group>"; };
 		48BFF7701FC4756F00BAE311 /* InboxSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneWorker.swift; sourceTree = "<group>"; };
 		48BFF7731FC47A2B00BAE311 /* RecentMessageRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		48C0515C1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWaypoint.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */,
+				48B5CEF51FD283E5000C70FA /* PresenceRemoteWriter.swift */,
 				487B536A1FC9C094006D072F /* RemoteWriterResult.swift */,
 				48C55DD11FCE9D7700302DB2 /* TypingStatusRemoteWriter.swift */,
 			);
@@ -571,6 +576,7 @@
 			children = (
 				48B37E8C1FCBD474004978F1 /* ChatMessageRemoteListener.swift */,
 				488639321FCBAE99003108A1 /* InboxRemoteListener.swift */,
+				48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */,
 				488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */,
 				48C55DCF1FCE6B1800302DB2 /* TypingStatusRemoteListener.swift */,
 			);
@@ -1167,6 +1173,7 @@
 				489FE1D01FC05FE30062E1AB /* RegisterSceneFactory.swift in Sources */,
 				487767051FC6AE01008E865F /* ConvoSceneFlow.swift in Sources */,
 				4877BF801FC4610700885C60 /* PersonsRemoteQuery.swift in Sources */,
+				48B5CEF81FD28E6A000C70FA /* PresenceRemoteListener.swift in Sources */,
 				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
 				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
 				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
@@ -1219,6 +1226,7 @@
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
 				489FE1CC1FC05E430062E1AB /* RegisterSceneFlow.swift in Sources */,
+				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
