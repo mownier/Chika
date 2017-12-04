@@ -107,20 +107,8 @@ class InboxScene: UITableViewController {
         
         item.unreadMessageCount = 0
         data.updateMessageCount(for: item)
-        tableView.reloadRows(at: [indexPath], with: .fade)
+        tableView.reloadRows(at: [indexPath], with: .none)
         currentItem = item
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let chat = data.item(at: indexPath.row)?.chat
-        worker.listenOnActiveStatus(for: chat)
-        worker.listenOnTypingStatus(for: chat)
-    }
-    
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let chat = data.item(at: indexPath.row)?.chat
-        worker.unlistenOnActiveStatus(for: chat)
-        worker.unlistenOnTypingStatus(for: chat)
     }
 }
 
@@ -132,6 +120,11 @@ extension InboxScene: InboxSceneWorkerOutput {
         tableView.reloadData()
         
         worker.listenOnRecentChat()
+        
+        for chat in chats {
+            worker.listenOnTypingStatus(for: chat)
+            worker.listenOnActiveStatus(for: chat)
+        }
     }
     
     func workerDidFetchWithError(_ error: Error) {
@@ -141,23 +134,18 @@ extension InboxScene: InboxSceneWorkerOutput {
     func workerDidReceiveRecentChat(_ chat: Chat) {
         data.update(chat)
         tableView.reloadData()
+        
+        worker.listenOnActiveStatus(for: chat)
+        worker.listenOnTypingStatus(for: chat)
     }
     
     func workerDidChangeActiveStatus(for participantID: String, isActive: Bool) {
-        let rows = data.updateActiveStatus(for: participantID, isActive: isActive)
-        
-        guard !rows.isEmpty else {
-            return
-        }
-        
-        tableView.reloadRows(at: rows.map({ IndexPath(row: $0, section: 0) }), with: .none)
+        let _ = data.updateActiveStatus(for: participantID, isActive: isActive)
+        tableView.reloadData()
     }
     
     func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool) {
-        guard let row = data.updateTypingStatus(for: chatID, participantID: participantID, isTyping: isTyping) else {
-            return
-        }
-        
-        tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+        let _ = data.updateTypingStatus(for: chatID, participantID: participantID, isTyping: isTyping)
+        tableView.reloadData()
     }
 }
