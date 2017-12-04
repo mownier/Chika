@@ -110,6 +110,18 @@ class InboxScene: UITableViewController {
         tableView.reloadRows(at: [indexPath], with: .fade)
         currentItem = item
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let chat = data.item(at: indexPath.row)?.chat
+        worker.listenOnActiveStatus(for: chat)
+        worker.listenOnTypingStatus(for: chat)
+    }
+    
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let chat = data.item(at: indexPath.row)?.chat
+        worker.unlistenOnActiveStatus(for: chat)
+        worker.unlistenOnTypingStatus(for: chat)
+    }
 }
 
 extension InboxScene: InboxSceneWorkerOutput {
@@ -119,15 +131,33 @@ extension InboxScene: InboxSceneWorkerOutput {
         data.append(list: chats)
         tableView.reloadData()
         
-        worker.listenForInboxUpdates()
+        worker.listenForRecentChat()
     }
     
     func workerDidFetchWithError(_ error: Error) {
         tableView.reloadData()
     }
     
-    func workerDidUpdateInbox(chat: Chat) {
+    func workerDidReceiveRecentChat(_ chat: Chat) {
         data.update(chat)
         tableView.reloadData()
+    }
+    
+    func workerDidChangeActiveStatus(for participantID: String, isActive: Bool) {
+        let rows = data.updateActiveStatus(for: participantID, isActive: isActive)
+        
+        guard !rows.isEmpty else {
+            return
+        }
+        
+        tableView.reloadRows(at: rows.map({ IndexPath(row: $0, section: 0) }), with: .none)
+    }
+    
+    func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool) {
+        guard let row = data.updateTypingStatus(for: chatID, participantID: participantID, isTyping: isTyping) else {
+            return
+        }
+        
+        tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
     }
 }
