@@ -8,9 +8,14 @@
 
 @testable import Chika
 
-class ChatMessageRemoteListenerMock: ChatMessageRemoteListener {
+class RecentMessageRemoteListenerMock: RecentMessageRemoteListener {
     
-    func listen(callback: @escaping (Message) -> Void) {
-        
+    func listen(for chatID: String, callback: @escaping (Message) -> Void) -> Bool {
+        return true
+    }
+    
+    func unlisten(for chatID: String) -> Bool {
+        return true
     }
 }
+

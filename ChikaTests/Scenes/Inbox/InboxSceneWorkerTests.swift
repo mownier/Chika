@@ -11,15 +11,6 @@ import XCTest
 
 class InboxSceneWorkerTests: XCTestCase {
     
-    // CONTEXT: Constructor should
-    //   - have an empty personID
-    // GIVEN:
-    //   - user is nil
-    func testInitA() {
-        let worker = InboxScene.Worker(user: nil)
-        XCTAssertTrue(worker.personID.isEmpty)
-    }
-    
     // CONTEXT: fetchInbox function should
     //   - call the workerDidFetchWithError function of
     //     output
@@ -30,8 +21,11 @@ class InboxSceneWorkerTests: XCTestCase {
     func testFetchInboxA() {
         let personID = "person:1"
         let service = ChatRemoteServiceMock()
-        let listener = InboxRemoteListenerMock()
-        let worker = InboxScene.Worker(personID: personID, service: service, listener: listener)
+        let recentChat = RecentChatRemoteListenerMock()
+        let presence = PresenceRemoteListenerMock()
+        let typingStatus = TypingStatusRemoteListenerMock()
+        let listener = InboxScene.Worker.Listener(recentChat: recentChat, presence: presence, typingStatus: typingStatus)
+        let worker = InboxScene.Worker(meID: personID, service: service, listener: listener)
         let output = InboxSceneWorkerOutputMock()
         service.isForcedError = true
         worker.output = output
@@ -49,8 +43,11 @@ class InboxSceneWorkerTests: XCTestCase {
     func testFetchInboxB() {
         let personID = "person:1"
         let service = ChatRemoteServiceMock()
-        let listener = InboxRemoteListenerMock()
-        let worker = InboxScene.Worker(personID: personID, service: service, listener: listener)
+        let recentChat = RecentChatRemoteListenerMock()
+        let presence = PresenceRemoteListenerMock()
+        let typingStatus = TypingStatusRemoteListenerMock()
+        let listener = InboxScene.Worker.Listener(recentChat: recentChat, presence: presence, typingStatus: typingStatus)
+        let worker = InboxScene.Worker(meID: personID, service: service, listener: listener)
         let output = InboxSceneWorkerOutputMock()
         var chat = Chat()
         chat.id = "chat:1"

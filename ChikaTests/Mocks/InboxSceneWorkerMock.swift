@@ -11,7 +11,27 @@ import UIKit
 
 class InboxSceneWorkerMock: InboxSceneWorker {
     
-    func listenForInboxUpdates() {
+    func listenOnRecentChat() {
+        
+    }
+    
+    func listenOnActiveStatus(for chat: Chat?) {
+        
+    }
+    
+    func listenOnTypingStatus(for chat: Chat?) {
+        
+    }
+    
+    func unlistenOnRecentChat() {
+        
+    }
+    
+    func unlistenOnActiveStatus(for chat: Chat?) {
+        
+    }
+    
+    func unlistenOnTypingStatus(for chat: Chat?) {
         
     }
     

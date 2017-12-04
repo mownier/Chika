@@ -21,7 +21,15 @@ class InboxSceneWorkerOutputMock: InboxSceneWorkerOutput {
         self.error = error
     }
     
-    func workerDidUpdateInbox(chat: Chat) {
+    func workerDidReceiveRecentChat(_ chat: Chat) {
+        
+    }
+    
+    func workerDidChangeActiveStatus(for participantID: String, isActive: Bool) {
+        
+    }
+    
+    func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool) {
         
     }
 }
