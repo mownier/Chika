@@ -11,8 +11,11 @@ protocol ConvoSceneWorker: class {
     func fetchNewMessages() -> Bool
     func fetchNextMessages() -> Bool
     func sendMessage(_ content: String) -> Bool
-    func listenForUpdates()
-    func changeTypingStatus(isTyping: Bool, forced: Bool)
+    func listenOnRecentMessage()
+    func listenOnTypingStatus()
+    func unlistenOnTypingStatus()
+    func unlisteOnRecentMessage()
+    func changeTypingStatus(_ status: Bool)
 }
 
 protocol ConvoSceneWorkerOutput: class {
@@ -23,7 +26,7 @@ protocol ConvoSceneWorkerOutput: class {
     func workerDidSend(message: Message)
     func workerDidSendWithError(_ error: Error)
     func workerDidUpdateConvo(message: Message)
-    func workerDidUpdateTypingStatus(for person: Person, isTyping: Bool)
+    func workerDidUpdateTypingStatus(for personID: String, isTyping: Bool)
 }
 
 extension ConvoScene {
@@ -32,7 +35,7 @@ extension ConvoScene {
         
         struct Listener {
             
-            var chatMessage: ChatMessageRemoteListener
+            var recentMessage: ChatMessageRemoteListener
             var typingStatus: TypingStatusRemoteListener
         }
         
@@ -50,9 +53,8 @@ extension ConvoScene {
         var offset: Double?
         var limit: UInt
         var isFetching: Bool
-        var isListening: Bool
-        var isChangingTypingStatus: Bool
         var isTyping: Bool
+        var isChangingTypingStatus: Bool
         
         init(chatID: String, participantIDs: [String], service: ChatRemoteService, listener: Listener, writer: TypingStatusRemoteWriter, limit: UInt) {
             self.chatID = chatID
@@ -63,53 +65,71 @@ extension ConvoScene {
             self.offset = 0
             self.limit = limit
             self.isFetching = false
-            self.isListening = false
             self.isTyping = false
             self.isChangingTypingStatus = false
         }
         
         convenience init(chatID: String, participantIDs: [String]) {
             let service = ChatRemoteServiceProvider()
-            let chatMessage = ChatMessageRemoteListenerProvider(chatID: chatID)
-            let typingStatus = TypingStatusRemoteListenerProvider(chatID: chatID)
-            let listener = Listener(chatMessage: chatMessage, typingStatus: typingStatus)
+            let recentMessage = ChatMessageRemoteListenerProvider()
+            let typingStatus = TypingStatusRemoteListenerProvider()
+            let listener = Listener(recentMessage: recentMessage, typingStatus: typingStatus)
             let writer = TypingStatusRemoteWriterProvider()
             let limit: UInt = 50
             self.init(chatID: chatID, participantIDs: participantIDs, service: service, listener: listener, writer: writer, limit: limit)
         }
         
-        func changeTypingStatus(isTyping typing: Bool, forced: Bool) {
-            guard (!isChangingTypingStatus && isTyping != typing) || forced else {
+        func listenOnTypingStatus() {
+            guard !chatID.isEmpty else {
+                return
+            }
+            
+            let _ = listener.typingStatus.listen(for: chatID) { [weak self] personID, isTyping in
+                self?.output?.workerDidUpdateTypingStatus(for: personID, isTyping: isTyping)
+            }
+        }
+        
+        func unlistenOnTypingStatus() {
+            guard !chatID.isEmpty else {
+                return
+            }
+            
+            let _ = listener.typingStatus.unlisten(for: chatID)
+        }
+        
+        func listenOnRecentMessage() {
+            guard !chatID.isEmpty else {
+                return
+            }
+            
+            let _ = listener.recentMessage.listen(for: chatID) { [weak self] message in
+                self?.output?.workerDidUpdateConvo(message: message)
+            }
+        }
+        
+        func unlisteOnRecentMessage() {
+            guard !chatID.isEmpty else {
+                return
+            }
+            
+            let _ = listener.recentMessage.unlisten(for: chatID)
+        }
+        
+        func changeTypingStatus(_ status: Bool) {
+            guard !chatID.isEmpty, !isChangingTypingStatus, isTyping != status else {
                 return
             }
             
             isChangingTypingStatus = true
-            writer.changeTypingStatus(typing, for: chatID) { [weak self] result in
+            writer.changeTypingStatus(status, for: chatID) { [weak self] result in
                 switch result {
                 case .ok:
-                    self?.isTyping = typing
+                    self?.isTyping = status
                 
                 default:
                     break
                 }
-                
                 self?.isChangingTypingStatus = false
-            }
-        }
-        
-        func listenForUpdates() {
-            guard !isListening, !chatID.isEmpty else {
-                return
-            }
-            
-            isListening = true
-            
-            listener.chatMessage.listen { [weak self] message in
-                self?.output?.workerDidUpdateConvo(message: message)
-            }
-            
-            listener.typingStatus.listen { [weak self] person, isTyping in
-                self?.output?.workerDidUpdateTypingStatus(for: person, isTyping: isTyping)
             }
         }
         

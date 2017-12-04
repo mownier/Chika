@@ -69,9 +69,9 @@ class ConvoScene: UIViewController {
     
     }
     
-    var typingStatus: [Person: Bool] = [:] {
+    var typingStatus: [String: Bool] = [:] {
         didSet {
-            let typingPersons: [Person] = typingStatus.filter({ $0.value }).flatMap({ $0.key })
+            let typingPersons: [Person] = chat.participants.filter({ typingStatus[$0.id] ?? false })
             
             guard typingPersons.count > 0 else {
                 typingStatusText = ""
@@ -200,20 +200,22 @@ class ConvoScene: UIViewController {
         navigationItem.title = chat.title
         
         let _ = worker.fetchNewMessages()
-        worker.listenForUpdates()
-        worker.changeTypingStatus(isTyping: false, forced: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         addKeyboardObserer()
+        worker.listenOnRecentMessage()
+        worker.listenOnTypingStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         removeKeyboardObserver()
+        worker.unlisteOnRecentMessage()
+        worker.unlistenOnTypingStatus()
     }
     
     override func viewDidLayoutSubviews() {
@@ -498,12 +500,12 @@ extension ConvoScene: ConvoSceneWorkerOutput {
         }
     }
     
-    func workerDidUpdateTypingStatus(for person: Person, isTyping: Bool) {
+    func workerDidUpdateTypingStatus(for personID: String, isTyping: Bool) {
         if isTyping {
-            typingStatus[person] = isTyping
-        
+            typingStatus[personID] = isTyping
+            
         } else {
-            typingStatus.removeValue(forKey: person)
+            typingStatus.removeValue(forKey: personID)
         }
     }
 }
@@ -515,7 +517,7 @@ extension ConvoScene: ConvoSceneInteraction {
     }
     
     func didTapSend() {
-        worker.changeTypingStatus(isTyping: false, forced: true)
+        worker.changeTypingStatus(false)
         let _ = worker.sendMessage(composerView.contentInput.text)
         composerView.updateContent("")
         composerView.contentInput.resignFirstResponder()
@@ -529,6 +531,6 @@ extension ConvoScene: ConvoSceneInteraction {
 extension ConvoScene: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-        worker.changeTypingStatus(isTyping: !textView.text.isEmpty, forced: false)
+        worker.changeTypingStatus(!textView.text.isEmpty)
     }
 }
