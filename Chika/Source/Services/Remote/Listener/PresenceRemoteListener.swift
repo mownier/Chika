@@ -7,6 +7,7 @@
 //
 
 import FirebaseDatabase
+import FirebaseAuth
 
 protocol PresenceRemoteListener: class {
 
@@ -17,40 +18,54 @@ protocol PresenceRemoteListener: class {
 class PresenceRemoteListenerProvider: PresenceRemoteListener {
     
     var database: Database
-    var info: [String: UInt]
+    var handles: [String: UInt]
+    var meID: String
     
-    init(database: Database = Database.database()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database()) {
         self.database = database
-        self.info = [:]
+        self.handles = [:]
+        self.meID = meID
     }
     
     func listen(personID: String, callback: @escaping (Bool) -> Void) -> Bool {
-        guard !personID.isEmpty else {
+        guard !personID.isEmpty, personID != meID, handles[personID] == nil else {
             return false
         }
         
+        handles[personID] = 0
+        
         let rootRef = database.reference()
-        let ref = rootRef.child("person:presence/\(personID)")
-        let handle = ref.observe(.childChanged) { snapshot in
-            guard snapshot.key == "is:active", let isActive = snapshot.value as? Bool else {
+        let ref = rootRef.child("person:presence/\(personID)/is:active")
+        
+        rootRef.child("person:contacts/\(meID)/\(personID)").observeSingleEvent(of: .value) { [weak self] snapshot in
+            guard snapshot.exists() else {
+                self?.handles.removeValue(forKey: personID)
                 return
             }
             
-            callback(isActive)
+            let handle = ref.observe(.value) { snapshot in
+                guard snapshot.exists(), snapshot.key == "is:active", let isActive = snapshot.value as? Bool else {
+                    return
+                }
+                
+                callback(isActive)
+            }
+            
+            self?.handles[personID] = handle
         }
         
-        info[personID] = handle
         return true
     }
     
     func unlisten(personID: String) -> Bool {
-        guard !personID.isEmpty, let handle = info[personID] else {
+        guard !personID.isEmpty, let handle = handles.removeValue(forKey: personID), handle != 0  else {
             return false
         }
         
         let rootRef = database.reference()
         let ref = rootRef.child("person:presence/\(personID)")
         ref.removeObserver(withHandle: handle)
+        
         return true
     }
 }

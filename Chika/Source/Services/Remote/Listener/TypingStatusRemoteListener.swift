@@ -11,34 +11,45 @@ import FirebaseAuth
 
 protocol TypingStatusRemoteListener: class {
 
-    func listen(callback: @escaping (Person, Bool) -> Void)
+    func listen(for chatID: String, callback: @escaping (String, Bool) -> Void) -> Bool
+    func unlisten(for chatID: String) -> Bool
 }
 
 class TypingStatusRemoteListenerProvider: TypingStatusRemoteListener {
     
     var meID: String
-    var chatID: String
+    var handles: [String: UInt]
     var database: Database
-    var personsQuery: PersonsRemoteQuery
     
-    init(chatID: String, meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider()) {
-        self.chatID = chatID
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database()) {
+        self.handles = [:]
         self.meID = meID
         self.database = database
-        self.personsQuery = personsQuery
     }
     
-    func listen(callback: @escaping (Person, Bool) -> Void) {
+    func unlisten(for chatID: String) -> Bool {
+        guard !chatID.isEmpty, let handle = handles[chatID] else {
+            return false
+        }
+        
+        let rootRef = database.reference()
+        let ref = rootRef.child("chat:typing:status/\(chatID)")
+        ref.child(meID).setValue(false) { _, _ in }
+        ref.removeObserver(withHandle: handle)
+        return true
+    }
+    
+    func listen(for chatID: String, callback: @escaping (String, Bool) -> Void) -> Bool {
         guard !chatID.isEmpty else {
-            return
+            return false
         }
         
         let meID = self.meID
-        let personsQuery = self.personsQuery
         let rootRef = database.reference()
         let ref = rootRef.child("chat:typing:status/\(chatID)")
         
-        ref.observe(.childChanged) { snapshot in
+        ref.child(meID).onDisconnectSetValue(false)
+        let handle = ref.observe(.childChanged) { snapshot in
             guard snapshot.exists() else {
                 return
             }
@@ -51,13 +62,10 @@ class TypingStatusRemoteListenerProvider: TypingStatusRemoteListener {
             
             let isTyping = snapshot.value as? Bool ?? false
             
-            personsQuery.getPersons(for: [personKey]) { persons in
-                guard persons.count > 0 else {
-                    return
-                }
-                
-                callback(persons[0], isTyping)
-            }
+            callback(personKey, isTyping)
         }
+        handles[chatID] = handle
+        
+        return true
     }
 }
