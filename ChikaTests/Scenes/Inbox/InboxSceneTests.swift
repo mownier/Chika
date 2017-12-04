@@ -67,6 +67,7 @@ class InboxSceneTests: XCTestCase {
     //   - an initial Chat array appended to data
     //   - a tableView mock
     func testWorkerDidFetchA() {
+        let worker = InboxSceneWorkerMock()
         let scene = InboxScene()
         let tableView = TableViewMock()
         var chat1 = Chat()
@@ -81,6 +82,7 @@ class InboxSceneTests: XCTestCase {
         let outputChats = [chat3, chat4]
         scene.data.append(list: initialChats)
         scene.tableView = tableView
+        scene.worker = worker
         scene.workerDidFetch(chats: outputChats)
         XCTAssertEqual(scene.data.itemCount, 2)
         XCTAssertEqual(scene.data.item(at: 0)?.chat.id, "chat:3")
