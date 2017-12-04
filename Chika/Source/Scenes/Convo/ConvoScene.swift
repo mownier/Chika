@@ -231,7 +231,7 @@ class ConvoScene: UIViewController {
         
         rect.size.width = 200
         rect.size.height = 44
-        rect.origin.y = tableView.bounds.height - rect.height - 24
+        rect.origin.y = composerView.isKeyboardShown ? newMessageCountLabel.frame.origin.y : tableView.bounds.height - rect.height - 24
         rect.origin.x = (tableView.bounds.width - rect.width) / 2
         newMessageCountLabel.frame = rect
         newMessageCountLabel.layer.cornerRadius = rect.height / 2
@@ -241,37 +241,37 @@ class ConvoScene: UIViewController {
     }
     
     func scrollToBottom(_ animated: Bool = true) {
-        let section: Int = 0
-        
-        guard data.messageCount(in: section) > 0 else {
-            return
-        }
-        
         let indexPath: IndexPath
-        
+
         if isTypingViewHidden {
             indexPath = IndexPath(row: data.messageCount(in: 0) - 1, section: 0)
-            
+
         } else {
             indexPath = IndexPath(row: 0, section: 1)
         }
-        
+
         guard animated else {
             tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
             return
         }
-        
+
         DispatchQueue.main.async { [weak self] in
             guard let scene = self else {
                 return
             }
-            
+
             scene.tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
         }
     }
     
     func showTypingView() {
-        tableView.reloadData()
+        if tableView.numberOfSections > 1 {
+            tableView.reloadSections([1], with: .none)
+        
+        } else {
+            tableView.reloadData()
+        }
+        
         if isAtBottom {
             scrollToBottom()
         }
@@ -296,6 +296,7 @@ class ConvoScene: UIViewController {
         
         prevOriginY = composerView.frame.origin.y
         prevBottomOffset = tableView.contentInset.bottom
+        prevCountOriginY = newMessageCountLabel.frame.origin.y
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] _ in
             guard let this = self else { return }
@@ -311,6 +312,7 @@ class ConvoScene: UIViewController {
                     options: UIViewAnimationOptions(rawValue: 7 << 16),
                     animations: {
                         this.composerView.frame.origin.y = newY
+                        this.newMessageCountLabel.frame.origin.y = newY - this.newMessageCountLabel.frame.height - 24
                 }) { _ in }
             }
             
@@ -337,9 +339,18 @@ class ConvoScene: UIViewController {
         timer?.invalidate()
         timer = nil
         
-        composerView.frame.origin.y = prevOriginY
-        tableView.contentInset.bottom = prevBottomOffset
-        tableView.scrollIndicatorInsets.bottom = prevBottomOffset
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: UIViewAnimationOptions(rawValue: 7 << 16),
+            animations: { [weak self] in
+                guard let this = self else { return }
+                this.newMessageCountLabel.frame.origin.y = this.prevCountOriginY
+                this.composerView.frame.origin.y = this.prevOriginY
+                this.tableView.contentInset.bottom = this.prevBottomOffset
+                this.tableView.scrollIndicatorInsets.bottom = this.prevBottomOffset
+        }) { _ in }
+
     }
     
     func addKeyboardObserer() {
@@ -354,6 +365,7 @@ class ConvoScene: UIViewController {
     
     var prevOriginY: CGFloat = 0
     var prevBottomOffset: CGFloat = 0
+    var prevCountOriginY: CGFloat = 0
     var timer: Timer?
 }
 
