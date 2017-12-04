@@ -14,16 +14,6 @@ struct Chat {
     var title: String
     var creator: String
     
-    var hasOnlineParticipants: Bool {        
-        for person in participants {
-            if person.isOnline {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
     init() {
         id = ""
         title = ""
