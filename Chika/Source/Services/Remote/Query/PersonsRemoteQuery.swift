@@ -76,7 +76,6 @@ class PersonsRemoteQueryProvider: PersonsRemoteQuery {
                 person.id = info["id"] as? String ?? ""
                 person.name = info["name"] as? String ?? ""
                 person.avatarURL = info["avatar_url"] as? String ?? ""
-                person.isOnline = info["is_online"] as? Bool ?? false
                 
                 persons.append(person)
                 personCounter += 1
