@@ -11,13 +11,11 @@ struct Person {
     var id: String
     var name: String
     var avatarURL: String
-    var isOnline: Bool
     
     init() {
         id = ""
         name = ""
         avatarURL = ""
-        isOnline = false
     }
 }
 
