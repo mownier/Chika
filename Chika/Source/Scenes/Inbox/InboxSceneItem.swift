@@ -9,12 +9,18 @@
 struct InboxSceneItem {
     
     var chat: Chat
-    var isOnline: Bool
+    var isSomeoneOnline: Bool
+    var typingText: String
     var unreadMessageCount: UInt
+    var active: [String: Bool]
+    var typing: [String: String]
     
     init(chat: Chat) {
         self.chat = chat
-        self.isOnline = false
+        self.isSomeoneOnline = false
         self.unreadMessageCount = 0
+        self.typingText = ""
+        self.active = [:]
+        self.typing = [:]
     }
 }
