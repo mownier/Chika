@@ -35,7 +35,7 @@ extension ConvoScene {
         
         struct Listener {
             
-            var recentMessage: ChatMessageRemoteListener
+            var recentMessage: RecentMessageRemoteListener
             var typingStatus: TypingStatusRemoteListener
         }
         
@@ -71,7 +71,7 @@ extension ConvoScene {
         
         convenience init(chatID: String, participantIDs: [String]) {
             let service = ChatRemoteServiceProvider()
-            let recentMessage = ChatMessageRemoteListenerProvider()
+            let recentMessage = RecentMessageRemoteListenerProvider()
             let typingStatus = TypingStatusRemoteListenerProvider()
             let listener = Listener(recentMessage: recentMessage, typingStatus: typingStatus)
             let writer = TypingStatusRemoteWriterProvider()

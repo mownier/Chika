@@ -1,5 +1,5 @@
 //
-//  ChatMessageRemoteListener.swift
+//  RecentMessageRemoteListener.swift
 //  Chika
 //
 //  Created by Mounir Ybanez on 11/27/17.
@@ -9,13 +9,13 @@
 import FirebaseAuth
 import FirebaseDatabase
 
-protocol ChatMessageRemoteListener: class {
+protocol RecentMessageRemoteListener: class {
 
     func listen(for chatID: String, callback: @escaping (Message) -> Void) -> Bool
     func unlisten(for chatID: String) -> Bool
 }
 
-class ChatMessageRemoteListenerProvider: ChatMessageRemoteListener {
+class RecentMessageRemoteListenerProvider: RecentMessageRemoteListener {
     
     var handles: [String: UInt]
     var database: Database

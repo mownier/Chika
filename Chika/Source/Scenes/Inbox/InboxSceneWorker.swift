@@ -10,9 +10,10 @@ import FirebaseAuth
 
 protocol InboxSceneWorker: class {
 
-    func listenForRecentChat()
+    func listenOnRecentChat()
     func listenOnActiveStatus(for chat: Chat?)
     func listenOnTypingStatus(for chat: Chat?)
+    func unlistenOnRecentChat()
     func unlistenOnActiveStatus(for chat: Chat?)
     func unlistenOnTypingStatus(for chat: Chat?)
     func fetchInbox()
@@ -33,7 +34,7 @@ extension InboxScene {
         
         struct Listener {
             
-            var inbox: InboxRemoteListener
+            var recentChat: RecentChatRemoteListener
             var presence: PresenceRemoteListener
             var typingStatus: TypingStatusRemoteListener
         }
@@ -51,10 +52,10 @@ extension InboxScene {
         
         convenience init(meID: String = Auth.auth().currentUser?.uid ?? "") {
             let service = ChatRemoteServiceProvider()
-            let inbox = InboxRemoteListenerProvider(meID: meID)
+            let recentChat = RecentChatRemoteListenerProvider(meID: meID)
             let presence = PresenceRemoteListenerProvider()
             let typingStatus = TypingStatusRemoteListenerProvider()
-            let listener = Listener(inbox: inbox, presence: presence, typingStatus: typingStatus)
+            let listener = Listener(recentChat: recentChat, presence: presence, typingStatus: typingStatus)
             self.init(meID: meID, service: service, listener: listener)
         }
         
@@ -70,8 +71,8 @@ extension InboxScene {
             }
         }
         
-        func listenForRecentChat() {
-            listener.inbox.listenForRecentChat { [weak self] chat in
+        func listenOnRecentChat() {
+            let _ = listener.recentChat.listen { [weak self] chat in
                 self?.output?.workerDidReceiveRecentChat(chat)
             }
         }
@@ -96,6 +97,10 @@ extension InboxScene {
             let _ = listener.typingStatus.listen(for: chat.id) { [weak self] personID, isTyping in
                 self?.output?.workerDidChangeTypingStatus(for: chat.id, participantID: personID, isTyping: isTyping)
             }
+        }
+        
+        func unlistenOnRecentChat() {
+            let _ = listener.recentChat.unlisten()
         }
         
         func unlistenOnActiveStatus(for chat: Chat?) {
