@@ -36,11 +36,11 @@ extension InboxScene {
             cell.onlineStatusView.backgroundColor = theme.onlineStatusColor
             
             cell.chatTitleLabel.text = item.chat.title
-            cell.chatRecentMessageLabel.text = item.chat.recent.content
+            cell.chatRecentMessageLabel.text = item.typingText.isEmpty ? item.chat.recent.content : item.typingText
             cell.avatarView.style = InboxSceneCellAvatar.Style(count: UInt(item.chat.participants.count))
             cell.timeLabel.text = "\((item.chat.recent.date as NSDate).timeAgoSinceNow()!)".lowercased()
             cell.unreadMessageCountLabel.text = item.unreadMessageCount == 0 ? "" : "\(item.unreadMessageCount)"
-            cell.onlineStatusView.isHidden = !item.isOnline
+            cell.onlineStatusView.isHidden = !item.isSomeoneOnline
             
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
