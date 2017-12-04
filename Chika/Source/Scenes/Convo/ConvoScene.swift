@@ -200,22 +200,21 @@ class ConvoScene: UIViewController {
         navigationItem.title = chat.title
         
         let _ = worker.fetchNewMessages()
+        
+        worker.listenOnRecentMessage()
+        worker.listenOnTypingStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         addKeyboardObserer()
-        worker.listenOnRecentMessage()
-        worker.listenOnTypingStatus()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         removeKeyboardObserver()
-        worker.unlisteOnRecentMessage()
-        worker.unlistenOnTypingStatus()
     }
     
     override func viewDidLayoutSubviews() {
@@ -513,6 +512,8 @@ extension ConvoScene: ConvoSceneWorkerOutput {
 extension ConvoScene: ConvoSceneInteraction {
     
     func didTapBack() {
+        worker.unlisteOnRecentMessage()
+        worker.unlistenOnTypingStatus()
         let _ = waypoint.exit()
     }
     
