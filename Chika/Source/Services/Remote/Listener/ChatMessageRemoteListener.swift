@@ -11,26 +11,27 @@ import FirebaseDatabase
 
 protocol ChatMessageRemoteListener: class {
 
-    func listen(callback: @escaping (Message) -> Void)
+    func listen(for chatID: String, callback: @escaping (Message) -> Void) -> Bool
+    func unlisten(for chatID: String) -> Bool
 }
 
 class ChatMessageRemoteListenerProvider: ChatMessageRemoteListener {
     
-    var chatID: String
+    var handles: [String: UInt]
     var database: Database
     var messagesQuery: MessagesRemoteQuery
     var meID: String
     
-    init(chatID: String, meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), messagesQuery: MessagesRemoteQuery = MessagesRemoteQueryProvider()) {
-        self.chatID = chatID
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), messagesQuery: MessagesRemoteQuery = MessagesRemoteQueryProvider()) {
+        self.handles = [:]
         self.meID = meID
         self.database = database
         self.messagesQuery = messagesQuery
     }
     
-    func listen(callback: @escaping (Message) -> Void) {
-        guard !chatID.isEmpty else {
-            return
+    func listen(for chatID: String, callback: @escaping (Message) -> Void) -> Bool {
+        guard !chatID.isEmpty, handles[chatID] == nil else {
+            return false
         }
         
         let rootRef = database.reference()
@@ -38,7 +39,7 @@ class ChatMessageRemoteListenerProvider: ChatMessageRemoteListener {
         let meID = self.meID
         var isCallbackEnabled = false
         
-        rootRef.child("chat:messages/\(chatID)").queryOrdered(byChild: "created_on").queryLimited(toLast: 1).observe(.childAdded) { snapshot in
+        let handle = rootRef.child("chat:messages/\(chatID)").queryOrdered(byChild: "created_on").queryLimited(toLast: 1).observe(.childAdded) { snapshot in
             guard isCallbackEnabled, snapshot.exists() else {
                 isCallbackEnabled = true
                 return
@@ -52,5 +53,17 @@ class ChatMessageRemoteListenerProvider: ChatMessageRemoteListener {
                 callback(messages[0])
             }
         }
+        
+        handles[chatID] = handle
+        return true
+    }
+    
+    func unlisten(for chatID: String) -> Bool {
+        guard !chatID.isEmpty, handles[chatID] == nil else {
+            return false
+        }
+        
+        handles.removeValue(forKey: chatID)
+        return true
     }
 }
