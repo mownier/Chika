@@ -16,6 +16,8 @@ protocol InboxSceneData: class {
     func append(list: [Chat])
     func update(_ chat: Chat)
     func updateMessageCount(for item: InboxSceneItem)
+    func updateActiveStatus(for participantID: String, isActive: Bool) -> [Int]
+    func updateTypingStatus(for chatID: String, participantID: String, isTyping: Bool) -> Int?
     func removeAll()
 }
 
@@ -68,6 +70,73 @@ extension InboxScene {
             }
             
             items[index].unreadMessageCount = item.unreadMessageCount
+        }
+        
+        func updateActiveStatus(for participantID: String, isActive: Bool) -> [Int] {
+            let indexes: [Int] = items.enumerated().filter({ $1.chat.participants.map({ $0.id }).contains(participantID) }).map({ $0.offset })
+            
+            guard !indexes.isEmpty else {
+                return []
+            }
+            
+            for index in indexes {
+                if isActive {
+                    items[index].active[participantID] = isActive
+
+                } else {
+                    items[index].active.removeValue(forKey: participantID)
+                }
+
+                items[index].isSomeoneOnline = !items[index].active.isEmpty
+            }
+
+            return indexes
+        }
+        
+        func updateTypingStatus(for chatID: String, participantID: String, isTyping: Bool) -> Int? {
+            guard let index = items.index(where: { $0.chat.id == chatID }) else {
+                return nil
+            }
+            
+            guard let participantIndex = items[index].chat.participants.index(where: { $0.id == participantID }) else {
+                return nil
+            }
+            
+            let participant = items[index].chat.participants[participantIndex]
+            
+            if isTyping {
+                items[index].typing[participantID] = participant.name
+                
+            } else {
+                items[index].typing.removeValue(forKey: participant.id)
+            }
+            
+            guard !items[index].typing.isEmpty else {
+                items[index].typingText = ""
+                return index
+            }
+            
+            var typingText = " are typing..."
+            let count = items[index].typing.count
+            if count == 1 {
+                typingText = " is typing..."
+            }
+            
+            var personText = ""
+            var i = 0
+            for (_, value) in items[index].typing {
+                if i != 0 && i == count - 1 {
+                    personText.append(" and ")
+                    
+                } else if i > 0 {
+                    personText.append(", ")
+                }
+                personText.append(value)
+                i += 1
+            }
+            
+            items[index].typingText = "\(personText) \(typingText)"
+            return index
         }
     }
 }
