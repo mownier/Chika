@@ -29,6 +29,7 @@
 		482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */; };
 		482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */; };
 		482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */; };
+		483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483873911FD667E100CAC325 /* ContactRemoteListener.swift */; };
 		483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */; };
 		483D0C651FBD74EC004BDB3F /* HomeSceneFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */; };
 		483D0C671FBD761D004BDB3F /* HomeSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */; };
@@ -102,6 +103,15 @@
 		488730E01FC2CD89001F9876 /* PersonRemoteServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */; };
 		488730E21FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */; };
 		488730E41FC2CF96001F9876 /* FirebaseDatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */; };
+		488D87CD1FD6405A00E690BD /* ContactsSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */; };
+		488D87CF1FD6412200E690BD /* ContactsSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87CE1FD6412200E690BD /* ContactsSceneData.swift */; };
+		488D87D11FD6414E00E690BD /* ContactsSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */; };
+		488D87D31FD6418D00E690BD /* ContactsSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D21FD6418D00E690BD /* ContactsSceneSetup.swift */; };
+		488D87D51FD641B300E690BD /* ContactsSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D41FD641B300E690BD /* ContactsSceneCellFactory.swift */; };
+		488D87D71FD641F400E690BD /* ContactsSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D61FD641F400E690BD /* ContactsSceneFlow.swift */; };
+		488D87D91FD6432100E690BD /* ContactRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D81FD6432100E690BD /* ContactRemoteService.swift */; };
+		488D87DB1FD643E800E690BD /* ContactsRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */; };
+		488D87DD1FD648B800E690BD /* ContactsSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */; };
 		48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */; };
 		48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EDF1FBFD6B4008F090F /* SignInUITests.swift */; };
 		48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */; };
@@ -130,6 +140,10 @@
 		489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */; };
 		489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */; };
 		489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */; };
+		48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */; };
+		48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */; };
+		48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */; };
+		48A693111FD5A20500ED4024 /* ContactsSceneSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */; };
 		48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */; };
 		48A743B81FC7F0A90019EDD8 /* ConvoSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */; };
 		48A743BA1FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B91FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift */; };
@@ -210,6 +224,7 @@
 		482FDF0E1FBFFA6500ABA372 /* InitialSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneWaypoint.swift; sourceTree = "<group>"; };
 		482FDF101FBFFAA700ABA372 /* InitialSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFactory.swift; sourceTree = "<group>"; };
 		482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusBarFrameGetter.swift; sourceTree = "<group>"; };
+		483873911FD667E100CAC325 /* ContactRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteListener.swift; sourceTree = "<group>"; };
 		483D0C611FBD736A004BDB3F /* SignInSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C641FBD74EC004BDB3F /* HomeSceneFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactoryTests.swift; sourceTree = "<group>"; };
 		483D0C661FBD761D004BDB3F /* HomeSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -289,6 +304,15 @@
 		488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceMock.swift; sourceTree = "<group>"; };
 		488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseMock.swift; sourceTree = "<group>"; };
+		488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneTheme.swift; sourceTree = "<group>"; };
+		488D87CE1FD6412200E690BD /* ContactsSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneData.swift; sourceTree = "<group>"; };
+		488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneWorker.swift; sourceTree = "<group>"; };
+		488D87D21FD6418D00E690BD /* ContactsSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneSetup.swift; sourceTree = "<group>"; };
+		488D87D41FD641B300E690BD /* ContactsSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneCellFactory.swift; sourceTree = "<group>"; };
+		488D87D61FD641F400E690BD /* ContactsSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneFlow.swift; sourceTree = "<group>"; };
+		488D87D81FD6432100E690BD /* ContactRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteService.swift; sourceTree = "<group>"; };
+		488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsRemoteQuery.swift; sourceTree = "<group>"; };
+		488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneItem.swift; sourceTree = "<group>"; };
 		48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMock.swift; sourceTree = "<group>"; };
 		48920EDF1FBFD6B4008F090F /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
 		48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneExitWaypointTests.swift; sourceTree = "<group>"; };
@@ -317,6 +341,10 @@
 		489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneFlowMock.swift; sourceTree = "<group>"; };
 		489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneWorkerOutputMock.swift; sourceTree = "<group>"; };
 		489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneRootWaypointTests.swift; sourceTree = "<group>"; };
+		48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScene.swift; sourceTree = "<group>"; };
+		48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneCell.swift; sourceTree = "<group>"; };
+		48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneFactory.swift; sourceTree = "<group>"; };
+		48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneSearchView.swift; sourceTree = "<group>"; };
 		48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneFlow.swift; sourceTree = "<group>"; };
 		48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneCell.swift; sourceTree = "<group>"; };
 		48A743B91FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneCellManager.swift; sourceTree = "<group>"; };
@@ -394,7 +422,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				487766FC1FC6A89A008E865F /* Chat */,
+				487766FC1FC6A89A008E865F /* Contacts */,
 				487766FD1FC6ABD5008E865F /* Convo */,
 				48E019971FBD5D93008D94DE /* Home */,
 				4879B48E1FC28DC300611DA3 /* Inbox */,
@@ -507,11 +535,22 @@
 			path = ChikaUITests;
 			sourceTree = "<group>";
 		};
-		487766FC1FC6A89A008E865F /* Chat */ = {
+		487766FC1FC6A89A008E865F /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */,
+				48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */,
+				488D87D41FD641B300E690BD /* ContactsSceneCellFactory.swift */,
+				488D87CE1FD6412200E690BD /* ContactsSceneData.swift */,
+				48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */,
+				488D87D61FD641F400E690BD /* ContactsSceneFlow.swift */,
+				488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */,
+				48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */,
+				488D87D21FD6418D00E690BD /* ContactsSceneSetup.swift */,
+				488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */,
+				488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */,
 			);
-			path = Chat;
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		487766FD1FC6ABD5008E865F /* Convo */ = {
@@ -542,6 +581,7 @@
 				4877BF811FC461D100885C60 /* MessagesRemoteQuery.swift */,
 				4877BF7F1FC4610700885C60 /* PersonsRemoteQuery.swift */,
 				4877BF851FC466BE00885C60 /* RecentMessageRemoteQuery.swift */,
+				488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -583,6 +623,7 @@
 				48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */,
 				488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */,
 				48C55DCF1FCE6B1800302DB2 /* TypingStatusRemoteListener.swift */,
+				483873911FD667E100CAC325 /* ContactRemoteListener.swift */,
 			);
 			path = Listener;
 			sourceTree = "<group>";
@@ -711,6 +752,7 @@
 			children = (
 				48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */,
 				4874AE011FC3129C00096BA8 /* ChatRemoteService.swift */,
+				488D87D81FD6432100E690BD /* ContactRemoteService.swift */,
 				488730DD1FC2C7B8001F9876 /* PersonRemoteService.swift */,
 				4886392F1FCBADE6003108A1 /* Listener */,
 				4877BF7E1FC4609300885C60 /* Query */,
@@ -1166,10 +1208,14 @@
 				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,
+				488D87D91FD6432100E690BD /* ContactRemoteService.swift in Sources */,
 				487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */,
 				486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */,
 				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
 				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
+				48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */,
+				48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */,
+				488D87CF1FD6412200E690BD /* ContactsSceneData.swift in Sources */,
 				48B37E8D1FCBD474004978F1 /* RecentMessageRemoteListener.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
@@ -1197,6 +1243,7 @@
 				48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */,
 				487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */,
 				487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */,
+				488D87D51FD641B300E690BD /* ContactsSceneCellFactory.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
@@ -1209,15 +1256,18 @@
 				4874AE021FC3129C00096BA8 /* ChatRemoteService.swift in Sources */,
 				4877BF821FC461D100885C60 /* MessagesRemoteQuery.swift in Sources */,
 				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
+				488D87DD1FD648B800E690BD /* ContactsSceneItem.swift in Sources */,
 				489FE1C81FC05BC80062E1AB /* RegisterSceneWorker.swift in Sources */,
 				4879B49A1FC29A7C00611DA3 /* Message.swift in Sources */,
 				482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */,
 				488639311FCBAE4A003108A1 /* RemoteListenerResult.swift in Sources */,
+				488D87D31FD6418D00E690BD /* ContactsSceneSetup.swift in Sources */,
 				482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */,
 				4879B4981FC29A4A00611DA3 /* Chat.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
 				489FE1C61FC05A9F0062E1AB /* RegisterScene.swift in Sources */,
 				482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */,
+				488D87DB1FD643E800E690BD /* ContactsRemoteQuery.swift in Sources */,
 				487767091FC6AF65008E865F /* ConvoSceneFactory.swift in Sources */,
 				4877BF881FC4691B00885C60 /* InboxRemoteQuery.swift in Sources */,
 				48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */,
@@ -1225,18 +1275,24 @@
 				48BFF7711FC4756F00BAE311 /* InboxSceneWorker.swift in Sources */,
 				4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */,
 				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
+				48A693111FD5A20500ED4024 /* ContactsSceneSearchView.swift in Sources */,
 				4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */,
 				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
 				489FE1CA1FC05DCA0062E1AB /* RegisterSceneTheme.swift in Sources */,
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
+				48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */,
+				488D87CD1FD6405A00E690BD /* ContactsSceneTheme.swift in Sources */,
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
 				489FE1CC1FC05E430062E1AB /* RegisterSceneFlow.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
+				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
 				48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */,
+				488D87D11FD6414E00E690BD /* ContactsSceneWorker.swift in Sources */,
+				488D87D71FD641F400E690BD /* ContactsSceneFlow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
