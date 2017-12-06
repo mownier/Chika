@@ -10,21 +10,23 @@ import UIKit
 
 protocol ContactsSceneSetup: class {
 
-    func format(cell: UITableViewCell, theme: ContactsSceneTheme, item: ContactsSceneItem?) -> Bool
-    func height(for cell: UITableViewCell?, theme: ContactsSceneTheme, item: ContactsSceneItem?) -> CGFloat
+    func format(cell: UITableViewCell, theme: ContactsSceneTheme, item: ContactsSceneItem?, action: ContactsSceneCellAction?) -> Bool
+    func height(for cell: UITableViewCell?, theme: ContactsSceneTheme, item: ContactsSceneItem?, action: ContactsSceneCellAction?) -> CGFloat
 }
 
 extension ContactsScene {
     
     class Setup: ContactsSceneSetup {
         
-        func format(cell: UITableViewCell, theme: ContactsSceneTheme, item: ContactsSceneItem?) -> Bool {
+        func format(cell: UITableViewCell, theme: ContactsSceneTheme, item: ContactsSceneItem?, action: ContactsSceneCellAction?) -> Bool {
             guard let cell = cell as? ContactsSceneCell, let item = item else {
                 return false
             }
             
             cell.onlineStatusView.isHidden = !item.isActive
             cell.nameLabel.text = item.person.name
+            cell.action = action
+            cell.addButton.isHidden = action == nil
             
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
@@ -32,8 +34,8 @@ extension ContactsScene {
             return true
         }
         
-        func height(for cell: UITableViewCell?, theme: ContactsSceneTheme, item: ContactsSceneItem?) -> CGFloat {
-            guard let contactCell = cell as? ContactsSceneCell, format(cell: contactCell, theme: theme, item: item)  else {
+        func height(for cell: UITableViewCell?, theme: ContactsSceneTheme, item: ContactsSceneItem?, action: ContactsSceneCellAction?) -> CGFloat {
+            guard let contactCell = cell as? ContactsSceneCell, format(cell: contactCell, theme: theme, item: item, action: action)  else {
                 return 0
             }
             

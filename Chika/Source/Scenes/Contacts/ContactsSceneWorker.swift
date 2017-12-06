@@ -13,6 +13,7 @@ protocol ContactsSceneWorker: class {
     func listenOnAddedContact()
     func listenOnRemovedContact()
     func unlistenOnActiveStatus(for personID: String)
+    func searchPersonsToAdd(with keyword: String?)
 }
 
 protocol ContactsSceneWorkerOutput: class {
@@ -22,6 +23,8 @@ protocol ContactsSceneWorkerOutput: class {
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
     func workerDidAddContact(_ contact: Person)
     func workerDidRemoveContact(_ personID: String)
+    func workerDidSearchPersonsToAdd(persons: [Person])
+    func workerDidSearchPersonsToAddWithError(_ error: Error)
 }
 
 extension ContactsScene {
@@ -83,6 +86,24 @@ extension ContactsScene {
         
         func unlistenOnActiveStatus(for personID: String) {
             let _ = listener.presence.unlisten(personID: personID)
+        }
+        
+        func searchPersonsToAdd(with keyword: String?) {
+            guard keyword != nil else {
+                let error = AppError("search keyword is nil")
+                output?.workerDidSearchPersonsToAddWithError(error)
+                return
+            }
+            
+            contactService.searchPersonsToAdd(with: keyword!) { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidSearchPersonsToAddWithError(info)
+                    
+                case .ok(let persons):
+                    self?.output?.workerDidSearchPersonsToAdd(persons: persons)
+                }
+            }
         }
     }
 }

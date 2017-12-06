@@ -39,6 +39,8 @@ extension ContactsScene {
                 return !items.contains(where: { person.id == $0.person.id })
                 }.map({ ContactsSceneItem(person: $0) })
             items.append(contentsOf: diff)
+            items.sort(by: { $0.person.name.localizedStandardCompare($1.person.name) == .orderedAscending })
+            
         }
         
         func item(at index: Int) -> ContactsSceneItem? {
