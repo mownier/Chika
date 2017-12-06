@@ -251,18 +251,13 @@ extension ContactsScene: ContactsSceneInteraction {
         isKeyboardShown = true
         prevBottomOffset = searchResultTableView.contentInset.bottom
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { [weak self] _ in
-            guard let this = self else { return }
-            let keyboardSize = UIApplication.shared.windows[1].subviews[0].subviews[0].bounds.size
-            let prevBottom = this.searchResultTableView.contentInset.bottom
-            let newBottom = this.prevBottomOffset + keyboardSize.height - (this.view.safeAreaInsets.top == 20 ? 49 : this.view.safeAreaInsets.top == 44 ? 83 : 0)
-            if newBottom != prevBottom {
-                this.searchResultTableView.contentInset.bottom = newBottom
-                this.searchResultTableView.scrollIndicatorInsets.bottom = newBottom
-            }
-        })
-        
-        timer?.fire()
+        let keyboardSize = UIApplication.shared.windows[1].subviews[0].subviews[0].bounds.size
+        let prevBottom = searchResultTableView.contentInset.bottom
+        let newBottom = prevBottomOffset + keyboardSize.height - (view.safeAreaInsets.top == 20 ? 49 : view.safeAreaInsets.top == 44 ? 83 : 0)
+        if newBottom != prevBottom {
+            searchResultTableView.contentInset.bottom = newBottom + 42
+            searchResultTableView.scrollIndicatorInsets.bottom = newBottom
+        }
     }
 }
 
@@ -335,14 +330,7 @@ extension ContactsScene: ContactsSceneWorkerOutput {
     func workerDidSearchPersonsToAdd(persons: [Person]) {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = nil
-        var list = persons
-        for i in 0..<20 {
-            var person = Person()
-            person.name = randomString(length: 5)
-            person.id = "\(i):\(person.name)"
-            list.append(person)
-        }
-        searchResultData.append(list: list)
+        searchResultData.append(list: persons)
         searchResultTableView.reloadData()
     }
     
@@ -350,22 +338,6 @@ extension ContactsScene: ContactsSceneWorkerOutput {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = searchResultEmptyView
         searchResultTableView.reloadData()
-    }
-    
-    func randomString(length: Int) -> String {
-        
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return randomString
     }
 }
 
@@ -395,12 +367,10 @@ extension ContactsScene: ContactsSceneCellAction {
         vc.delegate = self
         
         let sourceView = (cell as? ContactsSceneCell)?.avatar
-        let sourceRect = sourceView == nil ?  .zero : sourceView!.bounds
         let controller = vc.popoverPresentationController
         controller?.sourceView = sourceView
-        controller?.sourceRect = sourceRect
+        controller?.sourceRect = sourceView == nil ? .zero : sourceView!.bounds
         controller?.delegate = self
-        
         present(vc, animated: true, completion: nil)
     }
 }
