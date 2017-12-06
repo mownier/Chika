@@ -9,6 +9,7 @@
 protocol ContactRemoteService: class {
 
     func getContacts(callback: @escaping (ServiceResult<[Person]>) -> Void)
+    func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
 }
 
 class ContactRemoteServiceProvider: ContactRemoteService {
@@ -27,6 +28,17 @@ class ContactRemoteServiceProvider: ContactRemoteService {
             }
             
             callback(.ok(contacts))
+        }
+    }
+    
+    func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void) {
+        contactsQuery.searchPersonsToAdd(with: keyword) { persons in
+            guard !persons.isEmpty else {
+                callback(.err(ServiceError("no persons found")))
+                return
+            }
+            
+            callback(.ok(persons))
         }
     }
 }
