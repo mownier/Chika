@@ -42,7 +42,7 @@ class ContactsSceneAddPopover: UIViewController {
         if !person.name.isEmpty {
             personName = " \(person.name)!"
         }
-        self.initialText = String(format: "Hi%@ I would like to add you as my contact.", personName)
+        self.initialText = String(format: "Hi%@ I would like to add you as contact.", personName)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,7 +50,7 @@ class ContactsSceneAddPopover: UIViewController {
         let theme = Theme()
         self.init(theme: theme, person: person)
         self.modalPresentationStyle = .popover
-        self.preferredContentSize = CGSize(width: 280, height: 160)
+        self.preferredContentSize = CGSize(width: 300, height: 160)
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -63,7 +63,7 @@ class ContactsSceneAddPopover: UIViewController {
         view.backgroundColor = theme.bgColor
         
         titleLabel = UILabel()
-        titleLabel.text = "Message"
+        titleLabel.text = "Contact Request"
         titleLabel.textColor = theme.titleTextColor
         titleLabel.font = theme.titleFont
         titleLabel.textAlignment = .center
@@ -111,7 +111,7 @@ class ContactsSceneAddPopover: UIViewController {
         input.text = initialText
         textViewDidChange(input)
         popoverPresentationController?.backgroundColor = theme.bgColor
-        popoverPresentationController?.permittedArrowDirections = .any
+        popoverPresentationController?.permittedArrowDirections = [.up, .down]
     }
     
     override func viewDidAppear(_ animated: Bool) {
