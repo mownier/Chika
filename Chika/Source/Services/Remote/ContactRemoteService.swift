@@ -10,14 +10,17 @@ protocol ContactRemoteService: class {
 
     func getContacts(callback: @escaping (ServiceResult<[Person]>) -> Void)
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
+    func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
 }
 
 class ContactRemoteServiceProvider: ContactRemoteService {
     
     var contactsQuery: ContactsRemoteQuery
+    var contactWriter: ContactRemoteWriter
     
-    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider()) {
+    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider(), contactWriter: ContactRemoteWriter = ContactRemoteWriterProvider()) {
         self.contactsQuery = contactsQuery
+        self.contactWriter = contactWriter
     }
     
     func getContacts(callback: @escaping (ServiceResult<[Person]>) -> Void) {
@@ -39,6 +42,17 @@ class ContactRemoteServiceProvider: ContactRemoteService {
             }
             
             callback(.ok(persons))
+        }
+    }
+    
+    func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void) {
+        contactWriter.sendContactRequest(to: personID, message: message) { error in
+            guard error == nil else {
+                callback(.err(error!))
+                return
+            }
+            
+            callback(.ok("OK"))
         }
     }
 }
