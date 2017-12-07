@@ -28,6 +28,30 @@ extension ContactsScene {
             cell.action = action
             cell.addButton.isHidden = action == nil
             
+            let addButtonTitle: String
+            let addButtonBGColor: UIColor
+            
+            switch item.requestStatus {
+            case .none:
+                addButtonTitle = "Send Request"
+                addButtonBGColor = theme.addActionBGColor
+            
+            case .sent:
+                addButtonTitle = "Sent"
+                addButtonBGColor = theme.addActionOkayBGColor
+                
+            case .failed:
+                addButtonTitle = "Retry"
+                addButtonBGColor = theme.addActionFailedBGColor
+                
+            case .sending:
+                addButtonTitle = "Sending"
+                addButtonBGColor = theme.addActionActiveBGColor
+            }
+            
+            cell.addButton.setTitle(addButtonTitle, for: .normal)
+            cell.addButton.backgroundColor = addButtonBGColor
+            
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
             
@@ -39,7 +63,8 @@ extension ContactsScene {
                 return 0
             }
             
-            return max(contactCell.nameLabel.frame.maxY, contactCell.avatar.frame.maxY) + min(contactCell.nameLabel.frame.origin.y, contactCell.avatar.frame.origin.y) + 8
+            let height = max(contactCell.nameLabel.frame.maxY, contactCell.avatar.frame.maxY) + min(contactCell.nameLabel.frame.origin.y, contactCell.avatar.frame.origin.y) + 8
+            return height
         }
     }
 }

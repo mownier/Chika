@@ -289,7 +289,7 @@ extension ContactsScene: UITableViewDelegate {
 }
 
 extension ContactsScene: ContactsSceneWorkerOutput {
-    
+
     func workerDidFetch(contacts: [Person]) {
         data.removeAll()
         data.append(list: contacts)
@@ -337,6 +337,16 @@ extension ContactsScene: ContactsSceneWorkerOutput {
     func workerDidSearchPersonsToAddWithError(_ error: Error) {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = searchResultEmptyView
+        searchResultTableView.reloadData()
+    }
+    
+    func workerDidRequestContactWithError(_ error: Error, personID: String) {
+        let _ = searchResultData.updateRequestStatus(for: personID, status: .failed)
+        searchResultTableView.reloadData()
+    }
+    
+    func workerDidRequestContactOK(_ personID: String) {
+        let _ = searchResultData.updateRequestStatus(for: personID, status: .sent)
         searchResultTableView.reloadData()
     }
 }
@@ -394,8 +404,9 @@ extension ContactsScene: ContactsSceneAddPopoverDelegate {
     
     func addPopoverDidOK(message: String, person: Person) {
         isPopoverShown = false
-        searchResultData.remove(person.id)
+        let _ = searchResultData.updateRequestStatus(for: person.id, status: .sending)
         searchResultTableView.reloadData()
+        worker.sendContactRequest(to: person.id, message: message)
     }
     
     func addPopoverDidCancel() {

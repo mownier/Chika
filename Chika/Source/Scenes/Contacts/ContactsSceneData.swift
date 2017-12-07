@@ -15,6 +15,7 @@ protocol ContactsSceneData: class {
     func remove(_ personID: String)
     func item(at index: Int) -> ContactsSceneItem?
     func updateActiveStatus(for personID: String, isActive: Bool) -> Int?
+    func updateRequestStatus(for personID: String, status: ContactsSceneItem.RequestStatus) -> Int?
 }
 
 extension ContactsScene {
@@ -66,6 +67,15 @@ extension ContactsScene {
             }
             
             items.remove(at: index)
+        }
+        
+        func updateRequestStatus(for personID: String, status: ContactsSceneItem.RequestStatus) -> Int? {
+            guard let index = items.index(where: { $0.person.id == personID }) else {
+                return nil
+            }
+            
+            items[index].requestStatus = status
+            return index
         }
     }
 }

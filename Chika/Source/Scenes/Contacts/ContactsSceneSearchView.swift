@@ -36,6 +36,7 @@ class ContactsSceneSearchView: UIView {
         searchInput.contentVerticalAlignment = .center
         searchInput.returnKeyType = .search
         searchInput.autocapitalizationType = .none
+        searchInput.autocorrectionType = .no
         
         strip = UIView()
         

@@ -14,6 +14,7 @@ protocol ContactsSceneWorker: class {
     func listenOnRemovedContact()
     func unlistenOnActiveStatus(for personID: String)
     func searchPersonsToAdd(with keyword: String?)
+    func sendContactRequest(to personID: String, message: String)
 }
 
 protocol ContactsSceneWorkerOutput: class {
@@ -22,6 +23,8 @@ protocol ContactsSceneWorkerOutput: class {
     func workerDidFetchWithError(_ error: Error)
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
     func workerDidAddContact(_ contact: Person)
+    func workerDidRequestContactWithError(_ error: Error, personID: String)
+    func workerDidRequestContactOK(_ personID: String)
     func workerDidRemoveContact(_ personID: String)
     func workerDidSearchPersonsToAdd(persons: [Person])
     func workerDidSearchPersonsToAddWithError(_ error: Error)
@@ -102,6 +105,18 @@ extension ContactsScene {
                     
                 case .ok(let persons):
                     self?.output?.workerDidSearchPersonsToAdd(persons: persons)
+                }
+            }
+        }
+        
+        func sendContactRequest(to personID: String, message: String) {
+            contactService.sendContactRequest(to: personID, message: message) { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidRequestContactWithError(info, personID: personID)
+                    
+                case .ok:
+                    self?.output?.workerDidRequestContactOK(personID)
                 }
             }
         }
