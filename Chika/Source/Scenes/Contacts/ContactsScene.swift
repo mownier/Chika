@@ -330,19 +330,37 @@ extension ContactsScene: ContactsSceneWorkerOutput {
     func workerDidFetch(contacts: [Person]) {
         data.removeAll()
         var list = contacts
-//        for i in 48..<58 {
-//            var person = Person()
-//            person.name = String(UnicodeScalar(UInt8(i)))
-//            person.id = "\(i):\(person.name)"
-//            list.append(person)
-//        }
-        
-        for i in 65..<91 {
+        for i in 48..<58 {
             var person = Person()
             person.name = String(UnicodeScalar(UInt8(i)))
             person.id = "\(i):\(person.name)"
             list.append(person)
         }
+        
+        for i in 65..<94 {
+            if i == 92 {
+                var person = Person()
+                person.name = "😃"
+                person.id = "\(i):\(person.name)"
+                list.append(person)
+                continue
+            }
+            
+            if i == 93 {
+                var person = Person()
+                person.name = "🤡"
+                person.id = "\(i):\(person.name)"
+                list.append(person)
+                continue
+            }
+            
+            var person = Person()
+            person.name = String(UnicodeScalar(UInt8(i)))
+            person.id = "\(i):\(person.name)"
+            list.append(person)
+        }
+        
+        
         data.append(list: list)
         tableView.reloadData()
 
