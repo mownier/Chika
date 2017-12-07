@@ -176,6 +176,7 @@
 		48CDD7641FBEC2D7009269A6 /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7631FBEC2D7009269A6 /* InitialScene.swift */; };
 		48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */; };
 		48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */; };
+		48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */; };
 		48D627511FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D627501FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift */; };
 		48D627531FD53C600016868E /* PresenceRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D627521FD53C600016868E /* PresenceRemoteListenerMock.swift */; };
 		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
@@ -382,6 +383,7 @@
 		48CDD7631FBEC2D7009269A6 /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
 		48CDD7651FBEC384009269A6 /* InitialSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneTheme.swift; sourceTree = "<group>"; };
 		48CDD7671FBECE2C009269A6 /* InitialSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneFlow.swift; sourceTree = "<group>"; };
+		48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneIndexView.swift; sourceTree = "<group>"; };
 		48D627501FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStatusRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48D627521FD53C600016868E /* PresenceRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				488DD28D1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift */,
 				488DD28F1FD6F91600AC2E42 /* ContactsSceneAddPopover.swift */,
 				48AFB39C1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift */,
+				48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -1257,6 +1260,7 @@
 				48AFB39D1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift in Sources */,
 				48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */,
 				4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */,
+				48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */,
 				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
 				488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */,
 				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,

@@ -30,6 +30,9 @@ protocol ContactsSceneTheme: class {
     var addActionActiveBGColor: UIColor { get }
     var addActionTextColor: UIColor { get }
     var addActionFont: UIFont? { get }
+    var indexTextColor: UIColor { get }
+    var indexFont: UIFont? { get }
+    var indexBGColor: UIColor { get }
 }
 
 extension ContactsScene {
@@ -56,5 +59,8 @@ extension ContactsScene {
         var addActionActiveBGColor: UIColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1.0)
         var addActionFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 14.0)
         var addActionTextColor: UIColor = .white
+        var indexTextColor: UIColor = .white
+        var indexFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 10.0)
+        var indexBGColor: UIColor = .black
     }
 }

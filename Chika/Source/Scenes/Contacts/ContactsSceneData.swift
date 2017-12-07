@@ -9,6 +9,7 @@
 protocol ContactsSceneData: class {
 
     var itemCount: Int { get }
+    var indexChars: [Character] { get }
     
     func removeAll()
     func append(list: [Person])
@@ -16,6 +17,7 @@ protocol ContactsSceneData: class {
     func item(at index: Int) -> ContactsSceneItem?
     func updateActiveStatus(for personID: String, isActive: Bool) -> Int?
     func updateRequestStatus(for personID: String, status: ContactsSceneItem.RequestStatus) -> Int?
+    func index(for char: Character) -> Int?
 }
 
 extension ContactsScene {
@@ -25,6 +27,12 @@ extension ContactsScene {
         var items: [ContactsSceneItem]
         var itemCount: Int {
             return items.count
+        }
+        var indexChars: [Character] {
+            let set = Set(items.filter({ !$0.person.name.isEmpty }).map({ $0.person.name.uppercased() }).map({ Array($0.characters)[0] }))
+            var array = Array(set)
+            array.sort(by: { String($0).localizedStandardCompare(String($1)) == .orderedAscending })
+            return array
         }
         
         init() {
@@ -76,6 +84,10 @@ extension ContactsScene {
             
             items[index].requestStatus = status
             return index
+        }
+        
+        func index(for char: Character) -> Int? {
+            return items.index(where: { !$0.person.name.isEmpty && String(Array($0.person.name.characters)[0]).uppercased() == String(char).uppercased() })
         }
     }
 }

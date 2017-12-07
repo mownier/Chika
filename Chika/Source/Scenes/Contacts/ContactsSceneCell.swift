@@ -71,24 +71,24 @@ class ContactsSceneCell: UITableViewCell {
         rect.size.width = 108
         rect.size.height = 40
         rect.origin.y = spacing
-        rect.origin.x = bounds.width - rect.width - spacing
+        rect.origin.x = bounds.width - rect.width - spacing * 2
         addButton.frame = rect
         
         rect.size.width = 40
         rect.size.height = rect.width
-        rect.origin.x = spacing
+        rect.origin.x = spacing * 2
         avatar.frame = rect
         avatar.layer.cornerRadius = rect.width / 2
         
-        rect.size = onlineStatusView.isHidden ? .zero : CGSize(width: 10, height: 10)
-        rect.origin.y = avatar.frame.midY - rect.height / 2
-        rect.origin.x = bounds.width - rect.width - spacing
+        rect.size = CGSize(width: 16, height: 16)
+        rect.origin.y = (avatar.frame.midY - rect.height + spacing) / 2
+        rect.origin.x = (avatar.frame.midX - rect.width + spacing) / 2
         onlineStatusView.frame = rect
         onlineStatusView.layer.cornerRadius = rect.width / 2
         
         rect.origin.x = avatar.frame.maxX + spacing
         rect.origin.y = avatar.frame.midY - nameLabel.font.lineHeight / 2
-        rect.size.width = bounds.width - rect.origin.x - spacing * 2 - (addButton.isHidden ? onlineStatusView.frame.width : addButton.frame.width)
+        rect.size.width = bounds.width - rect.origin.x - (addButton.isHidden ? spacing * 2 : addButton.frame.width + spacing * 3)
         rect.size.height = nameLabel.sizeThatFits(rect.size).height
         nameLabel.frame = rect
     }

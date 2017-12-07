@@ -22,6 +22,7 @@ class ContactsScene: UIViewController {
     var searchResultTableView: UITableView!
     var searchResultEmptyView: ContactsSceneSearchResultEmptyView!
     var tableView: UITableView!
+    var indexView: ContactsSceneIndexView!
     
     var theme: ContactsSceneTheme
     var data: ContactsSceneData
@@ -96,6 +97,8 @@ class ContactsScene: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = theme.bgColor
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.showsVerticalScrollIndicator = false
         
         searchResultTableView = UITableView()
         searchResultTableView.tableFooterView = UIView()
@@ -126,7 +129,15 @@ class ContactsScene: UIViewController {
         searchResultEmptyView.titleLabel.textColor = theme.searchResultEmptyTitleTextColor
         searchResultEmptyView.titleLabel.font = theme.searchResultEmptyTitleFont
         
+        indexView = ContactsSceneIndexView()
+        indexView.indexFont = theme.indexFont
+        indexView.indexTextColor = theme.indexTextColor
+        indexView.indexBGColor = theme.indexBGColor
+        indexView.delegate = self
+        indexView.isHidden = true
+        
         view.addSubview(tableView)
+        view.addSubview(indexView)
         view.addSubview(searchView)
         view.addSubview(searchResultTableView)
     }
@@ -162,9 +173,24 @@ class ContactsScene: UIViewController {
     
         rect.origin.y = rect.maxY
         rect.size.height = view.bounds.height - rect.origin.y
-        tableView.frame = rect
         searchResultTableView.frame = rect
         searchResultEmptyView.frame = searchResultTableView.bounds
+        
+        rect.size.width = indexView.isHidden ? 0 : 28
+        rect.origin.x = view.bounds.width - rect.width - (indexView.isHidden ? 0 : 8)
+        indexView.frame = rect
+        
+        rect.origin.x = 0
+        rect.size.width = searchResultTableView.frame.width - indexView.frame.width - (indexView.isHidden ? 0 : 8)
+        tableView.frame = rect
+    }
+    
+    func updateIndexView() {
+        indexView.isHidden = tableView.frame.height >= tableView.contentSize.height
+        indexView.indexChars = indexView.isHidden ? [] : data.indexChars
+        
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
     func showSearchResultTableView(_ completion: @escaping () -> Void) {
@@ -219,7 +245,6 @@ class ContactsScene: UIViewController {
     
     var isKeyboardShown: Bool = false
     var prevBottomOffset: CGFloat = 0
-    var timer: Timer?
 }
 
 extension ContactsScene: ContactsSceneInteraction {
@@ -235,9 +260,6 @@ extension ContactsScene: ContactsSceneInteraction {
     
     func keyboardWillHide() {
         isKeyboardShown = false
-        
-        timer?.invalidate()
-        timer = nil
         
         searchResultTableView.contentInset.bottom = prevBottomOffset
         searchResultTableView.scrollIndicatorInsets.bottom = prevBottomOffset
@@ -290,18 +312,64 @@ extension ContactsScene: UITableViewDelegate {
 
 extension ContactsScene: ContactsSceneWorkerOutput {
 
+    func randomString(length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
+    }
+    
     func workerDidFetch(contacts: [Person]) {
         data.removeAll()
-        data.append(list: contacts)
-        tableView.reloadData()
+        var list = contacts
+//        for i in 48..<58 {
+//            var person = Person()
+//            person.name = String(UnicodeScalar(UInt8(i)))
+//            person.id = "\(i):\(person.name)"
+//            list.append(person)
+//        }
         
+        for i in 65..<91 {
+            var person = Person()
+            person.name = String(UnicodeScalar(UInt8(i)))
+            person.id = "\(i):\(person.name)"
+            list.append(person)
+        }
+        data.append(list: list)
+        tableView.reloadData()
+
         for person in contacts {
             worker.listenOnActiveStatus(for: person.id)
         }
-        
+
         worker.listenOnAddedContact()
         worker.listenOnRemovedContact()
+        
+        updateIndexView()
     }
+    
+//    func workerDidFetch(contacts: [Person]) {
+//        data.removeAll()
+//        data.append(list: contacts)
+//        tableView.reloadData()
+//
+//        for person in contacts {
+//            worker.listenOnActiveStatus(for: person.id)
+//        }
+//
+//        worker.listenOnAddedContact()
+//        worker.listenOnRemovedContact()
+//
+//        updateIndexView()
+//    }
     
     func workerDidFetchWithError(_ error: Error) {
         tableView.reloadData()
@@ -319,12 +387,14 @@ extension ContactsScene: ContactsSceneWorkerOutput {
         data.append(list: [contact])
         tableView.reloadData()
         worker.listenOnActiveStatus(for: contact.id)
+        updateIndexView()
     }
     
     func workerDidRemoveContact(_ personID: String) {
         data.remove(personID)
         tableView.reloadData()
         worker.unlistenOnActiveStatus(for: personID)
+        updateIndexView()
     }
     
     func workerDidSearchPersonsToAdd(persons: [Person]) {
@@ -411,5 +481,16 @@ extension ContactsScene: ContactsSceneAddPopoverDelegate {
     
     func addPopoverDidCancel() {
         isPopoverShown = false
+    }
+}
+
+extension ContactsScene: ContactsSceneIndexViewDelegate {
+    
+    func indexViewDidSelectIndex(_ char: Character) {
+        guard let row = data.index(for: char) else {
+            return
+        }
+        
+        tableView.scrollToRow(at: IndexPath(row: row, section: 0), at: .top, animated: true)
     }
 }

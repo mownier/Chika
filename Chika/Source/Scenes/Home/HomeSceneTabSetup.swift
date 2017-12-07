@@ -35,8 +35,11 @@ extension HomeScene {
             let item3 = UITabBarItem(tabBarSystemItem: .more, tag: 2)
             
             let _ = item1Scene.view
-            let _ = item2Scene.view
+            let view2 = item2Scene.view
             let _ = item3Scene.view
+            
+            view2?.setNeedsLayout()
+            view2?.layoutIfNeeded()
             
             item1Scene.tabBarItem = item1
             item2Scene.tabBarItem = item2
