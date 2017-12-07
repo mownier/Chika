@@ -311,57 +311,10 @@ extension ContactsScene: UITableViewDelegate {
 }
 
 extension ContactsScene: ContactsSceneWorkerOutput {
-
-    func randomString(length: Int) -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return randomString
-    }
     
     func workerDidFetch(contacts: [Person]) {
         data.removeAll()
-        var list = contacts
-        for i in 48..<58 {
-            var person = Person()
-            person.name = String(UnicodeScalar(UInt8(i)))
-            person.id = "\(i):\(person.name)"
-            list.append(person)
-        }
-        
-        for i in 65..<94 {
-            if i == 92 {
-                var person = Person()
-                person.name = "😃"
-                person.id = "\(i):\(person.name)"
-                list.append(person)
-                continue
-            }
-            
-            if i == 93 {
-                var person = Person()
-                person.name = "🤡"
-                person.id = "\(i):\(person.name)"
-                list.append(person)
-                continue
-            }
-            
-            var person = Person()
-            person.name = String(UnicodeScalar(UInt8(i)))
-            person.id = "\(i):\(person.name)"
-            list.append(person)
-        }
-        
-        
-        data.append(list: list)
+        data.append(list: contacts)
         tableView.reloadData()
 
         for person in contacts {
@@ -370,24 +323,9 @@ extension ContactsScene: ContactsSceneWorkerOutput {
 
         worker.listenOnAddedContact()
         worker.listenOnRemovedContact()
-        
+
         updateIndexView()
     }
-    
-//    func workerDidFetch(contacts: [Person]) {
-//        data.removeAll()
-//        data.append(list: contacts)
-//        tableView.reloadData()
-//
-//        for person in contacts {
-//            worker.listenOnActiveStatus(for: person.id)
-//        }
-//
-//        worker.listenOnAddedContact()
-//        worker.listenOnRemovedContact()
-//
-//        updateIndexView()
-//    }
     
     func workerDidFetchWithError(_ error: Error) {
         tableView.reloadData()
