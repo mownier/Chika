@@ -19,10 +19,10 @@ protocol ContactsSceneWorker: class {
 
 protocol ContactsSceneWorkerOutput: class {
     
-    func workerDidFetch(contacts: [Person])
+    func workerDidFetch(contacts: [Contact])
     func workerDidFetchWithError(_ error: Error)
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
-    func workerDidAddContact(_ contact: Person)
+    func workerDidAddContact(_ contact: Contact)
     func workerDidRequestContactWithError(_ error: Error, personID: String)
     func workerDidRequestContactOK(_ personID: String)
     func workerDidRemoveContact(_ personID: String)
@@ -76,8 +76,8 @@ extension ContactsScene {
         }
         
         func listenOnAddedContact() {
-            let _ = listener.contact.listenOnAddedContact { [weak self] person in
-                self?.output?.workerDidAddContact(person)
+            let _ = listener.contact.listenOnAddedContact { [weak self] contact in
+                self?.output?.workerDidAddContact(contact)
             }
         }
         

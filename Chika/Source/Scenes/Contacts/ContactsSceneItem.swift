@@ -16,12 +16,12 @@ struct ContactsSceneItem {
         case failed
     }
     
-    var person: Person
+    var contact: Contact
     var isActive: Bool
     var requestStatus: RequestStatus
     
-    init(person: Person) {
-        self.person = person
+    init(contact: Contact) {
+        self.contact = contact
         self.isActive = false
         self.requestStatus = .none
     }

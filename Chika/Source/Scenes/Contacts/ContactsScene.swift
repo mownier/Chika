@@ -78,6 +78,7 @@ class ContactsScene: UIViewController {
         let searchResultData = Data()
         self.init(theme: theme, data: data, worker: worker, flow: flow, cellFactory: cellFactory, setup: setup, searchResultData: searchResultData)
         worker.output = self
+        flow.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -308,17 +309,25 @@ extension ContactsScene: UITableViewDelegate {
         let item = source.item(at: indexPath.row)
         return setup.height(for: cellFactory.prototype, theme: theme, item: item, action: action)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard tableView != searchResultTableView, let chat = data.item(at: indexPath.row)?.contact.chat else {
+            return
+        }
+        
+        let _ = flow.goToConvo(withChat: chat)
+    }
 }
 
 extension ContactsScene: ContactsSceneWorkerOutput {
     
-    func workerDidFetch(contacts: [Person]) {
+    func workerDidFetch(contacts: [Contact]) {
         data.removeAll()
-        data.append(list: contacts)
+        data.appendContacts(contacts)
         tableView.reloadData()
 
-        for person in contacts {
-            worker.listenOnActiveStatus(for: person.id)
+        for contact in contacts {
+            worker.listenOnActiveStatus(for: contact.person.id)
         }
 
         worker.listenOnAddedContact()
@@ -339,10 +348,10 @@ extension ContactsScene: ContactsSceneWorkerOutput {
         tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
     }
     
-    func workerDidAddContact(_ contact: Person) {
-        data.append(list: [contact])
+    func workerDidAddContact(_ contact: Contact) {
+        data.appendContacts([contact])
         tableView.reloadData()
-        worker.listenOnActiveStatus(for: contact.id)
+        worker.listenOnActiveStatus(for: contact.person.id)
         updateIndexView()
     }
     
@@ -356,7 +365,7 @@ extension ContactsScene: ContactsSceneWorkerOutput {
     func workerDidSearchPersonsToAdd(persons: [Person]) {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = nil
-        searchResultData.append(list: persons)
+        searchResultData.appendPersons(persons)
         searchResultTableView.reloadData()
     }
     
@@ -393,7 +402,7 @@ extension ContactsScene: ContactsSceneCellAction {
     
     func contactsSceneCellWillAddContact(_ cell: UITableViewCell) {
         guard let index = searchResultTableView.indexPath(for: cell),
-            let person = searchResultData.item(at: index.row)?.person else {
+            let person = searchResultData.item(at: index.row)?.contact.person else {
                 return
         }
         

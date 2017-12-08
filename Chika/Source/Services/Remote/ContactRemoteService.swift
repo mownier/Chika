@@ -8,7 +8,7 @@
 
 protocol ContactRemoteService: class {
 
-    func getContacts(callback: @escaping (ServiceResult<[Person]>) -> Void)
+    func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void)
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
 }
@@ -23,7 +23,7 @@ class ContactRemoteServiceProvider: ContactRemoteService {
         self.contactWriter = contactWriter
     }
     
-    func getContacts(callback: @escaping (ServiceResult<[Person]>) -> Void) {
+    func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void) {
         contactsQuery.getContacts { contacts in
             guard !contacts.isEmpty else {
                 callback(.err(ServiceError("no contacts")))

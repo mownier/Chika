@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol ContactRemoteListener: class {
 
-    func listenOnAddedContact(callback: @escaping (Person) -> Void) -> Bool
+    func listenOnAddedContact(callback: @escaping (Contact) -> Void) -> Bool
     func listenOnRemovedContact(callback: @escaping (String) -> Void) -> Bool
     func unlistenOnAddedConctact() -> Bool
     func unlistenOnRemovedContact() -> Bool
@@ -23,15 +23,19 @@ class ContactRemoteListenerProvider: ContactRemoteListener {
     var database: Database
     var handles: [String: UInt]
     var personsQuery: PersonsRemoteQuery
+    var chatsQuery: ChatsRemoteQuery
     
-    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), chatsQuery: ChatsRemoteQuery = ChatsRemoteQueryProvider()) {
         self.meID = meID
         self.database = database
         self.personsQuery = personsQuery
+        self.chatsQuery = chatsQuery
         self.handles = [:]
     }
     
-    func listenOnAddedContact(callback: @escaping (Person) -> Void) -> Bool {
+    func listenOnAddedContact(callback: @escaping (Contact) -> Void) -> Bool {
+        let meID = self.meID
+        
         guard !meID.isEmpty else {
             return false
         }
@@ -39,18 +43,31 @@ class ContactRemoteListenerProvider: ContactRemoteListener {
         let rootRef = database.reference()
         let ref = rootRef.child("person:contacts/\(meID)")
         let personsQuery = self.personsQuery
+        let chatsQuery = self.chatsQuery
         
         let handle = ref.observe(.childAdded) { snapshot in
-            guard snapshot.exists() else {
+            guard snapshot.exists(), snapshot.hasChild("chat") else {
+                return
+            }
+            
+            let chat = snapshot.childSnapshot(forPath: "chat")
+            
+            guard let value = chat.value as? [String: Bool], value.count == 1, value.keys.count == 1, let chatID = value.keys.first, !chatID.isEmpty else {
                 return
             }
             
             personsQuery.getPersons(for: [snapshot.key]) { persons in
-                guard persons.count == 1 else {
-                    return
+                chatsQuery.getChats(for: [chatID]) { chats in
+                    guard persons.count == 1, chats.count == 1 else {
+                        return
+                    }
+                    
+                    var contact = Contact()
+                    contact.person = persons[0]
+                    contact.chat = chats[0]
+                    
+                    callback(contact)
                 }
-                
-                callback(persons[0])
             }
         }
         

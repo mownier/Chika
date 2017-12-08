@@ -24,7 +24,7 @@ extension ContactsScene {
             }
             
             cell.onlineStatusView.isHidden = !item.isActive
-            cell.nameLabel.text = item.person.name
+            cell.nameLabel.text = item.contact.person.name
             cell.action = action
             cell.addButton.isHidden = action == nil
             
@@ -35,18 +35,22 @@ extension ContactsScene {
             case .none:
                 addButtonTitle = "Send Request"
                 addButtonBGColor = theme.addActionBGColor
-            
+                cell.addButton.isUserInteractionEnabled = true
+                
             case .sent:
                 addButtonTitle = "Sent"
                 addButtonBGColor = theme.addActionOkayBGColor
+                cell.addButton.isUserInteractionEnabled = false
                 
             case .failed:
                 addButtonTitle = "Retry"
                 addButtonBGColor = theme.addActionFailedBGColor
+                cell.addButton.isUserInteractionEnabled = true
                 
             case .sending:
                 addButtonTitle = "Sending"
                 addButtonBGColor = theme.addActionActiveBGColor
+                cell.addButton.isUserInteractionEnabled = false
             }
             
             cell.addButton.setTitle(addButtonTitle, for: .normal)

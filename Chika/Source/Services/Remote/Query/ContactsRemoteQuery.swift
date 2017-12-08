@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol ContactsRemoteQuery: class {
 
-    func getContacts(callback: @escaping ([Person]) -> Void)
+    func getContacts(callback: @escaping ([Contact]) -> Void)
     func searchPersonsToAdd(with keyword: String, callback: @escaping ([Person]) -> Void)
 }
 
@@ -20,16 +20,20 @@ class ContactsRemoteQueryProvider: ContactsRemoteQuery {
     var meID: String
     var database: Database
     var personsQuery: PersonsRemoteQuery
+    var chatsQuery: ChatsRemoteQuery
     var emailValidator: EmailValidator
     
-    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), emailValidator: EmailValidator = EmailValidatorProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), chatsQuery: ChatsRemoteQuery = ChatsRemoteQueryProvider(), emailValidator: EmailValidator = EmailValidatorProvider()) {
         self.meID = meID
         self.database = database
         self.personsQuery = personsQuery
+        self.chatsQuery = chatsQuery
         self.emailValidator = emailValidator
     }
     
-    func getContacts(callback: @escaping ([Person]) -> Void) {
+    func getContacts(callback: @escaping ([Contact]) -> Void) {
+        let meID = self.meID
+        
         guard !meID.isEmpty else {
             callback([])
             return
@@ -38,6 +42,7 @@ class ContactsRemoteQueryProvider: ContactsRemoteQuery {
         let rootRef = database.reference()
         let ref = rootRef.child("person:contacts/\(meID)")
         let personsQuery = self.personsQuery
+        let chatsQuery = self.chatsQuery
         
         ref.observeSingleEvent(of: .value) { snapshot in
             guard snapshot.exists(), snapshot.hasChildren() else {
@@ -46,17 +51,44 @@ class ContactsRemoteQueryProvider: ContactsRemoteQuery {
             }
             
             var personKeys: [String] = []
+            var chatKeys: [String: String] = [:]
             
             for child in snapshot.children {
                 guard let child = child as? DataSnapshot else {
                     continue
                 }
                 
+                guard child.hasChild("chat") else {
+                    continue
+                }
+                
+                let chat = child.childSnapshot(forPath: "chat")
+                
+                guard let value = chat.value as? [String: Bool], value.count == 1, value.keys.count == 1,
+                    let chatKey = value.keys.first, !chatKey.isEmpty else {
+                        continue
+                }
+                
+                chatKeys[child.key] = chatKey
                 personKeys.append(child.key)
             }
             
+            personKeys = Array(Set(personKeys))
             personsQuery.getPersons(for: personKeys) { persons in
-                callback(persons)
+                chatsQuery.getChats(for: chatKeys.map({ $0.value })) { chats in
+                    let contacts = persons.map({ person -> Contact in
+                        var contact = Contact()
+                        contact.person = person
+                        
+                        if let chatID = chatKeys[person.id], let index = chats.index(where: { $0.id == chatID }) {
+                            contact.chat = chats[index]
+                        }
+                        
+                        return contact
+                    }).filter({ !$0.chat.id.isEmpty })
+                    
+                    callback(contacts)
+                }
             }
         }
     }
@@ -120,8 +152,16 @@ class ContactsRemoteQueryProvider: ContactsRemoteQuery {
                         return
                     }
                     
-                    personKeys.append(child.key)
-                    personKeyCounter += 1
+                    let establishedRef = rootRef.child("person:contact:request:established/\(meID)/\(child.key)")
+                    establishedRef.observeSingleEvent(of: .value) { snapshot in
+                        guard !snapshot.exists() else {
+                            personKeyCounter += 1
+                            return
+                        }
+                        
+                        personKeys.append(child.key)
+                        personKeyCounter += 1
+                    }
                 }
             }
         }
