@@ -73,6 +73,7 @@
 		4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877BF831FC4643400885C60 /* ChatsRemoteQuery.swift */; };
 		4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877BF851FC466BE00885C60 /* RecentMessageRemoteQuery.swift */; };
 		4877BF881FC4691B00885C60 /* InboxRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877BF871FC4691B00885C60 /* InboxRemoteQuery.swift */; };
+		4877C2CD1FD987D7004F1AFB /* ChatRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4877C2CC1FD987D7004F1AFB /* ChatRemoteWriter.swift */; };
 		4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B4881FC2854100611DA3 /* HomeSceneTheme.swift */; };
 		4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B48A1FC2871B00611DA3 /* HomeSceneTabSetup.swift */; };
 		4879B48D1FC28C3F00611DA3 /* HomeSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */; };
@@ -280,6 +281,7 @@
 		4877BF831FC4643400885C60 /* ChatsRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRemoteQuery.swift; sourceTree = "<group>"; };
 		4877BF851FC466BE00885C60 /* RecentMessageRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageRemoteQuery.swift; sourceTree = "<group>"; };
 		4877BF871FC4691B00885C60 /* InboxRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxRemoteQuery.swift; sourceTree = "<group>"; };
+		4877C2CC1FD987D7004F1AFB /* ChatRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteWriter.swift; sourceTree = "<group>"; };
 		4879B4881FC2854100611DA3 /* HomeSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTheme.swift; sourceTree = "<group>"; };
 		4879B48A1FC2871B00611DA3 /* HomeSceneTabSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTabSetup.swift; sourceTree = "<group>"; };
 		4879B48C1FC28C3F00611DA3 /* HomeSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneTests.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 				487B536A1FC9C094006D072F /* RemoteWriterResult.swift */,
 				48C55DD11FCE9D7700302DB2 /* TypingStatusRemoteWriter.swift */,
 				487365741FD84278004DE6C2 /* ContactRemoteWriter.swift */,
+				4877C2CC1FD987D7004F1AFB /* ChatRemoteWriter.swift */,
 			);
 			path = Writer;
 			sourceTree = "<group>";
@@ -1261,6 +1264,7 @@
 				48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */,
 				4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */,
 				48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */,
+				4877C2CD1FD987D7004F1AFB /* ChatRemoteWriter.swift in Sources */,
 				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
 				488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */,
 				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,
