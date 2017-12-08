@@ -20,4 +20,12 @@ class PersonRemoteServiceMock: PersonRemoteService {
             completion(.err(ServiceError("Person Remote Service Error")))
         }
     }
+    
+    func getProfile(of personID: String, completion: @escaping (ServiceResult<Person>) -> Void) {
+        
+    }
+    
+    func getMyProfile(completion: @escaping (ServiceResult<Person>) -> Void) {
+        
+    }
 }
