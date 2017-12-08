@@ -23,3 +23,14 @@ struct Chat {
     }
 }
 
+extension Chat: Hashable {
+    
+    var hashValue: Int {
+        return id.hashValue
+    }
+    
+    static func ==(lhs: Chat, rhs: Chat) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
