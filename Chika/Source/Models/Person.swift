@@ -29,3 +29,14 @@ extension Person: Hashable {
         return lhs.id == rhs.id
     }
 }
+
+struct Contact {
+    
+    var person: Person
+    var chat: Chat
+    
+    init() {
+        person = Person()
+        chat = Chat()
+    }
+}
