@@ -7,6 +7,7 @@
 //
 
 import FirebaseDatabase
+import FirebaseAuth
 
 protocol PersonsRemoteQuery: class {
     
@@ -37,8 +38,10 @@ class PersonsRemoteQueryProvider: PersonsRemoteQuery {
     var database: Database
     var path: String
     var sort: PersonsSort
+    var meID: String
     
-    init(database: Database = Database.database(), path: String = "persons", sort: PersonsSort = PersonsSortProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), path: String = "persons", sort: PersonsSort = PersonsSortProvider()) {
+        self.meID = meID
         self.database = database
         self.path = path
         self.sort = sort
@@ -50,6 +53,7 @@ class PersonsRemoteQueryProvider: PersonsRemoteQuery {
             return
         }
         
+        let meID = self.meID
         let rootRef = database.reference()
         
         var persons = [Person]()
@@ -75,10 +79,23 @@ class PersonsRemoteQueryProvider: PersonsRemoteQuery {
                 var person = Person()
                 person.id = info["id"] as? String ?? ""
                 person.name = info["name"] as? String ?? ""
-                person.avatarURL = info["avatar_url"] as? String ?? ""
+                person.avatarURL = info["avatar:url"] as? String ?? ""
+                person.displayName = info["display:name"] as? String ?? ""
                 
-                persons.append(person)
-                personCounter += 1
+                if !meID.isEmpty && key == meID {
+                    let emailRef = rootRef.child("person:email/\(meID)/email")
+                    emailRef.observeSingleEvent(of: .value) { snapshot in
+                        if snapshot.exists(), let email = snapshot.value as? String {
+                            person.email = email
+                        }
+                        persons.append(person)
+                        personCounter += 1
+                    }
+                    
+                } else {
+                    persons.append(person)
+                    personCounter += 1
+                }
             }
         }
     }
