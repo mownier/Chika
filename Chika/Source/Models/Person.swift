@@ -11,11 +11,15 @@ struct Person {
     var id: String
     var name: String
     var avatarURL: String
+    var displayName: String
+    var email: String
     
     init() {
         id = ""
         name = ""
         avatarURL = ""
+        displayName = ""
+        email = ""
     }
 }
 
