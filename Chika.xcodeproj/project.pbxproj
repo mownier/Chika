@@ -106,6 +106,9 @@
 		488730E21FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */; };
 		488730E41FC2CF96001F9876 /* FirebaseDatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */; };
 		48876CF41FD68B16005E5EB7 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48876CF31FD68B16005E5EB7 /* EmailValidator.swift */; };
+		48888ACA1FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48888AC91FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift */; };
+		488D59431FDA780F005CCB40 /* ProfileSceneHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D59421FDA780F005CCB40 /* ProfileSceneHeaderView.swift */; };
+		488D59451FDA7BF8005CCB40 /* ProfileSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D59441FDA7BF8005CCB40 /* ProfileSceneItem.swift */; };
 		488D87CD1FD6405A00E690BD /* ContactsSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */; };
 		488D87CF1FD6412200E690BD /* ContactsSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87CE1FD6412200E690BD /* ContactsSceneData.swift */; };
 		488D87D11FD6414E00E690BD /* ContactsSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */; };
@@ -180,6 +183,13 @@
 		48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */; };
 		48D627511FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D627501FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift */; };
 		48D627531FD53C600016868E /* PresenceRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D627521FD53C600016868E /* PresenceRemoteListenerMock.swift */; };
+		48D9E2C71FDA6CA500A37A3D /* ProfileScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2C61FDA6CA500A37A3D /* ProfileScene.swift */; };
+		48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2C81FDA6CC200A37A3D /* ProfileSceneTheme.swift */; };
+		48D9E2CB1FDA6CD300A37A3D /* ProfileSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2CA1FDA6CD300A37A3D /* ProfileSceneWorker.swift */; };
+		48D9E2CD1FDA6CE700A37A3D /* ProfileSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2CC1FDA6CE700A37A3D /* ProfileSceneFlow.swift */; };
+		48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2CE1FDA6D0400A37A3D /* ProfileSceneData.swift */; };
+		48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2D01FDA6D2800A37A3D /* ProfileSceneSetup.swift */; };
+		48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2D21FDA6DAE00A37A3D /* ProfileSceneFactory.swift */; };
 		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
 		48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */; };
 		48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */; };
@@ -314,6 +324,9 @@
 		488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseMock.swift; sourceTree = "<group>"; };
 		48876CF31FD68B16005E5EB7 /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
+		48888AC91FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneCellFactory.swift; sourceTree = "<group>"; };
+		488D59421FDA780F005CCB40 /* ProfileSceneHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneHeaderView.swift; sourceTree = "<group>"; };
+		488D59441FDA7BF8005CCB40 /* ProfileSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneItem.swift; sourceTree = "<group>"; };
 		488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneTheme.swift; sourceTree = "<group>"; };
 		488D87CE1FD6412200E690BD /* ContactsSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneData.swift; sourceTree = "<group>"; };
 		488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneWorker.swift; sourceTree = "<group>"; };
@@ -388,6 +401,13 @@
 		48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneIndexView.swift; sourceTree = "<group>"; };
 		48D627501FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingStatusRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48D627521FD53C600016868E /* PresenceRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteListenerMock.swift; sourceTree = "<group>"; };
+		48D9E2C61FDA6CA500A37A3D /* ProfileScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScene.swift; sourceTree = "<group>"; };
+		48D9E2C81FDA6CC200A37A3D /* ProfileSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneTheme.swift; sourceTree = "<group>"; };
+		48D9E2CA1FDA6CD300A37A3D /* ProfileSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneWorker.swift; sourceTree = "<group>"; };
+		48D9E2CC1FDA6CE700A37A3D /* ProfileSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneFlow.swift; sourceTree = "<group>"; };
+		48D9E2CE1FDA6D0400A37A3D /* ProfileSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneData.swift; sourceTree = "<group>"; };
+		48D9E2D01FDA6D2800A37A3D /* ProfileSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneSetup.swift; sourceTree = "<group>"; };
+		48D9E2D21FDA6DAE00A37A3D /* ProfileSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneFactory.swift; sourceTree = "<group>"; };
 		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
 		48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerMock.swift; sourceTree = "<group>"; };
 		48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -441,6 +461,7 @@
 				48E019971FBD5D93008D94DE /* Home */,
 				4879B48E1FC28DC300611DA3 /* Inbox */,
 				48CDD7621FBEC2C5009269A6 /* Initial */,
+				48D9E2C51FDA6BDB00A37A3D /* Profile */,
 				489FE1C41FC05A7A0062E1AB /* Register */,
 				48B4D0141FBAD86A008C78F6 /* Sign In */,
 			);
@@ -893,6 +914,23 @@
 			path = Initial;
 			sourceTree = "<group>";
 		};
+		48D9E2C51FDA6BDB00A37A3D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				48D9E2C61FDA6CA500A37A3D /* ProfileScene.swift */,
+				48D9E2CE1FDA6D0400A37A3D /* ProfileSceneData.swift */,
+				48D9E2D21FDA6DAE00A37A3D /* ProfileSceneFactory.swift */,
+				48D9E2CC1FDA6CE700A37A3D /* ProfileSceneFlow.swift */,
+				488D59421FDA780F005CCB40 /* ProfileSceneHeaderView.swift */,
+				488D59441FDA7BF8005CCB40 /* ProfileSceneItem.swift */,
+				48D9E2D01FDA6D2800A37A3D /* ProfileSceneSetup.swift */,
+				48D9E2C81FDA6CC200A37A3D /* ProfileSceneTheme.swift */,
+				48D9E2CA1FDA6CD300A37A3D /* ProfileSceneWorker.swift */,
+				48888AC91FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		48E019971FBD5D93008D94DE /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,8 +1303,10 @@
 				4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */,
 				48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */,
 				4877C2CD1FD987D7004F1AFB /* ChatRemoteWriter.swift in Sources */,
+				488D59451FDA7BF8005CCB40 /* ProfileSceneItem.swift in Sources */,
 				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
 				488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */,
+				48D9E2CD1FDA6CE700A37A3D /* ProfileSceneFlow.swift in Sources */,
 				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,
 				4879B4921FC28E1600611DA3 /* InboxSceneTheme.swift in Sources */,
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
@@ -1279,8 +1319,10 @@
 				487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */,
 				487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */,
 				488D87D51FD641B300E690BD /* ContactsSceneCellFactory.swift in Sources */,
+				48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
+				48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */,
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
 				48A743BA1FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift in Sources */,
 				4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */,
@@ -1301,7 +1343,9 @@
 				4879B4981FC29A4A00611DA3 /* Chat.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
 				489FE1C61FC05A9F0062E1AB /* RegisterScene.swift in Sources */,
+				488D59431FDA780F005CCB40 /* ProfileSceneHeaderView.swift in Sources */,
 				482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */,
+				48D9E2CB1FDA6CD300A37A3D /* ProfileSceneWorker.swift in Sources */,
 				488D87DB1FD643E800E690BD /* ContactsRemoteQuery.swift in Sources */,
 				487767091FC6AF65008E865F /* ConvoSceneFactory.swift in Sources */,
 				4877BF881FC4691B00885C60 /* InboxRemoteQuery.swift in Sources */,
@@ -1310,6 +1354,7 @@
 				48BFF7711FC4756F00BAE311 /* InboxSceneWorker.swift in Sources */,
 				4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */,
 				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
+				48D9E2C71FDA6CA500A37A3D /* ProfileScene.swift in Sources */,
 				48A693111FD5A20500ED4024 /* ContactsSceneSearchView.swift in Sources */,
 				4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */,
 				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
@@ -1317,14 +1362,17 @@
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
 				48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */,
+				48888ACA1FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift in Sources */,
 				488D87CD1FD6405A00E690BD /* ContactsSceneTheme.swift in Sources */,
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
 				489FE1CC1FC05E430062E1AB /* RegisterSceneFlow.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
+				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
+				48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */,
 				48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */,
 				488D87D11FD6414E00E690BD /* ContactsSceneWorker.swift in Sources */,
 				48876CF41FD68B16005E5EB7 /* EmailValidator.swift in Sources */,
