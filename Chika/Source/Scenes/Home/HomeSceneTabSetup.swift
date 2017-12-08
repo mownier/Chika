@@ -21,6 +21,7 @@ extension HomeScene {
             
             var inbox: InboxSceneFactory
             var contacts: ContactsSceneFactory
+            var profile: ProfileSceneFactory
         }
         
         var factory: Factory
@@ -28,7 +29,7 @@ extension HomeScene {
         var subscenes: [UIViewController] {
             let item1Scene = factory.inbox.build()
             let item2Scene = factory.contacts.build()
-            let item3Scene = UIViewController()
+            let item3Scene = factory.profile.build()
             
             let item1 = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
             let item2 = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
@@ -55,7 +56,8 @@ extension HomeScene {
         convenience init() {
             let inbox = InboxScene.Factory()
             let contacts = ContactsScene.Factory()
-            let factory = Factory(inbox: inbox, contacts: contacts)
+            let profile = ProfileScene.Factory()
+            let factory = Factory(inbox: inbox, contacts: contacts, profile: profile)
             self.init(factory: factory)
         }
     }
