@@ -43,4 +43,21 @@ struct Contact {
         person = Person()
         chat = Chat()
     }
+    
+    struct Request {
+        
+        var id: String
+        var requestee: Person
+        var requestor: Person
+        var message: String
+        var createdOn: Double
+        
+        init() {
+            self.id = ""
+            self.message = ""
+            self.requestee = Person()
+            self.requestor = Person()
+            self.createdOn = 0
+        }
+    }
 }
