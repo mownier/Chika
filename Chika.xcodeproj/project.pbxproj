@@ -103,6 +103,7 @@
 		48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */; };
 		48803F351FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */; };
 		48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */; };
+		48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48819BDE1FDC1E57002148B6 /* ContactRequestRemoteListener.swift */; };
 		488639311FCBAE4A003108A1 /* RemoteListenerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */; };
 		488639331FCBAE99003108A1 /* RecentChatRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488639321FCBAE99003108A1 /* RecentChatRemoteListener.swift */; };
 		488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730C81FC2A497001F9876 /* InboxSceneSetup.swift */; };
@@ -333,6 +334,7 @@
 		48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneTypingView.swift; sourceTree = "<group>"; };
+		48819BDE1FDC1E57002148B6 /* ContactRequestRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestRemoteListener.swift; sourceTree = "<group>"; };
 		488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteListenerResult.swift; sourceTree = "<group>"; };
 		488639321FCBAE99003108A1 /* RecentChatRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatRemoteListener.swift; sourceTree = "<group>"; };
 		488730C81FC2A497001F9876 /* InboxSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneSetup.swift; sourceTree = "<group>"; };
@@ -703,12 +705,13 @@
 		4886392F1FCBADE6003108A1 /* Listener */ = {
 			isa = PBXGroup;
 			children = (
-				48B37E8C1FCBD474004978F1 /* RecentMessageRemoteListener.swift */,
-				488639321FCBAE99003108A1 /* RecentChatRemoteListener.swift */,
+				483873911FD667E100CAC325 /* ContactRemoteListener.swift */,
+				48819BDE1FDC1E57002148B6 /* ContactRequestRemoteListener.swift */,
 				48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */,
+				488639321FCBAE99003108A1 /* RecentChatRemoteListener.swift */,
+				48B37E8C1FCBD474004978F1 /* RecentMessageRemoteListener.swift */,
 				488639301FCBAE4A003108A1 /* RemoteListenerResult.swift */,
 				48C55DCF1FCE6B1800302DB2 /* TypingStatusRemoteListener.swift */,
-				483873911FD667E100CAC325 /* ContactRemoteListener.swift */,
 			);
 			path = Listener;
 			sourceTree = "<group>";
@@ -1422,6 +1425,7 @@
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
 				489FE1CC1FC05E430062E1AB /* RegisterSceneFlow.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
+				48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */,
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
