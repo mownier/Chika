@@ -50,6 +50,7 @@ class ProfileScene: UIViewController {
         let cellFactory = CellFactory()
         self.init(theme: theme, worker: worker, data: data, flow: flow, setup: setup, cellFactory: cellFactory)
         worker.output = self
+        flow.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -220,6 +221,6 @@ extension ProfileScene: ProfileSceneInteraction {
     }
     
     func didTapRequests() {
-        
+        let _ = flow.goToContactRequest()
     }
 }
