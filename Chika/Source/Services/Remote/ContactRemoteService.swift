@@ -11,16 +11,20 @@ protocol ContactRemoteService: class {
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void)
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
+    func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void)
+    func getPendingRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void)
 }
 
 class ContactRemoteServiceProvider: ContactRemoteService {
     
     var contactsQuery: ContactsRemoteQuery
     var contactWriter: ContactRemoteWriter
+    var contactRequestsQuery: ContactRequestsRemoteQuery
     
-    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider(), contactWriter: ContactRemoteWriter = ContactRemoteWriterProvider()) {
+    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider(), contactWriter: ContactRemoteWriter = ContactRemoteWriterProvider(), contactRequestsQuery: ContactRequestsRemoteQuery = ContactRequestsRemoteQueryProvider()) {
         self.contactsQuery = contactsQuery
         self.contactWriter = contactWriter
+        self.contactRequestsQuery = contactRequestsQuery
     }
     
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void) {
@@ -53,6 +57,28 @@ class ContactRemoteServiceProvider: ContactRemoteService {
             }
             
             callback(.ok("OK"))
+        }
+    }
+    
+    func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void) {
+        contactRequestsQuery.getSentRequests { requests in
+            guard !requests.isEmpty else {
+                callback(.err(ServiceError("no sent requests")))
+                return
+            }
+            
+            callback(.ok(requests))
+        }
+    }
+    
+    func getPendingRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void) {
+        contactRequestsQuery.getPendingRequests { requests in
+            guard !requests.isEmpty else {
+                callback(.err(ServiceError("no pending requests")))
+                return
+            }
+            
+            callback(.ok(requests))
         }
     }
 }
