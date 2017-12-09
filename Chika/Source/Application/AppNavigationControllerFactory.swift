@@ -20,6 +20,7 @@ protocol AppNavigationBarTheme: class {
     var isTranslucent: Bool { get }
     var barTintColor: UIColor? { get }
     var tintColor: UIColor? { get }
+    var barTitleFont: UIFont { get }
 }
 
 extension UINavigationBar {
@@ -33,6 +34,7 @@ extension UINavigationBar {
             var isTranslucent: Bool = false
             var barTintColor: UIColor? = .white
             var tintColor: UIColor? = .black
+            var barTitleFont: UIFont = UIFont(name: "AvenirNext-Bold", size: 16)!
         }
         
         class Empty: AppNavigationBarTheme {
@@ -42,6 +44,7 @@ extension UINavigationBar {
             var isTranslucent: Bool = true
             var barTintColor: UIColor?
             var tintColor: UIColor? = .black
+            var barTitleFont: UIFont = UIFont(name: "AvenirNext-Bold", size: 16)!
         }
     }
 }
@@ -63,6 +66,7 @@ extension UINavigationController {
             nav.navigationBar.setBackgroundImage(navBarTheme.bgImage, for: .default)
             nav.navigationBar.barTintColor = navBarTheme.barTintColor
             nav.navigationBar.tintColor = navBarTheme.tintColor
+            nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: navBarTheme.barTitleFont]
             return nav
         }
     }
