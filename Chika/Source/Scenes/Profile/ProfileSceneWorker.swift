@@ -25,9 +25,9 @@ extension ProfileScene {
         
         weak var output: ProfileSceneWorkerOutput?
         var service: PersonRemoteService
-        var listener: ContactRemoteListener
+        var listener: ContactRequestRemoteListener
         
-        init(service: PersonRemoteService = PersonRemoteServiceProvider(), listener: ContactRemoteListener = ContactRemoteListenerProvider()) {
+        init(service: PersonRemoteService = PersonRemoteServiceProvider(), listener: ContactRequestRemoteListener = ContactRequestRemoteListenerProvider()) {
             self.service = service
             self.listener = listener
         }
@@ -45,7 +45,7 @@ extension ProfileScene {
         }
         
         func listenOnContactRequests() {
-            let _ = listener.listenOnContactRequests { [weak self] _ in
+            let _ = listener.listen { [weak self] _ in
                 self?.output?.workerDidReceiveContactRequest()
             }
         }
