@@ -203,6 +203,7 @@
 		48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2CE1FDA6D0400A37A3D /* ProfileSceneData.swift */; };
 		48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2D01FDA6D2800A37A3D /* ProfileSceneSetup.swift */; };
 		48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9E2D21FDA6DAE00A37A3D /* ProfileSceneFactory.swift */; };
+		48DDF0711FDE61A700D79BBD /* AppImageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DDF0701FDE61A700D79BBD /* AppImageCreator.swift */; };
 		48E0198A1FBD43E3008D94DE /* SignInSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */; };
 		48E0198C1FBD45A4008D94DE /* SignInSceneWorkerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */; };
 		48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */; };
@@ -434,6 +435,7 @@
 		48D9E2CE1FDA6D0400A37A3D /* ProfileSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneData.swift; sourceTree = "<group>"; };
 		48D9E2D01FDA6D2800A37A3D /* ProfileSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneSetup.swift; sourceTree = "<group>"; };
 		48D9E2D21FDA6DAE00A37A3D /* ProfileSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneFactory.swift; sourceTree = "<group>"; };
+		48DDF0701FDE61A700D79BBD /* AppImageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImageCreator.swift; sourceTree = "<group>"; };
 		48E019891FBD43E3008D94DE /* SignInSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowMock.swift; sourceTree = "<group>"; };
 		48E0198B1FBD45A4008D94DE /* SignInSceneWorkerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneWorkerMock.swift; sourceTree = "<group>"; };
 		48E0198D1FBD58C9008D94DE /* SignInSceneFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlowTests.swift; sourceTree = "<group>"; };
@@ -815,6 +817,7 @@
 			children = (
 				483FC2F11FBAD25300545269 /* AppDelegate.swift */,
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
+				48DDF0701FDE61A700D79BBD /* AppImageCreator.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
 				482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */,
 				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
@@ -1433,6 +1436,7 @@
 				4869019B1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
 				48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */,
+				48DDF0711FDE61A700D79BBD /* AppImageCreator.swift in Sources */,
 				48C0515D1FBF2E3C009DDFC8 /* SignInSceneWaypoint.swift in Sources */,
 				488D87D11FD6414E00E690BD /* ContactsSceneWorker.swift in Sources */,
 				48876CF41FD68B16005E5EB7 /* EmailValidator.swift in Sources */,
