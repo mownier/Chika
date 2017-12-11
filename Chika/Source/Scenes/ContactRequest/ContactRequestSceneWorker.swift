@@ -9,16 +9,24 @@
 protocol ContactRequestSceneWorker: class {
 
     func fetchSentRequests()
-    func fetchPendingRequests()
     func listenOnContactRequests()
+    func unlistenOnContactRequests()
+    func revokeSentRequest(withID id: String)
+    func ignorePendingRequest(withID id: String)
+    func acceptPendingRequest(withID id: String)
 }
 
 protocol ContactRequestSceneWorkerOutput: class {
 
-    func workerDidFetchPendingRequests(_ requests: [Contact.Request])
     func workerDidFetchSentRequests(_ requests: [Contact.Request])
-    func workerDidFetchPendingRequestsWithError(_ info: Error)
     func workerDidFetchSentRequestsWithError(_ info: Error)
+    func workerDidReceiveContactRequest(_ request: Contact.Request)
+    func workerDidRevokeSentRequest(withID id: String)
+    func workerDidIgnorePendingRequest(withID id: String)
+    func workerDidAcceptPendingRequest(withID id: String)
+    func workerDidRevokeSentRequest(withError error: Error, id: String)
+    func workerDidIgnorePendingRequest(withError error: Error, id: String)
+    func workerDidAcceptPendingRequest(withError error: Error, id: String)
 }
 
 extension ContactRequestScene {
@@ -27,9 +35,11 @@ extension ContactRequestScene {
     
         weak var output: ContactRequestSceneWorkerOutput?
         var service: ContactRemoteService
+        var listener: ContactRequestRemoteListener
         
-        init(service: ContactRemoteService = ContactRemoteServiceProvider()) {
+        init(service: ContactRemoteService = ContactRemoteServiceProvider(), listener: ContactRequestRemoteListener = ContactRequestRemoteListenerProvider()) {
             self.service = service
+            self.listener = listener
         }
         
         func fetchSentRequests() {
@@ -44,20 +54,50 @@ extension ContactRequestScene {
             }
         }
         
-        func fetchPendingRequests() {
-            service.getPendingRequests { [weak self] result in
+        func listenOnContactRequests() {
+            let _ = listener.listen { [weak self] request in
+                self?.output?.workerDidReceiveContactRequest(request)
+            }
+        }
+        
+        func unlistenOnContactRequests() {
+            let _ = listener.unlisten()
+        }
+        
+        func revokeSentRequest(withID id: String) {
+            service.revokeSentRequest(withID: id) { [weak self] result in
                 switch result {
                 case .err(let info):
-                    self?.output?.workerDidFetchPendingRequestsWithError(info)
-                    
-                case .ok(let requests):
-                    self?.output?.workerDidFetchPendingRequests(requests)
+                    self?.output?.workerDidRevokeSentRequest(withError: info, id: id)
+                
+                case .ok(let id):
+                    self?.output?.workerDidRevokeSentRequest(withID: id)
                 }
             }
         }
         
-        func listenOnContactRequests() {
-            
+        func acceptPendingRequest(withID id: String) {
+            service.acceptPendingRequest(withID: id) { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidAcceptPendingRequest(withError: info, id: id)
+                    
+                case .ok(let id):
+                    self?.output?.workerDidAcceptPendingRequest(withID: id)
+                }
+            }
+        }
+        
+        func ignorePendingRequest(withID id: String) {
+            service.ignorePendingRequest(withID: id) { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidIgnorePendingRequest(withError: info, id: id)
+                    
+                case .ok(let id):
+                    self?.output?.workerDidIgnorePendingRequest(withID: id)
+                }
+            }
         }
     }
 }

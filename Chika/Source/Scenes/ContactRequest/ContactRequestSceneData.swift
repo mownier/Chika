@@ -15,6 +15,11 @@ protocol ContactRequestSceneData: class {
     func appendSentRequests(_ requests: [Contact.Request])
     func appendPendingRequests(_ requests: [Contact.Request])
     func headerTitle(in section: Int) -> String?
+    func updateMessageShown(in section: Int, at row: Int, isShown: Bool)
+    func updateAcceptStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
+    func updateIgnoreStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
+    func updateRevokeStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
+    func sectionCategory(for section: Int) -> ContactRequestSceneItem.SectionCategory
 }
 
 extension ContactRequestScene {
@@ -24,15 +29,7 @@ extension ContactRequestScene {
         var sent: [ContactRequestSceneItem]
         var pending: [ContactRequestSceneItem]
         var sectionCount: Int {
-            if !sent.isEmpty && !pending.isEmpty {
-                return 2
-            
-            } else if !sent.isEmpty || !pending.isEmpty {
-                return 1
-            
-            } else {
-                return 0
-            }
+            return 2
         }
         
         init() {
@@ -43,7 +40,7 @@ extension ContactRequestScene {
         func itemCount(in section: Int) -> Int {
             return value(in: section,
                 pendingValue: { return pending.count },
-                sentValue: { return sent.count },
+                sentValue:    { return sent.count },
                 defaultValue: { return 0 })
         }
         
@@ -60,41 +57,85 @@ extension ContactRequestScene {
                 pendingValue: {
                     guard row >= 0, row < pending.count else { return nil }
                     return pending[row]
-                    
-                }, sentValue: {
+                },
+                sentValue: {
                     guard row >= 0, row < sent.count else { return nil }
                     return sent[row]
-                    
-                }, defaultValue: {
+                },
+                defaultValue: {
                     return nil
                 })
         }
         
         func headerTitle(in section: Int) -> String? {
             return value(in: section,
-                pendingValue: { return "PENDING" },
-                sentValue: { return "SENT" },
+                pendingValue: { return pending.isEmpty ? nil : "PENDING" },
+                sentValue:    { return sent.isEmpty ? nil : "SENT" },
                 defaultValue: { return nil })
         }
         
-        private func value<T>(in section: Int, pendingValue: () -> T, sentValue: () -> T, defaultValue: () -> T) -> T {
-            if !pending.isEmpty && !sent.isEmpty {
-                switch section {
-                case 0: return pendingValue()
-                case 1: return sentValue()
-                default: return defaultValue()
+        func updateMessageShown(in section: Int, at row: Int, isShown: Bool) {
+            switch section {
+            case 0:
+                guard row >= 0, row < pending.count else { return }
+                pending[row].isMessageShown = isShown
+            
+            case 1:
+                guard row >= 0, row < sent.count else { return }
+                sent[row].isMessageShown = isShown
+            
+            default:
+                break
+            }
+        }
+        
+        func updateAcceptStatus(for id: String, status: ContactRequestSceneItem.ActionStatus) {
+            updateStatus(for: id, status: status, actionName: .accept)
+        }
+        
+        func updateIgnoreStatus(for id: String, status: ContactRequestSceneItem.ActionStatus) {
+            updateStatus(for: id, status: status, actionName: .ignore)
+        }
+        
+        func updateRevokeStatus(for id: String, status: ContactRequestSceneItem.ActionStatus) {
+            updateStatus(for: id, status: status, actionName: .revoke)
+        }
+        
+        func updateStatus(for id: String, status: ContactRequestSceneItem.ActionStatus, actionName: ContactRequestSceneItem.ActionName) {
+            var index = pending.index(where: { $0.request.id == id })
+            
+            if index != nil {
+                switch actionName {
+                case .accept: pending[index!].action.accept = status
+                case .ignore: pending[index!].action.ignore = status
+                default: break
+                }
+                return
+            }
+            
+            index = sent.index(where: { $0.request.id == id })
+            
+            if index != nil {
+                switch actionName {
+                case .revoke: sent[index!].action.revoke = status
+                default: break
                 }
             }
-            
-            if !pending.isEmpty {
-                return pendingValue()
+        }
+        
+        func sectionCategory(for section: Int) -> ContactRequestSceneItem.SectionCategory {
+             return value(in: section,
+                pendingValue: { return .pending },
+                sentValue:    { return .sent },
+                defaultValue: { return .none })
+        }
+        
+        private func value<T>(in section: Int, pendingValue: () -> T, sentValue: () -> T, defaultValue: () -> T) -> T {
+            switch section {
+            case 0:  return pendingValue()
+            case 1:  return sentValue()
+            default: return defaultValue()
             }
-            
-            if !sent.isEmpty {
-                return sentValue()
-            }
-            
-            return defaultValue()
         }
     }
 }
