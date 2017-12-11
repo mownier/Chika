@@ -48,7 +48,6 @@ struct Contact {
         
         var id: String
         var requestee: Person
-        var requestor: Person
         var message: String
         var createdOn: Double
         
@@ -56,7 +55,6 @@ struct Contact {
             self.id = ""
             self.message = ""
             self.requestee = Person()
-            self.requestor = Person()
             self.createdOn = 0
         }
     }
