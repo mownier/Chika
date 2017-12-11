@@ -12,7 +12,9 @@ protocol ContactRemoteService: class {
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
     func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void)
-    func getPendingRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void)
+    func revokeSentRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
+    func acceptPendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
+    func ignorePendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
 }
 
 class ContactRemoteServiceProvider: ContactRemoteService {
@@ -71,14 +73,26 @@ class ContactRemoteServiceProvider: ContactRemoteService {
         }
     }
     
-    func getPendingRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void) {
-        contactRequestsQuery.getPendingRequests { requests in
-            guard !requests.isEmpty else {
-                callback(.err(ServiceError("no pending requests")))
+    func revokeSentRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
+        contactWriter.revokeSentRequest(withID: id) { error in
+            
+        }
+    }
+    
+    func acceptPendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
+        contactWriter.acceptPendingRequest(withID: id) { error in
+            guard error == nil else {
+                callback(.err(error!))
                 return
             }
             
-            callback(.ok(requests))
+            callback(.ok(id))
+        }
+    }
+    
+    func ignorePendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
+        contactWriter.ignorePendingRequest(withID: id) { error in
+            
         }
     }
 }

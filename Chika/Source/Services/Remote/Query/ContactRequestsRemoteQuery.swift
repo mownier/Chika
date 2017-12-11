@@ -12,15 +12,9 @@ import FirebaseAuth
 protocol ContactRequestsRemoteQuery: class {
 
     func getSentRequests(callback: @escaping ([Contact.Request]) -> Void)
-    func getPendingRequests(callback: @escaping ([Contact.Request]) -> Void)
 }
 
 class ContactRequestsRemoteQueryProvider: ContactRequestsRemoteQuery {
-    
-    private enum Request {
-        
-        case sent, pending
-    }
     
     var meID: String
     var database: Database
@@ -33,29 +27,15 @@ class ContactRequestsRemoteQueryProvider: ContactRequestsRemoteQuery {
     }
     
     func getSentRequests(callback: @escaping ([Contact.Request]) -> Void) {
-       getRequests(.sent, callback: callback)
-    }
-    
-    func getPendingRequests(callback: @escaping ([Contact.Request]) -> Void) {
-       getRequests(.pending, callback: callback)
-    }
-    
-    private func getRequests(_ type: Request, callback: @escaping ([Contact.Request]) -> Void) {
         let meID = self.meID
         guard !meID.isEmpty else {
             callback([])
             return
         }
         
-        let queryChild: String
-        switch type {
-        case .sent: queryChild = "requestor"
-        case .pending: queryChild = "requestee"
-        }
-        
         let personsQuery = self.personsQuery
         let rootRef = database.reference()
-        let query = rootRef.child("person:contact:request:established/\(meID)").queryOrdered(byChild: queryChild).queryEqual(toValue: meID)
+        let query = rootRef.child("person:contact:request:established/\(meID)").queryOrdered(byChild: "requestor").queryEqual(toValue: meID)
         query.observeSingleEvent(of: .value) { snapshot in
             guard snapshot.exists() else {
                 callback([])
@@ -89,11 +69,7 @@ class ContactRequestsRemoteQueryProvider: ContactRequestsRemoteQuery {
                     request.id = value?["id"] as? String ?? ""
                     request.message = value?["message"] as? String ?? ""
                     request.createdOn = value?["created:on"] as? Double ?? 0
-                    
-                    switch type {
-                    case .sent: request.requestee = person
-                    case .pending: request.requestor = person
-                    }
+                    request.requestee = person
                     
                     return request
                 })

@@ -13,10 +13,8 @@ protocol ContactRemoteListener: class {
 
     func listenOnAddedContact(callback: @escaping (Contact) -> Void) -> Bool
     func listenOnRemovedContact(callback: @escaping (String) -> Void) -> Bool
-    func listenOnContactRequests(callback: @escaping (Person) -> Void) -> Bool
     func unlistenOnAddedConctact() -> Bool
     func unlistenOnRemovedContact() -> Bool
-    func unlistenOnContactRequests() -> Bool
 }
 
 class ContactRemoteListenerProvider: ContactRemoteListener {
@@ -96,37 +94,6 @@ class ContactRemoteListenerProvider: ContactRemoteListener {
         return true
     }
     
-    func listenOnContactRequests(callback: @escaping (Person) -> Void) -> Bool {
-        let meID = self.meID
-        
-        guard !meID.isEmpty else {
-            return false
-        }
-        
-        let personsQuery = self.personsQuery
-        let rootRef = database.reference()
-        let ref = rootRef.child("person:contact:request:established/\(meID)")
-        let handle = ref.queryOrdered(byChild: "created:on").observe(.childAdded) { snapshot in
-            guard snapshot.exists(), !snapshot.key.isEmpty, snapshot.hasChild("requestee"),
-                let requestee = snapshot.childSnapshot(forPath: "requestee").value as? String, requestee == meID else {
-                    return
-            }
-            
-            personsQuery.getPersons(for: [snapshot.key]) { persons in
-                let persons = Array(Set(persons.filter({ !$0.id.isEmpty && $0.id == snapshot.key})))
-                
-                guard persons.count == 1 else {
-                    return
-                }
-                
-                callback(persons[0])
-            }
-        }
-        
-        handles["onContactRequests"] = handle
-        return true
-    }
-    
     func unlistenOnAddedConctact() -> Bool {
         guard !meID.isEmpty, let handle = handles["onAdded"] else {
             return false
@@ -145,17 +112,6 @@ class ContactRemoteListenerProvider: ContactRemoteListener {
         
         let rootRef = database.reference()
         let ref = rootRef.child("person:contacts/\(meID)")
-        ref.removeObserver(withHandle: handle)
-        return true
-    }
-    
-    func unlistenOnContactRequests() -> Bool {
-        guard !meID.isEmpty, let handle = handles["onContactRequests"] else {
-            return false
-        }
-        
-        let rootRef = database.reference()
-        let ref = rootRef.child("person:contact:request:established/\(meID)")
         ref.removeObserver(withHandle: handle)
         return true
     }

@@ -11,7 +11,9 @@ import FirebaseAuth
 
 protocol ContactRemoteWriter: class {
 
-    func approveContactRequest(withID id: String, callback: @escaping (Error?) -> Void)
+    func revokeSentRequest(withID id: String, callback: @escaping (Error?) -> Void)
+    func acceptPendingRequest(withID id: String, callback: @escaping (Error?) -> Void)
+    func ignorePendingRequest(withID id: String, callback: @escaping (Error?) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (Error?) -> Void)
 }
 
@@ -55,7 +57,39 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
         }
     }
     
-    func approveContactRequest(withID id: String, callback: @escaping (Error?) -> Void) {
+    func revokeSentRequest(withID id: String, callback: @escaping (Error?) -> Void) {
+        
+    }
+    
+    func ignorePendingRequest(withID id: String, callback: @escaping (Error?) -> Void) {
+        guard !id.isEmpty else {
+            callback(RemoteWriterError("pending request ID is empty"))
+            return
+        }
+        
+        let meID = self.meID
+        
+        guard !meID.isEmpty else {
+            callback(RemoteWriterError("current user ID is empty"))
+            return
+        }
+        
+        let rootRef = database.reference()
+        let ref = rootRef.child("person:contact:request:established/\(meID)")
+        let query = ref.queryOrdered(byChild: "id").queryEqual(toValue: id)
+        query.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                callback(RemoteWriterError("pending request not found"))
+                return
+            }
+            
+            ref.child(snapshot.key).removeValue { error, _ in
+                callback(error)
+            }
+        }
+    }
+    
+    func acceptPendingRequest(withID id: String, callback: @escaping (Error?) -> Void) {
         let meID = self.meID
         
         guard !meID.isEmpty else {
