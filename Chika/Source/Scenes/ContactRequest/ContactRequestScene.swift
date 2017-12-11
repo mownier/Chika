@@ -155,20 +155,7 @@ extension ContactRequestScene: ContactRequestSceneWorkerOutput {
     }
     
     func workerDidReceiveContactRequest(_ request: Contact.Request) {
-        var req: [Contact.Request] = [request, request, request, request, request].enumerated().map({
-            var req = $0.element
-            req.id = "\($0.offset):\(req.id)"
-            return req
-        })
-        data.appendPendingRequests(req)
-        
-        req = req.enumerated().map({
-            var req = $0.element
-            req.id = "\($0.offset):\(req.id)"
-            return req
-        })
-        data.appendSentRequests(req)
-//        data.appendPendingRequests([request])
+        data.appendPendingRequests([request])
         tableView.reloadData()
     }
     
