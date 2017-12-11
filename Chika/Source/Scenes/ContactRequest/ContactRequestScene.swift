@@ -161,26 +161,32 @@ extension ContactRequestScene: ContactRequestSceneWorkerOutput {
     
     func workerDidRevokeSentRequest(withID id: String) {
         data.updateRevokeStatus(for: id, status: .ok)
+        tableView.reloadData()
     }
     
     func workerDidAcceptPendingRequest(withID id: String) {
         data.updateAcceptStatus(for: id, status: .ok)
+        tableView.reloadData()
     }
     
     func workerDidIgnorePendingRequest(withID id: String) {
         data.updateIgnoreStatus(for: id, status: .ok)
+        tableView.reloadData()
     }
     
     func workerDidRevokeSentRequest(withError error: Error, id: String) {
         data.updateRevokeStatus(for: id, status: .retry)
+        tableView.reloadData()
     }
     
     func workerDidAcceptPendingRequest(withError error: Error, id: String) {
         data.updateAcceptStatus(for: id, status: .retry)
+        tableView.reloadData()
     }
     
     func workerDidIgnorePendingRequest(withError error: Error, id: String) {
         data.updateIgnoreStatus(for: id, status: .retry)
+        tableView.reloadData()
     }
 }
 
