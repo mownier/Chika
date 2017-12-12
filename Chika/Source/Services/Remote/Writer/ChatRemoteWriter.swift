@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol ChatRemoteWriter: class {
     
-    func createNewChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void)
+    func createGroupChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void)
 }
 
 class ChatRemoteWriterProvider: ChatRemoteWriter {
@@ -26,12 +26,17 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         self.chatsQuery = chatsQuery
     }
     
-    func createNewChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void) {
-        var ids = participantIDs
-        ids.append(meID)
-        let personIDs = Array(Set(ids))
+    func createGroupChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void) {
+        guard !meID.isEmpty else {
+            callback(.err(RemoteWriterError("current user ID is empty")))
+            return
+        }
         
-        guard personIDs.count > 1 else {
+        var personIDs = participantIDs
+        personIDs.append(meID)
+        personIDs = Array(Set(personIDs))
+        
+        guard personIDs.count > 2 else {
             callback(.err(RemoteWriterError("not enough participants")))
             return
         }
@@ -41,24 +46,24 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         let chatsRef = rootRef.child("chats")
         let key = chatsRef.childByAutoId().key
         
-        var value: [String: Any] = [
+        var participants: [String: Bool] = [:]
+        for personID in personIDs {
+            participants[personID] = true
+        }
+        
+        let newChat: [String: Any] = [
             "created_on": ServerValue.timestamp(),
             "updated_on": ServerValue.timestamp(),
-            "id": key
+            "id": key,
+            "creator": meID,
+            "participants": participants
         ]
         
-        if participantIDs.count == 2 {
-            value["creator"] = meID
-        }
+        let values: [String: Any] = [
+            "chats/\(key)": newChat
+        ]
         
-        var participantsValue: [String: Bool] = [:]
-        for personID in personIDs {
-            participantsValue[personID] = true
-        }
-        
-        value["participants"] = participantsValue
-        
-        chatsRef.child(key).setValue(value) { error, _ in
+        rootRef.updateChildValues(values) { error, _ in
             guard error == nil else {
                 callback(.err(error!))
                 return
