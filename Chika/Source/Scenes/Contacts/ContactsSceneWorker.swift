@@ -13,7 +13,7 @@ protocol ContactsSceneWorker: class {
     func listenOnAddedContact()
     func listenOnRemovedContact()
     func unlistenOnActiveStatus(for personID: String)
-    func searchPersonsToAdd(with keyword: String?)
+    func searchPeople(withKeyword keyword: String?)
     func sendContactRequest(to personID: String, message: String)
 }
 
@@ -26,8 +26,8 @@ protocol ContactsSceneWorkerOutput: class {
     func workerDidRequestContactWithError(_ error: Error, personID: String)
     func workerDidRequestContactOK(_ personID: String)
     func workerDidRemoveContact(_ personID: String)
-    func workerDidSearchPersonsToAdd(persons: [Person])
-    func workerDidSearchPersonsToAddWithError(_ error: Error)
+    func workerDidSearchPeopleWithObjects(_ objects: [PersonSearchObject])
+    func workerDidSearchPeopleWithError(_ error: Error)
 }
 
 extension ContactsScene {
@@ -40,25 +40,33 @@ extension ContactsScene {
             var contact: ContactRemoteListener
         }
         
+        struct Service {
+        
+            var search: SearchRemoteService
+            var contact: ContactRemoteService
+        }
+        
         weak var output: ContactsSceneWorkerOutput?
-        var contactService: ContactRemoteService
+        var service: Service
         var listener: Listener
         
-        init(contactService: ContactRemoteService, listener: Listener) {
-            self.contactService = contactService
+        init(service: Service, listener: Listener) {
+            self.service = service
             self.listener = listener
         }
         
         convenience init() {
             let contactService = ContactRemoteServiceProvider()
+            let search = SearchRemoteServiceProvider()
+            let service = Service(search: search, contact: contactService)
             let presence = PresenceRemoteListenerProvider()
             let contact = ContactRemoteListenerProvider()
             let listener = Listener(presence: presence, contact: contact)
-            self.init(contactService: contactService, listener: listener)
+            self.init(service: service, listener: listener)
         }
         
         func fetchContacts() {
-            contactService.getContacts { [weak self] result in
+            service.contact.getContacts { [weak self] result in
                 switch result {
                 case .err(let info):
                     self?.output?.workerDidFetchWithError(info)
@@ -91,26 +99,26 @@ extension ContactsScene {
             let _ = listener.presence.unlisten(personID: personID)
         }
         
-        func searchPersonsToAdd(with keyword: String?) {
+        func searchPeople(withKeyword keyword: String?) {
             guard keyword != nil else {
                 let error = AppError("search keyword is nil")
-                output?.workerDidSearchPersonsToAddWithError(error)
+                output?.workerDidSearchPeopleWithError(error)
                 return
             }
             
-            contactService.searchPersonsToAdd(with: keyword!) { [weak self] result in
+            service.search.searchPeople(withKeyword: keyword!) { [weak self] result in
                 switch result {
                 case .err(let info):
-                    self?.output?.workerDidSearchPersonsToAddWithError(info)
+                    self?.output?.workerDidSearchPeopleWithError(info)
                     
-                case .ok(let persons):
-                    self?.output?.workerDidSearchPersonsToAdd(persons: persons)
+                case .ok(let objects):
+                    self?.output?.workerDidSearchPeopleWithObjects(objects)
                 }
             }
         }
         
         func sendContactRequest(to personID: String, message: String) {
-            contactService.sendContactRequest(to: personID, message: message) { [weak self] result in
+            service.contact.sendContactRequest(to: personID, message: message) { [weak self] result in
                 switch result {
                 case .err(let info):
                     self?.output?.workerDidRequestContactWithError(info, personID: personID)
