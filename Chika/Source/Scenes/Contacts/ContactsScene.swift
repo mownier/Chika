@@ -338,6 +338,9 @@ extension ContactsScene: ContactsSceneWorkerOutput {
     
     func workerDidFetchWithError(_ error: Error) {
         tableView.reloadData()
+        
+        worker.listenOnAddedContact()
+        worker.listenOnRemovedContact()
     }
     
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool) {
