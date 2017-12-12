@@ -107,7 +107,8 @@ class ProfileScene: UIViewController {
         
         tabBarItem.badgeColor = theme.badgeBGColor
         worker.fetchProfile()
-        worker.listenOnContactRequests()
+        worker.listenOnAddedContactRequests()
+        worker.listenOnRemovedContactRequests()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,6 +208,17 @@ extension ProfileScene: ProfileSceneWorkerOutput {
         data.contactRequestCount += 1
         badge.text = "\(data.contactRequestCount)"
         badge.isHidden = false
+        
+        if !isAppeared {
+            tabBarItem?.badgeValue = badge.text
+        }
+    }
+    
+    func workerDidRemoveContactRequest() {
+        guard data.contactRequestCount > 0 else { return }
+        data.contactRequestCount -= 1
+        badge.text = data.contactRequestCount == 0 ? nil : "\(data.contactRequestCount)"
+        badge.isHidden = data.contactRequestCount == 0
         
         if !isAppeared {
             tabBarItem?.badgeValue = badge.text
