@@ -71,6 +71,11 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
         }
         
         for key in keys {
+            guard !key.isEmpty else {
+                chatCounter += 1
+                continue
+            }
+            
             let ref = rootRef.child("\(path)/\(key)")
             
             ref.observeSingleEvent(of: .value) { snapshot in
