@@ -97,12 +97,7 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
                     chat.participants = persons
                     
                     recentMessageQuery.getRecentMessage(for: key) { message in
-                        guard let recent = message else {
-                            chatCounter += 1
-                            return
-                        }
-                        
-                        chat.recent = recent
+                        chat.recent = message == nil ? Message() : message!
                         chats.append(chat)
                         chatCounter += 1
                     }
