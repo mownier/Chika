@@ -59,3 +59,26 @@ struct Contact {
         }
     }
 }
+
+struct PersonSearchObject: Hashable {
+    
+    var person: Person
+    var chat: Chat
+    var isContact: Bool
+    var isRequested: Bool
+    
+    init() {
+        person = Person()
+        chat = Chat()
+        isContact = false
+        isRequested = false
+    }
+    
+    var hashValue: Int {
+        return person.hashValue
+    }
+    
+    static func ==(lhs: PersonSearchObject, rhs: PersonSearchObject) -> Bool {
+        return lhs.person == rhs.person && lhs.chat.id == rhs.chat.id && lhs.isContact == rhs.isContact && lhs.isRequested == rhs.isRequested
+    }
+}
