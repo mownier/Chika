@@ -77,17 +77,32 @@ extension ContactRequestScene {
             
             switch category {
             case .sent:
-                let action = revokeAction(withItem: item, block: revoke)
-                actions.append(action)
+                let action: UIContextualAction?
+                if item.action.ignore == .ok {
+                    action = ignoreAction(withItem: item, block: {})
                 
-            case .pending:
-                var action = ignoreAction(withItem: item, block: ignore)
+                } else {
+                    action = revokeAction(withItem: item, block: revoke)
+                }
+                
                 if action != nil {
                     actions.append(action!)
                 }
-                action = acceptAction(withItem: item, block: accept)
-                if action != nil {
-                    actions.append(action!)
+                
+            case .pending:
+                if item.action.revoke == .ok {
+                    let action = revokeAction(withItem: item, block: {})
+                    actions.append(action)
+                    
+                } else {
+                    var action = ignoreAction(withItem: item, block: ignore)
+                    if action != nil {
+                        actions.append(action!)
+                    }
+                    action = acceptAction(withItem: item, block: accept)
+                    if action != nil {
+                        actions.append(action!)
+                    }
                 }
             
             case .none:

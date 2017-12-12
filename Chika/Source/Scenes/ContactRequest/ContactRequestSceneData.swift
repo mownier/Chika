@@ -19,6 +19,7 @@ protocol ContactRequestSceneData: class {
     func updateAcceptStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
     func updateIgnoreStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
     func updateRevokeStatus(for id: String, status: ContactRequestSceneItem.ActionStatus)
+    func updateForRemovedRequest(withID id: String)
     func sectionCategory(for section: Int) -> ContactRequestSceneItem.SectionCategory
 }
 
@@ -108,7 +109,7 @@ extension ContactRequestScene {
                 switch actionName {
                 case .accept: pending[index!].action.accept = status
                 case .ignore: pending[index!].action.ignore = status
-                default: break
+                case .revoke: pending[index!].action.revoke = status
                 }
                 return
             }
@@ -118,9 +119,19 @@ extension ContactRequestScene {
             if index != nil {
                 switch actionName {
                 case .revoke: sent[index!].action.revoke = status
+                case .ignore: sent[index!].action.ignore = status
                 default: break
                 }
             }
+        }
+        
+        func updateForRemovedRequest(withID id: String) {
+            // TODO:
+//            switch sectionCategory(withRequestID: id) {
+//            case .pending: updateRevokeStatus(for: id, status: .ok)
+//            case .sent: updateIgnoreStatus(for: id, status: .ok)
+//            case .none: break
+//            }
         }
         
         func sectionCategory(for section: Int) -> ContactRequestSceneItem.SectionCategory {
@@ -128,6 +139,20 @@ extension ContactRequestScene {
                 pendingValue: { return .pending },
                 sentValue:    { return .sent },
                 defaultValue: { return .none })
+        }
+        
+        private func sectionCategory(withRequestID id: String) -> ContactRequestSceneItem.SectionCategory {
+            var index = pending.index(where: { $0.request.id == id })
+            if index != nil  {
+                return .pending
+            }
+            
+            index = sent.index(where: { $0.request.id == id })
+            if index != nil {
+                return .sent
+            }
+            
+            return .none
         }
         
         private func value<T>(in section: Int, pendingValue: () -> T, sentValue: () -> T, defaultValue: () -> T) -> T {

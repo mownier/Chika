@@ -53,12 +53,12 @@ struct ContactRequestSceneItem {
         case .retry: return "retry"
         default:
             switch action.accept {
-            case .ok: return "accept"
+            case .ok: return "accepted"
             case .requesting: return "accepting"
             case .retry: return "retry"
             default:
                 switch action.ignore {
-                case .ok: return "ignore"
+                case .ok: return "ignored"
                 case .requesting: return "ignoring"
                 case .retry: return "retry"
                 default:

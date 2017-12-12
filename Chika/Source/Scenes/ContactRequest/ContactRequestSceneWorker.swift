@@ -9,8 +9,10 @@
 protocol ContactRequestSceneWorker: class {
 
     func fetchSentRequests()
-    func listenOnContactRequests()
-    func unlistenOnContactRequests()
+    func listenOnAddedContactRequests()
+    func listenOnRemovedContactRequests()
+    func unlistenOnAddedContactRequests()
+    func unlistenOnRemovedContactRequests()
     func revokeSentRequest(withID id: String)
     func ignorePendingRequest(withID id: String)
     func acceptPendingRequest(withID id: String)
@@ -21,6 +23,7 @@ protocol ContactRequestSceneWorkerOutput: class {
     func workerDidFetchSentRequests(_ requests: [Contact.Request])
     func workerDidFetchSentRequestsWithError(_ info: Error)
     func workerDidReceiveContactRequest(_ request: Contact.Request)
+    func workerDidRemoveContactRequest(withID id: String)
     func workerDidRevokeSentRequest(withID id: String)
     func workerDidIgnorePendingRequest(withID id: String)
     func workerDidAcceptPendingRequest(withID id: String)
@@ -54,14 +57,24 @@ extension ContactRequestScene {
             }
         }
         
-        func listenOnContactRequests() {
-            let _ = listener.listen { [weak self] request in
+        func listenOnAddedContactRequests() {
+            let _ = listener.listenOnAdded { [weak self] request in
                 self?.output?.workerDidReceiveContactRequest(request)
             }
         }
         
-        func unlistenOnContactRequests() {
-            let _ = listener.unlisten()
+        func listenOnRemovedContactRequests() {
+            let _ = listener.listenOnRemoved { [weak self] id in
+                self?.output?.workerDidRemoveContactRequest(withID: id)
+            }
+        }
+        
+        func unlistenOnAddedContactRequests() {
+            let _ = listener.unlistenOnAdded()
+        }
+        
+        func unlistenOnRemovedContactRequests() {
+            let _ = listener.unlistenOnRemoved()
         }
         
         func revokeSentRequest(withID id: String) {

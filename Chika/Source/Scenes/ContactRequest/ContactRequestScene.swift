@@ -25,19 +25,6 @@ class ContactRequestScene: UIViewController {
     var cellFactory: ContactRequestSceneCellFactory
     var waypoint: AppExitWaypoint
     
-    var ignoreImage: UIImage?
-    var acceptImage: UIImage?
-    var showMessageImage: UIImage?
-    var hideMessageImage: UIImage?
-    var revokeImage: UIImage?
-    var retryImage: UIImage?
-    var ignoringImage: UIImage?
-    var acceptingImage: UIImage?
-    var revokingImage: UIImage?
-    var revokedImage: UIImage?
-    var acceptedImage: UIImage?
-    var ignoredImage: UIImage?
-    
     init(theme: ContactRequestSceneTheme,
         data: ContactRequestSceneData,
         worker: ContactRequestSceneWorker,
@@ -99,7 +86,8 @@ class ContactRequestScene: UIViewController {
         let _ = setup.formatTitle(in: navigationItem)
         
         worker.fetchSentRequests()
-        worker.listenOnContactRequests()
+        worker.listenOnAddedContactRequests()
+        worker.listenOnRemovedContactRequests()
     }
     
     override func viewDidLayoutSubviews() {
@@ -139,6 +127,8 @@ class ContactRequestScene: UIViewController {
 extension ContactRequestScene: ContactRequestSceneInteraction {
     
     func didTapBack() {
+        worker.unlistenOnAddedContactRequests()
+        worker.unlistenOnRemovedContactRequests()
         let _ = waypoint.exit()
     }
 }
@@ -156,6 +146,11 @@ extension ContactRequestScene: ContactRequestSceneWorkerOutput {
     
     func workerDidReceiveContactRequest(_ request: Contact.Request) {
         data.appendPendingRequests([request])
+        tableView.reloadData()
+    }
+    
+    func workerDidRemoveContactRequest(withID id: String) {
+        data.updateForRemovedRequest(withID: id)
         tableView.reloadData()
     }
     
