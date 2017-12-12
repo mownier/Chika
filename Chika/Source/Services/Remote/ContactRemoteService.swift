@@ -9,7 +9,6 @@
 protocol ContactRemoteService: class {
 
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void)
-    func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
     func acceptPendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
     func ignorePendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
@@ -28,12 +27,6 @@ class ContactRemoteServiceProvider: ContactRemoteService {
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void) {
         contactsQuery.getContacts { [weak self] contacts in
             self?.processQueryRequest(contacts, "no contacts", callback)
-        }
-    }
-    
-    func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void) {
-        contactsQuery.searchPersonsToAdd(with: keyword) { [weak self] persons in
-            self?.processQueryRequest(persons, "no persons found", callback)
         }
     }
     
