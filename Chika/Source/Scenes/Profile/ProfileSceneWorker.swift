@@ -9,7 +9,8 @@
 protocol ProfileSceneWorker: class {
 
     func fetchProfile()
-    func listenOnContactRequests()
+    func listenOnAddedContactRequests()
+    func listenOnRemovedContactRequests()
 }
 
 protocol ProfileSceneWorkerOutput: class {
@@ -17,6 +18,7 @@ protocol ProfileSceneWorkerOutput: class {
     func workerDidFetchProfile(_ person: Person)
     func workerDidFetchProfileWithError(_ error: Error)
     func workerDidReceiveContactRequest()
+    func workerDidRemoveContactRequest()
 }
 
 extension ProfileScene {
@@ -44,9 +46,15 @@ extension ProfileScene {
             }
         }
         
-        func listenOnContactRequests() {
-            let _ = listener.listen { [weak self] _ in
+        func listenOnAddedContactRequests() {
+            let _ = listener.listenOnAdded { [weak self] _ in
                 self?.output?.workerDidReceiveContactRequest()
+            }
+        }
+        
+        func listenOnRemovedContactRequests() {
+            let _ = listener.listenOnRemoved { [weak self] _ in
+                self?.output?.workerDidRemoveContactRequest()
             }
         }
     }
