@@ -30,69 +30,62 @@ class ContactRemoteServiceProvider: ContactRemoteService {
     }
     
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void) {
-        contactsQuery.getContacts { contacts in
-            guard !contacts.isEmpty else {
-                callback(.err(ServiceError("no contacts")))
-                return
-            }
-            
-            callback(.ok(contacts))
+        contactsQuery.getContacts { [weak self] contacts in
+            self?.processQueryRequest(contacts, "no contacts", callback)
         }
     }
     
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void) {
-        contactsQuery.searchPersonsToAdd(with: keyword) { persons in
-            guard !persons.isEmpty else {
-                callback(.err(ServiceError("no persons found")))
-                return
-            }
-            
-            callback(.ok(persons))
+        contactsQuery.searchPersonsToAdd(with: keyword) { [weak self] persons in
+            self?.processQueryRequest(persons, "no persons found", callback)
         }
     }
     
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void) {
-        contactWriter.sendContactRequest(to: personID, message: message) { error in
-            guard error == nil else {
-                callback(.err(error!))
-                return
-            }
-            
-            callback(.ok("OK"))
+        contactWriter.sendContactRequest(to: personID, message: message) { [weak self] error in
+            self?.processWriteRequest("OK", error, callback)
         }
     }
     
     func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void) {
-        contactRequestsQuery.getSentRequests { requests in
-            guard !requests.isEmpty else {
-                callback(.err(ServiceError("no sent requests")))
-                return
-            }
-            
-            callback(.ok(requests))
+        contactRequestsQuery.getSentRequests { [weak self] requests in
+            self?.processQueryRequest(requests, "no sent requests", callback)
         }
     }
     
     func revokeSentRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
-        contactWriter.revokeSentRequest(withID: id) { error in
-            
+        contactWriter.revokeSentRequest(withID: id) { [weak self] error in
+           self?.processWriteRequest(id, error, callback)
         }
     }
     
     func acceptPendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
-        contactWriter.acceptPendingRequest(withID: id) { error in
-            guard error == nil else {
-                callback(.err(error!))
-                return
-            }
-            
-            callback(.ok(id))
+        contactWriter.acceptPendingRequest(withID: id) { [weak self] error in
+           self?.processWriteRequest(id, error, callback)
         }
     }
     
     func ignorePendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
-        contactWriter.ignorePendingRequest(withID: id) { error in
-            
+        contactWriter.ignorePendingRequest(withID: id) { [weak self] error in
+            self?.processWriteRequest(id, error, callback)
         }
+    }
+    
+    private func processWriteRequest(_ data: String, _ error: Error?, _ callback: @escaping (ServiceResult<String>) -> Void) {
+        guard error == nil else {
+            callback(.err(error!))
+            return
+        }
+        
+        callback(.ok(data))
+    }
+    
+    private func processQueryRequest<T>(_ data: [T], _ errorMessage: String, _ callback: @escaping (ServiceResult<[T]>) -> Void) {
+        guard !data.isEmpty else {
+            callback(.err(ServiceError(errorMessage)))
+            return
+        }
+        
+        callback(.ok(data))
     }
 }
