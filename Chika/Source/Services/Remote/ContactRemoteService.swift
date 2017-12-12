@@ -11,8 +11,6 @@ protocol ContactRemoteService: class {
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void)
     func searchPersonsToAdd(with keyword: String, callback: @escaping (ServiceResult<[Person]>) -> Void)
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void)
-    func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void)
-    func revokeSentRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
     func acceptPendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
     func ignorePendingRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void)
 }
@@ -21,12 +19,10 @@ class ContactRemoteServiceProvider: ContactRemoteService {
     
     var contactsQuery: ContactsRemoteQuery
     var contactWriter: ContactRemoteWriter
-    var contactRequestsQuery: ContactRequestsRemoteQuery
     
-    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider(), contactWriter: ContactRemoteWriter = ContactRemoteWriterProvider(), contactRequestsQuery: ContactRequestsRemoteQuery = ContactRequestsRemoteQueryProvider()) {
+    init(contactsQuery: ContactsRemoteQuery = ContactsRemoteQueryProvider(), contactWriter: ContactRemoteWriter = ContactRemoteWriterProvider()) {
         self.contactsQuery = contactsQuery
         self.contactWriter = contactWriter
-        self.contactRequestsQuery = contactRequestsQuery
     }
     
     func getContacts(callback: @escaping (ServiceResult<[Contact]>) -> Void) {
@@ -44,18 +40,6 @@ class ContactRemoteServiceProvider: ContactRemoteService {
     func sendContactRequest(to personID: String, message: String, callback: @escaping (ServiceResult<String>) -> Void) {
         contactWriter.sendContactRequest(to: personID, message: message) { [weak self] error in
             self?.processWriteRequest("OK", error, callback)
-        }
-    }
-    
-    func getSentRequests(callback: @escaping (ServiceResult<[Contact.Request]>) -> Void) {
-        contactRequestsQuery.getSentRequests { [weak self] requests in
-            self?.processQueryRequest(requests, "no sent requests", callback)
-        }
-    }
-    
-    func revokeSentRequest(withID id: String, callback: @escaping (ServiceResult<String>) -> Void) {
-        contactWriter.revokeSentRequest(withID: id) { [weak self] error in
-           self?.processWriteRequest(id, error, callback)
         }
     }
     

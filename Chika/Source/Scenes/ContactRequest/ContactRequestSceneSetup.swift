@@ -14,7 +14,7 @@ protocol ContactRequestSceneSetup: class {
     func format(cell: UITableViewCell, theme: ContactRequestSceneTheme, item: ContactRequestSceneItem?, action: ContactRequestSceneCellAction?) -> Bool
     func height(for cell: UITableViewCell?, theme: ContactRequestSceneTheme, item: ContactRequestSceneItem?, action: ContactRequestSceneCellAction?) -> CGFloat
     func headerHeight(withTitle title: String?) -> CGFloat
-    func swipeActionsConfig(for item: ContactRequestSceneItem?, category: ContactRequestSceneItem.SectionCategory, revoke: @escaping () -> Void, ignore: @escaping () -> Void, accept: @escaping () -> Void, showMessage: @escaping () -> Void) -> UISwipeActionsConfiguration?
+    func swipeActionsConfig(for item: ContactRequestSceneItem?, ignore: @escaping () -> Void, accept: @escaping () -> Void, showMessage: @escaping () -> Void) -> UISwipeActionsConfiguration?
 }
 
 extension ContactRequestScene {
@@ -68,56 +68,27 @@ extension ContactRequestScene {
             return 44
         }
         
-        func swipeActionsConfig(for item: ContactRequestSceneItem?, category: ContactRequestSceneItem.SectionCategory, revoke: @escaping () -> Void, ignore: @escaping () -> Void, accept: @escaping () -> Void, showMessage: @escaping () -> Void) -> UISwipeActionsConfiguration? {
-            guard let item = item else {
-                return nil
-            }
+        func swipeActionsConfig(for item: ContactRequestSceneItem?, ignore: @escaping () -> Void, accept: @escaping () -> Void, showMessage: @escaping () -> Void) -> UISwipeActionsConfiguration? {
+            guard let item = item else { return nil }
             
             var actions: [UIContextualAction] = []
             
-            switch category {
-            case .sent:
-                let action: UIContextualAction?
-                if item.action.ignore == .ok {
-                    action = ignoreAction(withItem: item, block: {})
-                
-                } else {
-                    action = revokeAction(withItem: item, block: revoke)
-                }
-                
-                if action != nil {
-                    actions.append(action!)
-                }
-                
-            case .pending:
-                if item.action.revoke == .ok {
-                    let action = revokeAction(withItem: item, block: {})
-                    actions.append(action)
-                    
-                } else {
-                    var action = ignoreAction(withItem: item, block: ignore)
-                    if action != nil {
-                        actions.append(action!)
-                    }
-                    action = acceptAction(withItem: item, block: accept)
-                    if action != nil {
-                        actions.append(action!)
-                    }
-                }
-            
-            case .none:
-                return nil
-            }
-                
-            if !item.request.message.isEmpty {
-                let action = showMessageAction(withItem: item, block: showMessage)
-                actions.append(action)
+            var action = ignoreAction(withItem: item, block: ignore)
+            if action != nil {
+                actions.append(action!)
             }
             
-            guard !actions.isEmpty else {
-                return nil
+            action = acceptAction(withItem: item, block: accept)
+            if action != nil {
+                actions.append(action!)
             }
             
+            action = showMessageAction(withItem: item, block: showMessage)
+            if action != nil {
+                actions.append(action!)
+            }
+            
+            guard !actions.isEmpty else { return nil }
             let config = UISwipeActionsConfiguration(actions: actions)
             config.performsFirstActionWithFullSwipe = false
             
@@ -127,27 +98,6 @@ extension ContactRequestScene {
 }
 
 fileprivate extension ContactRequestScene.Setup {
-    
-    func revokeAction(withItem item: ContactRequestSceneItem, block: @escaping () -> Void) -> UIContextualAction {
-        let revoke = UIContextualAction(style: .normal, title: nil) { _, _, completion in
-            switch item.action.revoke {
-            case .none, .retry: block()
-            default: break
-            }
-            completion(true)
-        }
-        
-        revoke.backgroundColor = theme.actionDestructiveColor
-        
-        switch item.action.revoke {
-        case .none:       revoke.image = revokeImage
-        case .ok:         revoke.image = revokedImage
-        case .requesting: revoke.image = revokingImage
-        case .retry:      revoke.image = retryImage
-        }
-        
-        return revoke
-    }
     
     func ignoreAction(withItem item: ContactRequestSceneItem, block: @escaping () -> Void) -> UIContextualAction? {
         switch item.action.accept {
@@ -203,7 +153,8 @@ fileprivate extension ContactRequestScene.Setup {
         }
     }
     
-    func showMessageAction(withItem item: ContactRequestSceneItem, block: @escaping () -> Void) -> UIContextualAction {
+    func showMessageAction(withItem item: ContactRequestSceneItem, block: @escaping () -> Void) -> UIContextualAction? {
+        guard !item.request.message.isEmpty else { return nil }
         let showMessage = UIContextualAction(style: .normal, title: nil) { _, _, completion in
             block()
             completion(true)
@@ -243,18 +194,6 @@ fileprivate extension ContactRequestScene.Setup {
     
     private var ignoredImage: UIImage? {
         return image(for: "Ignored")
-    }
-    
-    private var revokeImage: UIImage? {
-        return image(for: "Revoke")
-    }
-    
-    private var revokingImage: UIImage? {
-        return image(for: "Revoking")
-    }
-    
-    private var revokedImage: UIImage? {
-        return image(for: "Revoked")
     }
     
     private var retryImage: UIImage? {

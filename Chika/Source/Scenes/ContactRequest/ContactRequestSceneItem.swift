@@ -18,24 +18,17 @@ struct ContactRequestSceneItem {
     
     enum ActionName {
         
-        case accept, ignore, revoke
-    }
-    
-    enum SectionCategory {
-        
-        case none, pending, sent
+        case accept, ignore
     }
     
     struct Action {
         
         var accept: ActionStatus
         var ignore: ActionStatus
-        var revoke: ActionStatus
         
         init() {
             self.accept = .none
             self.ignore = .none
-            self.revoke = .none
         }
     }
     
@@ -47,23 +40,17 @@ struct ContactRequestSceneItem {
         return isMessageShown ? request.message : ""
     }
     var statusText: String {
-        switch action.revoke {
-        case .ok: return "revoked"
-        case .requesting: return "revoking"
+        switch action.accept {
+        case .ok: return "accepted"
+        case .requesting: return "accepting"
         case .retry: return "retry"
         default:
-            switch action.accept {
-            case .ok: return "accepted"
-            case .requesting: return "accepting"
+            switch action.ignore {
+            case .ok: return "ignored"
+            case .requesting: return "ignoring"
             case .retry: return "retry"
             default:
-                switch action.ignore {
-                case .ok: return "ignored"
-                case .requesting: return "ignoring"
-                case .retry: return "retry"
-                default:
-                    return ""
-                }
+                return ""
             }
         }
     }

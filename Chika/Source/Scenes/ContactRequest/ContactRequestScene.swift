@@ -85,9 +85,7 @@ class ContactRequestScene: UIViewController {
         
         let _ = setup.formatTitle(in: navigationItem)
         
-        worker.fetchSentRequests()
         worker.listenOnAddedContactRequests()
-        worker.listenOnRemovedContactRequests()
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,28 +97,21 @@ class ContactRequestScene: UIViewController {
         tableView.frame = rect
     }
     
-    func revoke(for item: ContactRequestSceneItem, at indexPath: IndexPath) {
-        data.updateRevokeStatus(for: item.request.id, status: .requesting)
-        tableView.reloadRows(at: [indexPath], with: .fade)
-        worker.revokeSentRequest(withID: item.request.id)
-    }
-    
     func ignore(for item: ContactRequestSceneItem, at indexPath: IndexPath) {
-        data.updateIgnoreStatus(for: item.request.id, status: .requesting)
+        let _ = data.updateIgnoreStatus(for: item.request.id, status: .requesting)
         tableView.reloadRows(at: [indexPath], with: .fade)
         worker.ignorePendingRequest(withID: item.request.id)
     }
     
     func accept(for item: ContactRequestSceneItem, at indexPath: IndexPath) {
-        data.updateAcceptStatus(for: item.request.id, status: .requesting)
+        let _ = data.updateAcceptStatus(for: item.request.id, status: .requesting)
         tableView.reloadRows(at: [indexPath], with: .fade)
         worker.acceptPendingRequest(withID: item.request.id)
     }
     
     func showMessage(for item: ContactRequestSceneItem, at indexPath: IndexPath) {
-        data.updateMessageShown(in: indexPath.section, at: indexPath.row, isShown: !item.isMessageShown)
+        data.updateMessageShown(at: indexPath.row, isShown: !item.isMessageShown)
         tableView.reloadRows(at: [indexPath], with: .fade)
-        worker.acceptPendingRequest(withID: item.request.id)
     }
 }
 
@@ -128,88 +119,61 @@ extension ContactRequestScene: ContactRequestSceneInteraction {
     
     func didTapBack() {
         worker.unlistenOnAddedContactRequests()
-        worker.unlistenOnRemovedContactRequests()
         let _ = waypoint.exit()
     }
 }
 
 extension ContactRequestScene: ContactRequestSceneWorkerOutput {
-
-    func workerDidFetchSentRequests(_ requests: [Contact.Request]) {
-        data.appendSentRequests(requests)
-        tableView.reloadData()
-    }
-    
-    func workerDidFetchSentRequestsWithError(_ info: Error) {
-        tableView.reloadData()
-    }
     
     func workerDidReceiveContactRequest(_ request: Contact.Request) {
-        data.appendPendingRequests([request])
-        tableView.reloadData()
-    }
-    
-    func workerDidRemoveContactRequest(withID id: String) {
-        data.updateForRemovedRequest(withID: id)
-        tableView.reloadData()
-    }
-    
-    func workerDidRevokeSentRequest(withID id: String) {
-        data.updateRevokeStatus(for: id, status: .ok)
+        data.appendRequests([request])
         tableView.reloadData()
     }
     
     func workerDidAcceptPendingRequest(withID id: String) {
-        data.updateAcceptStatus(for: id, status: .ok)
-        tableView.reloadData()
+        guard let row = data.updateAcceptStatus(for: id, status: .ok) else { return }
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     func workerDidIgnorePendingRequest(withID id: String) {
-        data.updateIgnoreStatus(for: id, status: .ok)
-        tableView.reloadData()
-    }
-    
-    func workerDidRevokeSentRequest(withError error: Error, id: String) {
-        data.updateRevokeStatus(for: id, status: .retry)
-        tableView.reloadData()
+        guard let row = data.updateIgnoreStatus(for: id, status: .ok) else { return }
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     func workerDidAcceptPendingRequest(withError error: Error, id: String) {
-        data.updateAcceptStatus(for: id, status: .retry)
-        tableView.reloadData()
+        guard let row = data.updateAcceptStatus(for: id, status: .retry) else { return }
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
     func workerDidIgnorePendingRequest(withError error: Error, id: String) {
-        data.updateIgnoreStatus(for: id, status: .retry)
-        tableView.reloadData()
+        guard let row = data.updateIgnoreStatus(for: id, status: .retry) else { return }
+        let indexPath = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [indexPath], with: .fade)
     }
 }
 
 extension ContactRequestScene: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return data.headerTitle(in: section)
+        return data.headerTitle
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return setup.headerHeight(withTitle: data.headerTitle(in: section))
+        return setup.headerHeight(withTitle: data.headerTitle)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = data.item(in: indexPath.section, at: indexPath.row)
+        let item = data.item(at: indexPath.row)
         return setup.height(for: cellFactory.prototype, theme: theme, item: item, action: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let item = data.item(in: indexPath.section, at: indexPath.row)
-        let category = data.sectionCategory(for: indexPath.section)
+        let item = data.item(at: indexPath.row)
         return setup.swipeActionsConfig(
             for: item,
-            category: category,
-            revoke: { [weak self] in
-                guard let this = self, let item = item else { return }
-                this.revoke(for: item, at: indexPath)
-            },
             ignore: { [weak self] in
                 guard let this = self, let item = item else { return }
                 this.ignore(for: item, at: indexPath)
@@ -237,17 +201,13 @@ extension ContactRequestScene: UITableViewDelegate {
 
 extension ContactRequestScene: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return data.sectionCount
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.itemCount(in: section)
+        return data.itemCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cellFactory.build(using: tableView, reuseID: "Cell", theme: theme)
-        let item = data.item(in: indexPath.section, at: indexPath.row)
+        let item = data.item(at: indexPath.row)
         let _ = setup.format(cell: cell, theme: theme, item: item, action: self)
         return cell
     }

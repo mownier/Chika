@@ -59,7 +59,6 @@
 		486901971FDBBD43005053CD /* ContactRequestSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869018C1FDBBD43005053CD /* ContactRequestSceneTheme.swift */; };
 		486901981FDBBD43005053CD /* ContactRequestSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869018D1FDBBD43005053CD /* ContactRequestSceneWaypoint.swift */; };
 		486901991FDBBD43005053CD /* ContactRequestSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869018E1FDBBD43005053CD /* ContactRequestSceneWorker.swift */; };
-		4869019B1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869019A1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift */; };
 		486931F41FD114BD000D3AD4 /* InboxSceneCellAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486931F31FD114BD000D3AD4 /* InboxSceneCellAvatar.swift */; };
 		486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486931F51FD127D1000D3AD4 /* InboxSceneItem.swift */; };
 		487365751FD84278004DE6C2 /* ContactRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487365741FD84278004DE6C2 /* ContactRemoteWriter.swift */; };
@@ -291,7 +290,6 @@
 		4869018C1FDBBD43005053CD /* ContactRequestSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneTheme.swift; sourceTree = "<group>"; };
 		4869018D1FDBBD43005053CD /* ContactRequestSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneWaypoint.swift; sourceTree = "<group>"; };
 		4869018E1FDBBD43005053CD /* ContactRequestSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneWorker.swift; sourceTree = "<group>"; };
-		4869019A1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestsRemoteQuery.swift; sourceTree = "<group>"; };
 		486931F31FD114BD000D3AD4 /* InboxSceneCellAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxSceneCellAvatar.swift; sourceTree = "<group>"; };
 		486931F51FD127D1000D3AD4 /* InboxSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneItem.swift; sourceTree = "<group>"; };
 		487365741FD84278004DE6C2 /* ContactRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteWriter.swift; sourceTree = "<group>"; };
@@ -668,7 +666,6 @@
 				4877BF7F1FC4610700885C60 /* PersonsRemoteQuery.swift */,
 				4877BF851FC466BE00885C60 /* RecentMessageRemoteQuery.swift */,
 				488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */,
-				4869019A1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -1433,7 +1430,6 @@
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
-				4869019B1FDBC73E005053CD /* ContactRequestsRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
 				48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */,
 				48DDF0711FDE61A700D79BBD /* AppImageCreator.swift in Sources */,
