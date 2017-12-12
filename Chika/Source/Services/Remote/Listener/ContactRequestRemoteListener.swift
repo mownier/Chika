@@ -11,8 +11,10 @@ import FirebaseAuth
 
 protocol ContactRequestRemoteListener: class {
 
-    func listen(callback: @escaping (Contact.Request) -> Void) -> Bool
-    func unlisten() -> Bool
+    func listenOnAdded(callback: @escaping (Contact.Request) -> Void) -> Bool
+    func listenOnRemoved(callback: @escaping (String) -> Void) -> Bool
+    func unlistenOnAdded() -> Bool
+    func unlistenOnRemoved() -> Bool
 }
 
 class ContactRequestRemoteListenerProvider: ContactRequestRemoteListener {
@@ -29,20 +31,15 @@ class ContactRequestRemoteListenerProvider: ContactRequestRemoteListener {
         self.personsQuery = personsQuery
     }
     
-    func listen(callback: @escaping (Contact.Request) -> Void) -> Bool {
-        let meID = self.meID
-        guard !meID.isEmpty else {
-            return false
-        }
-        
+    func listenOnAdded(callback: @escaping (Contact.Request) -> Void) -> Bool {
         let personsQuery = self.personsQuery
-        let rootRef = database.reference()
-        let ref = rootRef.child("person:contact:request:established/\(meID)")
-        let query = ref.queryOrdered(byChild: "requestee").queryEqual(toValue: meID)
-        let handle = query.observe(.childAdded) { snapshot in
+        let observer: (DatabaseQuery, String) -> DatabaseQuery = { ref, meID in
+            return ref.queryOrdered(byChild: "requestee").queryEqual(toValue: meID)
+        }
+        let block: (DataSnapshot) -> Void = { snapshot in
             guard snapshot.exists(), !snapshot.key.isEmpty,
                 let value = snapshot.value as? [String: Any] else {
-                return
+                    return
             }
             
             personsQuery.getPersons(for: [snapshot.key]) { persons in
@@ -60,20 +57,61 @@ class ContactRequestRemoteListenerProvider: ContactRequestRemoteListener {
                 callback(request)
             }
         }
-        
-        handles["onListen"] = handle
-        return true
+        return processListen("onAdded", .childAdded, observer, block)
     }
     
-    func unlisten() -> Bool {
-        guard !meID.isEmpty, let handle = handles["onListen"] else {
+    func listenOnRemoved(callback: @escaping (String) -> Void) -> Bool {
+        let observer: (DatabaseQuery, String) -> DatabaseQuery = { ref, _ in
+            return ref
+        }
+        let block: (DataSnapshot) -> Void = { snapshot in
+            guard snapshot.exists(), !snapshot.key.isEmpty,
+                let value = snapshot.value as? [String: Any],
+                let id = value["id"] as? String, !id.isEmpty else {
+                    return
+            }
+            callback(id)
+        }
+        return processListen("onRemoved", .childRemoved, observer, block)
+    }
+    
+    func unlistenOnAdded() -> Bool {
+        return processUnlisten("onListen") { ref, meID in
+            return ref.queryOrdered(byChild: "requestee").queryEqual(toValue: meID)
+        }
+    }
+    
+    func unlistenOnRemoved() -> Bool {
+        return processUnlisten("onRemoved") { ref, _ in
+            return ref
+        }
+    }
+    
+    private func processListen(_ handleKey: String, _ event: DataEventType, _ observer: @escaping (DatabaseQuery, String) -> DatabaseQuery, _ block: @escaping (DataSnapshot) -> Void) -> Bool {
+        let meID = self.meID
+        guard !meID.isEmpty, handles[handleKey] == nil else {
             return false
         }
         
-
         let rootRef = database.reference()
         let ref = rootRef.child("person:contact:request:established/\(meID)")
-        let query = ref.queryOrdered(byChild: "requestee").queryEqual(toValue: meID)
+        let query = observer(ref, meID)
+        let handle = query.observe(event) { snapshot in
+            block(snapshot)
+        }
+        
+        handles[handleKey] = handle
+        return true
+    }
+    
+    private func processUnlisten(_ handleKey: String, _ observer: @escaping (DatabaseQuery, String) -> DatabaseQuery) -> Bool {
+        guard !meID.isEmpty, let handle = handles[handleKey] else {
+            return false
+        }
+        
+        let rootRef = database.reference()
+        let ref = rootRef.child("person:contact:request:established/\(meID)")
+        let query = observer(ref, meID)
         query.removeObserver(withHandle: handle)
         return true
     }
