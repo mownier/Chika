@@ -365,14 +365,14 @@ extension ContactsScene: ContactsSceneWorkerOutput {
         updateIndexView()
     }
     
-    func workerDidSearchPersonsToAdd(persons: [Person]) {
+    func workerDidSearchPeopleWithObjects(_ objects: [PersonSearchObject]) {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = nil
-        searchResultData.appendPersons(persons)
+        // TODO: searchResultData.appendPersons(persons)
         searchResultTableView.reloadData()
     }
     
-    func workerDidSearchPersonsToAddWithError(_ error: Error) {
+    func workerDidSearchPeopleWithError(_ error: Error) {
         searchResultData.removeAll()
         searchResultTableView.backgroundView = searchResultEmptyView
         searchResultTableView.reloadData()
@@ -392,7 +392,7 @@ extension ContactsScene: ContactsSceneWorkerOutput {
 extension ContactsScene: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        worker.searchPersonsToAdd(with: textField.text)
+        worker.searchPeople(withKeyword: textField.text)
         return true
     }
     
