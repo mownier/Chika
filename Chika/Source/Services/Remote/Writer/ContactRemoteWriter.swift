@@ -122,8 +122,8 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
             
             let values: [AnyHashable: Any] = [
                 "chats/\(key)": newChat,
-                "person:contacts/\(requestor)/\(requestee)/chat/\(key)": true,
-                "person:contacts/\(requestee)/\(requestor)/chat/\(key)": true,
+                "person:contacts/\(requestor)/\(requestee)/chat": key,
+                "person:contacts/\(requestee)/\(requestor)/chat": key,
                 "person:contact:request:established/\(requestor)/\(requestee)": NSNull(),
                 "person:contact:request:established/\(requestee)/\(requestor)": NSNull(),
                 "contact:requests/\(id)": NSNull()
