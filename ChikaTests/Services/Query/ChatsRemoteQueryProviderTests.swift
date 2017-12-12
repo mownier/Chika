@@ -109,55 +109,6 @@ class ChatsRemoteQueryProviderTests: XCTestCase {
     //   - three snapshot values are of type [String : Any]
     //   - personsQuery returns correct array of persons
     //     for all snapshots
-    //   - recentMessageQuery returns nil for snapshot2
-    //     and snapshot3
-    func testGetChatsD() {
-        let exp = expectation(description: "testGetChatsD")
-        let personsQuery = PersonsRemoteQueryMock()
-        let recentMessageQuery = RecentMessageRemoteQueryMock()
-        let database = FirebaseDatabaseMock()
-        let query = ChatsRemoteQueryProvider(database: database, personsQuery: personsQuery, recentMessageQuery: recentMessageQuery)
-        let keys = ["chat:1", "chat:2", "chat:3"]
-        let participants1: [String: Any] = ["person:1" : true, "person:2" : true]
-        let participants2: [String: Any] = ["person:1" : true, "person:3" : true]
-        let participants3: [String: Any] = ["person:1" : true, "person:4" : true]
-        let snapshot1: [String: Any] = ["id" : "chat:1", "participants": participants1]
-        let snapshot2: [String: Any] = ["id" : "chat:2", "participants": participants2]
-        let snapshot3: [String: Any] = ["id" : "chat:3", "participants": participants3]
-        var person1 = Person()
-        var person2 = Person()
-        var person3 = Person()
-        var person4 = Person()
-        var recentMessage1: Message? = Message()
-        let recentMessage2: Message? = nil
-        let recentMessage3: Message? = nil
-        person1.id = "person:1"
-        person2.id = "person:2"
-        person3.id = "person:3"
-        person4.id = "person:4"
-        recentMessage1?.id = "message:1"
-        let mockPersons1: [Person] = [person1, person2]
-        let mockPersons2: [Person] = [person1, person3]
-        let mockPersons3: [Person] = [person1, person4]
-        personsQuery.mockPersons = [mockPersons1, mockPersons2, mockPersons3]
-        recentMessageQuery.mockMessages = [recentMessage1, recentMessage2, recentMessage3]
-        database.mockReference.snapshotValues = [snapshot1, snapshot2, snapshot3]
-        query.getChats(for: keys) { chats in
-            XCTAssertEqual(chats.count, 1)
-            XCTAssertEqual(keys[0], chats[0].id)
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 2.0)
-    }
-    
-    // CONTEXT: getChats function should
-    //   - return an array of chats whose ids are
-    //     not equal to the keys
-    // GIVEN:
-    //   - keys is not empty
-    //   - three snapshot values are of type [String : Any]
-    //   - personsQuery returns correct array of persons
-    //     for all snapshots
     //   - recentMessageQuery returns a non-nil Message
     //     for all snapshots
     //   - sort has failed to sort the chats
