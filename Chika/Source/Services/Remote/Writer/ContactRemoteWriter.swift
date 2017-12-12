@@ -19,14 +19,18 @@ protocol ContactRemoteWriter: class {
 
 class ContactRemoteWriterProvider: ContactRemoteWriter {
     
+    private enum Request: String {
+        
+        case sent = "sent"
+        case pending = "pending"
+    }
+    
     var meID: String
     var database: Database
-    var chatWriter: ChatRemoteWriter
     
-    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), chatWriter: ChatRemoteWriter = ChatRemoteWriterProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database()) {
         self.meID = meID
         self.database = database
-        self.chatWriter = chatWriter
     }
     
     func sendContactRequest(to personID: String, message: String, callback: @escaping (Error?) -> Void) {
@@ -40,11 +44,19 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
         let rootRef = database.reference()
         let requestsRef = rootRef.child("contact:requests")
         let key = requestsRef.childByAutoId().key
-        let requestValue: [AnyHashable: Any] = ["id": key, "message": message, "requestor": meID, "requestee": personID, "created:on": ServerValue.timestamp()]
+        
+        let newRequest: [AnyHashable: Any] = [
+            "id": key,
+            "message": message,
+            "requestor": meID,
+            "requestee": personID,
+            "created:on": ServerValue.timestamp()
+        ]
+        
         let values: [AnyHashable: Any] = [
-            "contact:requests/\(key)": requestValue,
-            "person:contact:request:established/\(meID)/\(personID)": requestValue,
-            "person:contact:request:established/\(personID)/\(meID)": requestValue,
+            "contact:requests/\(key)": newRequest,
+            "person:contact:request:established/\(meID)/\(personID)": newRequest,
+            "person:contact:request:established/\(personID)/\(meID)": newRequest
         ]
         
         rootRef.updateChildValues(values) { error, _ in
@@ -58,35 +70,11 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
     }
     
     func revokeSentRequest(withID id: String, callback: @escaping (Error?) -> Void) {
-        
+        removeRequest(.sent, id, callback)
     }
     
     func ignorePendingRequest(withID id: String, callback: @escaping (Error?) -> Void) {
-        guard !id.isEmpty else {
-            callback(RemoteWriterError("pending request ID is empty"))
-            return
-        }
-        
-        let meID = self.meID
-        
-        guard !meID.isEmpty else {
-            callback(RemoteWriterError("current user ID is empty"))
-            return
-        }
-        
-        let rootRef = database.reference()
-        let ref = rootRef.child("person:contact:request:established/\(meID)")
-        let query = ref.queryOrdered(byChild: "id").queryEqual(toValue: id)
-        query.observeSingleEvent(of: .value) { snapshot in
-            guard snapshot.exists() else {
-                callback(RemoteWriterError("pending request not found"))
-                return
-            }
-            
-            ref.child(snapshot.key).removeValue { error, _ in
-                callback(error)
-            }
-        }
+        removeRequest(.pending, id, callback)
     }
     
     func acceptPendingRequest(withID id: String, callback: @escaping (Error?) -> Void) {
@@ -97,7 +85,6 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
             return
         }
         
-        let chatWriter = self.chatWriter
         let rootRef = database.reference()
         let requestsRef = rootRef.child("contact:requests/\(id)")
         requestsRef.observeSingleEvent(of: .value) { snapshot in
@@ -121,28 +108,78 @@ class ContactRemoteWriterProvider: ContactRemoteWriter {
                 return
             }
             
-            chatWriter.createNewChat(for: [requestor, requestee]) { result in
-                switch result {
-                case .err(let info):
-                    callback(info)
-                    
-                case .ok(let chat):
-                    guard !chat.id.isEmpty else {
-                        callback(RemoteWriterError("chat ID is empty"))
-                        return
-                    }
-                    
-                    let chatValue = [chat.id: true]
-                    let values: [AnyHashable: Any] = [
-                        "person:contacts/\(requestor)/\(requestee)/chat": chatValue,
-                        "person:contacts/\(requestee)/\(requestor)/chat": chatValue,
-                        "person:contact:request:established/\(requestor)/\(requestee)": NSNull(),
-                        "person:contact:request:established/\(requestee)/\(requestor)": NSNull()
-                    ]
-                    rootRef.updateChildValues(values) { error, _ in
-                        callback(error)
-                    }
-                }
+            let chatsRef = rootRef.child("chats")
+            let key = chatsRef.childByAutoId().key
+            let newChat: [String: Any] = [
+                "created_on": ServerValue.timestamp(),
+                "updated_on": ServerValue.timestamp(),
+                "id": key,
+                "participants":[
+                    "\(requestor)": true,
+                    "\(requestee)": true
+                ]
+            ]
+            
+            let values: [AnyHashable: Any] = [
+                "chats/\(key)": newChat,
+                "person:contacts/\(requestor)/\(requestee)/chat/\(key)": true,
+                "person:contacts/\(requestee)/\(requestor)/chat/\(key)": true,
+                "person:contact:request:established/\(requestor)/\(requestee)": NSNull(),
+                "person:contact:request:established/\(requestee)/\(requestor)": NSNull(),
+                "contact:requests/\(id)": NSNull()
+            ]
+            
+            rootRef.updateChildValues(values) { error, _ in
+                callback(error)
+            }
+        }
+    }
+    
+    private func removeRequest(_ request: Request, _ id: String, _ callback: @escaping (Error?) -> Void) {
+        guard !id.isEmpty else {
+            callback(RemoteWriterError("\(request.rawValue) request ID is empty"))
+            return
+        }
+        
+        let meID = self.meID
+        
+        guard !meID.isEmpty else {
+            callback(RemoteWriterError("current user ID is empty"))
+            return
+        }
+        
+        let rootRef = database.reference()
+        let ref = rootRef.child("person:contact:request:established/\(meID)")
+        let query = ref.queryOrdered(byChild: "id").queryEqual(toValue: id)
+        query.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                callback(RemoteWriterError("\(request.rawValue) request not found"))
+                return
+            }
+            
+            guard snapshot.childrenCount == 1, snapshot.children.allObjects.count == 1 else {
+                callback(RemoteWriterError("snapshot child count is not 1"))
+                return
+            }
+            
+            guard let child = snapshot.children.allObjects[0] as? DataSnapshot else {
+                callback(RemoteWriterError("snapshot child is nil"))
+                return
+            }
+            
+            guard !child.key.isEmpty else {
+                callback(RemoteWriterError("child snapshot key is empty"))
+                return
+            }
+            
+            let values: [String: Any] = [
+                "contact:requests/\(id)": NSNull(),
+                "person:contact:request:established/\(child.key)/\(meID)": NSNull(),
+                "person:contact:request:established/\(meID)/\(child.key)": NSNull()
+            ]
+            
+            rootRef.updateChildValues(values) { error, _ in
+                callback(error)
             }
         }
     }
