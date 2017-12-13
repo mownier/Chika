@@ -12,7 +12,7 @@ import FirebaseAuth
 protocol ContactRequestRemoteListener: class {
 
     func listenOnAdded(callback: @escaping (Contact.Request) -> Void) -> Bool
-    func listenOnRemoved(callback: @escaping (String) -> Void) -> Bool
+    func listenOnRemoved(callback: @escaping (Contact.Request) -> Void) -> Bool
     func unlistenOnAdded() -> Bool
     func unlistenOnRemoved() -> Bool
 }
@@ -60,23 +60,37 @@ class ContactRequestRemoteListenerProvider: ContactRequestRemoteListener {
         return processListen("onAdded", .childAdded, observer, block)
     }
     
-    func listenOnRemoved(callback: @escaping (String) -> Void) -> Bool {
+    func listenOnRemoved(callback: @escaping (Contact.Request) -> Void) -> Bool {
+        let personsQuery = self.personsQuery
         let observer: (DatabaseQuery, String) -> DatabaseQuery = { ref, _ in
             return ref
         }
         let block: (DataSnapshot) -> Void = { snapshot in
             guard snapshot.exists(), !snapshot.key.isEmpty,
-                let value = snapshot.value as? [String: Any],
-                let id = value["id"] as? String, !id.isEmpty else {
+                let value = snapshot.value as? [String: Any] else {
                     return
             }
-            callback(id)
+            
+            personsQuery.getPersons(for: [snapshot.key]) { persons in
+                let persons = Array(Set(persons)).filter({ $0.id == snapshot.key })
+                guard persons.count == 1 else {
+                    return
+                }
+                
+                var request = Contact.Request()
+                request.id = value["id"] as? String ?? ""
+                request.message = value["message"] as? String ?? ""
+                request.createdOn = value["created:on"] as? Double ?? 0
+                request.requestee = persons[0]
+                
+                callback(request)
+            }
         }
         return processListen("onRemoved", .childRemoved, observer, block)
     }
     
     func unlistenOnAdded() -> Bool {
-        return processUnlisten("onListen") { ref, meID in
+        return processUnlisten("onAdded") { ref, meID in
             return ref.queryOrdered(byChild: "requestee").queryEqual(toValue: meID)
         }
     }
@@ -105,7 +119,7 @@ class ContactRequestRemoteListenerProvider: ContactRequestRemoteListener {
     }
     
     private func processUnlisten(_ handleKey: String, _ observer: @escaping (DatabaseQuery, String) -> DatabaseQuery) -> Bool {
-        guard !meID.isEmpty, let handle = handles[handleKey] else {
+        guard !meID.isEmpty, let handle = handles.removeValue(forKey: handleKey), handle != 0 else {
             return false
         }
         
