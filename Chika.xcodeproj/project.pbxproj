@@ -41,6 +41,8 @@
 		483FC2F71FBAD25300545269 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F51FBAD25300545269 /* Main.storyboard */; };
 		483FC2F91FBAD25300545269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2F81FBAD25300545269 /* Assets.xcassets */; };
 		483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */; };
+		484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484629FB1FE11C3200346AA3 /* ContactSceneController.swift */; };
+		484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */; };
 		485205FD1FC5440000DFD68D /* MessagesRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485205FC1FC5440000DFD68D /* MessagesRemoteQueryMock.swift */; };
 		485206001FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485205FF1FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift */; };
 		485206021FC5526900DFD68D /* PersonsSortMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206011FC5526900DFD68D /* PersonsSortMock.swift */; };
@@ -145,7 +147,6 @@
 		488D87D91FD6432100E690BD /* ContactRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87D81FD6432100E690BD /* ContactRemoteService.swift */; };
 		488D87DB1FD643E800E690BD /* ContactsRemoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */; };
 		488D87DD1FD648B800E690BD /* ContactsSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */; };
-		488DD28E1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DD28D1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift */; };
 		488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488DD28F1FD6F91600AC2E42 /* ContactsSceneAddPopover.swift */; };
 		48920EDA1FBFBFB5008F090F /* NavigationControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */; };
 		48920EE01FBFD6B4008F090F /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EDF1FBFD6B4008F090F /* SignInUITests.swift */; };
@@ -178,7 +179,6 @@
 		48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */; };
 		48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */; };
 		48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */; };
-		48A693111FD5A20500ED4024 /* ContactsSceneSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */; };
 		48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */; };
 		48A743B81FC7F0A90019EDD8 /* ConvoSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */; };
 		48A743BA1FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A743B91FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift */; };
@@ -287,6 +287,8 @@
 		483FC3081FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		483FC30D1FBAD25300545269 /* ChikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		483FC3131FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		484629FB1FE11C3200346AA3 /* ContactSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSceneController.swift; sourceTree = "<group>"; };
+		484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSceneControllerFactory.swift; sourceTree = "<group>"; };
 		485205FC1FC5440000DFD68D /* MessagesRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRemoteQueryMock.swift; sourceTree = "<group>"; };
 		485205FF1FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		485206011FC5526900DFD68D /* PersonsSortMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsSortMock.swift; sourceTree = "<group>"; };
@@ -391,7 +393,6 @@
 		488D87D81FD6432100E690BD /* ContactRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRemoteService.swift; sourceTree = "<group>"; };
 		488D87DA1FD643E800E690BD /* ContactsRemoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsRemoteQuery.swift; sourceTree = "<group>"; };
 		488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneItem.swift; sourceTree = "<group>"; };
-		488DD28D1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneSearchResultEmptyView.swift; sourceTree = "<group>"; };
 		488DD28F1FD6F91600AC2E42 /* ContactsSceneAddPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneAddPopover.swift; sourceTree = "<group>"; };
 		48920ED91FBFBFB5008F090F /* NavigationControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMock.swift; sourceTree = "<group>"; };
 		48920EDF1FBFD6B4008F090F /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
@@ -424,7 +425,6 @@
 		48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScene.swift; sourceTree = "<group>"; };
 		48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneCell.swift; sourceTree = "<group>"; };
 		48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneFactory.swift; sourceTree = "<group>"; };
-		48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneSearchView.swift; sourceTree = "<group>"; };
 		48A743B51FC7E2250019EDD8 /* InboxSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneFlow.swift; sourceTree = "<group>"; };
 		48A743B71FC7F0A90019EDD8 /* ConvoSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneCell.swift; sourceTree = "<group>"; };
 		48A743B91FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneCellManager.swift; sourceTree = "<group>"; };
@@ -512,6 +512,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				484629FA1FE11C2200346AA3 /* Controllers */,
 				4876E3001FE0236F004664E6 /* PeopleSearch */,
 				486900C71FDB95D1005053CD /* ContactRequest */,
 				487766FC1FC6A89A008E865F /* Contacts */,
@@ -628,6 +629,23 @@
 			path = ChikaUITests;
 			sourceTree = "<group>";
 		};
+		484629FA1FE11C2200346AA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				484629FD1FE11C7E00346AA3 /* Contact */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		484629FD1FE11C7E00346AA3 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				484629FB1FE11C3200346AA3 /* ContactSceneController.swift */,
+				484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
 		486900C71FDB95D1005053CD /* ContactRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,11 +702,9 @@
 				48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */,
 				488D87D61FD641F400E690BD /* ContactsSceneFlow.swift */,
 				488D87DC1FD648B800E690BD /* ContactsSceneItem.swift */,
-				48A693101FD5A20500ED4024 /* ContactsSceneSearchView.swift */,
 				488D87D21FD6418D00E690BD /* ContactsSceneSetup.swift */,
 				488D87CC1FD6405A00E690BD /* ContactsSceneTheme.swift */,
 				488D87D01FD6414E00E690BD /* ContactsSceneWorker.swift */,
-				488DD28D1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift */,
 				488DD28F1FD6F91600AC2E42 /* ContactsSceneAddPopover.swift */,
 				48AFB39C1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift */,
 				48CFD5791FD904D8007D7BCE /* ContactsSceneIndexView.swift */,
@@ -1385,7 +1401,6 @@
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,
 				488D87D91FD6432100E690BD /* ContactRemoteService.swift in Sources */,
 				487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */,
-				488DD28E1FD6E34D00AC2E42 /* ContactsSceneSearchResultEmptyView.swift in Sources */,
 				486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */,
 				486901941FDBBD43005053CD /* ContactRequestSceneFlow.swift in Sources */,
 				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
@@ -1399,6 +1414,7 @@
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
 				4876E3151FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift in Sources */,
+				484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */,
 				488639331FCBAE99003108A1 /* RecentChatRemoteListener.swift in Sources */,
@@ -1483,7 +1499,6 @@
 				4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */,
 				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
 				48D9E2C71FDA6CA500A37A3D /* ProfileScene.swift in Sources */,
-				48A693111FD5A20500ED4024 /* ContactsSceneSearchView.swift in Sources */,
 				4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */,
 				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
 				489FE1CA1FC05DCA0062E1AB /* RegisterSceneTheme.swift in Sources */,
@@ -1503,6 +1518,7 @@
 				48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */,
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
+				484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
