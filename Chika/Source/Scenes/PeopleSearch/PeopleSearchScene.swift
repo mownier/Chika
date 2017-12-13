@@ -16,8 +16,16 @@ import UIKit
     func keyboardWillHide()
 }
 
+protocol PeopleSearchSceneDelegate: class {
+    
+    func peopleSearchSceneDidBeginSearching()
+    func peopleSearchSceneDidEndSearching()
+}
+
 class PeopleSearchScene: UIViewController {
 
+    weak var delegate: PeopleSearchSceneDelegate?
+    
     var tableView: UITableView!
     var input: PeopleSearchSceneInput!
     var emptyView: PeopleSearchSceneEmptyView!
@@ -183,6 +191,7 @@ extension PeopleSearchScene: PeopleSearchSceneInteraction {
         tableView.backgroundView = nil
         tableView.reloadData()
         worker.unlistenAll()
+        delegate?.peopleSearchSceneDidEndSearching()
     }
 }
 
@@ -346,6 +355,7 @@ extension PeopleSearchScene: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         input.isSearching = true
+        delegate?.peopleSearchSceneDidBeginSearching()
     }
 }
 

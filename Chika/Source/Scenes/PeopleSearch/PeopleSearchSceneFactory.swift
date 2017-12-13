@@ -10,15 +10,16 @@ import UIKit
 
 protocol PeopleSearchSceneFactory: class {
 
-    func build() -> UIViewController
+    func build(withDelegate: PeopleSearchSceneDelegate?) -> UIViewController
 }
 
 extension PeopleSearchScene {
     
     class Factory: PeopleSearchSceneFactory {
     
-        func build() -> UIViewController {
+        func build(withDelegate delegate: PeopleSearchSceneDelegate?) -> UIViewController {
             let scene = PeopleSearchScene()
+            scene.delegate = delegate
             return scene
         }
     }
