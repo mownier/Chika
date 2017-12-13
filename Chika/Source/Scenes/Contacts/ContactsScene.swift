@@ -10,17 +10,10 @@ import UIKit
 
 @objc protocol ContactsSceneInteraction {
     
-    func didTapSearchCancel()
-    func didTapSearchIcon()
-    func keyboardWillShow()
-    func keyboardWillHide()
 }
 
 class ContactsScene: UIViewController {
 
-    var searchView: ContactsSceneSearchView!
-    var searchResultTableView: UITableView!
-    var searchResultEmptyView: ContactsSceneSearchResultEmptyView!
     var tableView: UITableView!
     var indexView: ContactsSceneIndexView!
     
@@ -30,41 +23,14 @@ class ContactsScene: UIViewController {
     var cellFactory: ContactsSceneCellFactory
     var flow: ContactsSceneFlow
     var setup: ContactsSceneSetup
-    var searchResultData: ContactsSceneData
     
-    var notifCenter: NotificationCenter = .default
-    
-    var isPopoverShown: Bool = false
-    var isSearchEnabled: Bool = false {
-        didSet {
-            guard isSearchEnabled != oldValue else {
-                return
-            }
-            
-            searchView.isSearching = isSearchEnabled
-            
-            if isSearchEnabled {
-                showSearchResultTableView { }
-            
-            } else {
-                hideSearchResultTableView { [weak self] in
-                    self?.searchResultData.removeAll()
-                    self?.searchResultTableView.reloadData()
-                    self?.searchResultTableView.backgroundView = nil
-                    self?.searchView.searchInput.text = ""
-                }
-            }
-        }
-    }
-    
-    init(theme: ContactsSceneTheme, data: ContactsSceneData, worker: ContactsSceneWorker, flow: ContactsSceneFlow, cellFactory: ContactsSceneCellFactory, setup: ContactsSceneSetup, searchResultData: ContactsSceneData) {
+    init(theme: ContactsSceneTheme, data: ContactsSceneData, worker: ContactsSceneWorker, flow: ContactsSceneFlow, cellFactory: ContactsSceneCellFactory, setup: ContactsSceneSetup) {
         self.theme = theme
         self.data = data
         self.worker = worker
         self.flow = flow
         self.cellFactory = cellFactory
         self.setup = setup
-        self.searchResultData = searchResultData
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,8 +41,7 @@ class ContactsScene: UIViewController {
         let flow = Flow()
         let cellFactory = ContactsSceneCell.Factory()
         let setup = Setup()
-        let searchResultData = Data()
-        self.init(theme: theme, data: data, worker: worker, flow: flow, cellFactory: cellFactory, setup: setup, searchResultData: searchResultData)
+        self.init(theme: theme, data: data, worker: worker, flow: flow, cellFactory: cellFactory, setup: setup)
         worker.output = self
         flow.scene = self
     }
@@ -101,35 +66,6 @@ class ContactsScene: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
         
-        searchResultTableView = UITableView()
-        searchResultTableView.tableFooterView = UIView()
-        searchResultTableView.separatorStyle = .none
-        searchResultTableView.estimatedRowHeight = 0
-        searchResultTableView.rowHeight = 0
-        searchResultTableView.delegate = self
-        searchResultTableView.dataSource = self
-        searchResultTableView.backgroundColor = theme.bgColor
-        searchResultTableView.alpha = 0.0
-        
-        searchView = ContactsSceneSearchView()
-        searchView.backgroundColor = theme.searchBGColor
-        searchView.searchInput.font = theme.searchInputFont
-        searchView.searchInput.textColor = theme.searchInputTextColor
-        searchView.searchInput.tintColor = theme.searchInputTextColor
-        searchView.strip.backgroundColor = theme.searchStripColor
-        searchView.searchInput.delegate = self
-        searchView.searchButton.tintColor = theme.searchButtonTintColor
-        searchView.cancelButton.tintColor = theme.searchButtonTintColor
-        searchView.cancelButton.setTitleColor(theme.searchCancelButtonTextColor, for: .normal)
-        searchView.cancelButton.titleLabel?.font = theme.searchCancelButtonFont
-        searchView.searchButton.addTarget(self, action: #selector(self.didTapSearchIcon), for: .touchUpInside)
-        searchView.cancelButton.addTarget(self, action: #selector(self.didTapSearchCancel), for: .touchUpInside)
-        
-        searchResultEmptyView = ContactsSceneSearchResultEmptyView()
-        searchResultEmptyView.titleLabel.text = "No results found"
-        searchResultEmptyView.titleLabel.textColor = theme.searchResultEmptyTitleTextColor
-        searchResultEmptyView.titleLabel.font = theme.searchResultEmptyTitleFont
-        
         indexView = ContactsSceneIndexView()
         indexView.indexFont = theme.indexFont
         indexView.indexTextColor = theme.indexTextColor
@@ -139,8 +75,6 @@ class ContactsScene: UIViewController {
         
         view.addSubview(tableView)
         view.addSubview(indexView)
-        view.addSubview(searchView)
-        view.addSubview(searchResultTableView)
     }
     
     override func viewDidLoad() {
@@ -149,40 +83,21 @@ class ContactsScene: UIViewController {
         worker.fetchContacts()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        addKeyboardObserer()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        removeKeyboardObserver()
-    }
-    
     override func viewDidLayoutSubviews() {
         cellFactory.prototype?.bounds.size.width = view.bounds.width
         
         let topInset: CGFloat = view.statusBarFrame().height
         
         var rect = CGRect.zero
-        
-        rect.size.height = 59 + topInset
-        rect.size.width = view.bounds.width
-        searchView.frame = rect
-    
-        rect.origin.y = rect.maxY
-        rect.size.height = view.bounds.height - rect.origin.y
-        searchResultTableView.frame = rect
-        searchResultEmptyView.frame = searchResultTableView.bounds
-        
+
+        rect.origin.y = 0
+        rect.size.height = view.bounds.height
         rect.size.width = indexView.isHidden ? 0 : 28
         rect.origin.x = view.bounds.width - rect.width - (indexView.isHidden ? 0 : 8)
         indexView.frame = rect
         
         rect.origin.x = 0
-        rect.size.width = searchResultTableView.frame.width - indexView.frame.width - (indexView.isHidden ? 0 : 8)
+        rect.size.width = view.bounds.width - indexView.frame.width - (indexView.isHidden ? 0 : 8)
         tableView.frame = rect
     }
     
@@ -193,110 +108,22 @@ class ContactsScene: UIViewController {
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
-    
-    func showSearchResultTableView(_ completion: @escaping () -> Void) {
-        let tableView = searchResultTableView
-        let animator = UIViewPropertyAnimator(duration: 0.25, curve: .easeIn) {
-            tableView?.alpha = 1.0
-        }
-        animator.addCompletion { position in
-            switch position {
-            case .end:
-                completion()
-                
-            default:
-                break
-            }
-        }
-        
-        DispatchQueue.main.async {
-            animator.startAnimation()
-        }
-    }
-    
-    func hideSearchResultTableView(_ completion: @escaping () -> Void) {
-        let tableView = searchResultTableView
-        let animator = UIViewPropertyAnimator(duration: 0.25, curve: .easeOut) {
-            tableView?.alpha = 0.0
-        }
-        animator.addCompletion { position in
-            switch position {
-            case .end:
-                completion()
-                
-            default:
-                break
-            }
-        }
-        
-        DispatchQueue.main.async {
-            animator.startAnimation()
-        }
-    }
-    
-    func addKeyboardObserer() {
-        notifCenter.addObserver(self, selector: #selector(self.keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-        notifCenter.addObserver(self, selector: #selector(self.keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    func removeKeyboardObserver() {
-        notifCenter.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        notifCenter.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    var isKeyboardShown: Bool = false
-    var prevBottomOffset: CGFloat = 0
 }
 
 extension ContactsScene: ContactsSceneInteraction {
     
-    func didTapSearchIcon() {
-        searchView.searchInput.becomeFirstResponder()
-    }
-    
-    func didTapSearchCancel() {
-        isSearchEnabled = false
-        searchView.searchInput.resignFirstResponder()
-    }
-    
-    func keyboardWillHide() {
-        isKeyboardShown = false
-        
-        searchResultTableView.contentInset.bottom = prevBottomOffset
-        searchResultTableView.scrollIndicatorInsets.bottom = prevBottomOffset
-    }
-    
-    func keyboardWillShow() {
-        guard !isKeyboardShown else {
-            return
-        }
-        
-        isKeyboardShown = true
-        prevBottomOffset = searchResultTableView.contentInset.bottom
-        
-        let keyboardSize = UIApplication.shared.windows[1].subviews[0].subviews[0].bounds.size
-        let prevBottom = searchResultTableView.contentInset.bottom
-        let newBottom = prevBottomOffset + keyboardSize.height - (view.safeAreaInsets.top == 20 ? 49 : view.safeAreaInsets.top == 44 ? 83 : 0)
-        if newBottom != prevBottom {
-            searchResultTableView.contentInset.bottom = newBottom + 42
-            searchResultTableView.scrollIndicatorInsets.bottom = newBottom
-        }
-    }
 }
 
 extension ContactsScene: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let source = tableView == searchResultTableView ? searchResultData : data
-        return source.itemCount
+        return data.itemCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let source = tableView == searchResultTableView ? searchResultData : data
-        let action = tableView == searchResultTableView ? self : nil
         let cell = cellFactory.build(using: tableView, reuseID: "ContactsSceneCell", theme: theme)
-        let item = source.item(at: indexPath.row)
-        let _ = setup.format(cell: cell, theme: theme, item: item, action: action)
+        let item = data.item(at: indexPath.row)
+        let _ = setup.format(cell: cell, theme: theme, item: item, action: self)
         return cell
     }
 }
@@ -304,19 +131,21 @@ extension ContactsScene: UITableViewDataSource {
 extension ContactsScene: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let source = tableView == searchResultTableView ? searchResultData : data
-        let action = tableView == searchResultTableView ? self : nil
-        let item = source.item(at: indexPath.row)
-        return setup.height(for: cellFactory.prototype, theme: theme, item: item, action: action)
+        let item = data.item(at: indexPath.row)
+        return setup.height(for: cellFactory.prototype, theme: theme, item: item, action: self)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard tableView != searchResultTableView, let chat = data.item(at: indexPath.row)?.contact.chat else {
+        guard let chat = data.item(at: indexPath.row)?.contact.chat else {
             return
         }
         
         let _ = flow.goToConvo(withChat: chat)
     }
+}
+
+extension ContactsScene: ContactsSceneCellAction {
+    
 }
 
 extension ContactsScene: ContactsSceneWorkerOutput {
@@ -363,92 +192,6 @@ extension ContactsScene: ContactsSceneWorkerOutput {
         tableView.reloadData()
         worker.unlistenOnActiveStatus(for: personID)
         updateIndexView()
-    }
-    
-    func workerDidSearchPeopleWithObjects(_ objects: [PersonSearchObject]) {
-        searchResultData.removeAll()
-        searchResultTableView.backgroundView = nil
-        // TODO: searchResultData.appendPersons(persons)
-        searchResultTableView.reloadData()
-    }
-    
-    func workerDidSearchPeopleWithError(_ error: Error) {
-        searchResultData.removeAll()
-        searchResultTableView.backgroundView = searchResultEmptyView
-        searchResultTableView.reloadData()
-    }
-    
-    func workerDidRequestContactWithError(_ error: Error, personID: String) {
-        let _ = searchResultData.updateRequestStatus(for: personID, status: .failed)
-        searchResultTableView.reloadData()
-    }
-    
-    func workerDidRequestContactOK(_ personID: String) {
-        let _ = searchResultData.updateRequestStatus(for: personID, status: .sent)
-        searchResultTableView.reloadData()
-    }
-}
-
-extension ContactsScene: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        worker.searchPeople(withKeyword: textField.text)
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        isSearchEnabled = true
-    }
-}
-
-extension ContactsScene: ContactsSceneCellAction {
-    
-    func contactsSceneCellWillAddContact(_ cell: UITableViewCell) {
-        guard let index = searchResultTableView.indexPath(for: cell),
-            let person = searchResultData.item(at: index.row)?.contact.person else {
-                return
-        }
-        
-        isPopoverShown = true
-        
-        let vc = ContactsSceneAddPopover(person: person)
-        vc.delegate = self
-        
-        let sourceView = (cell as? ContactsSceneCell)?.avatar
-        let controller = vc.popoverPresentationController
-        controller?.sourceView = sourceView
-        controller?.sourceRect = sourceView == nil ? .zero : sourceView!.bounds
-        controller?.delegate = self
-        present(vc, animated: true, completion: nil)
-    }
-}
-
-extension ContactsScene: UIPopoverPresentationControllerDelegate {
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
-    }
-    
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        isPopoverShown = false
-    }
-}
-
-extension ContactsScene: ContactsSceneAddPopoverDelegate {
-    
-    func addPopoverDidOK(message: String, person: Person) {
-        isPopoverShown = false
-        let _ = searchResultData.updateRequestStatus(for: person.id, status: .sending)
-        searchResultTableView.reloadData()
-        worker.sendContactRequest(to: person.id, message: message)
-    }
-    
-    func addPopoverDidCancel() {
-        isPopoverShown = false
     }
 }
 

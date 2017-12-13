@@ -10,12 +10,10 @@ import UIKit
 
 @objc protocol ContactsSceneCellInteraction: class {
     
-    func didTapAdd()
 }
 
 protocol ContactsSceneCellAction: class {
     
-    func contactsSceneCellWillAddContact(_ cell: UITableViewCell)
 }
 
 class ContactsSceneCell: UITableViewCell {
@@ -51,16 +49,9 @@ class ContactsSceneCell: UITableViewCell {
         onlineStatusView = UIView()
         onlineStatusView.layer.masksToBounds = true
         
-        addButton = UIButton()
-        addButton.layer.masksToBounds = true
-        addButton.layer.cornerRadius = 3
-        addButton.setTitle("Add Contact", for: .normal)
-        addButton.addTarget(self, action: #selector(self.didTapAdd), for: .touchUpInside)
-        
         addSubview(avatar)
         addSubview(nameLabel)
         addSubview(onlineStatusView)
-        addSubview(addButton)
     }
     
     override func layoutSubviews() {
@@ -68,15 +59,10 @@ class ContactsSceneCell: UITableViewCell {
         
         var rect = CGRect.zero
         
-        rect.size.width = 108
-        rect.size.height = 40
-        rect.origin.y = spacing
-        rect.origin.x = bounds.width - rect.width - spacing * 2
-        addButton.frame = rect
-        
         rect.size.width = 40
         rect.size.height = rect.width
         rect.origin.x = spacing * 2
+        rect.origin.y = spacing
         avatar.frame = rect
         avatar.layer.cornerRadius = rect.width / 2
         
@@ -88,15 +74,12 @@ class ContactsSceneCell: UITableViewCell {
         
         rect.origin.x = avatar.frame.maxX + spacing
         rect.origin.y = avatar.frame.midY - nameLabel.font.lineHeight / 2
-        rect.size.width = bounds.width - rect.origin.x - (addButton.isHidden ? spacing * 2 : addButton.frame.width + spacing * 3)
+        rect.size.width = bounds.width - rect.origin.x - spacing * 2
         rect.size.height = nameLabel.sizeThatFits(rect.size).height
         nameLabel.frame = rect
     }
 }
 
 extension ContactsSceneCell: ContactsSceneCellInteraction {
-    
-    func didTapAdd() {
-        action?.contactsSceneCellWillAddContact(self)
-    }
+
 }

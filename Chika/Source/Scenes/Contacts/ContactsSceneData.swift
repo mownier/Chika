@@ -15,11 +15,9 @@ protocol ContactsSceneData: class {
     
     func removeAll()
     func appendContacts(_ contacts: [Contact])
-    func appendPersons(_ persons: [Person])
     func remove(_ personID: String)
     func item(at index: Int) -> ContactsSceneItem?
     func updateActiveStatus(for personID: String, isActive: Bool) -> Int?
-    func updateRequestStatus(for personID: String, status: ContactsSceneItem.RequestStatus) -> Int?
     func index(for char: Character) -> Int?
 }
 
@@ -67,15 +65,6 @@ extension ContactsScene {
             items.sort(by: { $0.contact.person.name.localizedStandardCompare($1.contact.person.name) == .orderedAscending })
         }
         
-        func appendPersons(_ persons: [Person]) {
-            let list = persons.map { person -> Contact in
-                var contact = Contact()
-                contact.person = person
-                return contact
-            }
-            appendContacts(list)
-        }
-        
         func item(at index: Int) -> ContactsSceneItem? {
             guard index >= 0, index < items.count else {
                 return nil
@@ -99,15 +88,6 @@ extension ContactsScene {
             }
             
             items.remove(at: index)
-        }
-        
-        func updateRequestStatus(for personID: String, status: ContactsSceneItem.RequestStatus) -> Int? {
-            guard let index = items.index(where: { $0.contact.person.id == personID }) else {
-                return nil
-            }
-            
-            items[index].requestStatus = status
-            return index
         }
         
         func index(for char: Character) -> Int? {

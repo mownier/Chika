@@ -7,22 +7,12 @@
 //
 
 struct ContactsSceneItem {
-
-    enum RequestStatus {
-        
-        case none
-        case sending
-        case sent
-        case failed
-    }
     
     var contact: Contact
     var isActive: Bool
-    var requestStatus: RequestStatus
     
     init(contact: Contact) {
         self.contact = contact
         self.isActive = false
-        self.requestStatus = .none
     }
 }

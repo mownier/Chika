@@ -13,8 +13,6 @@ protocol ContactsSceneWorker: class {
     func listenOnAddedContact()
     func listenOnRemovedContact()
     func unlistenOnActiveStatus(for personID: String)
-    func searchPeople(withKeyword keyword: String?)
-    func sendContactRequest(to personID: String, message: String)
 }
 
 protocol ContactsSceneWorkerOutput: class {
@@ -23,11 +21,7 @@ protocol ContactsSceneWorkerOutput: class {
     func workerDidFetchWithError(_ error: Error)
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
     func workerDidAddContact(_ contact: Contact)
-    func workerDidRequestContactWithError(_ error: Error, personID: String)
-    func workerDidRequestContactOK(_ personID: String)
     func workerDidRemoveContact(_ personID: String)
-    func workerDidSearchPeopleWithObjects(_ objects: [PersonSearchObject])
-    func workerDidSearchPeopleWithError(_ error: Error)
 }
 
 extension ContactsScene {
@@ -97,36 +91,6 @@ extension ContactsScene {
         
         func unlistenOnActiveStatus(for personID: String) {
             let _ = listener.presence.unlisten(personID: personID)
-        }
-        
-        func searchPeople(withKeyword keyword: String?) {
-            guard keyword != nil else {
-                let error = AppError("search keyword is nil")
-                output?.workerDidSearchPeopleWithError(error)
-                return
-            }
-            
-            service.search.searchPeople(withKeyword: keyword!) { [weak self] result in
-                switch result {
-                case .err(let info):
-                    self?.output?.workerDidSearchPeopleWithError(info)
-                    
-                case .ok(let objects):
-                    self?.output?.workerDidSearchPeopleWithObjects(objects)
-                }
-            }
-        }
-        
-        func sendContactRequest(to personID: String, message: String) {
-            service.contact.sendContactRequest(to: personID, message: message) { [weak self] result in
-                switch result {
-                case .err(let info):
-                    self?.output?.workerDidRequestContactWithError(info, personID: personID)
-                    
-                case .ok:
-                    self?.output?.workerDidRequestContactOK(personID)
-                }
-            }
         }
     }
 }

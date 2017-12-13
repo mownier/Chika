@@ -31,11 +31,7 @@ extension ContactsSceneCell {
                 let contactCell = ContactsSceneCell()
                 contactCell.avatar.backgroundColor = theme.avatarBGColor
                 contactCell.nameLabel.textColor = theme.contactNameTextColor
-                contactCell.nameLabel.font = theme.contactNameFont
                 contactCell.onlineStatusView.backgroundColor = theme.onlineStatusColor
-                contactCell.addButton.backgroundColor = theme.addActionBGColor
-                contactCell.addButton.setTitleColor(theme.addActionTextColor, for: .normal)
-                contactCell.addButton.titleLabel?.font = theme.addActionFont
                 cell = contactCell
             }
             return cell
