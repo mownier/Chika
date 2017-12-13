@@ -13,6 +13,7 @@ protocol PresenceRemoteListener: class {
 
     func listen(personID: String, callback: @escaping (Bool) -> Void) -> Bool
     func unlisten(personID: String) -> Bool
+    func unlistenAll() -> Bool
 }
 
 class PresenceRemoteListenerProvider: PresenceRemoteListener {
@@ -67,5 +68,17 @@ class PresenceRemoteListenerProvider: PresenceRemoteListener {
         ref.removeObserver(withHandle: handle)
         
         return true
+    }
+    
+    func unlistenAll() -> Bool {
+        guard !handles.isEmpty else {
+            return false
+        }
+        
+        var result = true
+        for (personID, _) in handles {
+            result = result && unlisten(personID: personID)
+        }
+        return result
     }
 }
