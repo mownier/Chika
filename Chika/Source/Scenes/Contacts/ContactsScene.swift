@@ -86,8 +86,6 @@ class ContactsScene: UIViewController {
     override func viewDidLayoutSubviews() {
         cellFactory.prototype?.bounds.size.width = view.bounds.width
         
-        let topInset: CGFloat = view.statusBarFrame().height
-        
         var rect = CGRect.zero
 
         rect.origin.y = 0
