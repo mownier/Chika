@@ -66,12 +66,14 @@ struct PersonSearchObject: Hashable {
     var chat: Chat
     var isContact: Bool
     var isRequested: Bool
+    var isPending: Bool
     
     init() {
         person = Person()
         chat = Chat()
         isContact = false
         isRequested = false
+        isPending = false
     }
     
     var hashValue: Int {
