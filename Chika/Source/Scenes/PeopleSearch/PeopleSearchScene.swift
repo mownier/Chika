@@ -36,7 +36,6 @@ class PeopleSearchScene: UIViewController {
     var flow: PeopleSearchSceneFlow
     var setup: PeopleSearchSceneSetup
     var cellFactory: PeopleSearchSceneCellFactory
-    var waypoint: AppExitWaypoint
     
     var notifCenter: NotificationCenter = .default
     var isKeyboardShown: Bool = false
@@ -48,15 +47,13 @@ class PeopleSearchScene: UIViewController {
         worker: PeopleSearchSceneWorker,
         flow: PeopleSearchSceneFlow,
         setup: PeopleSearchSceneSetup,
-        cellFactory: PeopleSearchSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        cellFactory: PeopleSearchSceneCellFactory) {
         self.theme = theme
         self.data = data
         self.worker = worker
         self.flow = flow
         self.cellFactory = cellFactory
         self.setup = setup
-        self.waypoint = waypoint
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,11 +64,9 @@ class PeopleSearchScene: UIViewController {
         let flow = Flow()
         let cellFactory = PeopleSearchSceneCell.Factory()
         let setup = Setup()
-        let waypoint = PeopleSearchScene.ExitWaypoint()
-        self.init(theme: theme, data: data, worker: worker, flow: flow, setup: setup, cellFactory: cellFactory, waypoint: waypoint)
+        self.init(theme: theme, data: data, worker: worker, flow: flow, setup: setup, cellFactory: cellFactory)
         worker.output = self
         flow.scene = self
-        waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {

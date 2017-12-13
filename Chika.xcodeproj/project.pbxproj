@@ -77,7 +77,6 @@
 		4876E3121FE0239B004664E6 /* PeopleSearchSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E3071FE0239B004664E6 /* PeopleSearchSceneItem.swift */; };
 		4876E3131FE0239B004664E6 /* PeopleSearchSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E3081FE0239B004664E6 /* PeopleSearchSceneSetup.swift */; };
 		4876E3141FE0239B004664E6 /* PeopleSearchSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E3091FE0239B004664E6 /* PeopleSearchSceneTheme.swift */; };
-		4876E3151FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E30A1FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift */; };
 		4876E3161FE0239B004664E6 /* PeopleSearchSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E30B1FE0239B004664E6 /* PeopleSearchSceneWorker.swift */; };
 		4876E3181FE023DD004664E6 /* PeopleSearchSceneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E3171FE023DD004664E6 /* PeopleSearchSceneInput.swift */; };
 		4876E31A1FE02472004664E6 /* PeopleSearchSceneEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876E3191FE02472004664E6 /* PeopleSearchSceneEmptyView.swift */; };
@@ -323,7 +322,6 @@
 		4876E3071FE0239B004664E6 /* PeopleSearchSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneItem.swift; sourceTree = "<group>"; };
 		4876E3081FE0239B004664E6 /* PeopleSearchSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneSetup.swift; sourceTree = "<group>"; };
 		4876E3091FE0239B004664E6 /* PeopleSearchSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneTheme.swift; sourceTree = "<group>"; };
-		4876E30A1FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneWaypoint.swift; sourceTree = "<group>"; };
 		4876E30B1FE0239B004664E6 /* PeopleSearchSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneWorker.swift; sourceTree = "<group>"; };
 		4876E3171FE023DD004664E6 /* PeopleSearchSceneInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneInput.swift; sourceTree = "<group>"; };
 		4876E3191FE02472004664E6 /* PeopleSearchSceneEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleSearchSceneEmptyView.swift; sourceTree = "<group>"; };
@@ -686,7 +684,6 @@
 				4876E3071FE0239B004664E6 /* PeopleSearchSceneItem.swift */,
 				4876E3081FE0239B004664E6 /* PeopleSearchSceneSetup.swift */,
 				4876E3091FE0239B004664E6 /* PeopleSearchSceneTheme.swift */,
-				4876E30A1FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift */,
 				4876E30B1FE0239B004664E6 /* PeopleSearchSceneWorker.swift */,
 			);
 			path = PeopleSearch;
@@ -1413,7 +1410,6 @@
 				48B37E8D1FCBD474004978F1 /* RecentMessageRemoteListener.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
-				4876E3151FE0239B004664E6 /* PeopleSearchSceneWaypoint.swift in Sources */,
 				484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */,
