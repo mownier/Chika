@@ -61,6 +61,7 @@ class PersonRemoteSearchProvider: PersonRemoteSearch {
             
             var contactInfo = [String: Bool]()
             var requestedInfo = [String: Bool]()
+            var pendingInfo = [String: Bool]()
             var chatInfo = [String: Chat]()
             var personKeys = [String]()
             var personKeyCounter: UInt = 0 {
@@ -77,7 +78,8 @@ class PersonRemoteSearchProvider: PersonRemoteSearch {
                     personsQuery.getPersons(for: personKeys) { persons in
                         let persons = Array(Set(persons)).filter({
                             guard let isContact = contactInfo[$0.id],
-                                requestedInfo[$0.id] != nil else {
+                                requestedInfo[$0.id] != nil,
+                                pendingInfo[$0.id] != nil else {
                                     return false
                             }
                             
@@ -99,6 +101,7 @@ class PersonRemoteSearchProvider: PersonRemoteSearch {
                             object.person = person
                             object.isContact = contactInfo[person.id] ?? false
                             object.isRequested = requestedInfo[person.id] ?? false
+                            object.isPending = pendingInfo[person.id] ?? false
                             if let chat = chatInfo[person.id] {
                                 object.chat = chat
                             }
@@ -125,7 +128,13 @@ class PersonRemoteSearchProvider: PersonRemoteSearch {
                     let establishedRef = rootRef.child("person:contact:request:established/\(meID)/\(personID)")
 
                     establishedRef.observeSingleEvent(of: .value) { snapshot in
-                        let isRequested = snapshot.exists()
+                        var isRequested = false
+                        var isPending = false
+                        
+                        if snapshot.exists() {
+                            isPending = snapshot.hasChild("requestee") && snapshot.childSnapshot(forPath: "requestee").value as? String == meID
+                            isRequested = snapshot.hasChild("requestor") && snapshot.childSnapshot(forPath: "requestor").value as? String == meID
+                        }
                         
                         chatsQuery.getChats(for: [chatID]) { chats in
                             if isContact, chats.count == 1, chats[0].id == chatID {
@@ -133,6 +142,7 @@ class PersonRemoteSearchProvider: PersonRemoteSearch {
                             }
                             contactInfo[personID] = isContact
                             requestedInfo[personID] = isRequested
+                            pendingInfo[personID] = isPending
                             personKeys.append(personID)
                             personKeyCounter += 1
                         }
