@@ -20,7 +20,7 @@ extension HomeScene {
         struct Factory {
             
             var inbox: InboxSceneFactory
-            var contacts: ContactsSceneFactory
+            var contacts: ContactSceneControllerFactory
             var profile: ProfileSceneFactory
         }
         
@@ -55,7 +55,7 @@ extension HomeScene {
         
         convenience init() {
             let inbox = InboxScene.Factory()
-            let contacts = ContactsScene.Factory()
+            let contacts = ContactSceneController.Factory()
             let profile = ProfileScene.Factory()
             let factory = Factory(inbox: inbox, contacts: contacts, profile: profile)
             self.init(factory: factory)
