@@ -50,9 +50,9 @@ class ContactRemoteListenerProvider: ContactRemoteListener {
                 return
             }
             
-            let chat = snapshot.childSnapshot(forPath: "chat")
+            let chatID = snapshot.childSnapshot(forPath: "chat").value as? String ?? ""
             
-            guard let value = chat.value as? [String: Bool], value.count == 1, value.keys.count == 1, let chatID = value.keys.first, !chatID.isEmpty else {
+            guard !chatID.isEmpty else {
                 return
             }
             
