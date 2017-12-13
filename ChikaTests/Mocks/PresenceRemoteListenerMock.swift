@@ -17,4 +17,8 @@ class PresenceRemoteListenerMock: PresenceRemoteListener {
     func unlisten(personID: String) -> Bool {
         return true
     }
+    
+    func unlistenAll() -> Bool {
+        return true
+    }
 }
