@@ -212,6 +212,9 @@ extension ProfileScene: UITableViewDelegate {
             
         case "about":
             let _ = flow.goToAbout()
+        
+        case "help & feedback":
+            let _ = flow.goToSupport()
             
         default:
             break

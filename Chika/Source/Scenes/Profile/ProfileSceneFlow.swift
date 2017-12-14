@@ -16,6 +16,7 @@ protocol ProfileSceneFlow: class {
     func goToPasswordChange() -> Bool
     func goToInitial() -> Bool
     func goToAbout() -> Bool
+    func goToSupport() -> Bool
 }
 
 extension ProfileScene {
@@ -30,6 +31,7 @@ extension ProfileScene {
             var passwordChange: AppEntryWaypoint
             var initial: AppRootWaypoint
             var about: AppEntryWaypoint
+            var support: AppEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -48,7 +50,8 @@ extension ProfileScene {
             let passwordChange = PasswordChangeScene.EntryWaypoint()
             let initial = InitialScene.RootWaypoint()
             let about = AboutScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about)
+            let support = SupportScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about, support: support)
             self.init(waypoint: waypoint, application: UIApplication.shared)
         }
         
@@ -94,6 +97,14 @@ extension ProfileScene {
             }
             
             return waypoint.about.enter(from: scene)
+        }
+        
+        func goToSupport() -> Bool {
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.support.enter(from: scene)
         }
     }
 }
