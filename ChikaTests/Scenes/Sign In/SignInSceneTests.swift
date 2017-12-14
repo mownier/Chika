@@ -25,35 +25,6 @@ class SignInSceneTests: XCTestCase {
         constructorTest(withType: "coder")
     }
     
-    // CONTEXT: didTapGo function should resign the email and
-    // pass inputs as first responder. It should return ok.
-    // Texts of inputs should be empty.
-    func testDidTapGoA() {
-        let exp = expectation(description: "testDidTapGoA")
-        let service = AuthRemoteServiceMock()
-        let worker = SignInSceneWorkerMock(service: service)
-        let theme = SignInScene.Theme()
-        let flow = SignInSceneFlowMock()
-        let waypoint = SignInScene.ExitWaypoint()
-        let scene = SignInScene(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
-        let _ = scene.view
-        
-        worker.exp = exp
-        worker.output = scene
-        worker.callback.workerDidSignInWithError = { _ in XCTFail() }
-        worker.callback.workerDidSignInOK = {
-            XCTAssertFalse(scene.emailInput.isFirstResponder)
-            XCTAssertFalse(scene.passInput.isFirstResponder)
-            XCTAssertTrue(scene.emailInput.text!.isEmpty)
-            XCTAssertTrue(scene.passInput.text!.isEmpty)
-        }
-        
-        scene.emailInput.text = "me@me.com"
-        scene.passInput.text = "12345"
-        scene.goButton.sendActions(for: .touchUpInside)
-        wait(for: [exp], timeout: 2.0)
-    }
-    
     // CONTEXT: didTapBack function should call the exit
     // function in waypoint given that the left bar button
     // item is tapped
