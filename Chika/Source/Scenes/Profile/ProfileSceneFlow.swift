@@ -11,6 +11,7 @@ import UIKit
 protocol ProfileSceneFlow: class {
 
     func goToContactRequest() -> Bool
+    func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool
 }
 
 extension ProfileScene {
@@ -20,6 +21,7 @@ extension ProfileScene {
         struct Waypoint {
             
             var contactRequest: AppEntryWaypoint
+            var profileEdit: ProfileEditSceneEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -31,7 +33,8 @@ extension ProfileScene {
         
         convenience init() {
             let contactRequest = ContactRequestScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest)
+            let profileEdit = ProfileEditScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit)
             self.init(waypoint: waypoint)
         }
         
@@ -41,6 +44,14 @@ extension ProfileScene {
             }
             
             return waypoint.contactRequest.enter(from: scene)
+        }
+        
+        func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool {
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.profileEdit.withDelegate(delegate).withPerson(me).enter(from: scene)
         }
     }
 }
