@@ -10,8 +10,7 @@ import UIKit
 
 protocol EmailUpdateSceneEntryWaypoint: class {
     
-    func withDelegate(_ delegate: EmailUpdateSceneDelegate?) -> EmailUpdateSceneEntryWaypoint
-    func withEmail(_ email: String) -> AppEntryWaypoint
+    func withDelegate(_ delegate: EmailUpdateSceneDelegate?) -> AppEntryWaypoint
 }
 
 extension EmailUpdateScene {
@@ -26,11 +25,9 @@ extension EmailUpdateScene {
         
         weak var delegate: EmailUpdateSceneDelegate?
         var factory: Factory
-        var email: String
         
         init(factory: Factory) {
             self.factory = factory
-            self.email = ""
         }
         
         convenience init() {
@@ -41,24 +38,18 @@ extension EmailUpdateScene {
         }
         
         func enter(from parent: UIViewController) -> Bool {
-            let scene = factory.scene.build(withEmail: email, delegate: delegate)
+            let scene = factory.scene.build(withDelegate: delegate)
             let nav = factory.nav.build(root: scene)
             DispatchQueue.main.async { [weak self] in
                 parent.present(nav, animated: true, completion: nil)
                 
                 guard let this = self else { return }
-                this.email = ""
                 this.delegate = nil
             }
             return true
         }
         
-        func withEmail(_ anEmail: String) -> AppEntryWaypoint {
-            email = anEmail
-            return self
-        }
-        
-        func withDelegate(_ aDelegate: EmailUpdateSceneDelegate?) -> EmailUpdateSceneEntryWaypoint {
+        func withDelegate(_ aDelegate: EmailUpdateSceneDelegate?) -> AppEntryWaypoint {
             delegate = aDelegate
             return self
         }

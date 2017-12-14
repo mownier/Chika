@@ -194,7 +194,7 @@ extension ProfileScene: UITableViewDelegate {
             }
         
         case "email":
-            let _ = flow.goToEmailUpdate(withEmail: data.person.email, delegate: self)
+            let _ = flow.goToEmailUpdate(withDelegate: self)
         
         case "change password":
             let _ = flow.goToPasswordChange()

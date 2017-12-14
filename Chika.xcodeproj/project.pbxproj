@@ -51,7 +51,6 @@
 		4852060A1FC55A6300DFD68D /* MessagesSortMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206091FC55A6300DFD68D /* MessagesSortMock.swift */; };
 		4852060C1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */; };
 		4867F8C01FE237F000ADFD39 /* EmailUpdateScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */; };
-		4867F8C31FE237F000ADFD39 /* EmailUpdateSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */; };
 		4867F8C41FE237F000ADFD39 /* EmailUpdateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */; };
 		4867F8C71FE237F000ADFD39 /* EmailUpdateSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */; };
 		4867F8C81FE237F000ADFD39 /* EmailUpdateSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */; };
@@ -321,7 +320,6 @@
 		485206091FC55A6300DFD68D /* MessagesSortMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSortMock.swift; sourceTree = "<group>"; };
 		4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRemoteQueryMock.swift; sourceTree = "<group>"; };
 		4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateScene.swift; sourceTree = "<group>"; };
-		4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneData.swift; sourceTree = "<group>"; };
 		4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneFactory.swift; sourceTree = "<group>"; };
 		4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneSetup.swift; sourceTree = "<group>"; };
 		4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneTheme.swift; sourceTree = "<group>"; };
@@ -701,7 +699,6 @@
 			isa = PBXGroup;
 			children = (
 				4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */,
-				4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */,
 				4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */,
 				4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */,
 				4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */,
@@ -1493,7 +1490,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4867F8CA1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift in Sources */,
-				4867F8C31FE237F000ADFD39 /* EmailUpdateSceneData.swift in Sources */,
 				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,

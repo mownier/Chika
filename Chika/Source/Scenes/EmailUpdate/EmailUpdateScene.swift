@@ -33,39 +33,33 @@ class EmailUpdateScene: UIViewController {
     var toast: UILabel!
     
     var theme: EmailUpdateSceneTheme
-    var data: EmailUpdateSceneData
     var worker: EmailUpdateSceneWorker
     var setup: EmailUpdateSceneSetup
     var waypoint: AppExitWaypoint
     
-    init(email: String,
-        theme: EmailUpdateSceneTheme,
-        data: EmailUpdateSceneData,
+    init(theme: EmailUpdateSceneTheme,
         worker: EmailUpdateSceneWorker,
         setup: EmailUpdateSceneSetup,
         waypoint: AppExitWaypoint) {
         self.theme = theme
-        self.data = data
         self.worker = worker
         self.setup = setup
         self.waypoint = waypoint
         super.init(nibName: nil, bundle: nil)
-        data.email = email
     }
     
-    convenience init(email: String) {
+    convenience init() {
         let theme = Theme()
-        let data = Data()
         let worker = Worker()
         let setup = Setup()
         let waypoint = EmailUpdateScene.ExitWaypoint()
-        self.init(email: email,theme: theme, data: data, worker: worker, setup: setup, waypoint: waypoint)
+        self.init(theme: theme, worker: worker, setup: setup, waypoint: waypoint)
         worker.output = self
         waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
-        self.init(email: "")
+        self.init()
     }
     
     override func loadView() {
@@ -244,7 +238,6 @@ extension EmailUpdateScene: EmailUpdateSceneWorkerOutput {
     func workerDidChangeEmail(_ email: String) {
         changeToUpdateBarItem()
         showToast(withText: "EMAIL CHANGED")
-        data.email = email
         delegate?.emailUpdateDidChangeEmail(email)
     }
     

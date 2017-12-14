@@ -12,7 +12,7 @@ protocol ProfileSceneFlow: class {
 
     func goToContactRequest() -> Bool
     func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool
-    func goToEmailUpdate(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> Bool
+    func goToEmailUpdate(withDelegate: EmailUpdateSceneDelegate?) -> Bool
     func goToPasswordChange() -> Bool
 }
 
@@ -60,12 +60,12 @@ extension ProfileScene {
             return waypoint.profileEdit.withDelegate(delegate).withPerson(me).enter(from: scene)
         }
         
-        func goToEmailUpdate(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> Bool {
-            guard let scene = scene, !email.isEmpty else {
+        func goToEmailUpdate(withDelegate delegate: EmailUpdateSceneDelegate?) -> Bool {
+            guard let scene = scene else {
                 return false
             }
             
-            return waypoint.emailUpdate.withDelegate(delegate).withEmail(email).enter(from: scene)
+            return waypoint.emailUpdate.withDelegate(delegate).enter(from: scene)
         }
         
         func goToPasswordChange() -> Bool {

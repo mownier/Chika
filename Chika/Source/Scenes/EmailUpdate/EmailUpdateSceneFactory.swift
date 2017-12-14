@@ -10,15 +10,15 @@ import UIKit
 
 protocol EmailUpdateSceneFactory: class {
 
-    func build(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> UIViewController
+    func build(withDelegate: EmailUpdateSceneDelegate?) -> UIViewController
 }
 
 extension EmailUpdateScene {
     
     class Factory: EmailUpdateSceneFactory {
     
-        func build(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> UIViewController {
-            let scene = EmailUpdateScene(email: email)
+        func build(withDelegate delegate: EmailUpdateSceneDelegate?) -> UIViewController {
+            let scene = EmailUpdateScene()
             scene.delegate = delegate
             return scene
         }
