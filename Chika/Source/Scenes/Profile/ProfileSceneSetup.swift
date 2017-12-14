@@ -23,13 +23,9 @@ extension ProfileScene {
             }
             
             cell.textLabel?.textColor = theme.labelTextColor
-            cell.accessoryType = .none
+            cell.accessoryType = item.isDisclosureEnabled ? .disclosureIndicator : .none
             cell.textLabel?.text = item.label
             cell.detailTextLabel?.text = item.content
-            
-            if item.content.isEmpty  {
-                cell.accessoryType = .disclosureIndicator
-            }
             
             if item.label.lowercased() == "sign out" {
                 cell.textLabel?.textColor = theme.destructiveTextColor
