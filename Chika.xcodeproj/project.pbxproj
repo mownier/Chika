@@ -115,6 +115,18 @@
 		487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */; };
 		487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */; };
 		487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B536A1FC9C094006D072F /* RemoteWriterResult.swift */; };
+		487C4BE11FE168650066DD41 /* ProfileEditScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BD61FE168650066DD41 /* ProfileEditScene.swift */; };
+		487C4BE21FE168650066DD41 /* ProfileEditSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BD71FE168650066DD41 /* ProfileEditSceneCell.swift */; };
+		487C4BE31FE168650066DD41 /* ProfileEditSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BD81FE168650066DD41 /* ProfileEditSceneCellFactory.swift */; };
+		487C4BE41FE168650066DD41 /* ProfileEditSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BD91FE168650066DD41 /* ProfileEditSceneData.swift */; };
+		487C4BE51FE168650066DD41 /* ProfileEditSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDA1FE168650066DD41 /* ProfileEditSceneFactory.swift */; };
+		487C4BE61FE168650066DD41 /* ProfileEditSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDB1FE168650066DD41 /* ProfileEditSceneFlow.swift */; };
+		487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDC1FE168650066DD41 /* ProfileEditSceneItem.swift */; };
+		487C4BE81FE168650066DD41 /* ProfileEditSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDD1FE168650066DD41 /* ProfileEditSceneSetup.swift */; };
+		487C4BE91FE168650066DD41 /* ProfileEditSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDE1FE168650066DD41 /* ProfileEditSceneTheme.swift */; };
+		487C4BEA1FE168650066DD41 /* ProfileEditSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDF1FE168650066DD41 /* ProfileEditSceneWaypoint.swift */; };
+		487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */; };
+		487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */; };
 		48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */; };
 		48803F351FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */; };
 		48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */; };
@@ -360,6 +372,18 @@
 		487B53651FC9A9D9006D072F /* ConvoSceneComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneComposerView.swift; sourceTree = "<group>"; };
 		487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRemoteWriter.swift; sourceTree = "<group>"; };
 		487B536A1FC9C094006D072F /* RemoteWriterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWriterResult.swift; sourceTree = "<group>"; };
+		487C4BD61FE168650066DD41 /* ProfileEditScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditScene.swift; sourceTree = "<group>"; };
+		487C4BD71FE168650066DD41 /* ProfileEditSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneCell.swift; sourceTree = "<group>"; };
+		487C4BD81FE168650066DD41 /* ProfileEditSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneCellFactory.swift; sourceTree = "<group>"; };
+		487C4BD91FE168650066DD41 /* ProfileEditSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneData.swift; sourceTree = "<group>"; };
+		487C4BDA1FE168650066DD41 /* ProfileEditSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneFactory.swift; sourceTree = "<group>"; };
+		487C4BDB1FE168650066DD41 /* ProfileEditSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneFlow.swift; sourceTree = "<group>"; };
+		487C4BDC1FE168650066DD41 /* ProfileEditSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneItem.swift; sourceTree = "<group>"; };
+		487C4BDD1FE168650066DD41 /* ProfileEditSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneSetup.swift; sourceTree = "<group>"; };
+		487C4BDE1FE168650066DD41 /* ProfileEditSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneTheme.swift; sourceTree = "<group>"; };
+		487C4BDF1FE168650066DD41 /* ProfileEditSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneWaypoint.swift; sourceTree = "<group>"; };
+		487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneWorker.swift; sourceTree = "<group>"; };
+		487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteWriter.swift; sourceTree = "<group>"; };
 		48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneTypingView.swift; sourceTree = "<group>"; };
@@ -510,6 +534,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				487C4BD51FE1684B0066DD41 /* ProfileEdit */,
 				484629FA1FE11C2200346AA3 /* Controllers */,
 				4876E3001FE0236F004664E6 /* PeopleSearch */,
 				486900C71FDB95D1005053CD /* ContactRequest */,
@@ -763,14 +788,33 @@
 		487B53671FC9BB76006D072F /* Writer */ = {
 			isa = PBXGroup;
 			children = (
+				4877C2CC1FD987D7004F1AFB /* ChatRemoteWriter.swift */,
+				487365741FD84278004DE6C2 /* ContactRemoteWriter.swift */,
 				487B53681FC9BB9B006D072F /* MessageRemoteWriter.swift */,
+				487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */,
 				48B5CEF51FD283E5000C70FA /* PresenceRemoteWriter.swift */,
 				487B536A1FC9C094006D072F /* RemoteWriterResult.swift */,
 				48C55DD11FCE9D7700302DB2 /* TypingStatusRemoteWriter.swift */,
-				487365741FD84278004DE6C2 /* ContactRemoteWriter.swift */,
-				4877C2CC1FD987D7004F1AFB /* ChatRemoteWriter.swift */,
 			);
 			path = Writer;
+			sourceTree = "<group>";
+		};
+		487C4BD51FE1684B0066DD41 /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				487C4BD61FE168650066DD41 /* ProfileEditScene.swift */,
+				487C4BD71FE168650066DD41 /* ProfileEditSceneCell.swift */,
+				487C4BD81FE168650066DD41 /* ProfileEditSceneCellFactory.swift */,
+				487C4BD91FE168650066DD41 /* ProfileEditSceneData.swift */,
+				487C4BDA1FE168650066DD41 /* ProfileEditSceneFactory.swift */,
+				487C4BDB1FE168650066DD41 /* ProfileEditSceneFlow.swift */,
+				487C4BDC1FE168650066DD41 /* ProfileEditSceneItem.swift */,
+				487C4BDD1FE168650066DD41 /* ProfileEditSceneSetup.swift */,
+				487C4BDE1FE168650066DD41 /* ProfileEditSceneTheme.swift */,
+				487C4BDF1FE168650066DD41 /* ProfileEditSceneWaypoint.swift */,
+				487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */,
+			);
+			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		4886392F1FCBADE6003108A1 /* Listener */ = {
@@ -1401,6 +1445,7 @@
 				486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */,
 				486901941FDBBD43005053CD /* ContactRequestSceneFlow.swift in Sources */,
 				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
+				487C4BE81FE168650066DD41 /* ProfileEditSceneSetup.swift in Sources */,
 				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
 				48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */,
 				48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */,
@@ -1421,6 +1466,7 @@
 				487365751FD84278004DE6C2 /* ContactRemoteWriter.swift in Sources */,
 				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
 				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
+				487C4BE91FE168650066DD41 /* ProfileEditSceneTheme.swift in Sources */,
 				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
 				48AFB39D1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift in Sources */,
 				48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */,
@@ -1439,6 +1485,7 @@
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4876E3181FE023DD004664E6 /* PeopleSearchSceneInput.swift in Sources */,
 				48C55DD01FCE6B1800302DB2 /* TypingStatusRemoteListener.swift in Sources */,
+				487C4BE21FE168650066DD41 /* ProfileEditSceneCell.swift in Sources */,
 				486901951FDBBD43005053CD /* ContactRequestSceneItem.swift in Sources */,
 				4876E2FF1FE00F3C004664E6 /* PersonRemoteSearch.swift in Sources */,
 				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
@@ -1452,14 +1499,17 @@
 				4876E3111FE0239B004664E6 /* PeopleSearchSceneFlow.swift in Sources */,
 				486901921FDBBD43005053CD /* ContactRequestSceneData.swift in Sources */,
 				487B53691FC9BB9B006D072F /* MessageRemoteWriter.swift in Sources */,
+				487C4BE41FE168650066DD41 /* ProfileEditSceneData.swift in Sources */,
 				487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */,
 				488D87D51FD641B300E690BD /* ContactsSceneCellFactory.swift in Sources */,
 				48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
+				487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
 				48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */,
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
 				486901971FDBBD43005053CD /* ContactRequestSceneTheme.swift in Sources */,
+				487C4BE31FE168650066DD41 /* ProfileEditSceneCellFactory.swift in Sources */,
 				48A743BA1FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift in Sources */,
 				4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */,
 				4876E30E1FE0239B004664E6 /* PeopleSearchSceneCellFactory.swift in Sources */,
@@ -1468,10 +1518,14 @@
 				486901901FDBBD43005053CD /* ContactRequestSceneCell.swift in Sources */,
 				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
 				48C55DD21FCE9D7700302DB2 /* TypingStatusRemoteWriter.swift in Sources */,
+				487C4BE61FE168650066DD41 /* ProfileEditSceneFlow.swift in Sources */,
 				4874AE021FC3129C00096BA8 /* ChatRemoteService.swift in Sources */,
 				4877BF821FC461D100885C60 /* MessagesRemoteQuery.swift in Sources */,
 				48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */,
+				487C4BE51FE168650066DD41 /* ProfileEditSceneFactory.swift in Sources */,
 				488D87DD1FD648B800E690BD /* ContactsSceneItem.swift in Sources */,
+				487C4BE11FE168650066DD41 /* ProfileEditScene.swift in Sources */,
+				487C4BEA1FE168650066DD41 /* ProfileEditSceneWaypoint.swift in Sources */,
 				486901991FDBBD43005053CD /* ContactRequestSceneWorker.swift in Sources */,
 				489FE1C81FC05BC80062E1AB /* RegisterSceneWorker.swift in Sources */,
 				4879B49A1FC29A7C00611DA3 /* Message.swift in Sources */,
@@ -1513,6 +1567,8 @@
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
 				48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */,
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
+				487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */,
+				487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
