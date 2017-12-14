@@ -43,4 +43,12 @@ class AuthRemoteServiceMock: AuthRemoteService {
     func refresh(completion: @escaping (ServiceResult<Access>) -> Void) {
         
     }
+    
+    func changeEmail(withNew: String, currentEmail: String, currentPassword: String, completion: @escaping (ServiceResult<String>) -> Void) {
+        
+    }
+    
+    func changePassword(withNew: String, currentPassword: String, currentEmail: String, completion: @escaping (ServiceResult<String>) -> Void) {
+        
+    }
 }

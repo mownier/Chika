@@ -28,4 +28,8 @@ class PersonRemoteServiceMock: PersonRemoteService {
     func getMyProfile(completion: @escaping (ServiceResult<Person>) -> Void) {
         
     }
+    
+    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (ServiceResult<Person>) -> Void) {
+        
+    }
 }
