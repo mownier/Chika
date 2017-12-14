@@ -20,6 +20,7 @@ class RegisterScene: UIViewController {
     var emailInput: UITextField!
     var goButton: UIButton!
     var titleLabel: UILabel!
+    var indicator: UIActivityIndicatorView!
 
     var worker: RegisterSceneWorker!
     var theme: RegisterSceneTheme!
@@ -103,10 +104,15 @@ class RegisterScene: UIViewController {
         titleLabel.textColor = theme.titleLabelTextColor
         titleLabel.accessibilityLabel = "Title Label"
         
+        indicator = UIActivityIndicatorView()
+        indicator.color = theme.indicatorColor
+        indicator.hidesWhenStopped = true
+        
         view.addSubview(passInput)
         view.addSubview(emailInput)
         view.addSubview(goButton)
         view.addSubview(titleLabel)
+        view.addSubview(indicator)
     }
     
     override func viewDidLoad() {
@@ -119,26 +125,27 @@ class RegisterScene: UIViewController {
     
     override func viewDidLayoutSubviews() {
         let spacing: CGFloat = 8
-        let topInset: CGFloat = view.statusBarFrame().height
-        let inputHeight: CGFloat = 52
-        let buttonHeight: CGFloat = 52
         
-        var (rect, rem) = view.bounds.divided(atDistance: topInset, from: .minYEdge)
+        var rect = CGRect.zero
         
-        (rect, rem) = rem.divided(atDistance: inputHeight, from: .minYEdge)
-        titleLabel.frame = rect.insetBy(dx: spacing, dy: 0)
+        rect.origin.y = view.statusBarFrame().height
+        rect.origin.x = spacing * 2
+        rect.size.width = view.bounds.width - spacing * 4
+        rect.size.height = 52
+        titleLabel.frame = rect
         
-        (rect, rem) = rem.divided(atDistance: spacing * 2, from: .minYEdge)
-        (rect, rem) = rem.divided(atDistance: inputHeight, from: .minYEdge)
-        emailInput.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.y = rect.maxY + spacing * 2
+        emailInput.frame = rect
         
-        (rect, rem) = rem.divided(atDistance: spacing, from: .minYEdge)
-        (rect, rem) = rem.divided(atDistance: inputHeight, from: .minYEdge)
-        passInput.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.y = rect.maxY + spacing * 2
+        passInput.frame = rect
         
-        (rect, rem) = rem.divided(atDistance: spacing * 4, from: .minYEdge)
-        (rect, rem) = rem.divided(atDistance: buttonHeight, from: .minYEdge)
-        goButton.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.y = rect.maxY + spacing * 4
+        goButton.frame = rect
+        
+        rect.size.width = goButton.frame.height
+        rect.origin.x = goButton.frame.maxX - rect.width
+        indicator.frame = rect
     }
 }
 
@@ -149,12 +156,14 @@ extension RegisterScene: RegisterSceneInteraction {
     }
     
     func didTapGo() {
+        indicator.startAnimating()
         passInput.resignFirstResponder()
         emailInput.resignFirstResponder()
+        emailInput.isUserInteractionEnabled = false
+        passInput.isUserInteractionEnabled = false
+        goButton.isUserInteractionEnabled = false
         let email = emailInput.text
         let pass = passInput.text
-        passInput.text = ""
-        emailInput.text = ""
         worker.register(email: email, pass: pass)
     }
 }
@@ -166,6 +175,10 @@ extension RegisterScene: RegisterSceneWorkerOutput {
     }
     
     func workerDidRegisterWithError(_ error: Error) {
+        emailInput.isUserInteractionEnabled = true
+        passInput.isUserInteractionEnabled = true
+        goButton.isUserInteractionEnabled = true
+        indicator.stopAnimating()
         flow.showError(error)
     }
 }

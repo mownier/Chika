@@ -19,6 +19,7 @@ protocol SignInSceneTheme: class {
     var buttonBGColor: UIColor { get }
     var titleLabelFont: UIFont { get }
     var titleLabelTextColor: UIColor { get }
+    var indicatorColor: UIColor { get }
 }
 
 extension SignInScene {
@@ -34,5 +35,6 @@ extension SignInScene {
         var buttonBGColor: UIColor = .black
         var titleLabelFont: UIFont = UIFont(name: "AvenirNext-Bold", size: 32.0)!
         var titleLabelTextColor: UIColor = .black
+        var indicatorColor: UIColor = .white
     }
 }
