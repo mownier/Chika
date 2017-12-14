@@ -16,6 +16,7 @@ protocol AuthRemoteService: class {
     func signOut(completion: @escaping (ServiceResult<String>) -> Void)
     func refresh(completion: @escaping (ServiceResult<Access>) -> Void)
     func changeEmail(withNew: String, currentEmail: String, currentPassword: String, completion: @escaping (ServiceResult<String>) -> Void)
+    func changePassword(withNew: String, currentPassword: String, currentEmail: String, completion: @escaping (ServiceResult<String>) -> Void)
 }
 
 class AuthRemoteServiceProvider: AuthRemoteService {
@@ -87,6 +88,37 @@ class AuthRemoteServiceProvider: AuthRemoteService {
                 case .ok:                    
                     user?.updateEmail(to: newEmail, completion: { error in
                         completion(.ok(newEmail))
+                    })
+                }
+            })
+        }
+    }
+    
+    func changePassword(withNew newPassword: String, currentPassword: String, currentEmail: String, completion: @escaping (ServiceResult<String>) -> Void) {
+        guard let user = auth.currentUser, let userEmail = user.email, !userEmail.isEmpty else {
+            completion(.err(ServiceError("no current user")))
+            return
+        }
+        
+        guard currentEmail == userEmail else {
+            completion(.err(ServiceError("provided current email is not the same with the current user's email")))
+            return
+        }
+        
+        auth.signIn(withEmail: userEmail, password: currentPassword) { [weak self] user, error in
+            self?.handleAccessResult(user, error, { result in
+                switch result {
+                case .err(let info):
+                    completion(.err(info))
+                    
+                case .ok:
+                    user?.updatePassword(to: newPassword, completion: { error in
+                        guard error == nil else {
+                            completion(.err(error!))
+                            return
+                        }
+                        
+                        completion(.ok("OK"))
                     })
                 }
             })
