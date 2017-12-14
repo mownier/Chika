@@ -210,6 +210,9 @@ extension ProfileScene: UITableViewDelegate {
         case "change password":
             let _ = flow.goToPasswordChange()
             
+        case "about":
+            let _ = flow.goToAbout()
+            
         default:
             break
         }

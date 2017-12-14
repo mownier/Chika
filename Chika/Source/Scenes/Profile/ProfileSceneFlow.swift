@@ -15,6 +15,7 @@ protocol ProfileSceneFlow: class {
     func goToEmailUpdate(withDelegate: EmailUpdateSceneDelegate?) -> Bool
     func goToPasswordChange() -> Bool
     func goToInitial() -> Bool
+    func goToAbout() -> Bool
 }
 
 extension ProfileScene {
@@ -28,6 +29,7 @@ extension ProfileScene {
             var emailUpdate: EmailUpdateSceneEntryWaypoint
             var passwordChange: AppEntryWaypoint
             var initial: AppRootWaypoint
+            var about: AppEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -45,7 +47,8 @@ extension ProfileScene {
             let emailUpdate = EmailUpdateScene.EntryWaypoint()
             let passwordChange = PasswordChangeScene.EntryWaypoint()
             let initial = InitialScene.RootWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial)
+            let about = AboutScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about)
             self.init(waypoint: waypoint, application: UIApplication.shared)
         }
         
@@ -83,6 +86,14 @@ extension ProfileScene {
         
         func goToInitial() -> Bool {
             return waypoint.initial.makeRoot(from: application.keyWindow)
+        }
+        
+        func goToAbout() -> Bool {
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.about.enter(from: scene)
         }
     }
 }
