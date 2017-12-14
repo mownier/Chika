@@ -15,6 +15,7 @@ protocol ProfileSceneData: class {
     
     func item(at index: Int) -> ProfileSceneItem?
     func updatePerson(_ person: Person)
+    func updateEmail(_ email: String)
 }
 
 extension ProfileScene {
@@ -77,8 +78,12 @@ extension ProfileScene {
             return items[index]
         }
         
-        func updatePerson(_ person: Person) {
-            self.person = person
+        func updatePerson(_ aPerson: Person) {
+            person = aPerson
+        }
+        
+        func updateEmail(_ email: String) {
+            person.email = email
         }
     }
 }
