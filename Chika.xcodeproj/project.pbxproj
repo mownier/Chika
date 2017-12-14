@@ -171,6 +171,12 @@
 		48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */; };
 		48920EE81FBFE034008F090F /* SignInSceneEntryWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EE71FBFE034008F090F /* SignInSceneEntryWaypointTests.swift */; };
 		48920EED1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */; };
+		489270391FE255D00088CEA5 /* PasswordChangeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892702E1FE255D00088CEA5 /* PasswordChangeScene.swift */; };
+		4892703D1FE255D00088CEA5 /* PasswordChangeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489270321FE255D00088CEA5 /* PasswordChangeSceneFactory.swift */; };
+		489270401FE255D00088CEA5 /* PasswordChangeSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489270351FE255D00088CEA5 /* PasswordChangeSceneSetup.swift */; };
+		489270411FE255D00088CEA5 /* PasswordChangeSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489270361FE255D00088CEA5 /* PasswordChangeSceneTheme.swift */; };
+		489270421FE255D00088CEA5 /* PasswordChangeSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489270371FE255D00088CEA5 /* PasswordChangeSceneWaypoint.swift */; };
+		489270431FE255D00088CEA5 /* PasswordChangeSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489270381FE255D00088CEA5 /* PasswordChangeSceneWorker.swift */; };
 		489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DA18F1FBD7BB600918AD9 /* ViewMock.swift */; };
 		489DE79C1FC5B9EA00B6C960 /* ChatsSortProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DE79B1FC5B9EA00B6C960 /* ChatsSortProviderTests.swift */; };
 		489DE79E1FC5BF7C00B6C960 /* RecentMessageRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489DE79D1FC5BF7C00B6C960 /* RecentMessageRemoteQueryMock.swift */; };
@@ -435,6 +441,12 @@
 		48920EE51FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneExitWaypointTests.swift; sourceTree = "<group>"; };
 		48920EE71FBFE034008F090F /* SignInSceneEntryWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneEntryWaypointTests.swift; sourceTree = "<group>"; };
 		48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerFactoryTests.swift; sourceTree = "<group>"; };
+		4892702E1FE255D00088CEA5 /* PasswordChangeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeScene.swift; sourceTree = "<group>"; };
+		489270321FE255D00088CEA5 /* PasswordChangeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeSceneFactory.swift; sourceTree = "<group>"; };
+		489270351FE255D00088CEA5 /* PasswordChangeSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeSceneSetup.swift; sourceTree = "<group>"; };
+		489270361FE255D00088CEA5 /* PasswordChangeSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeSceneTheme.swift; sourceTree = "<group>"; };
+		489270371FE255D00088CEA5 /* PasswordChangeSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeSceneWaypoint.swift; sourceTree = "<group>"; };
+		489270381FE255D00088CEA5 /* PasswordChangeSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordChangeSceneWorker.swift; sourceTree = "<group>"; };
 		489DA18F1FBD7BB600918AD9 /* ViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
 		489DE79B1FC5B9EA00B6C960 /* ChatsSortProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsSortProviderTests.swift; sourceTree = "<group>"; };
 		489DE79D1FC5BF7C00B6C960 /* RecentMessageRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageRemoteQueryMock.swift; sourceTree = "<group>"; };
@@ -548,17 +560,18 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4867F8B41FE237D200ADFD39 /* EmailUpdate */,
-				487C4BD51FE1684B0066DD41 /* ProfileEdit */,
-				484629FA1FE11C2200346AA3 /* Controllers */,
-				4876E3001FE0236F004664E6 /* PeopleSearch */,
 				486900C71FDB95D1005053CD /* ContactRequest */,
 				487766FC1FC6A89A008E865F /* Contacts */,
+				484629FA1FE11C2200346AA3 /* Controllers */,
 				487766FD1FC6ABD5008E865F /* Convo */,
+				4867F8B41FE237D200ADFD39 /* EmailUpdate */,
 				48E019971FBD5D93008D94DE /* Home */,
 				4879B48E1FC28DC300611DA3 /* Inbox */,
 				48CDD7621FBEC2C5009269A6 /* Initial */,
+				4892702D1FE255AD0088CEA5 /* PasswordChange */,
+				4876E3001FE0236F004664E6 /* PeopleSearch */,
 				48D9E2C51FDA6BDB00A37A3D /* Profile */,
+				487C4BD51FE1684B0066DD41 /* ProfileEdit */,
 				489FE1C41FC05A7A0062E1AB /* Register */,
 				48B4D0141FBAD86A008C78F6 /* Sign In */,
 			);
@@ -904,6 +917,19 @@
 				48920EEC1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		4892702D1FE255AD0088CEA5 /* PasswordChange */ = {
+			isa = PBXGroup;
+			children = (
+				4892702E1FE255D00088CEA5 /* PasswordChangeScene.swift */,
+				489270321FE255D00088CEA5 /* PasswordChangeSceneFactory.swift */,
+				489270351FE255D00088CEA5 /* PasswordChangeSceneSetup.swift */,
+				489270361FE255D00088CEA5 /* PasswordChangeSceneTheme.swift */,
+				489270371FE255D00088CEA5 /* PasswordChangeSceneWaypoint.swift */,
+				489270381FE255D00088CEA5 /* PasswordChangeSceneWorker.swift */,
+			);
+			path = PasswordChange;
 			sourceTree = "<group>";
 		};
 		489FE1C41FC05A7A0062E1AB /* Register */ = {
@@ -1485,11 +1511,13 @@
 				488D87CF1FD6412200E690BD /* ContactsSceneData.swift in Sources */,
 				4876E30C1FE0239B004664E6 /* PeopleSearchScene.swift in Sources */,
 				48B37E8D1FCBD474004978F1 /* RecentMessageRemoteListener.swift in Sources */,
+				489270411FE255D00088CEA5 /* PasswordChangeSceneTheme.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
 				484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */,
+				4892703D1FE255D00088CEA5 /* PasswordChangeSceneFactory.swift in Sources */,
 				488639331FCBAE99003108A1 /* RecentChatRemoteListener.swift in Sources */,
 				489FE1D01FC05FE30062E1AB /* RegisterSceneFactory.swift in Sources */,
 				487767051FC6AE01008E865F /* ConvoSceneFlow.swift in Sources */,
@@ -1509,6 +1537,7 @@
 				4869018F1FDBBD43005053CD /* ContactRequestScene.swift in Sources */,
 				488D59451FDA7BF8005CCB40 /* ProfileSceneItem.swift in Sources */,
 				48C0515F1FBF2E5C009DDFC8 /* AppWaypoint.swift in Sources */,
+				489270431FE255D00088CEA5 /* PasswordChangeSceneWorker.swift in Sources */,
 				488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */,
 				48D9E2CD1FDA6CE700A37A3D /* ProfileSceneFlow.swift in Sources */,
 				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,
@@ -1522,6 +1551,7 @@
 				486901951FDBBD43005053CD /* ContactRequestSceneItem.swift in Sources */,
 				4876E2FF1FE00F3C004664E6 /* PersonRemoteSearch.swift in Sources */,
 				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
+				489270401FE255D00088CEA5 /* PasswordChangeSceneSetup.swift in Sources */,
 				4867F8C71FE237F000ADFD39 /* EmailUpdateSceneSetup.swift in Sources */,
 				487767071FC6AE28008E865F /* ConvoSceneWaypoint.swift in Sources */,
 				4876E3131FE0239B004664E6 /* PeopleSearchSceneSetup.swift in Sources */,
@@ -1536,6 +1566,7 @@
 				487C4BE41FE168650066DD41 /* ProfileEditSceneData.swift in Sources */,
 				487B536B1FC9C094006D072F /* RemoteWriterResult.swift in Sources */,
 				488D87D51FD641B300E690BD /* ContactsSceneCellFactory.swift in Sources */,
+				489270421FE255D00088CEA5 /* PasswordChangeSceneWaypoint.swift in Sources */,
 				48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */,
@@ -1605,6 +1636,7 @@
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */,
 				487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */,
+				489270391FE255D00088CEA5 /* PasswordChangeScene.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
