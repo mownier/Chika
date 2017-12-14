@@ -180,15 +180,24 @@ extension ProfileScene: UITableViewDelegate {
             return
         }
         
-        if item.label.lowercased() == "sign out" {
+        switch item.label.lowercased() {
+        case "sign out":
             let actionSheet = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .actionSheet)
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             actionSheet.addAction(okAction)
             actionSheet.addAction(cancelAction)
             actionSheet.view.tintColor = theme.labelTextColor
+            DispatchQueue.main.async { [weak self] in
+                guard let this = self else { return }
+                this.present(actionSheet, animated: true, completion: nil)
+            }
+        
+        case "email":
+            let _ = flow.goToEmailUpdate(withEmail: data.person.email, delegate: self)
             
-            present(actionSheet, animated: true, completion: nil)
+        default:
+            break
         }
     }
 }
@@ -241,6 +250,14 @@ extension ProfileScene: ProfileEditSceneDelegate {
     
     func profileEditSceneDidEdit(withPerson person: Person) {
         data.updatePerson(person)
+        tableView.reloadData()
+    }
+}
+
+extension ProfileScene: EmailUpdateSceneDelegate {
+    
+    func emailUpdateDidChangeEmail(_ email: String) {
+        data.updateEmail(email)
         tableView.reloadData()
     }
 }

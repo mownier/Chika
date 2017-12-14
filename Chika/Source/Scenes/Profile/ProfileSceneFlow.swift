@@ -12,6 +12,7 @@ protocol ProfileSceneFlow: class {
 
     func goToContactRequest() -> Bool
     func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool
+    func goToEmailUpdate(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> Bool
 }
 
 extension ProfileScene {
@@ -22,6 +23,7 @@ extension ProfileScene {
             
             var contactRequest: AppEntryWaypoint
             var profileEdit: ProfileEditSceneEntryWaypoint
+            var emailUpdate: EmailUpdateSceneEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -34,7 +36,8 @@ extension ProfileScene {
         convenience init() {
             let contactRequest = ContactRequestScene.EntryWaypoint()
             let profileEdit = ProfileEditScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit)
+            let emailUpdate = EmailUpdateScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate)
             self.init(waypoint: waypoint)
         }
         
@@ -52,6 +55,14 @@ extension ProfileScene {
             }
             
             return waypoint.profileEdit.withDelegate(delegate).withPerson(me).enter(from: scene)
+        }
+        
+        func goToEmailUpdate(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> Bool {
+            guard let scene = scene, !email.isEmpty else {
+                return false
+            }
+            
+            return waypoint.emailUpdate.withDelegate(delegate).withEmail(email).enter(from: scene)
         }
     }
 }
