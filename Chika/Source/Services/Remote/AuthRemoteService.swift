@@ -15,6 +15,7 @@ protocol AuthRemoteService: class {
     func signIn(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void)
     func signOut(completion: @escaping (ServiceResult<String>) -> Void)
     func refresh(completion: @escaping (ServiceResult<Access>) -> Void)
+    func changeEmail(withNew: String, currentEmail: String, currentPassword: String, completion: @escaping (ServiceResult<String>) -> Void)
 }
 
 class AuthRemoteServiceProvider: AuthRemoteService {
@@ -49,6 +50,47 @@ class AuthRemoteServiceProvider: AuthRemoteService {
     
     func refresh(completion: @escaping (ServiceResult<Access>) -> Void) {
         handleAccessResult(auth.currentUser, nil, completion)
+    }
+    
+    func changeEmail(withNew newEmail: String, currentEmail: String, currentPassword: String, completion: @escaping (ServiceResult<String>) -> Void) {
+        guard let user = auth.currentUser, let userEmail = user.email, !userEmail.isEmpty else {
+            completion(.err(ServiceError("no current user")))
+            return
+        }
+        
+        guard !currentEmail.isEmpty else {
+            completion(.err(ServiceError("provided current email is empty")))
+            return
+        }
+        
+        guard currentEmail == userEmail else {
+            completion(.err(ServiceError("provided current email is not the same with the current user's email")))
+            return
+        }
+        
+        guard !currentPassword.isEmpty else {
+            completion(.err(ServiceError("provided current password is empty")))
+            return
+        }
+        
+        guard currentEmail != newEmail else {
+            completion(.err(ServiceError("provided new and current emails are the same")))
+            return
+        }
+        
+        auth.signIn(withEmail: userEmail, password: currentPassword) { [weak self] user, error in
+            self?.handleAccessResult(user, error, { result in
+                switch result {
+                case .err(let info):
+                    completion(.err(info))
+                
+                case .ok:                    
+                    user?.updateEmail(to: newEmail, completion: { error in
+                        completion(.ok(newEmail))
+                    })
+                }
+            })
+        }
     }
     
     private func handleAccessResult(_ user: User?, _ error: Error?, _ completion: @escaping (ServiceResult<Access>) -> Void) {
