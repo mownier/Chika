@@ -208,7 +208,9 @@ class PasswordChangeScene: UIViewController {
         let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

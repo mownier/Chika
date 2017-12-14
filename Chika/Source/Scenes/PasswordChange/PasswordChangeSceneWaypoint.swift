@@ -34,7 +34,9 @@ extension PasswordChangeScene {
         func enter(from parent: UIViewController) -> Bool {
             let scene = factory.scene.build()
             let nav = factory.nav.build(root: scene)
-            parent.present(nav, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                parent.present(nav, animated: true, completion: nil)
+            }
             return true
         }
     }
