@@ -13,6 +13,7 @@ protocol ProfileSceneFlow: class {
     func goToContactRequest() -> Bool
     func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool
     func goToEmailUpdate(withEmail email: String, delegate: EmailUpdateSceneDelegate?) -> Bool
+    func goToPasswordChange() -> Bool
 }
 
 extension ProfileScene {
@@ -24,6 +25,7 @@ extension ProfileScene {
             var contactRequest: AppEntryWaypoint
             var profileEdit: ProfileEditSceneEntryWaypoint
             var emailUpdate: EmailUpdateSceneEntryWaypoint
+            var passwordChange: AppEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -37,7 +39,8 @@ extension ProfileScene {
             let contactRequest = ContactRequestScene.EntryWaypoint()
             let profileEdit = ProfileEditScene.EntryWaypoint()
             let emailUpdate = EmailUpdateScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate)
+            let passwordChange = PasswordChangeScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange)
             self.init(waypoint: waypoint)
         }
         
@@ -63,6 +66,14 @@ extension ProfileScene {
             }
             
             return waypoint.emailUpdate.withDelegate(delegate).withEmail(email).enter(from: scene)
+        }
+        
+        func goToPasswordChange() -> Bool {
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.passwordChange.enter(from: scene)
         }
     }
 }
