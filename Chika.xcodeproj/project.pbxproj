@@ -248,6 +248,14 @@
 		48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */; };
 		48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */; };
 		48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */; };
+		48F1BCAE1FE26AF20058AD71 /* AboutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCA31FE26AF20058AD71 /* AboutScene.swift */; };
+		48F1BCB01FE26AF20058AD71 /* AboutSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCA51FE26AF20058AD71 /* AboutSceneCellFactory.swift */; };
+		48F1BCB11FE26AF20058AD71 /* AboutSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCA61FE26AF20058AD71 /* AboutSceneData.swift */; };
+		48F1BCB21FE26AF20058AD71 /* AboutSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCA71FE26AF20058AD71 /* AboutSceneFactory.swift */; };
+		48F1BCB41FE26AF20058AD71 /* AboutSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCA91FE26AF20058AD71 /* AboutSceneItem.swift */; };
+		48F1BCB51FE26AF20058AD71 /* AboutSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCAA1FE26AF20058AD71 /* AboutSceneSetup.swift */; };
+		48F1BCB61FE26AF20058AD71 /* AboutSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCAB1FE26AF20058AD71 /* AboutSceneTheme.swift */; };
+		48F1BCB71FE26AF20058AD71 /* AboutSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1BCAC1FE26AF20058AD71 /* AboutSceneWaypoint.swift */; };
 		620CB63C900C763D99FB09E3 /* Pods_ChikaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */; };
 		865BCCCA239C091FAECE69DB /* Pods_Chika.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E0275EFC771ED20D1C73BF /* Pods_Chika.framework */; };
 /* End PBXBuildFile section */
@@ -517,6 +525,14 @@
 		48E0199A1FBD5DAC008D94DE /* HomeSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFactory.swift; sourceTree = "<group>"; };
 		48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationControllerFactory.swift; sourceTree = "<group>"; };
 		48E0199E1FBD6885008D94DE /* HomeSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlow.swift; sourceTree = "<group>"; };
+		48F1BCA31FE26AF20058AD71 /* AboutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScene.swift; sourceTree = "<group>"; };
+		48F1BCA51FE26AF20058AD71 /* AboutSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneCellFactory.swift; sourceTree = "<group>"; };
+		48F1BCA61FE26AF20058AD71 /* AboutSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneData.swift; sourceTree = "<group>"; };
+		48F1BCA71FE26AF20058AD71 /* AboutSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneFactory.swift; sourceTree = "<group>"; };
+		48F1BCA91FE26AF20058AD71 /* AboutSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneItem.swift; sourceTree = "<group>"; };
+		48F1BCAA1FE26AF20058AD71 /* AboutSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneSetup.swift; sourceTree = "<group>"; };
+		48F1BCAB1FE26AF20058AD71 /* AboutSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneTheme.swift; sourceTree = "<group>"; };
+		48F1BCAC1FE26AF20058AD71 /* AboutSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSceneWaypoint.swift; sourceTree = "<group>"; };
 		50E0275EFC771ED20D1C73BF /* Pods_Chika.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chika.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A512F3683C0D2FADD0A0F36 /* Pods-ChikaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaTests/Pods-ChikaTests.release.xcconfig"; sourceTree = "<group>"; };
 		6287BE7AF4D15C2D7B64EDF5 /* Pods-ChikaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChikaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChikaUITests/Pods-ChikaUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -558,6 +574,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				48F1BC8C1FE269F40058AD71 /* About */,
 				486900C71FDB95D1005053CD /* ContactRequest */,
 				487766FC1FC6A89A008E865F /* Contacts */,
 				484629FA1FE11C2200346AA3 /* Controllers */,
@@ -1161,6 +1178,21 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		48F1BC8C1FE269F40058AD71 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				48F1BCA31FE26AF20058AD71 /* AboutScene.swift */,
+				48F1BCA51FE26AF20058AD71 /* AboutSceneCellFactory.swift */,
+				48F1BCA61FE26AF20058AD71 /* AboutSceneData.swift */,
+				48F1BCA71FE26AF20058AD71 /* AboutSceneFactory.swift */,
+				48F1BCA91FE26AF20058AD71 /* AboutSceneItem.swift */,
+				48F1BCAA1FE26AF20058AD71 /* AboutSceneSetup.swift */,
+				48F1BCAB1FE26AF20058AD71 /* AboutSceneTheme.swift */,
+				48F1BCAC1FE26AF20058AD71 /* AboutSceneWaypoint.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		C041E7F997C048EBF3375AFC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1510,6 +1542,7 @@
 				489270411FE255D00088CEA5 /* PasswordChangeSceneTheme.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
+				48F1BCB41FE26AF20058AD71 /* AboutSceneItem.swift in Sources */,
 				484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
 				4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */,
@@ -1541,6 +1574,7 @@
 				4879B4921FC28E1600611DA3 /* InboxSceneTheme.swift in Sources */,
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4876E3181FE023DD004664E6 /* PeopleSearchSceneInput.swift in Sources */,
+				48F1BCB21FE26AF20058AD71 /* AboutSceneFactory.swift in Sources */,
 				48C55DD01FCE6B1800302DB2 /* TypingStatusRemoteListener.swift in Sources */,
 				4867F8C01FE237F000ADFD39 /* EmailUpdateScene.swift in Sources */,
 				487C4BE21FE168650066DD41 /* ProfileEditSceneCell.swift in Sources */,
@@ -1573,6 +1607,7 @@
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
 				486901971FDBBD43005053CD /* ContactRequestSceneTheme.swift in Sources */,
 				487C4BE31FE168650066DD41 /* ProfileEditSceneCellFactory.swift in Sources */,
+				48F1BCAE1FE26AF20058AD71 /* AboutScene.swift in Sources */,
 				48A743BA1FC7F2FC0019EDD8 /* ConvoSceneCellManager.swift in Sources */,
 				4879B4A01FC29EC500611DA3 /* InboxSceneCell.swift in Sources */,
 				4876E30E1FE0239B004664E6 /* PeopleSearchSceneCellFactory.swift in Sources */,
@@ -1592,6 +1627,7 @@
 				486901991FDBBD43005053CD /* ContactRequestSceneWorker.swift in Sources */,
 				489FE1C81FC05BC80062E1AB /* RegisterSceneWorker.swift in Sources */,
 				4879B49A1FC29A7C00611DA3 /* Message.swift in Sources */,
+				48F1BCB61FE26AF20058AD71 /* AboutSceneTheme.swift in Sources */,
 				482FDF0F1FBFFA6500ABA372 /* InitialSceneWaypoint.swift in Sources */,
 				488639311FCBAE4A003108A1 /* RemoteListenerResult.swift in Sources */,
 				488D87D31FD6418D00E690BD /* ContactsSceneSetup.swift in Sources */,
@@ -1601,6 +1637,7 @@
 				489FE1C61FC05A9F0062E1AB /* RegisterScene.swift in Sources */,
 				488D59431FDA780F005CCB40 /* ProfileSceneHeaderView.swift in Sources */,
 				4876E30F1FE0239B004664E6 /* PeopleSearchSceneData.swift in Sources */,
+				48F1BCB11FE26AF20058AD71 /* AboutSceneData.swift in Sources */,
 				482FDF111FBFFAA700ABA372 /* InitialSceneFactory.swift in Sources */,
 				48D9E2CB1FDA6CD300A37A3D /* ProfileSceneWorker.swift in Sources */,
 				488D87DB1FD643E800E690BD /* ContactsRemoteQuery.swift in Sources */,
@@ -1611,6 +1648,7 @@
 				48BFF7711FC4756F00BAE311 /* InboxSceneWorker.swift in Sources */,
 				4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */,
 				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
+				48F1BCB71FE26AF20058AD71 /* AboutSceneWaypoint.swift in Sources */,
 				48D9E2C71FDA6CA500A37A3D /* ProfileScene.swift in Sources */,
 				4879B4901FC28DD100611DA3 /* InboxScene.swift in Sources */,
 				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
@@ -1625,6 +1663,7 @@
 				488D87CD1FD6405A00E690BD /* ContactsSceneTheme.swift in Sources */,
 				4876E30D1FE0239B004664E6 /* PeopleSearchSceneCell.swift in Sources */,
 				48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */,
+				48F1BCB51FE26AF20058AD71 /* AboutSceneSetup.swift in Sources */,
 				489FE1CC1FC05E430062E1AB /* RegisterSceneFlow.swift in Sources */,
 				4876E2FC1FE00E20004664E6 /* SearchRemoteService.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
@@ -1638,6 +1677,7 @@
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
+				48F1BCB01FE26AF20058AD71 /* AboutSceneCellFactory.swift in Sources */,
 				4876E3141FE0239B004664E6 /* PeopleSearchSceneTheme.swift in Sources */,
 				48D9E2D31FDA6DAE00A37A3D /* ProfileSceneFactory.swift in Sources */,
 				48DDF0711FDE61A700D79BBD /* AppImageCreator.swift in Sources */,
