@@ -229,10 +229,18 @@ extension ProfileScene: ProfileSceneWorkerOutput {
 extension ProfileScene: ProfileSceneInteraction {
     
     func didTapEdit() {
-        
+        let _ = flow.goToProfileEdit(withPerson: data.person, delegate: self)
     }
     
     func didTapRequests() {
         let _ = flow.goToContactRequest()
+    }
+}
+
+extension ProfileScene: ProfileEditSceneDelegate {
+    
+    func profileEditSceneDidEdit(withPerson person: Person) {
+        data.updatePerson(person)
+        tableView.reloadData()
     }
 }
