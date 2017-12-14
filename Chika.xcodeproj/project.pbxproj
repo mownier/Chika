@@ -50,6 +50,13 @@
 		485206081FC557BB00DFD68D /* MessagesRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206071FC557BB00DFD68D /* MessagesRemoteQueryProviderTests.swift */; };
 		4852060A1FC55A6300DFD68D /* MessagesSortMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206091FC55A6300DFD68D /* MessagesSortMock.swift */; };
 		4852060C1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */; };
+		4867F8C01FE237F000ADFD39 /* EmailUpdateScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */; };
+		4867F8C31FE237F000ADFD39 /* EmailUpdateSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */; };
+		4867F8C41FE237F000ADFD39 /* EmailUpdateSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */; };
+		4867F8C71FE237F000ADFD39 /* EmailUpdateSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */; };
+		4867F8C81FE237F000ADFD39 /* EmailUpdateSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */; };
+		4867F8C91FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BE1FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift */; };
+		4867F8CA1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4867F8BF1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift */; };
 		4869018F1FDBBD43005053CD /* ContactRequestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486901841FDBBD43005053CD /* ContactRequestScene.swift */; };
 		486901901FDBBD43005053CD /* ContactRequestSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486901851FDBBD43005053CD /* ContactRequestSceneCell.swift */; };
 		486901911FDBBD43005053CD /* ContactRequestSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486901861FDBBD43005053CD /* ContactRequestSceneCellFactory.swift */; };
@@ -307,6 +314,13 @@
 		485206071FC557BB00DFD68D /* MessagesRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		485206091FC55A6300DFD68D /* MessagesSortMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesSortMock.swift; sourceTree = "<group>"; };
 		4852060B1FC55C6900DFD68D /* PersonsRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRemoteQueryMock.swift; sourceTree = "<group>"; };
+		4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateScene.swift; sourceTree = "<group>"; };
+		4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneData.swift; sourceTree = "<group>"; };
+		4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneFactory.swift; sourceTree = "<group>"; };
+		4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneSetup.swift; sourceTree = "<group>"; };
+		4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneTheme.swift; sourceTree = "<group>"; };
+		4867F8BE1FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneWaypoint.swift; sourceTree = "<group>"; };
+		4867F8BF1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailUpdateSceneWorker.swift; sourceTree = "<group>"; };
 		486901841FDBBD43005053CD /* ContactRequestScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestScene.swift; sourceTree = "<group>"; };
 		486901851FDBBD43005053CD /* ContactRequestSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneCell.swift; sourceTree = "<group>"; };
 		486901861FDBBD43005053CD /* ContactRequestSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneCellFactory.swift; sourceTree = "<group>"; };
@@ -534,6 +548,7 @@
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4867F8B41FE237D200ADFD39 /* EmailUpdate */,
 				487C4BD51FE1684B0066DD41 /* ProfileEdit */,
 				484629FA1FE11C2200346AA3 /* Controllers */,
 				4876E3001FE0236F004664E6 /* PeopleSearch */,
@@ -667,6 +682,20 @@
 				484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */,
 			);
 			path = Contact;
+			sourceTree = "<group>";
+		};
+		4867F8B41FE237D200ADFD39 /* EmailUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				4867F8B51FE237F000ADFD39 /* EmailUpdateScene.swift */,
+				4867F8B81FE237F000ADFD39 /* EmailUpdateSceneData.swift */,
+				4867F8B91FE237F000ADFD39 /* EmailUpdateSceneFactory.swift */,
+				4867F8BC1FE237F000ADFD39 /* EmailUpdateSceneSetup.swift */,
+				4867F8BD1FE237F000ADFD39 /* EmailUpdateSceneTheme.swift */,
+				4867F8BE1FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift */,
+				4867F8BF1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift */,
+			);
+			path = EmailUpdate;
 			sourceTree = "<group>";
 		};
 		486900C71FDB95D1005053CD /* ContactRequest */ = {
@@ -1437,6 +1466,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4867F8CA1FE237F000ADFD39 /* EmailUpdateSceneWorker.swift in Sources */,
+				4867F8C31FE237F000ADFD39 /* EmailUpdateSceneData.swift in Sources */,
 				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,
@@ -1446,6 +1477,7 @@
 				486901941FDBBD43005053CD /* ContactRequestSceneFlow.swift in Sources */,
 				4879B4961FC28FB000611DA3 /* InboxSceneFactory.swift in Sources */,
 				487C4BE81FE168650066DD41 /* ProfileEditSceneSetup.swift in Sources */,
+				4867F8C81FE237F000ADFD39 /* EmailUpdateSceneTheme.swift in Sources */,
 				48C051611FBF2FB3009DDFC8 /* HomeSceneWaypoint.swift in Sources */,
 				48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */,
 				48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */,
@@ -1485,10 +1517,12 @@
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4876E3181FE023DD004664E6 /* PeopleSearchSceneInput.swift in Sources */,
 				48C55DD01FCE6B1800302DB2 /* TypingStatusRemoteListener.swift in Sources */,
+				4867F8C01FE237F000ADFD39 /* EmailUpdateScene.swift in Sources */,
 				487C4BE21FE168650066DD41 /* ProfileEditSceneCell.swift in Sources */,
 				486901951FDBBD43005053CD /* ContactRequestSceneItem.swift in Sources */,
 				4876E2FF1FE00F3C004664E6 /* PersonRemoteSearch.swift in Sources */,
 				4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */,
+				4867F8C71FE237F000ADFD39 /* EmailUpdateSceneSetup.swift in Sources */,
 				487767071FC6AE28008E865F /* ConvoSceneWaypoint.swift in Sources */,
 				4876E3131FE0239B004664E6 /* PeopleSearchSceneSetup.swift in Sources */,
 				486901911FDBBD43005053CD /* ContactRequestSceneCellFactory.swift in Sources */,
@@ -1506,7 +1540,9 @@
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
+				4867F8C91FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift in Sources */,
 				48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */,
+				4867F8C41FE237F000ADFD39 /* EmailUpdateSceneFactory.swift in Sources */,
 				4879B4891FC2854100611DA3 /* HomeSceneTheme.swift in Sources */,
 				486901971FDBBD43005053CD /* ContactRequestSceneTheme.swift in Sources */,
 				487C4BE31FE168650066DD41 /* ProfileEditSceneCellFactory.swift in Sources */,
