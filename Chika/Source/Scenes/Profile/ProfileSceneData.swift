@@ -42,6 +42,7 @@ extension ProfileScene {
                 
                 item.label = "Email"
                 item.content = person.email
+                item.isDisclosureEnabled = true
                 items.append(item)
                 
                 item.label = "Change password"
