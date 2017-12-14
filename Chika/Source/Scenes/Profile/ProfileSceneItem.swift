@@ -10,9 +10,11 @@ struct ProfileSceneItem {
     
     var label: String
     var content: String
+    var isDisclosureEnabled: Bool
     
     init() {
         label = ""
         content = ""
+        isDisclosureEnabled = false
     }
 }
