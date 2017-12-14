@@ -80,22 +80,20 @@ class InitialScene: UIViewController {
     
     override func viewDidLayoutSubviews() {
         let spacing: CGFloat = 8
-        let topInset: CGFloat = view.statusBarFrame().height
-        let buttonHeight: CGFloat = 52
-        let labelHeight: CGFloat = 52
         
-        var (rect, rem) = view.bounds.divided(atDistance: spacing * 5, from: .maxYEdge)
+        var rect = CGRect.zero
         
-        (rect, rem) = rem.divided(atDistance: buttonHeight, from: .maxYEdge)
-        registerButton.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.x = spacing * 2
+        rect.size.width = view.bounds.width - spacing * 4
+        rect.size.height = 52
+        rect.origin.y = view.bounds.height - spacing * 5 - rect.height
+        registerButton.frame = rect
         
-        (rect, rem) = rem.divided(atDistance: spacing, from: .maxYEdge)
-        (rect, rem) = rem.divided(atDistance: buttonHeight, from: .maxYEdge)
-        signInButton.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.y -= (spacing + rect.height)
+        signInButton.frame = rect
         
-        (rect, rem) = rem.divided(atDistance: topInset, from: .minYEdge)
-        (rect, rem) = rem.divided(atDistance: labelHeight, from: .minYEdge)
-        appNameLabel.frame = rect.insetBy(dx: spacing * 2, dy: 0)
+        rect.origin.y = view.statusBarFrame().height
+        appNameLabel.frame = rect
     }
 }
 
