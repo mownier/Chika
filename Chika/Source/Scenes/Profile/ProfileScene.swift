@@ -157,6 +157,15 @@ class ProfileScene: UIViewController {
         badge.frame = rect
         badge.layer.cornerRadius = rect.width / 2
     }
+    
+    func showError(withMessage msg: String) {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 extension ProfileScene: UITableViewDataSource {
@@ -183,7 +192,9 @@ extension ProfileScene: UITableViewDelegate {
         switch item.label.lowercased() {
         case "sign out":
             let actionSheet = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .actionSheet)
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in }
+            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                self?.worker.signOut()
+            }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
             actionSheet.addAction(okAction)
             actionSheet.addAction(cancelAction)
@@ -206,7 +217,7 @@ extension ProfileScene: UITableViewDelegate {
 }
 
 extension ProfileScene: ProfileSceneWorkerOutput {
-    
+
     func workerDidFetchProfile(_ person: Person) {
         data.updatePerson(person)
         tableView.reloadData()
@@ -235,6 +246,15 @@ extension ProfileScene: ProfileSceneWorkerOutput {
         if !isAppeared {
             tabBarItem?.badgeValue = badge.text
         }
+    }
+    
+    func workerDidSignOut() {
+        let _ = flow.goToInitial()
+    }
+    
+    func workerDidSignOutWithError(_ error: Error) {
+        tableView.reloadData()
+        showError(withMessage: "\(error)")
     }
 }
 

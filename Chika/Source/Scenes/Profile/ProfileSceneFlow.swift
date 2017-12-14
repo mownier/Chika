@@ -14,6 +14,7 @@ protocol ProfileSceneFlow: class {
     func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool
     func goToEmailUpdate(withDelegate: EmailUpdateSceneDelegate?) -> Bool
     func goToPasswordChange() -> Bool
+    func goToInitial() -> Bool
 }
 
 extension ProfileScene {
@@ -26,13 +27,16 @@ extension ProfileScene {
             var profileEdit: ProfileEditSceneEntryWaypoint
             var emailUpdate: EmailUpdateSceneEntryWaypoint
             var passwordChange: AppEntryWaypoint
+            var initial: AppRootWaypoint
         }
         
         weak var scene: UIViewController?
         var waypoint: Waypoint
+        var application: UIApplication
         
-        init(waypoint: Waypoint) {
+        init(waypoint: Waypoint, application: UIApplication) {
             self.waypoint = waypoint
+            self.application = application
         }
         
         convenience init() {
@@ -40,8 +44,9 @@ extension ProfileScene {
             let profileEdit = ProfileEditScene.EntryWaypoint()
             let emailUpdate = EmailUpdateScene.EntryWaypoint()
             let passwordChange = PasswordChangeScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange)
-            self.init(waypoint: waypoint)
+            let initial = InitialScene.RootWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial)
+            self.init(waypoint: waypoint, application: UIApplication.shared)
         }
         
         func goToContactRequest() -> Bool {
@@ -74,6 +79,10 @@ extension ProfileScene {
             }
             
             return waypoint.passwordChange.enter(from: scene)
+        }
+        
+        func goToInitial() -> Bool {
+            return waypoint.initial.makeRoot(from: application.keyWindow)
         }
     }
 }

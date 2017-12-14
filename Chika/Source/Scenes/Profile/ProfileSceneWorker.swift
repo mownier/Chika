@@ -11,6 +11,7 @@ protocol ProfileSceneWorker: class {
     func fetchProfile()
     func listenOnAddedContactRequests()
     func listenOnRemovedContactRequests()
+    func signOut()
 }
 
 protocol ProfileSceneWorkerOutput: class {
@@ -19,23 +20,39 @@ protocol ProfileSceneWorkerOutput: class {
     func workerDidFetchProfileWithError(_ error: Error)
     func workerDidReceiveContactRequest()
     func workerDidRemoveContactRequest()
+    func workerDidSignOut()
+    func workerDidSignOutWithError(_ error: Error)
 }
 
 extension ProfileScene {
 
     class Worker: ProfileSceneWorker {
         
+        struct Service {
+            
+            var person: PersonRemoteService
+            var auth: AuthRemoteService
+        }
+        
         weak var output: ProfileSceneWorkerOutput?
-        var service: PersonRemoteService
+        var service: Service
         var listener: ContactRequestRemoteListener
         
-        init(service: PersonRemoteService = PersonRemoteServiceProvider(), listener: ContactRequestRemoteListener = ContactRequestRemoteListenerProvider()) {
+        init(service: Service, listener: ContactRequestRemoteListener) {
             self.service = service
             self.listener = listener
         }
         
+        convenience init() {
+            let person = PersonRemoteServiceProvider()
+            let auth = AuthRemoteServiceProvider()
+            let service = Service(person: person, auth: auth)
+            let listener = ContactRequestRemoteListenerProvider()
+            self.init(service: service, listener: listener)
+        }
+        
         func fetchProfile() {
-            service.getMyProfile { [weak self] result in
+            service.person.getMyProfile { [weak self] result in
                 switch result {
                 case .err(let info):
                     self?.output?.workerDidFetchProfileWithError(info)
@@ -55,6 +72,18 @@ extension ProfileScene {
         func listenOnRemovedContactRequests() {
             let _ = listener.listenOnRemoved { [weak self] _ in
                 self?.output?.workerDidRemoveContactRequest()
+            }
+        }
+        
+        func signOut() {
+            service.auth.signOut { [weak self] result in
+                switch result {
+                case .err(let info):
+                    self?.output?.workerDidSignOutWithError(info)
+                
+                case .ok:
+                    self?.output?.workerDidSignOut()
+                }
             }
         }
     }
