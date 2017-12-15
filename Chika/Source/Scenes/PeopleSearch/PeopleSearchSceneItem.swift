@@ -16,13 +16,6 @@ struct PeopleSearchSceneItem {
     var object: PersonSearchObject
     var requestStatus: RequestStatus
     var isActive: Bool
-    var name: String {
-        guard !object.person.displayName.isEmpty else {
-            return object.person.name
-        }
-        
-        return object.person.displayName
-    }
     
     init(object: PersonSearchObject) {
         self.object = object

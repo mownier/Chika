@@ -25,7 +25,7 @@ extension ContactsScene {
             
             cell.nameLabel.font = theme.contactNameFont
             cell.onlineStatusView.isHidden = !item.isActive
-            cell.nameLabel.text = item.name
+            cell.nameLabel.text = item.contact.person.displayName
             cell.action = action
             
             cell.setNeedsLayout()

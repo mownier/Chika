@@ -30,7 +30,7 @@ extension ContactsScene {
             return items.count
         }
         var indexChars: [Character] {
-            let set = Set(items.filter({ !$0.contact.person.name.isEmpty }).map({ $0.contact.person.name.uppercased() }).map({ Array($0.characters)[0] }))
+            let set = Set(items.filter({ !$0.contact.person.displayName.isEmpty }).map({ $0.contact.person.displayName.uppercased() }).map({ Array($0.characters)[0] }))
             var array = Array(set)
             array.sort(by: { String($0).localizedStandardCompare(String($1)) == .orderedAscending })
             var chars = array.filter({ String($0).rangeOfCharacter(from: CharacterSet.letters.inverted) == nil && !String($0).isEmpty })
@@ -62,7 +62,7 @@ extension ContactsScene {
                 return !items.contains(where: { contact.person.id == $0.contact.person.id })
                 }.map({ ContactsSceneItem(contact: $0) })
             items.append(contentsOf: diff)
-            items.sort(by: { $0.contact.person.name.localizedStandardCompare($1.contact.person.name) == .orderedAscending })
+            items.sort(by: { $0.contact.person.displayName.localizedStandardCompare($1.contact.person.displayName) == .orderedAscending })
         }
         
         func item(at index: Int) -> ContactsSceneItem? {
@@ -92,13 +92,13 @@ extension ContactsScene {
         
         func index(for char: Character) -> Int? {
             if String(char) == "/" {
-                return items.index(where: { $0.contact.person.name.isEmpty || String(Array($0.contact.person.name)[0]).rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) != nil || String(Array($0.contact.person.name)[0]).isEmpty })
+                return items.index(where: { $0.contact.person.displayName.isEmpty || String(Array($0.contact.person.displayName)[0]).rangeOfCharacter(from: CharacterSet.alphanumerics.inverted) != nil || String(Array($0.contact.person.displayName)[0]).isEmpty })
                 
             } else if String(char) == "#" {
-                return items.index(where: { !$0.contact.person.name.isEmpty && String(Array($0.contact.person.name)[0]).rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil && !String(Array($0.contact.person.name)[0]).isEmpty })
+                return items.index(where: { !$0.contact.person.displayName.isEmpty && String(Array($0.contact.person.displayName)[0]).rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil && !String(Array($0.contact.person.displayName)[0]).isEmpty })
                 
             } else {
-                return items.index(where: { !$0.contact.person.name.isEmpty && String(Array($0.contact.person.name.characters)[0]).uppercased() == String(char).uppercased() })
+                return items.index(where: { !$0.contact.person.displayName.isEmpty && String(Array($0.contact.person.displayName.characters)[0]).uppercased() == String(char).uppercased() })
             }
         }
     }

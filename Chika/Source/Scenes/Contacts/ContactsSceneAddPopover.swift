@@ -39,8 +39,8 @@ class ContactsSceneAddPopover: UIViewController {
         self.theme = theme
         self.person = person
         var personName  = "!"
-        if !person.name.isEmpty {
-            personName = " \(person.name)!"
+        if !person.displayName.isEmpty {
+            personName = " \(person.displayName)!"
         }
         self.initialText = String(format: "Hi%@ I would like to add you as contact.", personName)
         super.init(nibName: nil, bundle: nil)
