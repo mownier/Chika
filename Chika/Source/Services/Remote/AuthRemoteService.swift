@@ -22,30 +22,45 @@ protocol AuthRemoteService: class {
 class AuthRemoteServiceProvider: AuthRemoteService {
 
     var auth: Auth
+    var presenceWriterFactory: PresenceRemoteWriterFactory
     
-    init(auth: Auth = Auth.auth()) {
+    init(auth: Auth = Auth.auth(), presenceWriterFactory: PresenceRemoteWriterFactory = PresenceRemoteWriterProvider.Factory()) {
         self.auth = auth
+        self.presenceWriterFactory = presenceWriterFactory
     }
     
     func register(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
         auth.createUser(withEmail: email, password: pass) { [weak self] user, error in
-           self?.handleAccessResult(user, error, completion)
+            self?.handleAccessResult(user, error) { result in
+                self?.handleMakeOnline(result, completion)
+            }
         }
     }
     
     func signIn(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
         auth.signIn(withEmail: email, password: pass) { [weak self] user, error in
-            self?.handleAccessResult(user, error, completion)
+            self?.handleAccessResult(user, error) { result in
+                self?.handleMakeOnline(result, completion)
+            }
         }
     }
     
     func signOut(completion: @escaping (ServiceResult<String>) -> Void) {
-        do {
-            try auth.signOut()
-            completion(.ok("OK"))
+        let writer = presenceWriterFactory.build()
+        writer.makeOffline { [weak self] result in
+            switch result {
+            case .err(let info):
+                completion(.err(info))
             
-        } catch {
-            completion(.err(ServiceError("unable to sign out")))
+            case .ok:
+                do {
+                    try self?.auth.signOut()
+                    completion(.ok("OK"))
+                    
+                } catch {
+                    completion(.err(ServiceError("unable to sign out")))
+                }
+            }
         }
     }
     
@@ -176,6 +191,26 @@ class AuthRemoteServiceProvider: AuthRemoteService {
             }
             
             completion(.ok(token))
+        }
+    }
+    
+    private func handleMakeOnline(_ result: ServiceResult<Access>, _ completion: @escaping (ServiceResult<Access>) -> Void) {
+        switch result {
+        case .err:
+            completion(result)
+            
+        case .ok(let access):
+            let writer = presenceWriterFactory.build()
+            writer.makeOnline { [weak self] result in
+                switch result {
+                case .err(let info):
+                    try? self?.auth.signOut()
+                    completion(.err(info))
+                    
+                case .ok:
+                    completion(.ok(access))
+                }
+            }
         }
     }
 }
