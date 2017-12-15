@@ -213,7 +213,7 @@
 		489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */; };
 		489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */; };
 		489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */; };
-		48A2BEBF1FE3A995005FFE45 /* AppPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */; };
+		48A2BEBF1FE3A995005FFE45 /* AppPresenceSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2BEBE1FE3A995005FFE45 /* AppPresenceSwitcher.swift */; };
 		48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */; };
 		48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */; };
 		48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */; };
@@ -505,7 +505,7 @@
 		489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneFlowMock.swift; sourceTree = "<group>"; };
 		489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneWorkerOutputMock.swift; sourceTree = "<group>"; };
 		489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneRootWaypointTests.swift; sourceTree = "<group>"; };
-		48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresence.swift; sourceTree = "<group>"; };
+		48A2BEBE1FE3A995005FFE45 /* AppPresenceSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresenceSwitcher.swift; sourceTree = "<group>"; };
 		48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScene.swift; sourceTree = "<group>"; };
 		48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneCell.swift; sourceTree = "<group>"; };
 		48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneFactory.swift; sourceTree = "<group>"; };
@@ -1060,7 +1060,7 @@
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
 				48DDF0701FDE61A700D79BBD /* AppImageCreator.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
-				48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */,
+				48A2BEBE1FE3A995005FFE45 /* AppPresenceSwitcher.swift */,
 				482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */,
 				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
 			);
@@ -1742,7 +1742,7 @@
 				4876E2FC1FE00E20004664E6 /* SearchRemoteService.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
 				48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */,
-				48A2BEBF1FE3A995005FFE45 /* AppPresence.swift in Sources */,
+				48A2BEBF1FE3A995005FFE45 /* AppPresenceSwitcher.swift in Sources */,
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */,
 				487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */,
