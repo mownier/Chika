@@ -383,10 +383,24 @@ class ConvoScene: UIViewController {
         notifCenter.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
+    func updateTitleView() {
+        guard let presence = presence else {
+            return
+        }
+        
+        let date = NSDate(timeIntervalSince1970: presence.activeOn)
+        let dateText = date.timeAgoSinceNow() ?? ""
+        titleView.activeLabel.text = "active \(dateText)".lowercased()
+        titleView.setNeedsLayout()
+        titleView.layoutIfNeeded()
+    }
+    
     var prevOriginY: CGFloat = 0
     var prevBottomOffset: CGFloat = 0
     var prevCountOriginY: CGFloat = 0
     var timer: Timer?
+    var titleRefreshTimer: Timer?
+    var presence: Presence?
 }
 
 extension ConvoScene: UITableViewDataSource {
@@ -543,12 +557,17 @@ extension ConvoScene: ConvoSceneWorkerOutput {
         }
     }
     
-    func workerDidChangePresence(_ presence: Presence) {
-        let date = NSDate(timeIntervalSince1970: presence.activeOn)
-        let dateText = date.timeAgoSinceNow() ?? ""
-        titleView.activeLabel.text = "active \(dateText)".lowercased()
-        titleView.setNeedsLayout()
-        titleView.layoutIfNeeded()
+    func workerDidChangePresence(_ aPresence: Presence) {
+        presence = aPresence
+        updateTitleView()
+        guard titleRefreshTimer == nil else {
+            return
+        }
+        
+        titleRefreshTimer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { [weak self] _ in
+            self?.updateTitleView()
+        })
+        titleRefreshTimer?.fire()
     }
 }
 
@@ -558,6 +577,8 @@ extension ConvoScene: ConvoSceneInteraction {
         worker.unlisteOnRecentMessage()
         worker.unlistenOnTypingStatus()
         worker.unlistenOnPresence()
+        titleRefreshTimer?.invalidate()
+        titleRefreshTimer = nil
         let _ = waypoint.exit()
     }
     

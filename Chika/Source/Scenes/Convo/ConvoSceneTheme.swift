@@ -94,7 +94,7 @@ extension ConvoScene {
         
         var titleNameTextColor: UIColor = .black
         var titleNameFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
-        var titleActiveTextColor: UIColor = .black
-        var titleActiveFont: UIFont? = UIFont(name: "AvenirNext-Regular", size: 12.0)
+        var titleActiveTextColor: UIColor = .gray
+        var titleActiveFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 12.0)
     }
 }
