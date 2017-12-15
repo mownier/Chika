@@ -225,6 +225,7 @@
 		48A963611FBD401D002DBB1C /* SignInSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */; };
 		48AB2B621FC5691C00B3A253 /* ChatsRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB2B611FC5691C00B3A253 /* ChatsRemoteQueryProviderTests.swift */; };
 		48AFB39D1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AFB39C1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift */; };
+		48B21F3F1FE41AAE00D5E10A /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B21F3E1FE41AAE00D5E10A /* Presence.swift */; };
 		48B37E8D1FCBD474004978F1 /* RecentMessageRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B37E8C1FCBD474004978F1 /* RecentMessageRemoteListener.swift */; };
 		48B4D0181FBAD8CF008C78F6 /* AuthRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */; };
 		48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B4D0191FBADC60008C78F6 /* Service.swift */; };
@@ -517,6 +518,7 @@
 		48A963601FBD401D002DBB1C /* SignInSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFlow.swift; sourceTree = "<group>"; };
 		48AB2B611FC5691C00B3A253 /* ChatsRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		48AFB39C1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneAddPopoverTheme.swift; sourceTree = "<group>"; };
+		48B21F3E1FE41AAE00D5E10A /* Presence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
 		48B37E8C1FCBD474004978F1 /* RecentMessageRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageRemoteListener.swift; sourceTree = "<group>"; };
 		48B4D0171FBAD8CF008C78F6 /* AuthRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRemoteService.swift; sourceTree = "<group>"; };
 		48B4D0191FBADC60008C78F6 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -1112,6 +1114,7 @@
 				4879B4971FC29A4A00611DA3 /* Chat.swift */,
 				4879B4991FC29A7C00611DA3 /* Message.swift */,
 				4879B49B1FC29B0D00611DA3 /* Person.swift */,
+				48B21F3E1FE41AAE00D5E10A /* Presence.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1750,6 +1753,7 @@
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
+				48B21F3F1FE41AAE00D5E10A /* Presence.swift in Sources */,
 				4873F8E31FC7FD82009A41DB /* ChatMessagesRemoteQuery.swift in Sources */,
 				483873921FD667E100CAC325 /* ContactRemoteListener.swift in Sources */,
 				48F1BCB01FE26AF20058AD71 /* AboutSceneCellFactory.swift in Sources */,
