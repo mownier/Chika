@@ -32,7 +32,11 @@ class MessageRemoteWriterProvider: MessageRemoteWriter {
             return
         }
         
-        guard participantIDs.count > 1 else {
+        var personIDs = participantIDs
+        if !personIDs.contains(meID) {
+            personIDs.append(meID)
+        }
+        guard personIDs.count > 1 else {
             completion(.err(RemoteWriterError("participantIDs should contain more than 1")))
             return
         }
@@ -53,7 +57,7 @@ class MessageRemoteWriterProvider: MessageRemoteWriter {
             "chat:messages/\(chatID)/\(key)": ["created_on": createdOn]
         ]
         
-        for personID in participantIDs {
+        for personID in personIDs {
             updates["person:inbox/\(personID)/\(chatID)"] = ["updated_on": createdOn]
         }
         
