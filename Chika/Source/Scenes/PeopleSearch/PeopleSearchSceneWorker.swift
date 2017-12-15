@@ -71,8 +71,8 @@ extension PeopleSearchScene {
         
         func listenOnActiveStatus(for personIDs: [String]) {
             for personID in personIDs {
-                let _ = listener.presence.listen(personID: personID) { [weak self] isActive in
-                    self?.output?.workerDidChangeActiveStatus(for: personID, isActive: isActive)
+                let _ = listener.presence.listen(personID: personID) { [weak self] presence in
+                    self?.output?.workerDidChangeActiveStatus(for: personID, isActive: presence.isActive)
                 }
             }
         }

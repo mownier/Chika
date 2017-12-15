@@ -88,8 +88,8 @@ extension InboxScene {
                     continue
                 }
                 
-                let _ = listener.presence.listen(personID: participant.id) { [weak self] isActive in
-                    self?.output?.workerDidChangeActiveStatus(for: participant.id, isActive: isActive)
+                let _ = listener.presence.listen(personID: participant.id) { [weak self] presence in
+                    self?.output?.workerDidChangeActiveStatus(for: participant.id, isActive: presence.isActive)
                 }
             }
         }

@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol PresenceRemoteListener: class {
 
-    func listen(personID: String, callback: @escaping (Bool) -> Void) -> Bool
+    func listen(personID: String, callback: @escaping (Presence) -> Void) -> Bool
     func unlisten(personID: String) -> Bool
     func unlistenAll() -> Bool
 }
@@ -28,7 +28,7 @@ class PresenceRemoteListenerProvider: PresenceRemoteListener {
         self.meID = meID
     }
     
-    func listen(personID: String, callback: @escaping (Bool) -> Void) -> Bool {
+    func listen(personID: String, callback: @escaping (Presence) -> Void) -> Bool {
         guard !personID.isEmpty, personID != meID, handles[personID] == nil else {
             return false
         }
@@ -36,7 +36,6 @@ class PresenceRemoteListenerProvider: PresenceRemoteListener {
         handles[personID] = 0
         
         let rootRef = database.reference()
-        let ref = rootRef.child("person:presence/\(personID)/is:active")
         
         rootRef.child("person:contacts/\(meID)/\(personID)").observeSingleEvent(of: .value) { [weak self] snapshot in
             guard snapshot.exists() else {
@@ -44,12 +43,18 @@ class PresenceRemoteListenerProvider: PresenceRemoteListener {
                 return
             }
             
+            let ref = rootRef.child("person:presence/\(personID)")
             let handle = ref.observe(.value) { snapshot in
-                guard snapshot.exists(), snapshot.key == "is:active", let isActive = snapshot.value as? Bool else {
+                guard snapshot.exists() else {
                     return
                 }
                 
-                callback(isActive)
+                var presence = Presence()
+                presence.personID = personID
+                presence.isActive = snapshot.childSnapshot(forPath: "is:active").value as? Bool ?? false
+                presence.activeOn = (snapshot.childSnapshot(forPath: "active:on").value as? Double ?? 0) / 1000
+                
+                callback(presence)
             }
             
             self?.handles[personID] = handle
