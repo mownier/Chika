@@ -43,6 +43,10 @@
 		483FC2FC1FBAD25300545269 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 483FC2FA1FBAD25300545269 /* LaunchScreen.storyboard */; };
 		484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484629FB1FE11C3200346AA3 /* ContactSceneController.swift */; };
 		484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */; };
+		484A7AE81FE390B100CEBB32 /* SignOutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A7AE71FE390B100CEBB32 /* SignOutScene.swift */; };
+		484A7AEC1FE39A3900CEBB32 /* SignOutSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A7AEB1FE39A3900CEBB32 /* SignOutSceneFactory.swift */; };
+		484A7AEE1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A7AED1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift */; };
+		484A7AF21FE3A4C400CEBB32 /* SignOutSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A7AF11FE3A4C400CEBB32 /* SignOutSceneTheme.swift */; };
 		485205FD1FC5440000DFD68D /* MessagesRemoteQueryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485205FC1FC5440000DFD68D /* MessagesRemoteQueryMock.swift */; };
 		485206001FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485205FF1FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift */; };
 		485206021FC5526900DFD68D /* PersonsSortMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485206011FC5526900DFD68D /* PersonsSortMock.swift */; };
@@ -69,6 +73,8 @@
 		486901991FDBBD43005053CD /* ContactRequestSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869018E1FDBBD43005053CD /* ContactRequestSceneWorker.swift */; };
 		486931F41FD114BD000D3AD4 /* InboxSceneCellAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486931F31FD114BD000D3AD4 /* InboxSceneCellAvatar.swift */; };
 		486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486931F51FD127D1000D3AD4 /* InboxSceneItem.swift */; };
+		486C33D21FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C33D11FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift */; };
+		486C33D41FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C33D31FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift */; };
 		4870A2851FE2B69000FB30E7 /* SupportScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4870A27A1FE2B69000FB30E7 /* SupportScene.swift */; };
 		4870A2871FE2B69000FB30E7 /* SupportSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4870A27C1FE2B69000FB30E7 /* SupportSceneCellFactory.swift */; };
 		4870A2881FE2B69000FB30E7 /* SupportSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4870A27D1FE2B69000FB30E7 /* SupportSceneData.swift */; };
@@ -207,6 +213,7 @@
 		489FE1E51FC067A00062E1AB /* RegisterSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */; };
 		489FE1E71FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */; };
 		489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */; };
+		48A2BEBF1FE3A995005FFE45 /* AppPresence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */; };
 		48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */; };
 		48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */; };
 		48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */; };
@@ -328,6 +335,10 @@
 		483FC3131FBAD25300545269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		484629FB1FE11C3200346AA3 /* ContactSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSceneController.swift; sourceTree = "<group>"; };
 		484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSceneControllerFactory.swift; sourceTree = "<group>"; };
+		484A7AE71FE390B100CEBB32 /* SignOutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutScene.swift; sourceTree = "<group>"; };
+		484A7AEB1FE39A3900CEBB32 /* SignOutSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutSceneFactory.swift; sourceTree = "<group>"; };
+		484A7AED1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutSceneWaypoint.swift; sourceTree = "<group>"; };
+		484A7AF11FE3A4C400CEBB32 /* SignOutSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutSceneTheme.swift; sourceTree = "<group>"; };
 		485205FC1FC5440000DFD68D /* MessagesRemoteQueryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRemoteQueryMock.swift; sourceTree = "<group>"; };
 		485205FF1FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsRemoteQueryProviderTests.swift; sourceTree = "<group>"; };
 		485206011FC5526900DFD68D /* PersonsSortMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonsSortMock.swift; sourceTree = "<group>"; };
@@ -354,6 +365,8 @@
 		4869018E1FDBBD43005053CD /* ContactRequestSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRequestSceneWorker.swift; sourceTree = "<group>"; };
 		486931F31FD114BD000D3AD4 /* InboxSceneCellAvatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxSceneCellAvatar.swift; sourceTree = "<group>"; };
 		486931F51FD127D1000D3AD4 /* InboxSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneItem.swift; sourceTree = "<group>"; };
+		486C33D11FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteWriterFactoryMock.swift; sourceTree = "<group>"; };
+		486C33D31FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenceRemoteWriterMock.swift; sourceTree = "<group>"; };
 		4870A27A1FE2B69000FB30E7 /* SupportScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportScene.swift; sourceTree = "<group>"; };
 		4870A27C1FE2B69000FB30E7 /* SupportSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSceneCellFactory.swift; sourceTree = "<group>"; };
 		4870A27D1FE2B69000FB30E7 /* SupportSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportSceneData.swift; sourceTree = "<group>"; };
@@ -492,6 +505,7 @@
 		489FE1E41FC067A00062E1AB /* RegisterSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneFlowMock.swift; sourceTree = "<group>"; };
 		489FE1E61FC068E50062E1AB /* RegisterSceneWorkerOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSceneWorkerOutputMock.swift; sourceTree = "<group>"; };
 		489FE1EC1FC071570062E1AB /* InitialSceneRootWaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneRootWaypointTests.swift; sourceTree = "<group>"; };
+		48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresence.swift; sourceTree = "<group>"; };
 		48A6930A1FD59D4E00ED4024 /* ContactsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsScene.swift; sourceTree = "<group>"; };
 		48A6930C1FD59F0F00ED4024 /* ContactsSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneCell.swift; sourceTree = "<group>"; };
 		48A6930E1FD59F7100ED4024 /* ContactsSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSceneFactory.swift; sourceTree = "<group>"; };
@@ -605,6 +619,7 @@
 				487C4BD51FE1684B0066DD41 /* ProfileEdit */,
 				489FE1C41FC05A7A0062E1AB /* Register */,
 				48B4D0141FBAD86A008C78F6 /* Sign In */,
+				484A7AE61FE3909900CEBB32 /* SignOut */,
 				4870A2791FE2B66900FB30E7 /* Support */,
 			);
 			path = Scenes;
@@ -727,6 +742,17 @@
 				484629FE1FE11C9600346AA3 /* ContactSceneControllerFactory.swift */,
 			);
 			path = Contact;
+			sourceTree = "<group>";
+		};
+		484A7AE61FE3909900CEBB32 /* SignOut */ = {
+			isa = PBXGroup;
+			children = (
+				484A7AE71FE390B100CEBB32 /* SignOutScene.swift */,
+				484A7AEB1FE39A3900CEBB32 /* SignOutSceneFactory.swift */,
+				484A7AED1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift */,
+				484A7AF11FE3A4C400CEBB32 /* SignOutSceneTheme.swift */,
+			);
+			path = SignOut;
 			sourceTree = "<group>";
 		};
 		4867F8B41FE237D200ADFD39 /* EmailUpdate */ = {
@@ -1034,6 +1060,7 @@
 				4803C2671FBC2FBA0096E403 /* AppError.swift */,
 				48DDF0701FDE61A700D79BBD /* AppImageCreator.swift */,
 				48E0199C1FBD60CC008D94DE /* AppNavigationControllerFactory.swift */,
+				48A2BEBE1FE3A995005FFE45 /* AppPresence.swift */,
 				482FDF121FC0131A00ABA372 /* AppStatusBarFrameGetter.swift */,
 				48C0515E1FBF2E5C009DDFC8 /* AppWaypoint.swift */,
 			);
@@ -1149,6 +1176,8 @@
 				48D627501FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift */,
 				4803C2551FBBE10F0096E403 /* UserMock.swift */,
 				489DA18F1FBD7BB600918AD9 /* ViewMock.swift */,
+				486C33D11FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift */,
+				486C33D31FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1558,6 +1587,7 @@
 				4879B48B1FC2871B00611DA3 /* HomeSceneTabSetup.swift in Sources */,
 				489FE1CE1FC05F7E0062E1AB /* RegisterSceneWaypoint.swift in Sources */,
 				487766FF1FC6ABF3008E865F /* ConvoScene.swift in Sources */,
+				484A7AF21FE3A4C400CEBB32 /* SignOutSceneTheme.swift in Sources */,
 				488D87D91FD6432100E690BD /* ContactRemoteService.swift in Sources */,
 				487B53661FC9A9D9006D072F /* ConvoSceneComposerView.swift in Sources */,
 				486931F61FD127D1000D3AD4 /* InboxSceneItem.swift in Sources */,
@@ -1575,6 +1605,7 @@
 				489270411FE255D00088CEA5 /* PasswordChangeSceneTheme.swift in Sources */,
 				48A743BC1FC7F73E0019EDD8 /* ConvoSceneData.swift in Sources */,
 				488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */,
+				484A7AE81FE390B100CEBB32 /* SignOutScene.swift in Sources */,
 				48F1BCB41FE26AF20058AD71 /* AboutSceneItem.swift in Sources */,
 				484629FF1FE11C9600346AA3 /* ContactSceneControllerFactory.swift in Sources */,
 				48E0199D1FBD60CC008D94DE /* AppNavigationControllerFactory.swift in Sources */,
@@ -1587,6 +1618,7 @@
 				48B5CEF81FD28E6A000C70FA /* PresenceRemoteListener.swift in Sources */,
 				487365751FD84278004DE6C2 /* ContactRemoteWriter.swift in Sources */,
 				483FC2F21FBAD25300545269 /* AppDelegate.swift in Sources */,
+				484A7AEC1FE39A3900CEBB32 /* SignOutSceneFactory.swift in Sources */,
 				4803C2651FBC2DA80096E403 /* SignInSceneTheme.swift in Sources */,
 				487C4BE91FE168650066DD41 /* ProfileEditSceneTheme.swift in Sources */,
 				48E0199B1FBD5DAC008D94DE /* HomeSceneFactory.swift in Sources */,
@@ -1638,6 +1670,7 @@
 				48D9E2CF1FDA6D0400A37A3D /* ProfileSceneData.swift in Sources */,
 				48E019991FBD5D94008D94DE /* HomeScene.swift in Sources */,
 				4870A28C1FE2B69000FB30E7 /* SupportSceneSetup.swift in Sources */,
+				484A7AEE1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift in Sources */,
 				487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
 				4867F8C91FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift in Sources */,
@@ -1709,6 +1742,7 @@
 				4876E2FC1FE00E20004664E6 /* SearchRemoteService.swift in Sources */,
 				48B5CEF61FD283E5000C70FA /* PresenceRemoteWriter.swift in Sources */,
 				48819BDF1FDC1E57002148B6 /* ContactRequestRemoteListener.swift in Sources */,
+				48A2BEBF1FE3A995005FFE45 /* AppPresence.swift in Sources */,
 				48D9E2C91FDA6CC200A37A3D /* ProfileSceneTheme.swift in Sources */,
 				487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */,
 				487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */,
@@ -1743,6 +1777,7 @@
 				489DE7A01FC5C65F00B6C960 /* ChatsSortMock.swift in Sources */,
 				48B4D0231FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift in Sources */,
 				485206001FC5472000DFD68D /* PersonsRemoteQueryProviderTests.swift in Sources */,
+				486C33D41FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift in Sources */,
 				48B4D02A1FBAEE64008C78F6 /* AuthMock.swift in Sources */,
 				489DE79E1FC5BF7C00B6C960 /* RecentMessageRemoteQueryMock.swift in Sources */,
 				489FE1D91FC0630D0062E1AB /* RegisterSceneWorkerTests.swift in Sources */,
@@ -1761,6 +1796,7 @@
 				4879B48D1FC28C3F00611DA3 /* HomeSceneTests.swift in Sources */,
 				4802BFA41FC85FF00018D15C /* AppRootWaypointMock.swift in Sources */,
 				485206061FC554CE00DFD68D /* PersonsSortProviderTests.swift in Sources */,
+				486C33D21FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift in Sources */,
 				487766F51FC69613008E865F /* TableViewMock.swift in Sources */,
 				489FE1D71FC062F90062E1AB /* RegisterSceneTests.swift in Sources */,
 				483F8FBE1FC165740058CC56 /* InitialSceneFlowMock.swift in Sources */,
