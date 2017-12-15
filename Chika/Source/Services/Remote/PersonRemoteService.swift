@@ -19,28 +19,25 @@ protocol PersonRemoteService: class {
 
 class PersonRemoteServiceProvider: PersonRemoteService {
 
-    var database: Database
     var personsQuery: PersonsRemoteQuery
     var personWriter: PersonRemoteWriter
     var meID: String
     
-    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), personWriter: PersonRemoteWriter = PersonRemoteWriterProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), personWriter: PersonRemoteWriter = PersonRemoteWriterProvider()) {
         self.meID = meID
-        self.database = database
         self.personsQuery = personsQuery
         self.personWriter = personWriter
     }
     
     func add(email: String, id: String, completion: @escaping (ServiceResult<String>) -> Void) {
-        let ref = database.reference()
-        let values = ["persons/\(id)": ["email": email, "id": id]]
-        ref.updateChildValues(values) { error, _ in
-            guard error == nil else {
-                completion(.err(error!))
-                return
-            }
+        personWriter.add(email: email, id: id) { result in
+            switch result {
+            case .err(let info):
+                completion(.err(info))
             
-            completion(.ok("OK"))
+            case .ok:
+                completion(.ok("OK"))
+            }
         }
     }
     
@@ -97,13 +94,14 @@ class PersonRemoteServiceProvider: PersonRemoteService {
             return
         }
         
-        personWriter.saveInfo(newValue: newValue, oldValue: oldValue) { error in
-            guard error == nil else {
-                completion(.err(error!))
-                return
-            }
+        personWriter.saveInfo(newValue: newValue, oldValue: oldValue) { result in
+            switch result {
+            case .err(let info):
+                completion(.err(info))
             
-            completion(.ok(newValue))
+            case .ok:
+                completion(.ok(newValue))
+            }            
         }
     }
 }
