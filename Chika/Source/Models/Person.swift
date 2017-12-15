@@ -8,18 +8,31 @@
 
 struct Person {
 
+    private var dispName: String = ""
+    
     var id: String
     var name: String
     var avatarURL: String
-    var displayName: String
+    var displayName: String {
+        set {
+            dispName = newValue
+        }
+        get {
+            if dispName.isEmpty {
+                return name
+            }
+            return dispName
+        }
+    }
+    
     var email: String
     
     init() {
         id = ""
         name = ""
         avatarURL = ""
-        displayName = ""
         email = ""
+        self.displayName = ""
     }
 }
 

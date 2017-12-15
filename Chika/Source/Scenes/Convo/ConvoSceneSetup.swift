@@ -130,7 +130,7 @@ extension ConvoScene {
             }
             
             cell.contentLabel.text = message.content
-            cell.authorLabel.text = message.author.name
+            cell.authorLabel.text = message.author.displayName.isEmpty ? message.author.name : message.author.displayName
             cell.timeLabel.text = dateFormatter.string(from: message.date)
             
             cell.setNeedsLayout()

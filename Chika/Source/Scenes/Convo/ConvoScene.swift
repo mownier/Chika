@@ -79,23 +79,28 @@ class ConvoScene: UIViewController {
             }
             
             if typingPersons.count == 1 {
-                typingStatusText = "\(typingPersons[0].name) is typing..."
+                let name = typingPersons[0].displayName
+                typingStatusText = "\(name) is typing..."
                 return
             }
             
             if typingPersons.count == 2 {
-                typingStatusText = "\(typingPersons[0].name) and \(typingPersons[1].name) are typing..."
+                let name1 = typingPersons[0].displayName
+                let name2 = typingPersons[1].displayName
+                typingStatusText = "\(name1) and \(name2) are typing..."
                 return
             }
             
             var personText = ""
             for (index, person) in typingPersons.enumerated() {
+                let name = person.displayName
+                
                 if index == typingPersons.count - 1 {
-                    personText.append("and \(person.name)")
+                    personText.append("and \(name)")
                     continue
                 }
                 
-                personText.append("\(person.name), ")
+                personText.append("\(name), ")
             }
             
             typingStatusText = "\(personText) are typing..."

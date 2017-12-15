@@ -112,7 +112,7 @@ extension InboxScene {
             let participant = items[index].chat.participants[participantIndex]
             
             if isTyping {
-                items[index].typing[participantID] = participant.name
+                items[index].typing[participantID] = participant.displayName
                 
             } else {
                 items[index].typing.removeValue(forKey: participant.id)
