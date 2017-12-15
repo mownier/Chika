@@ -179,6 +179,7 @@ extension PeopleSearchScene: PeopleSearchSceneInteraction {
     }
     
     func didTapSearchCancel() {
+        input.isSearching = false
         input.isRequesting = false
         input.searchInput.text = ""
         input.searchInput.resignFirstResponder()
@@ -342,10 +343,6 @@ extension PeopleSearchScene: UITextFieldDelegate {
         input.isRequesting = true
         worker.searchPeople(withKeyword: textField.text)
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        input.isSearching = false
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
