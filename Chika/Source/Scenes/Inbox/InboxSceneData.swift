@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 protocol InboxSceneData: class {
 
@@ -25,14 +26,16 @@ extension InboxScene {
     
     class Data: InboxSceneData {
         
+        var meID: String
         var items: [InboxSceneItem]
         
         var itemCount: Int {
             return items.count
         }
         
-        init() {
-            items = []
+        init(meID: String = Auth.auth().currentUser?.uid ?? "") {
+            self.items = []
+            self.meID = meID
         }
         
         func item(at index: Int) -> InboxSceneItem? {
@@ -54,13 +57,17 @@ extension InboxScene {
         func update(_ newChat: Chat) {
             guard let index = items.index(where: { $0.chat.id == newChat.id }) else {
                 var item = InboxSceneItem(chat: newChat)
-                item.unreadMessageCount += 1
+                if !meID.isEmpty, !newChat.recent.author.id.isEmpty, newChat.recent.author.id != meID {
+                    item.unreadMessageCount += 1
+                }
                 items.insert(item, at: 0)
                 return
             }
             
             items[index].chat = newChat
-            items[index].unreadMessageCount += 1
+            if !meID.isEmpty, !newChat.recent.author.id.isEmpty, newChat.recent.author.id != meID {
+                items[index].unreadMessageCount += 1
+            }
             items.sort(by: { $0.chat.recent.date.timeIntervalSince1970 > $1.chat.recent.date.timeIntervalSince1970 })
         }
         
