@@ -128,6 +128,7 @@ extension InboxScene: InboxSceneWorkerOutput {
     }
     
     func workerDidFetchWithError(_ error: Error) {
+        worker.listenOnRecentChat()
         tableView.reloadData()
     }
     
