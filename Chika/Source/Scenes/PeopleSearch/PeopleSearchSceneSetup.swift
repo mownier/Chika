@@ -25,7 +25,7 @@ extension PeopleSearchScene {
             }
             
             cell.onlineStatusView.isHidden = !item.isActive
-            cell.nameLabel.text = item.object.person.name
+            cell.nameLabel.text = item.name
             cell.action = action
             cell.addButton.isHidden = item.object.isContact
             
