@@ -68,6 +68,11 @@ extension ProfileScene {
             contactRequestCount = 0
             items = []
             person = Person()
+            
+            var item = ProfileSceneItem()
+            item.label = "Sign Out"
+            item.content = ""
+            items.append(item)
         }
         
         func item(at index: Int) -> ProfileSceneItem? {
