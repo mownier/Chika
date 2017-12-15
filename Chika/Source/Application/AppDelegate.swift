@@ -13,12 +13,12 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var presenceWriter: PresenceRemoteWriter!
+    var presenceSwitcher: AppPresenceSwitcher?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        presenceWriter = PresenceRemoteWriterProvider()
+        presenceSwitcher = PresenceSwitcher()
         
         let waypoint = RootWaypoint()
         let _ = waypoint.makeRoot(from: window)
@@ -27,12 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        guard presenceWriter != nil else { return }
-        presenceWriter.makeOnline { _ in }
+        presenceSwitcher?.setActive()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        guard presenceWriter != nil else { return }
-        presenceWriter.makeOffline { _ in }
+        presenceSwitcher?.setInactive()
     }
 }
