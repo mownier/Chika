@@ -10,6 +10,13 @@ struct ContactsSceneItem {
     
     var contact: Contact
     var isActive: Bool
+    var name: String {
+        guard !contact.person.displayName.isEmpty else {
+            return contact.person.name
+        }
+        
+        return contact.person.displayName
+    }
     
     init(contact: Contact) {
         self.contact = contact
