@@ -204,7 +204,8 @@ class AuthRemoteServiceProviderTests: XCTestCase {
     func testRegisterH() {
         let exp = expectation(description: "testRegisterH")
         let auth = AuthMock(id: 0)
-        let provider = AuthRemoteServiceProvider(auth: auth)
+        let factory = PresenceRemoteWriterFactoryMock()
+        let provider = AuthRemoteServiceProvider(auth: auth, presenceWriterFactory: factory)
         
         provider.register(email: "me@me.com", pass: "12345") { result in
             switch result {
@@ -305,7 +306,8 @@ class AuthRemoteServiceProviderTests: XCTestCase {
     func testLoginA() {
         let exp = expectation(description: "testLoginA")
         let auth = AuthMock(id: 0)
-        let provider = AuthRemoteServiceProvider(auth: auth)
+        let factory = PresenceRemoteWriterFactoryMock()
+        let provider = AuthRemoteServiceProvider(auth: auth, presenceWriterFactory: factory)
         
         provider.signIn(email: "me@me.com", pass: "12345") { result in
             switch result {
@@ -354,8 +356,10 @@ class AuthRemoteServiceProviderTests: XCTestCase {
     func testSignOutA() {
         let exp = expectation(description: "testSignOutA")
         let auth = AuthMock(id: 0)
-        let provider = AuthRemoteServiceProvider(auth: auth)
+        let factory = PresenceRemoteWriterFactoryMock()
+        let provider = AuthRemoteServiceProvider(auth: auth, presenceWriterFactory: factory)
         
+        factory.hasError = false
         auth.isFirebaseSignOutError = true
         
         provider.signOut { result in
@@ -379,7 +383,8 @@ class AuthRemoteServiceProviderTests: XCTestCase {
     func testSignOutB() {
         let exp = expectation(description: "testSignOutB")
         let auth = AuthMock(id: 0)
-        let provider = AuthRemoteServiceProvider(auth: auth)
+        let factory = PresenceRemoteWriterFactoryMock()
+        let provider = AuthRemoteServiceProvider(auth: auth, presenceWriterFactory: factory)
         
         provider.signOut { result in
             switch result {
