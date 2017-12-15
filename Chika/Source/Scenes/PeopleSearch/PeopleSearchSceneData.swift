@@ -51,6 +51,7 @@ extension PeopleSearchScene {
         func appendItems(_ objects: [PersonSearchObject]) {
             let objects: [PeopleSearchSceneItem] = Array(Set(objects)).map({ PeopleSearchSceneItem(object: $0) })
             items.append(contentsOf: objects)
+            items.sort(by: { $0.object.person.displayName < $1.object.person.displayName })
         }
         
         func updateRequestStatus(for personID: String, status: PeopleSearchSceneItem.RequestStatus) -> Int? {
