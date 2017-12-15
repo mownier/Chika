@@ -17,6 +17,7 @@ protocol ProfileSceneFlow: class {
     func goToInitial() -> Bool
     func goToAbout() -> Bool
     func goToSupport() -> Bool
+    func goToSignOut(withDelegate delegate: SignOutSceneDelegate?) -> Bool
 }
 
 extension ProfileScene {
@@ -32,6 +33,7 @@ extension ProfileScene {
             var initial: AppRootWaypoint
             var about: AppEntryWaypoint
             var support: AppEntryWaypoint
+            var signOut: SignOutSceneEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -51,7 +53,8 @@ extension ProfileScene {
             let initial = InitialScene.RootWaypoint()
             let about = AboutScene.EntryWaypoint()
             let support = SupportScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about, support: support)
+            let signOut = SignOutScene.EntryWaypoint()
+            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about, support: support, signOut: signOut)
             self.init(waypoint: waypoint, application: UIApplication.shared)
         }
         
@@ -105,6 +108,14 @@ extension ProfileScene {
             }
             
             return waypoint.support.enter(from: scene)
+        }
+        
+        func goToSignOut(withDelegate delegate: SignOutSceneDelegate?) -> Bool {
+            guard let scene = scene else {
+                return false
+            }
+            
+            return waypoint.signOut.withDelegate(delegate).enter(from: scene)
         }
     }
 }

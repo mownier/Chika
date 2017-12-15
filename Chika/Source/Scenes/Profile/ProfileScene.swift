@@ -191,18 +191,7 @@ extension ProfileScene: UITableViewDelegate {
         
         switch item.label.lowercased() {
         case "sign out":
-            let actionSheet = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .actionSheet)
-            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-                self?.worker.signOut()
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            actionSheet.addAction(okAction)
-            actionSheet.addAction(cancelAction)
-            actionSheet.view.tintColor = theme.labelTextColor
-            DispatchQueue.main.async { [weak self] in
-                guard let this = self else { return }
-                this.present(actionSheet, animated: true, completion: nil)
-            }
+            let _ = flow.goToSignOut(withDelegate: self)
         
         case "email":
             let _ = flow.goToEmailUpdate(withDelegate: self)
@@ -288,5 +277,12 @@ extension ProfileScene: EmailUpdateSceneDelegate {
     func emailUpdateDidChangeEmail(_ email: String) {
         data.updateEmail(email)
         tableView.reloadData()
+    }
+}
+
+extension ProfileScene: SignOutSceneDelegate {
+    
+    func signOutSceneWillSignOut() {
+        worker.signOut()
     }
 }
