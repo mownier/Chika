@@ -15,7 +15,19 @@ protocol PresenceRemoteWriter: class {
     func makeOffline(callback: @escaping (RemoteWriterResult<String>) -> Void)
 }
 
+protocol PresenceRemoteWriterFactory: class {
+
+    func build() -> PresenceRemoteWriter
+}
+
 class PresenceRemoteWriterProvider: PresenceRemoteWriter {
+    
+    class Factory: PresenceRemoteWriterFactory {
+        
+        func build() -> PresenceRemoteWriter {
+            return PresenceRemoteWriterProvider()
+        }
+    }
     
     var meID: String
     var database: Database
