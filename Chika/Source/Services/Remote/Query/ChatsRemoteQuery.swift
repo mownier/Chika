@@ -7,6 +7,7 @@
 //
 
 import FirebaseDatabase
+import FirebaseAuth
 
 protocol ChatsRemoteQuery: class {
     
@@ -34,18 +35,20 @@ class ChatsSortProvider: ChatsSort {
 
 class ChatsRemoteQueryProvider: ChatsRemoteQuery {
     
+    var meID: String
     var recentMessageQuery: RecentMessageRemoteQuery
     var personsQuery: PersonsRemoteQuery
     var database: Database
     var path: String
     var sort: ChatsSort
     
-    init(database: Database = Database.database(), path: String = "chats", personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), recentMessageQuery: RecentMessageRemoteQuery = RecentMessageRemoteQueryProvider(), sort: ChatsSort = ChatsSortProvider()) {
+    init(meID: String = Auth.auth().currentUser?.uid ?? "", database: Database = Database.database(), path: String = "chats", personsQuery: PersonsRemoteQuery = PersonsRemoteQueryProvider(), recentMessageQuery: RecentMessageRemoteQuery = RecentMessageRemoteQueryProvider(), sort: ChatsSort = ChatsSortProvider()) {
         self.database = database
         self.path = path
         self.personsQuery = personsQuery
         self.recentMessageQuery = recentMessageQuery
         self.sort = sort
+        self.meID = meID
     }
     
     func getChats(for keys: [String], completion: @escaping ([Chat]) -> Void) {
@@ -57,6 +60,7 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
         let rootRef = database.reference()
         let personsQuery = self.personsQuery
         let recentMessageQuery = self.recentMessageQuery
+        let meID = self.meID
         
         var chats = [Chat]()
         var chatCounter: UInt = 0 {
@@ -102,6 +106,9 @@ class ChatsRemoteQueryProvider: ChatsRemoteQuery {
                     chat.participants = persons
                     
                     recentMessageQuery.getRecentMessage(for: key) { message in
+                        if chat.title.isEmpty {
+                            chat.title = chat.participants.filter({ $0.id != meID }).map({ $0.displayName.isEmpty ? $0.name : $0.displayName }).joined(separator: ", ")
+                        }
                         chat.recent = message == nil ? Message() : message!
                         chats.append(chat)
                         chatCounter += 1
