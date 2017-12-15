@@ -21,6 +21,7 @@ class ConvoScene: UIViewController {
     var tableView: UITableView!
     var composerView: ConvoSceneComposerView!
     var newMessageCountLabel: UILabel!
+    var titleView: ConvoSceneTitleView!
     
     var theme: ConvoSceneTheme
     var worker: ConvoSceneWorker
@@ -188,6 +189,12 @@ class ConvoScene: UIViewController {
         newMessageCountLabel.layer.masksToBounds = true
         newMessageCountLabel.isUserInteractionEnabled = true
         
+        titleView = ConvoSceneTitleView()
+        titleView.nameLabel.textColor = theme.titleNameTextColor
+        titleView.nameLabel.font = theme.titleNameFont
+        titleView.activeLabel.textColor = theme.titleActiveTextColor
+        titleView.activeLabel.font = theme.titleActiveFont
+        
         view.addSubview(tableView)
         view.addSubview(composerView)
         view.addSubview(newMessageCountLabel)
@@ -202,12 +209,15 @@ class ConvoScene: UIViewController {
         
         let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back"), style: .plain, target: self, action: #selector(self.didTapBack))
         navigationItem.leftBarButtonItem = back
-        navigationItem.title = chat.title
+        
+        titleView.nameLabel.text = chat.title
+        navigationItem.titleView = titleView
         
         let _ = worker.fetchNewMessages()
         
         worker.listenOnRecentMessage()
         worker.listenOnTypingStatus()
+        worker.listenOnPresence()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -240,6 +250,11 @@ class ConvoScene: UIViewController {
         rect.origin.x = (tableView.bounds.width - rect.width) / 2
         newMessageCountLabel.frame = rect
         newMessageCountLabel.layer.cornerRadius = rect.height / 2
+        
+        rect.origin = .zero
+        rect.size.height = navigationController?.navigationBar.bounds.height ?? 0
+        rect.size.width = view.bounds.width - 44 * 2
+        titleView.frame = rect
         
         cellManager.leftPrototype?.bounds.size.width = tableView.frame.width
         cellManager.rightPrototype?.bounds.size.width = tableView.frame.width
@@ -527,6 +542,14 @@ extension ConvoScene: ConvoSceneWorkerOutput {
             typingStatus.removeValue(forKey: personID)
         }
     }
+    
+    func workerDidChangePresence(_ presence: Presence) {
+        let date = NSDate(timeIntervalSince1970: presence.activeOn)
+        let dateText = date.timeAgoSinceNow() ?? ""
+        titleView.activeLabel.text = "active \(dateText)".lowercased()
+        titleView.setNeedsLayout()
+        titleView.layoutIfNeeded()
+    }
 }
 
 extension ConvoScene: ConvoSceneInteraction {
@@ -534,6 +557,7 @@ extension ConvoScene: ConvoSceneInteraction {
     func didTapBack() {
         worker.unlisteOnRecentMessage()
         worker.unlistenOnTypingStatus()
+        worker.unlistenOnPresence()
         let _ = waypoint.exit()
     }
     

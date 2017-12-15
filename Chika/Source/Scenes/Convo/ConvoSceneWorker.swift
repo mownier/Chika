@@ -6,15 +6,19 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import FirebaseAuth
+
 protocol ConvoSceneWorker: class {
 
     func fetchNewMessages() -> Bool
     func fetchNextMessages() -> Bool
     func sendMessage(_ content: String) -> Bool
+    func listenOnPresence()
     func listenOnRecentMessage()
     func listenOnTypingStatus()
     func unlistenOnTypingStatus()
     func unlisteOnRecentMessage()
+    func unlistenOnPresence()
     func changeTypingStatus(_ status: Bool)
 }
 
@@ -27,6 +31,7 @@ protocol ConvoSceneWorkerOutput: class {
     func workerDidSendWithError(_ error: Error)
     func workerDidUpdateConvo(message: Message)
     func workerDidUpdateTypingStatus(for personID: String, isTyping: Bool)
+    func workerDidChangePresence(_ presence: Presence)
 }
 
 extension ConvoScene {
@@ -37,6 +42,7 @@ extension ConvoScene {
             
             var recentMessage: RecentMessageRemoteListener
             var typingStatus: TypingStatusRemoteListener
+            var presence: PresenceRemoteListener
         }
         
         enum Fetch {
@@ -48,6 +54,7 @@ extension ConvoScene {
         var service: ChatRemoteService
         var writer: TypingStatusRemoteWriter
         var listener: Listener
+        var meID: String
         var chatID: String
         var participantIDs: [String]
         var offset: Double?
@@ -56,7 +63,8 @@ extension ConvoScene {
         var isTyping: Bool
         var isChangingTypingStatus: Bool
         
-        init(chatID: String, participantIDs: [String], service: ChatRemoteService, listener: Listener, writer: TypingStatusRemoteWriter, limit: UInt) {
+        init(meID: String, chatID: String, participantIDs: [String], service: ChatRemoteService, listener: Listener, writer: TypingStatusRemoteWriter, limit: UInt) {
+            self.meID = meID
             self.chatID = chatID
             self.participantIDs = participantIDs
             self.service = service
@@ -73,10 +81,12 @@ extension ConvoScene {
             let service = ChatRemoteServiceProvider()
             let recentMessage = RecentMessageRemoteListenerProvider()
             let typingStatus = TypingStatusRemoteListenerProvider()
-            let listener = Listener(recentMessage: recentMessage, typingStatus: typingStatus)
+            let presence = PresenceRemoteListenerProvider()
+            let listener = Listener(recentMessage: recentMessage, typingStatus: typingStatus, presence: presence)
             let writer = TypingStatusRemoteWriterProvider()
             let limit: UInt = 50
-            self.init(chatID: chatID, participantIDs: participantIDs, service: service, listener: listener, writer: writer, limit: limit)
+            let meID = Auth.auth().currentUser?.uid ?? ""
+            self.init(meID: meID, chatID: chatID, participantIDs: participantIDs, service: service, listener: listener, writer: writer, limit: limit)
         }
         
         func listenOnTypingStatus() {
@@ -113,6 +123,20 @@ extension ConvoScene {
             }
             
             let _ = listener.recentMessage.unlisten(for: chatID)
+        }
+        
+        func listenOnPresence() {
+            guard participantIDs.count == 2, let personID = participantIDs.filter({ $0 != meID }).first else {
+                return
+            }
+            
+            let _ = listener.presence.listen(personID: personID) { [weak self] presence in
+                self?.output?.workerDidChangePresence(presence)
+            }
+        }
+        
+        func unlistenOnPresence() {
+            let _ = listener.presence.unlistenAll()
         }
         
         func changeTypingStatus(_ status: Bool) {

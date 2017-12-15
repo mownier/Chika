@@ -45,6 +45,11 @@ protocol ConvoSceneTheme: class {
     
     var typingStatusTextColor: UIColor { get }
     var typingStatusFont: UIFont? { get }
+    
+    var titleNameTextColor: UIColor { get }
+    var titleNameFont: UIFont? { get }
+    var titleActiveTextColor: UIColor { get }
+    var titleActiveFont: UIFont? { get }
 }
 
 extension ConvoScene {
@@ -86,5 +91,10 @@ extension ConvoScene {
         
         var typingStatusTextColor: UIColor = .gray
         var typingStatusFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 14.0)
+        
+        var titleNameTextColor: UIColor = .black
+        var titleNameFont: UIFont? = UIFont(name: "AvenirNext-Bold", size: 16.0)
+        var titleActiveTextColor: UIColor = .black
+        var titleActiveFont: UIFont? = UIFont(name: "AvenirNext-Regular", size: 12.0)
     }
 }
