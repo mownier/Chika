@@ -158,7 +158,6 @@
 		488730DC1FC2C225001F9876 /* InboxSceneCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DB1FC2C225001F9876 /* InboxSceneCellTests.swift */; };
 		488730DE1FC2C7B8001F9876 /* PersonRemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DD1FC2C7B8001F9876 /* PersonRemoteService.swift */; };
 		488730E01FC2CD89001F9876 /* PersonRemoteServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */; };
-		488730E21FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */; };
 		488730E41FC2CF96001F9876 /* FirebaseDatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */; };
 		48876CF41FD68B16005E5EB7 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48876CF31FD68B16005E5EB7 /* EmailValidator.swift */; };
 		48888ACA1FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48888AC91FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift */; };
@@ -444,7 +443,6 @@
 		488730DB1FC2C225001F9876 /* InboxSceneCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxSceneCellTests.swift; sourceTree = "<group>"; };
 		488730DD1FC2C7B8001F9876 /* PersonRemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteService.swift; sourceTree = "<group>"; };
 		488730DF1FC2CD89001F9876 /* PersonRemoteServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceMock.swift; sourceTree = "<group>"; };
-		488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteServiceProviderTests.swift; sourceTree = "<group>"; };
 		488730E31FC2CF96001F9876 /* FirebaseDatabaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseMock.swift; sourceTree = "<group>"; };
 		48876CF31FD68B16005E5EB7 /* EmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		48888AC91FDAD7AE0018E1AA /* ProfileSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSceneCellFactory.swift; sourceTree = "<group>"; };
@@ -1105,7 +1103,6 @@
 			isa = PBXGroup;
 			children = (
 				48B4D0221FBAE88E008C78F6 /* AuthRemoteServiceProviderTests.swift */,
-				488730E11FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift */,
 				487766EE1FC68CE0008E865F /* ChatsRemoteServiceProviderTests.swift */,
 			);
 			path = Remote;
@@ -1798,7 +1795,6 @@
 				48920EED1FBFE3A2008F090F /* UINavigationControllerFactoryTests.swift in Sources */,
 				48BFF7741FC47A2B00BAE311 /* RecentMessageRemoteQueryProviderTests.swift in Sources */,
 				489FE1E31FC066820062E1AB /* RegisterSceneWorkerMock.swift in Sources */,
-				488730E21FC2CF40001F9876 /* PersonRemoteServiceProviderTests.swift in Sources */,
 				489DA1901FBD7BB600918AD9 /* ViewMock.swift in Sources */,
 				48920EE61FBFDCE0008F090F /* SignInSceneExitWaypointTests.swift in Sources */,
 				489FE1ED1FC071570062E1AB /* InitialSceneRootWaypointTests.swift in Sources */,
