@@ -60,6 +60,7 @@ extension InboxScene {
         }
         
         func fetchInbox() {
+            let meID = self.meID
             service.getInbox(for: meID) { [weak self] result in
                 switch result {
                 case .err(let info):
@@ -83,6 +84,10 @@ extension InboxScene {
             }
             
             for participant in chat!.participants {
+                guard participant.id != meID else {
+                    continue
+                }
+                
                 let _ = listener.presence.listen(personID: participant.id) { [weak self] isActive in
                     self?.output?.workerDidChangeActiveStatus(for: participant.id, isActive: isActive)
                 }
