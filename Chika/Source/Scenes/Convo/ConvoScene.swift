@@ -512,7 +512,10 @@ extension ConvoScene: ConvoSceneWorkerOutput {
             tableView.beginUpdates()
             tableView.insertRows(at: [row], with: .none)
             tableView.endUpdates()
-            newMessageCount += 1
+            
+            if tableView.contentSize.height + tableView.contentInset.bottom + tableView.contentInset.top > tableView.bounds.height {
+                newMessageCount += 1
+            }
         }
     }
     
