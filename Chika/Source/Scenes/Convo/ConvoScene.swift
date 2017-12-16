@@ -14,6 +14,7 @@ import FirebaseAuth
     func didTapBack()
     func didTapSend()
     func didTapNewMessageCount()
+    func didTapSetting()
 }
 
 class ConvoScene: UIViewController {
@@ -138,6 +139,7 @@ class ConvoScene: UIViewController {
         self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint, chat: chat, cellManager: cellManager, data: data, setup: setup)
         waypoint.scene = self
         worker.output = self
+        flow.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -159,6 +161,7 @@ class ConvoScene: UIViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 0
         tableView.rowHeight = 0
+        tableView.contentInsetAdjustmentBehavior = .never
         
         tableView.register(ConvoSceneTypingView.self, forCellReuseIdentifier: "TypingView")
         
@@ -209,6 +212,9 @@ class ConvoScene: UIViewController {
         
         let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back"), style: .plain, target: self, action: #selector(self.didTapBack))
         navigationItem.leftBarButtonItem = back
+        
+        let setting = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.didTapSetting))
+        navigationItem.rightBarButtonItem = setting
         
         titleView.nameLabel.text = chat.title
         navigationItem.titleView = titleView
@@ -591,6 +597,10 @@ extension ConvoScene: ConvoSceneInteraction {
     
     func didTapNewMessageCount() {
         scrollToBottom()
+    }
+    
+    func didTapSetting() {
+        let _ = flow.goToChatSetting(withChat: chat)
     }
 }
 
