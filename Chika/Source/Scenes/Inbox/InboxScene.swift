@@ -109,6 +109,13 @@ class InboxScene: UITableViewController {
         data.updateMessageCount(for: item)
         tableView.reloadRows(at: [indexPath], with: .none)
         currentItem = item
+        updateBadge()
+    }
+    
+    func updateBadge() {
+        let count = data.unreadChatCount
+        tabBarItem.badgeColor = theme.badgeBGColor
+        tabBarItem.badgeValue = count == 0 ? nil : "\(count)"
     }
 }
 
@@ -133,7 +140,10 @@ extension InboxScene: InboxSceneWorkerOutput {
     }
     
     func workerDidReceiveRecentChat(_ chat: Chat) {
-        data.update(chat)
+        let updateResult = data.update(chat)
+        if !updateResult.isYours {
+            updateBadge()
+        }
         tableView.reloadData()
         
         worker.listenOnActiveStatus(for: chat)
