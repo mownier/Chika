@@ -9,13 +9,28 @@
 import Foundation
 import FirebaseAuth
 
+enum InboxSceneDataUpdateResult {
+    
+    case new(Bool)
+    case existing(Bool)
+    
+    var isYours: Bool {
+        switch self {
+        case .new(let isYours),
+             .existing(let isYours):
+            return isYours
+        }
+    }
+}
+
 protocol InboxSceneData: class {
 
     var itemCount: Int { get }
+    var unreadChatCount: Int { get }
     
     func item(at index: Int) -> InboxSceneItem?
     func append(list: [Chat])
-    func update(_ chat: Chat)
+    func update(_ chat: Chat) -> InboxSceneDataUpdateResult
     func updateMessageCount(for item: InboxSceneItem)
     func updateActiveStatus(for participantID: String, isActive: Bool) -> [Int]
     func updateTypingStatus(for chatID: String, participantID: String, isTyping: Bool) -> Int?
@@ -31,6 +46,14 @@ extension InboxScene {
         
         var itemCount: Int {
             return items.count
+        }
+        
+        var unreadChatCount: Int {
+            return items.reduce(into: 0) { result, item in
+                if item.unreadMessageCount > 0 {
+                    result += 1
+                }
+            }
         }
         
         init(meID: String = Auth.auth().currentUser?.uid ?? "") {
@@ -54,14 +77,14 @@ extension InboxScene {
             items.removeAll()
         }
         
-        func update(_ newChat: Chat) {
+        func update(_ newChat: Chat) -> InboxSceneDataUpdateResult {
             guard let index = items.index(where: { $0.chat.id == newChat.id }) else {
                 var item = InboxSceneItem(chat: newChat)
                 if !meID.isEmpty, !newChat.recent.author.id.isEmpty, newChat.recent.author.id != meID {
                     item.unreadMessageCount += 1
                 }
                 items.insert(item, at: 0)
-                return
+                return .new(!meID.isEmpty && meID == newChat.recent.author.id)
             }
             
             items[index].chat = newChat
@@ -69,6 +92,7 @@ extension InboxScene {
                 items[index].unreadMessageCount += 1
             }
             items.sort(by: { $0.chat.recent.date.timeIntervalSince1970 > $1.chat.recent.date.timeIntervalSince1970 })
+            return .existing(!meID.isEmpty && meID == newChat.recent.author.id)
         }
         
         func updateMessageCount(for item: InboxSceneItem) {
