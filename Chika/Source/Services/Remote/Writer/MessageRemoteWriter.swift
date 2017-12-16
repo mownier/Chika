@@ -48,7 +48,7 @@ class MessageRemoteWriterProvider: MessageRemoteWriter {
         let createdOn = ServerValue.timestamp()
         let message: [String: Any] = [
             "id": key,
-            "content": content,
+            "content": content.trimmingCharacters(in: .newlines),
             "author": meID,
             "created_on": createdOn
         ]
