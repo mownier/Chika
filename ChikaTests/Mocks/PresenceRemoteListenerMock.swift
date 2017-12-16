@@ -21,4 +21,8 @@ class PresenceRemoteListenerMock: PresenceRemoteListener {
     func unlistenAll() -> Bool {
         return true
     }
+    
+    func listen(personID: String, callback: @escaping (Presence) -> Void) -> Bool {
+        return true
+    }
 }
