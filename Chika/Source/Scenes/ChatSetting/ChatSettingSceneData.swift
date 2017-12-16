@@ -18,12 +18,14 @@ protocol ChatSettingSceneData: class {
     func item(in section: Int, at row: Int) -> ChatSettingSceneItem?
     func itemCount(in section: Int) -> Int
     func headerTitle(in section: Int) -> String?
+    func toggleShowAction() -> (ChatSettingSceneMemberItem.ShowState, [Int])
 }
 
 extension ChatSettingScene {
     
     class Data: ChatSettingSceneData {
     
+        var participantShownLimit: UInt
         var meID: String
         var chat: Chat
         var sections: [[ChatSettingSceneItem]]
@@ -35,14 +37,24 @@ extension ChatSettingScene {
             return ChatSettingSceneHeaderItem(creatorName: creatorName, title: chat.title, avatar: "")
         }
     
-        init(meID: String = Auth.auth().currentUser?.uid ?? "", chat: Chat) {
+        init(meID: String = Auth.auth().currentUser?.uid ?? "", chat: Chat, participantShownLimit: UInt) {
+            self.participantShownLimit = participantShownLimit
             self.meID = meID
             self.chat = chat
             self.sections = []
             var members: [ChatSettingSceneItem] = chat.participants.filter({ !meID.isEmpty && $0.id != meID }).map({ ChatSettingSceneMemberItem(participant: $0) })
-            var addAction = ChatSettingSceneMemberItem(participant: Person())
-            addAction.isAddAction = true
-            members.insert(addAction, at: 0)
+            
+            if members.count > participantShownLimit {
+                members = Array(members.prefix(Int(participantShownLimit)))
+                
+                var actionShowItem = ChatSettingSceneMemberItem(participant: Person())
+                actionShowItem.action = .showMore
+                members.append(actionShowItem)
+            }
+            
+            var actionAddItem = ChatSettingSceneMemberItem(participant: Person())
+            actionAddItem.action = .add
+            members.insert(actionAddItem, at: 0)
             let options: [ChatSettingSceneItem] = [ ChatSettingSceneOptionItem(label: "Leave") ]
             self.sections.append(members)
             self.sections.append(options)
@@ -79,6 +91,34 @@ extension ChatSettingScene {
             case 1: return "OPTIONS"
             default: return nil
             }
+        }
+        
+        func toggleShowAction() -> (ChatSettingSceneMemberItem.ShowState, [Int]) {
+            guard let index = sections[0].index(where: { ($0 is ChatSettingSceneMemberItem) && ($0 as! ChatSettingSceneMemberItem).action == .showMore || ($0 as! ChatSettingSceneMemberItem ).action == .showLess }) else {
+                return (.none, [])
+            }
+            
+            var item = sections[0][index] as! ChatSettingSceneMemberItem
+            let currentAction = item.action
+            item.action = item.action == .showLess ? .showMore : .showLess
+            sections[0][index] = item
+            
+            let limit = Int(participantShownLimit)
+            let indices: [Int]
+            
+            if currentAction == .showMore {
+                var members: [ChatSettingSceneItem] = chat.participants.filter({ !meID.isEmpty && $0.id != meID }).map({ ChatSettingSceneMemberItem(participant: $0) })
+                members = Array(members.suffix(from: limit))
+                sections[0].insert(contentsOf: members, at: limit + 1)
+                indices = [Int](limit+1...sections[0].count-2)
+                
+            } else {
+                let count = sections[0].count
+                indices = [Int](limit+1...count-2)
+                sections[0].removeSubrange(limit+1...count-2)
+            }
+
+            return (currentAction == .showLess ? .less : .more, indices)
         }
     }
 }

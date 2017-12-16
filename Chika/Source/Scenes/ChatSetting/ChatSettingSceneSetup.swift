@@ -13,7 +13,6 @@ protocol ChatSettingSceneSetup: class {
     func formatTitle(in navigationItem: UINavigationItem)
     func format(cell: UITableViewCell, item: ChatSettingSceneItem?) -> Bool
     func formatHeaderView(_ view: ChatSettingSceneHeaderView, for item: ChatSettingSceneHeaderItem) -> Bool
-    func headerHeight(title: String?) -> CGFloat
 }
 
 extension ChatSettingScene {
@@ -34,19 +33,32 @@ extension ChatSettingScene {
             var ok = false
             
             if let cell = cell as? ChatSettingSceneMemberCell, let item = item as? ChatSettingSceneMemberItem {
-                if item.isAddAction {
-                    cell.nameLabel.text = "Add people"
-                    cell.avatar.image = #imageLiteral(resourceName: "chat_add_people")
-                    cell.onlineStatusView.isHidden = true
-                    cell.avatar.backgroundColor = theme.avatarBGColor.withAlphaComponent(0)
-                    cell.selectionStyle = .gray
-                    
-                } else {
-                    cell.nameLabel.text = item.participant.displayName
+                cell.nameLabel.text = item.text
+                
+                switch item.action {
+                case .none:
                     cell.onlineStatusView.isHidden = !item.isActive
                     cell.avatar.image = nil
                     cell.avatar.backgroundColor = theme.avatarBGColor
                     cell.selectionStyle = .none
+                    
+                case .add:
+                    cell.avatar.image = #imageLiteral(resourceName: "chat_add_people")
+                    cell.onlineStatusView.isHidden = true
+                    cell.avatar.backgroundColor = theme.avatarBGColor.withAlphaComponent(0)
+                    cell.selectionStyle = .gray
+                
+                case .showMore:
+                    cell.avatar.image = #imageLiteral(resourceName: "chat_show_more")
+                    cell.onlineStatusView.isHidden = true
+                    cell.avatar.backgroundColor = theme.avatarBGColor.withAlphaComponent(0)
+                    cell.selectionStyle = .gray
+                
+                case .showLess:
+                    cell.avatar.image = #imageLiteral(resourceName: "chat_show_less")
+                    cell.onlineStatusView.isHidden = true
+                    cell.avatar.backgroundColor = theme.avatarBGColor.withAlphaComponent(0)
+                    cell.selectionStyle = .gray
                 }
                 
                 ok = true
@@ -55,6 +67,14 @@ extension ChatSettingScene {
                 if let item = item as? ChatSettingSceneOptionItem {
                     cell.textLabel?.text = item.label
                     cell.accessoryType = item.isDisclosureEnabled ? .disclosureIndicator : .none
+                    
+                    switch item.label.lowercased() {
+                    case "leave":
+                        cell.textLabel?.textColor = theme.destructiveTextColor
+                    
+                    default:
+                        cell.textLabel?.textColor = theme.contactNameTextColor
+                    }
                     
                 } else {
                     cell.textLabel?.text = ""
@@ -66,14 +86,6 @@ extension ChatSettingScene {
             cell.layoutIfNeeded()
             
             return ok
-        }
-        
-        func headerHeight(title: String?) -> CGFloat {
-            guard let title = title, !title.isEmpty else {
-                return 0
-            }
-            
-            return 24
         }
         
         func formatHeaderView(_ view: ChatSettingSceneHeaderView, for item: ChatSettingSceneHeaderItem) -> Bool {

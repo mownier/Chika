@@ -12,14 +12,32 @@ protocol ChatSettingSceneItem {
 
 struct ChatSettingSceneMemberItem: ChatSettingSceneItem {
     
-    var isAddAction: Bool
+    enum Action {
+        
+        case none, add, showLess, showMore
+    }
+    
+    enum ShowState {
+        
+        case none, less, more
+    }
+    
+    var action: Action
     var participant: Person
     var isActive: Bool
+    var text: String {
+        switch action {
+        case .none: return participant.displayName
+        case .add: return "Add People"
+        case .showLess: return "Show less"
+        case .showMore: return "Show more"
+        }
+    }
     
     init(participant: Person, isActive: Bool = false) {
         self.participant = participant
         self.isActive = isActive
-        self.isAddAction = false
+        self.action = .none
     }
 }
 

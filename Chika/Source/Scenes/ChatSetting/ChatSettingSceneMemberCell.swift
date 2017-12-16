@@ -61,7 +61,7 @@ class ChatSettingSceneMemberCell: UITableViewCell {
         rect.size.width = 40
         rect.size.height = rect.width
         rect.origin.x = spacing * 2
-        rect.origin.y = spacing
+        rect.origin.y = (bounds.height - rect.height) / 2
         avatar.frame = rect
         avatar.layer.cornerRadius = rect.width / 2
         

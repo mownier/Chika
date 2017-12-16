@@ -11,6 +11,7 @@ import UIKit
 protocol ChatSettingSceneEntryWaypoint: class {
     
     func withChat(_ chat: Chat) -> AppEntryWaypoint
+    func withParticipantShownLimit(_ limit: UInt) -> ChatSettingSceneEntryWaypoint
 }
 
 extension ChatSettingScene {
@@ -24,10 +25,12 @@ extension ChatSettingScene {
         
         var factory: Factory
         var chat: Chat
+        var limit: UInt
         
         init(factory: Factory) {
             self.factory = factory
             self.chat = Chat()
+            self.limit = 4
         }
         
         convenience init() {
@@ -41,13 +44,18 @@ extension ChatSettingScene {
                 return false
             }
             
-            let scene = factory.scene.build(withChat: chat)
+            let scene = factory.scene.build(withChat: chat, participantShownLimit: limit)
             nav.pushViewController(scene, animated: true)
             return true
         }
         
         func withChat(_ aChat: Chat) -> AppEntryWaypoint {
             chat = aChat
+            return self
+        }
+        
+        func withParticipantShownLimit(_ aLimit: UInt) -> ChatSettingSceneEntryWaypoint {
+            limit = aLimit
             return self
         }
     }

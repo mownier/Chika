@@ -28,6 +28,8 @@ protocol ChatSettingSceneTheme: class {
     var tableHeaderTitleFont: UIFont? { get }
     var tableHeaderCreatorTextColor: UIColor { get }
     var tableHeaderCreatorFont: UIFont? { get }
+    
+    var destructiveTextColor: UIColor { get }
 }
 
 extension ChatSettingScene {
@@ -52,5 +54,7 @@ extension ChatSettingScene {
         var tableHeaderTitleFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 20.0)
         var tableHeaderCreatorTextColor: UIColor = .gray
         var tableHeaderCreatorFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 16.0)
+        
+        var destructiveTextColor: UIColor = UIColor(red: 255 / 255, green: 59 / 255, blue: 48 / 255, alpha: 1.0)
     }
 }

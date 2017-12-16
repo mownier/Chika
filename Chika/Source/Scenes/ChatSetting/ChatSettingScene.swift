@@ -53,9 +53,9 @@ class ChatSettingScene: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience init(chat: Chat) {
+    convenience init(chat: Chat, participantShownLimit limit: UInt) {
         let theme = Theme()
-        let data = Data(chat: chat)
+        let data = Data(chat: chat, participantShownLimit: limit)
         let worker = Worker()
         let flow = Flow()
         let setup = Setup(theme: theme)
@@ -68,7 +68,7 @@ class ChatSettingScene: UIViewController {
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
-        self.init(chat: Chat())
+        self.init(chat: Chat(), participantShownLimit: 4)
     }
     
     override func loadView() {
@@ -88,7 +88,7 @@ class ChatSettingScene: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 0
-        tableView.rowHeight = 59
+        tableView.rowHeight = 52
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = theme.bgColor
@@ -151,7 +151,15 @@ extension ChatSettingScene: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return setup.headerHeight(title: data.headerTitle(in: section))
+        return 24
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 24 : 0
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return section == 0 ? UIView() : nil
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -170,11 +178,43 @@ extension ChatSettingScene: UITableViewDelegate {
         
         guard let item = data.item(in: section, at: row),
             (item is ChatSettingSceneOptionItem) ||
-                (item is ChatSettingSceneMemberItem && (item as! ChatSettingSceneMemberItem).isAddAction) else {
+                (item is ChatSettingSceneMemberItem && (item as! ChatSettingSceneMemberItem).action != .none) else {
                     return
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let memberItem = item as? ChatSettingSceneMemberItem,
+            memberItem.action == .showMore ||
+                memberItem.action == .showLess else {
+                    return
+        }
+        
+        let (showState, indices) = data.toggleShowAction()
+        let indexPaths: [IndexPath] = indices.map({ IndexPath(row: $0, section: 0) })
+        let newCount = data.itemCount(in: 0)
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            if newCount > 0 {
+                tableView.reloadRows(at: [IndexPath(row: newCount - 1, section: 0)], with: .fade)
+            }
+        }
+        tableView.beginUpdates()
+        
+        switch showState {
+        case .less:
+            tableView.deleteRows(at: indexPaths, with: .top)
+
+        case .more:
+            tableView.insertRows(at: indexPaths, with: .bottom)
+
+        case .none:
+            break
+        }
+        
+        tableView.endUpdates()
+        CATransaction.commit()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
