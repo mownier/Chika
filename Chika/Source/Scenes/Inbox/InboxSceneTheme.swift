@@ -26,6 +26,8 @@ protocol InboxSceneTheme: class {
     var onlineStatusColor: UIColor { get }
     
     var stripColor: UIColor { get }
+    
+    var badgeBGColor: UIColor { get }
 }
 
 extension InboxScene {
@@ -48,5 +50,7 @@ extension InboxScene {
         var onlineStatusColor: UIColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1.0)
         
         var stripColor: UIColor = UIColor.gray.withAlphaComponent(0.25)
+        
+        var badgeBGColor: UIColor = UIColor(red: 255 / 255, green: 45 / 255, blue: 85 / 255, alpha: 1.0)
     }
 }
