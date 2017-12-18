@@ -131,6 +131,7 @@ extension InboxScene: InboxSceneWorkerOutput {
         for chat in chats {
             worker.listenOnTypingStatus(for: chat)
             worker.listenOnActiveStatus(for: chat)
+            worker.listenOnTitleUpdate(for: chat)
         }
     }
     
@@ -148,6 +149,7 @@ extension InboxScene: InboxSceneWorkerOutput {
         
         worker.listenOnActiveStatus(for: chat)
         worker.listenOnTypingStatus(for: chat)
+        worker.listenOnTitleUpdate(for: chat)
     }
     
     func workerDidChangeActiveStatus(for participantID: String, isActive: Bool) {
@@ -157,6 +159,11 @@ extension InboxScene: InboxSceneWorkerOutput {
     
     func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool) {
         let _ = data.updateTypingStatus(for: chatID, participantID: participantID, isTyping: isTyping)
+        tableView.reloadData()
+    }
+    
+    func workerDidUpdateTitle(for chatID: String, title: String) {
+        let _ = data.updateTitle(for: chatID, title: title)
         tableView.reloadData()
     }
 }

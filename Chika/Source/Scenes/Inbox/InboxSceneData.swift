@@ -34,6 +34,7 @@ protocol InboxSceneData: class {
     func updateMessageCount(for item: InboxSceneItem)
     func updateActiveStatus(for participantID: String, isActive: Bool) -> [Int]
     func updateTypingStatus(for chatID: String, participantID: String, isTyping: Bool) -> Int?
+    func updateTitle(for chatID: String, title: String) -> Int?
     func removeAll()
 }
 
@@ -167,6 +168,15 @@ extension InboxScene {
             }
             
             items[index].typingText = "\(personText) \(typingText)"
+            return index
+        }
+        
+        func updateTitle(for chatID: String, title: String) -> Int? {
+            guard let index = items.index(where: { $0.chat.id == chatID }) else {
+                return nil
+            }
+            
+            items[index].chat.title = title
             return index
         }
     }

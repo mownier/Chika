@@ -13,9 +13,11 @@ protocol InboxSceneWorker: class {
     func listenOnRecentChat()
     func listenOnActiveStatus(for chat: Chat?)
     func listenOnTypingStatus(for chat: Chat?)
+    func listenOnTitleUpdate(for chat: Chat?)
     func unlistenOnRecentChat()
     func unlistenOnActiveStatus(for chat: Chat?)
     func unlistenOnTypingStatus(for chat: Chat?)
+    func unlistenOnTitleUpdate(for chat: Chat?)
     func fetchInbox()
 }
 
@@ -26,6 +28,7 @@ protocol InboxSceneWorkerOutput: class {
     func workerDidReceiveRecentChat(_ chat: Chat)
     func workerDidChangeActiveStatus(for participantID: String, isActive: Bool)
     func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool)
+    func workerDidUpdateTitle(for chatID: String, title: String)
 }
 
 extension InboxScene {
@@ -37,6 +40,7 @@ extension InboxScene {
             var recentChat: RecentChatRemoteListener
             var presence: PresenceRemoteListener
             var typingStatus: TypingStatusRemoteListener
+            var chatUpdate: ChatRemoteListener
         }
         
         weak var output: InboxSceneWorkerOutput?
@@ -55,7 +59,8 @@ extension InboxScene {
             let recentChat = RecentChatRemoteListenerProvider(meID: meID)
             let presence = PresenceRemoteListenerProvider()
             let typingStatus = TypingStatusRemoteListenerProvider()
-            let listener = Listener(recentChat: recentChat, presence: presence, typingStatus: typingStatus)
+            let chatUpdate = ChatRemoteListenerProvider()
+            let listener = Listener(recentChat: recentChat, presence: presence, typingStatus: typingStatus, chatUpdate: chatUpdate)
             self.init(meID: meID, service: service, listener: listener)
         }
         
@@ -104,6 +109,22 @@ extension InboxScene {
             }
         }
         
+        func listenOnTitleUpdate(for chat: Chat?) {
+            guard let chat = chat else {
+                return
+            }
+            
+            let _ = listener.chatUpdate.listenOnTitleUpdate(for: chat.id) { [weak self] result in
+                switch result {
+                case .ok(let (chatID, title)):
+                    self?.output?.workerDidUpdateTitle(for: chatID, title: title)
+                
+                default:
+                    break
+                }
+            }
+        }
+        
         func unlistenOnRecentChat() {
             let _ = listener.recentChat.unlisten()
         }
@@ -124,6 +145,14 @@ extension InboxScene {
             }
             
             let _ = listener.typingStatus.unlisten(for: chat.id)
+        }
+        
+        func unlistenOnTitleUpdate(for chat: Chat?) {
+            guard let chat = chat else {
+                return
+            }
+            
+            let _ = listener.chatUpdate.unlisteOnTitleUpdate(for: chat.id)
         }
     }
 }
