@@ -648,6 +648,7 @@ extension ConvoScene: ChatSettingSceneDelegate {
     
     func chatSettingSceneDidUpdateTitle(_ title: String) {
         titleView.nameLabel.text = title
+        chat.title = title
     }
     
     func chatSettingSceneDidAddParticipant(_ person: Person) {

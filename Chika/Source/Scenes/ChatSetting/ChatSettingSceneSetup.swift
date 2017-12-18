@@ -13,6 +13,7 @@ protocol ChatSettingSceneSetup: class {
     func formatTitle(in navigationItem: UINavigationItem)
     func format(cell: UITableViewCell, item: ChatSettingSceneItem?) -> Bool
     func formatHeaderView(_ view: ChatSettingSceneHeaderView, for item: ChatSettingSceneHeaderItem) -> Bool
+    func formatHeaderView(_ view: ChatSettingSceneHeaderView, withTitle title: String) -> Bool
 }
 
 extension ChatSettingScene {
@@ -89,8 +90,17 @@ extension ChatSettingScene {
         }
         
         func formatHeaderView(_ view: ChatSettingSceneHeaderView, for item: ChatSettingSceneHeaderItem) -> Bool {
-            view.titleInput.text = item.title
+            view.titleLabel.text = item.title
             view.creatorLabel.text = item.creatorName.isEmpty ? "" : "created by \(item.creatorName)"
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            return true
+        }
+        
+        func formatHeaderView(_ view: ChatSettingSceneHeaderView, withTitle title: String) -> Bool {
+            view.titleLabel.text = title
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
             return true
         }
     }

@@ -11,6 +11,9 @@ import UIKit
 @objc protocol ChatSettingSceneInteraction: class {
     
     func didTapBack()
+    func didTapEdit()
+    func didTapEditCancel()
+    func didTapEditOK()
 }
 
 protocol ChatSettingSceneDelegate: class {
@@ -84,6 +87,16 @@ class ChatSettingScene: UIViewController {
         headerView.titleInput.font = theme.tableHeaderTitleFont
         headerView.creatorLabel.textColor = theme.tableHeaderCreatorTextColor
         headerView.creatorLabel.font = theme.tableHeaderCreatorFont
+        headerView.titleLabel.font = theme.tableHeaderTitleFont
+        headerView.titleLabel.textColor = theme.tableHeaderTitleTextColor
+        headerView.titleEditCancelButton.tintColor = theme.destructiveTextColor
+        headerView.titleEditButton.tintColor = theme.tableHeaderTitleTextColor
+        headerView.titleEditOKButton.tintColor = theme.positiveTextColor
+        headerView.titleEditOKButton.addTarget(self, action: #selector(self.didTapEditOK), for: .touchUpInside)
+        headerView.titleEditButton.addTarget(self, action: #selector(self.didTapEdit), for: .touchUpInside)
+        headerView.titleEditCancelButton.addTarget(self, action: #selector(self.didTapEditCancel), for: .touchUpInside)
+        headerView.titleEditButton.addTarget(self, action: #selector(self.didTapEdit), for: .touchUpInside)
+        headerView.isEditing = false
         
         tableView = UITableView()
         tableView.tableFooterView = UIView()
@@ -226,11 +239,7 @@ extension ChatSettingScene: UITableViewDelegate {
 extension ChatSettingScene: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let title = textField.text, !title.isEmpty, title != data.chat.title else {
-            return
-        }
-        
-        worker.updateTitle(of: data.chat.id, title: title)
+        headerView.isEditing = false
     }
 }
 
@@ -239,16 +248,40 @@ extension ChatSettingScene: ChatSettingSceneInteraction {
     func didTapBack() {
         let _ = waypoint.exit()
     }
+    
+    func didTapEdit() {
+        headerView.isEditing = true
+        headerView.titleInput.text = data.chat.title
+    }
+    
+    func didTapEditOK() {
+        headerView.isEditing = false
+        guard let title = headerView.titleInput.text, !title.isEmpty else {
+            return
+        }
+        
+        headerView.titleInput.text = ""
+        let _ = setup.formatHeaderView(headerView, withTitle: title)
+        tableView.tableHeaderView = headerView
+        worker.updateTitle(of: data.chat.id, title: title)
+    }
+    
+    func didTapEditCancel() {
+        headerView.isEditing = false
+    }
 }
 
 extension ChatSettingScene: ChatSettingSceneWorkerOutput {
     
     func workerDidUpdateTitle(_ title: String) {
         data.updateTitle(title)
+        let _ = setup.formatHeaderView(headerView, for: data.headerItem)
+        tableView.tableHeaderView = headerView
         delegate?.chatSettingSceneDidUpdateTitle(title)
     }
     
     func workerDidUpdateTitleWithError(_ error: Error) {
-        headerView.titleInput.text = data.chat.title
+        let _ = setup.formatHeaderView(headerView, withTitle: data.chat.title)
+        tableView.tableHeaderView = headerView
     }
 }
