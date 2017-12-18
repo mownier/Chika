@@ -600,7 +600,7 @@ extension ConvoScene: ConvoSceneInteraction {
     }
     
     func didTapSetting() {
-        let _ = flow.goToChatSetting(withChat: chat)
+        let _ = flow.goToChatSetting(withChat: chat, delegate: self)
     }
 }
 
@@ -608,5 +608,24 @@ extension ConvoScene: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         worker.changeTypingStatus(!textView.text.isEmpty)
+    }
+}
+
+extension ConvoScene: ChatSettingSceneDelegate {
+    
+    func chatSettingSceneDidUpdateTitle(_ title: String) {
+        titleView.nameLabel.text = title
+    }
+    
+    func chatSettingSceneDidAddParticipant(_ person: Person) {
+        
+    }
+    
+    func chatSettingSceneDidRemoveParticipant(_ person: Person) {
+        
+    }
+    
+    func chatSettingSceneDidUpdateAvatar(withURL url: URL) {
+        
     }
 }

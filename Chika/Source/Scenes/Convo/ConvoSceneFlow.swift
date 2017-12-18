@@ -10,7 +10,7 @@ import UIKit
 
 protocol ConvoSceneFlow: class {
 
-    func goToChatSetting(withChat: Chat) -> Bool
+    func goToChatSetting(withChat: Chat, delegate: ChatSettingSceneDelegate?) -> Bool
 }
 
 extension ConvoScene {
@@ -35,12 +35,12 @@ extension ConvoScene {
             self.init(waypoint: waypoint)
         }
         
-        func goToChatSetting(withChat chat: Chat) -> Bool {
+        func goToChatSetting(withChat chat: Chat, delegate: ChatSettingSceneDelegate?) -> Bool {
             guard scene != nil else {
                 return false
             }
             
-            return waypoint.chatSetting.withChat(chat).enter(from: scene!)
+            return waypoint.chatSetting.withDelegate(delegate).withChat(chat).enter(from: scene!)
         }
     }
 }
