@@ -232,6 +232,12 @@ class ConvoScene: UIViewController {
         addKeyboardObserer()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        composerView.contentInput.resignFirstResponder()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
