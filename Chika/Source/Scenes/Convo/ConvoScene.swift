@@ -413,6 +413,9 @@ class ConvoScene: UIViewController {
     var timer: Timer?
     var titleRefreshTimer: Timer?
     var presence: Presence?
+    var lastOffsetY: CGFloat = 0
+    var lastOffsetCapture: TimeInterval = 0
+    var isScrolling: Bool = false
 }
 
 extension ConvoScene: UITableViewDataSource {
@@ -501,6 +504,27 @@ extension ConvoScene: UITableViewDelegate {
         if isAtBottom {
             newMessageCount = 0
         }
+        
+        let endTime = Date().timeIntervalSinceReferenceDate
+        let startTime = lastOffsetCapture
+        let endPoint = scrollView.contentOffset.y
+        let startPoint = lastOffsetY
+        let distance = Double(fabsf(Float(endPoint - startPoint)))
+        let timeDelta = Double(fabsf(Float(endTime - startTime)))
+        let speed = (distance / timeDelta) / 1000
+        if speed > 5.0 {
+            composerView.contentInput.resignFirstResponder()
+        }
+        lastOffsetCapture = endTime
+        lastOffsetY = endPoint
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isScrolling = true
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isScrolling = false
     }
 }
 
@@ -613,6 +637,10 @@ extension ConvoScene: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         worker.changeTypingStatus(!textView.text.isEmpty)
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        return !isScrolling
     }
 }
 
