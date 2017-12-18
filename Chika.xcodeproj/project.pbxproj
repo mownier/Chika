@@ -149,6 +149,7 @@
 		487C4BEA1FE168650066DD41 /* ProfileEditSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BDF1FE168650066DD41 /* ProfileEditSceneWaypoint.swift */; };
 		487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */; };
 		487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */; };
+		487F3EBC1FE77AD3002E35B5 /* ChatRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F3EBB1FE77AD3002E35B5 /* ChatRemoteListener.swift */; };
 		48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */; };
 		48803F351FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */; };
 		48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */; };
@@ -455,6 +456,7 @@
 		487C4BDF1FE168650066DD41 /* ProfileEditSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneWaypoint.swift; sourceTree = "<group>"; };
 		487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneWorker.swift; sourceTree = "<group>"; };
 		487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteWriter.swift; sourceTree = "<group>"; };
+		487F3EBB1FE77AD3002E35B5 /* ChatRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteListener.swift; sourceTree = "<group>"; };
 		48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneTypingView.swift; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 		4886392F1FCBADE6003108A1 /* Listener */ = {
 			isa = PBXGroup;
 			children = (
+				487F3EBB1FE77AD3002E35B5 /* ChatRemoteListener.swift */,
 				483873911FD667E100CAC325 /* ContactRemoteListener.swift */,
 				48819BDE1FDC1E57002148B6 /* ContactRequestRemoteListener.swift */,
 				48B5CEF71FD28E6A000C70FA /* PresenceRemoteListener.swift */,
@@ -1664,6 +1667,7 @@
 				488639331FCBAE99003108A1 /* RecentChatRemoteListener.swift in Sources */,
 				489FE1D01FC05FE30062E1AB /* RegisterSceneFactory.swift in Sources */,
 				487767051FC6AE01008E865F /* ConvoSceneFlow.swift in Sources */,
+				487F3EBC1FE77AD3002E35B5 /* ChatRemoteListener.swift in Sources */,
 				4877BF801FC4610700885C60 /* PersonsRemoteQuery.swift in Sources */,
 				48B5CEF81FD28E6A000C70FA /* PresenceRemoteListener.swift in Sources */,
 				487365751FD84278004DE6C2 /* ContactRemoteWriter.swift in Sources */,
