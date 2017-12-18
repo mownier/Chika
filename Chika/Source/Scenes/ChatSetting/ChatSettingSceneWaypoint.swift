@@ -12,6 +12,7 @@ protocol ChatSettingSceneEntryWaypoint: class {
     
     func withChat(_ chat: Chat) -> AppEntryWaypoint
     func withParticipantShownLimit(_ limit: UInt) -> ChatSettingSceneEntryWaypoint
+    func withDelegate(_ delegate: ChatSettingSceneDelegate?) -> ChatSettingSceneEntryWaypoint
 }
 
 extension ChatSettingScene {
@@ -26,6 +27,7 @@ extension ChatSettingScene {
         var factory: Factory
         var chat: Chat
         var limit: UInt
+        weak var delegate: ChatSettingSceneDelegate?
         
         init(factory: Factory) {
             self.factory = factory
@@ -44,8 +46,9 @@ extension ChatSettingScene {
                 return false
             }
             
-            let scene = factory.scene.build(withChat: chat, participantShownLimit: limit)
+            let scene = factory.scene.build(withChat: chat, participantShownLimit: limit, delegate: delegate)
             nav.pushViewController(scene, animated: true)
+            delegate = nil
             return true
         }
         
@@ -56,6 +59,11 @@ extension ChatSettingScene {
         
         func withParticipantShownLimit(_ aLimit: UInt) -> ChatSettingSceneEntryWaypoint {
             limit = aLimit
+            return self
+        }
+        
+        func withDelegate(_ aDelegate: ChatSettingSceneDelegate?) -> ChatSettingSceneEntryWaypoint {
+            delegate = aDelegate
             return self
         }
     }

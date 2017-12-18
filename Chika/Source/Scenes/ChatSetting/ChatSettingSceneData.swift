@@ -19,6 +19,7 @@ protocol ChatSettingSceneData: class {
     func itemCount(in section: Int) -> Int
     func headerTitle(in section: Int) -> String?
     func toggleShowAction() -> (ChatSettingSceneMemberItem.ShowState, [Int])
+    func updateTitle(_ title: String)
 }
 
 extension ChatSettingScene {
@@ -119,6 +120,10 @@ extension ChatSettingScene {
             }
 
             return (currentAction == .showLess ? .less : .more, indices)
+        }
+        
+        func updateTitle(_ title: String) {
+            chat.title = title
         }
     }
 }

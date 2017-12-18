@@ -80,6 +80,7 @@ class ChatSettingScene: UIViewController {
         headerView.avatar.backgroundColor = theme.avatarBGColor
         headerView.titleInput.tintColor = theme.tableHeaderTitleTextColor
         headerView.titleInput.textColor = theme.tableHeaderTitleTextColor
+        headerView.titleInput.delegate = self
         headerView.titleInput.font = theme.tableHeaderTitleFont
         headerView.creatorLabel.textColor = theme.tableHeaderCreatorTextColor
         headerView.creatorLabel.font = theme.tableHeaderCreatorFont
@@ -222,6 +223,17 @@ extension ChatSettingScene: UITableViewDelegate {
     }
 }
 
+extension ChatSettingScene: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let title = textField.text, !title.isEmpty, title != data.chat.title else {
+            return
+        }
+        
+        worker.updateTitle(of: data.chat.id, title: title)
+    }
+}
+
 extension ChatSettingScene: ChatSettingSceneInteraction {
     
     func didTapBack() {
@@ -231,4 +243,12 @@ extension ChatSettingScene: ChatSettingSceneInteraction {
 
 extension ChatSettingScene: ChatSettingSceneWorkerOutput {
     
+    func workerDidUpdateTitle(_ title: String) {
+        data.updateTitle(title)
+        delegate?.chatSettingSceneDidUpdateTitle(title)
+    }
+    
+    func workerDidUpdateTitleWithError(_ error: Error) {
+        headerView.titleInput.text = data.chat.title
+    }
 }
