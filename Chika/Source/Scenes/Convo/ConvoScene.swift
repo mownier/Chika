@@ -598,7 +598,6 @@ extension ConvoScene: ConvoSceneInteraction {
         worker.changeTypingStatus(false)
         let _ = worker.sendMessage(composerView.contentInput.text)
         composerView.updateContent("")
-        composerView.contentInput.resignFirstResponder()
     }
     
     func didTapNewMessageCount() {
