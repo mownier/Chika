@@ -356,7 +356,7 @@ class ConvoScene: UIViewController {
                     delay: 0,
                     options: UIViewAnimationOptions(rawValue: 7 << 16),
                     animations: {
-                        this.tableView.contentOffset.y += (newBottom - prevBottom)
+                        this.tableView.contentOffset.y += (newBottom - prevBottom - 0.001)
                         this.tableView.contentInset.bottom = newBottom
                         this.tableView.scrollIndicatorInsets.bottom = newBottom
                 }) { _ in }
