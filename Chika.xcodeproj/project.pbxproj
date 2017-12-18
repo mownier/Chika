@@ -150,6 +150,7 @@
 		487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */; };
 		487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */; };
 		487F3EBC1FE77AD3002E35B5 /* ChatRemoteListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F3EBB1FE77AD3002E35B5 /* ChatRemoteListener.swift */; };
+		487F3EBE1FE7A9F9002E35B5 /* ChatRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487F3EBD1FE7A9F9002E35B5 /* ChatRemoteListenerMock.swift */; };
 		48803F331FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */; };
 		48803F351FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */; };
 		48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */; };
@@ -457,6 +458,7 @@
 		487C4BE01FE168650066DD41 /* ProfileEditSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditSceneWorker.swift; sourceTree = "<group>"; };
 		487C4BEC1FE180AC0066DD41 /* PersonRemoteWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRemoteWriter.swift; sourceTree = "<group>"; };
 		487F3EBB1FE77AD3002E35B5 /* ChatRemoteListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteListener.swift; sourceTree = "<group>"; };
+		487F3EBD1FE7A9F9002E35B5 /* ChatRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48803F321FCDBDDA007F56DC /* ChatMessageRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48803F341FCDBE23007F56DC /* RecentChatRemoteListenerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChatRemoteListenerMock.swift; sourceTree = "<group>"; };
 		48814A731FCE596A0006A75D /* ConvoSceneTypingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneTypingView.swift; sourceTree = "<group>"; };
@@ -1212,6 +1214,7 @@
 				489DA18F1FBD7BB600918AD9 /* ViewMock.swift */,
 				486C33D11FE3C795001D56A3 /* PresenceRemoteWriterFactoryMock.swift */,
 				486C33D31FE3C7C8001D56A3 /* PresenceRemoteWriterMock.swift */,
+				487F3EBD1FE7A9F9002E35B5 /* ChatRemoteListenerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1838,6 +1841,7 @@
 				487766EF1FC68CE0008E865F /* ChatsRemoteServiceProviderTests.swift in Sources */,
 				48E0198E1FBD58C9008D94DE /* SignInSceneFlowTests.swift in Sources */,
 				483D0C621FBD736A004BDB3F /* SignInSceneFactoryTests.swift in Sources */,
+				487F3EBE1FE7A9F9002E35B5 /* ChatRemoteListenerMock.swift in Sources */,
 				48D627511FD53C1A0016868E /* TypingStatusRemoteListenerMock.swift in Sources */,
 				483F8FC21FC166D70058CC56 /* AppEntryWaypointMock.swift in Sources */,
 				488730DA1FC2C013001F9876 /* InboxSceneSetupTests.swift in Sources */,

@@ -32,4 +32,8 @@ class InboxSceneWorkerOutputMock: InboxSceneWorkerOutput {
     func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool) {
         
     }
+    
+    func workerDidUpdateTitle(for chatID: String, title: String) {
+        
+    }
 }

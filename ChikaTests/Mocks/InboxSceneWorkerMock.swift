@@ -11,6 +11,15 @@ import UIKit
 
 class InboxSceneWorkerMock: InboxSceneWorker {
     
+    func listenOnTitleUpdate(for chat: Chat?) {
+    
+    }
+    
+    func unlistenOnTitleUpdate(for chat: Chat?) {
+    
+    }
+    
+    
     func listenOnRecentChat() {
         
     }
