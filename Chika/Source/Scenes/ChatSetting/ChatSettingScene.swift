@@ -135,6 +135,12 @@ class ChatSettingScene: UIViewController {
         headerView.bounds = rect
         tableView.tableHeaderView = headerView
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        headerView.titleInput.resignFirstResponder()
+    }
 }
 
 extension ChatSettingScene: UITableViewDataSource {
