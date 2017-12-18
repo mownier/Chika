@@ -198,37 +198,42 @@ extension ChatSettingScene: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let memberItem = item as? ChatSettingSceneMemberItem,
-            memberItem.action == .showMore ||
-                memberItem.action == .showLess else {
-                    return
+        guard let memberItem = item as? ChatSettingSceneMemberItem else {
+            return
         }
         
-        let (showState, indices) = data.toggleShowAction()
-        let indexPaths: [IndexPath] = indices.map({ IndexPath(row: $0, section: 0) })
-        let newCount = data.itemCount(in: 0)
+        if memberItem.action == .add {
+            let _ = flow.goToContactSelector(withDelegate: self)
+            return
+        }
         
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            if newCount > 0 {
-                tableView.reloadRows(at: [IndexPath(row: newCount - 1, section: 0)], with: .fade)
+        if memberItem.action == .showMore || memberItem.action == .showLess {
+            let (showState, indices) = data.toggleShowAction()
+            let indexPaths: [IndexPath] = indices.map({ IndexPath(row: $0, section: 0) })
+            let newCount = data.itemCount(in: 0)
+            
+            CATransaction.begin()
+            CATransaction.setCompletionBlock {
+                if newCount > 0 {
+                    tableView.reloadRows(at: [IndexPath(row: newCount - 1, section: 0)], with: .fade)
+                }
             }
+            tableView.beginUpdates()
+            
+            switch showState {
+            case .less:
+                tableView.deleteRows(at: indexPaths, with: .top)
+                
+            case .more:
+                tableView.insertRows(at: indexPaths, with: .bottom)
+                
+            case .none:
+                break
+            }
+            
+            tableView.endUpdates()
+            CATransaction.commit()
         }
-        tableView.beginUpdates()
-        
-        switch showState {
-        case .less:
-            tableView.deleteRows(at: indexPaths, with: .top)
-
-        case .more:
-            tableView.insertRows(at: indexPaths, with: .bottom)
-
-        case .none:
-            break
-        }
-        
-        tableView.endUpdates()
-        CATransaction.commit()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -283,5 +288,12 @@ extension ChatSettingScene: ChatSettingSceneWorkerOutput {
     func workerDidUpdateTitleWithError(_ error: Error) {
         let _ = setup.formatHeaderView(headerView, withTitle: data.chat.title)
         tableView.tableHeaderView = headerView
+    }
+}
+
+extension ChatSettingScene: ContactSelectorSceneDelegate {
+    
+    func contactSelectorScene(_ scene: ContactSelectorScene, didSelectContacts contacts: [Contact]) {
+        
     }
 }

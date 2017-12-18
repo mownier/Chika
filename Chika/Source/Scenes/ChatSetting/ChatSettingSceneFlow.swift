@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChatSettingSceneFlow: class {
 
+    func goToContactSelector(withDelegate: ContactSelectorSceneDelegate?) -> Bool
 }
 
 extension ChatSettingScene {
@@ -18,6 +19,7 @@ extension ChatSettingScene {
     
         struct Waypoint {
     
+            var contactSelector: ContactSelectorSceneEntryWaypoint
         }
     
         weak var scene: UIViewController?
@@ -28,8 +30,14 @@ extension ChatSettingScene {
         }
     
         convenience init() {
-            let waypoint = Waypoint()
+            let contactSelector = ContactSelectorScene.EntryWaypoint()
+            let waypoint = Waypoint(contactSelector: contactSelector)
             self.init(waypoint: waypoint)
+        }
+        
+        func goToContactSelector(withDelegate delegate: ContactSelectorSceneDelegate?) -> Bool {
+            guard let scene = scene else { return false }
+            return waypoint.contactSelector.withDelegate(delegate).enter(from: scene)
         }
     }
 }
