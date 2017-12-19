@@ -651,8 +651,9 @@ extension ConvoScene: ChatSettingSceneDelegate {
         chat.title = title
     }
     
-    func chatSettingSceneDidAddParticipant(_ person: Person) {
-        
+    func chatSettingSceneDidAddParticipants(_ persons: [Person]) {
+        chat.participants.append(contentsOf: persons)
+        print(persons)
     }
     
     func chatSettingSceneDidRemoveParticipant(_ person: Person) {
