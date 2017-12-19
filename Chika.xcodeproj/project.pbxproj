@@ -21,6 +21,7 @@
 		4806E9751FBD6CEE0020A594 /* HomeSceneFlowMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */; };
 		4806E9791FBD702F0020A594 /* SignInSceneMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E9781FBD702F0020A594 /* SignInSceneMock.swift */; };
 		4806E97B1FBD72010020A594 /* SignInSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */; };
+		480820981FE90109005113C4 /* ContactSelectorSceneEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480820971FE90109005113C4 /* ContactSelectorSceneEmptyView.swift */; };
 		480C5C7C1FE4F12C00F44C8A /* ChatSettingSceneHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480C5C7B1FE4F12C00F44C8A /* ChatSettingSceneHeaderView.swift */; };
 		482FDF031FBFE52F00ABA372 /* InitialSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */; };
 		482FDF051FBFE74F00ABA372 /* InitialUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482FDF041FBFE74F00ABA372 /* InitialUITests.swift */; };
@@ -334,6 +335,7 @@
 		4806E9741FBD6CEE0020A594 /* HomeSceneFlowMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneFlowMock.swift; sourceTree = "<group>"; };
 		4806E9781FBD702F0020A594 /* SignInSceneMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneMock.swift; sourceTree = "<group>"; };
 		4806E97A1FBD72010020A594 /* SignInSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneFactory.swift; sourceTree = "<group>"; };
+		480820971FE90109005113C4 /* ContactSelectorSceneEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSelectorSceneEmptyView.swift; sourceTree = "<group>"; };
 		480C5C7B1FE4F12C00F44C8A /* ChatSettingSceneHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingSceneHeaderView.swift; sourceTree = "<group>"; };
 		482FDF021FBFE52F00ABA372 /* InitialSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneTests.swift; sourceTree = "<group>"; };
 		482FDF041FBFE74F00ABA372 /* InitialUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialUITests.swift; sourceTree = "<group>"; };
@@ -1096,6 +1098,7 @@
 				48A6AB711FE817530068D2BB /* ContactSelectorSceneCell.swift */,
 				48A6AB721FE817530068D2BB /* ContactSelectorSceneCellFactory.swift */,
 				48A6AB731FE817530068D2BB /* ContactSelectorSceneData.swift */,
+				480820971FE90109005113C4 /* ContactSelectorSceneEmptyView.swift */,
 				48A6AB741FE817530068D2BB /* ContactSelectorSceneFactory.swift */,
 				48A6AB751FE817530068D2BB /* ContactSelectorSceneFlow.swift */,
 				48A6AB761FE817530068D2BB /* ContactSelectorSceneItem.swift */,
@@ -1751,6 +1754,7 @@
 				48E0199F1FBD6885008D94DE /* HomeSceneFlow.swift in Sources */,
 				4876E3181FE023DD004664E6 /* PeopleSearchSceneInput.swift in Sources */,
 				48F1BCB21FE26AF20058AD71 /* AboutSceneFactory.swift in Sources */,
+				480820981FE90109005113C4 /* ContactSelectorSceneEmptyView.swift in Sources */,
 				48C55DD01FCE6B1800302DB2 /* TypingStatusRemoteListener.swift in Sources */,
 				4870A2871FE2B69000FB30E7 /* SupportSceneCellFactory.swift in Sources */,
 				4867F8C01FE237F000ADFD39 /* EmailUpdateScene.swift in Sources */,
