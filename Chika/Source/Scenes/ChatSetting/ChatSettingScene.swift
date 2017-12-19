@@ -19,7 +19,7 @@ import UIKit
 protocol ChatSettingSceneDelegate: class {
     
     func chatSettingSceneDidUpdateTitle(_ title: String)
-    func chatSettingSceneDidAddParticipant(_ person: Person)
+    func chatSettingSceneDidAddParticipants(_ persons: [Person])
     func chatSettingSceneDidRemoveParticipant(_ person: Person)
     func chatSettingSceneDidUpdateAvatar(withURL url: URL)
 }
@@ -140,6 +140,15 @@ class ChatSettingScene: UIViewController {
         super.viewWillDisappear(animated)
         
         headerView.titleInput.resignFirstResponder()
+    }
+    
+    func showError(withMessage msg: String) {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -294,12 +303,23 @@ extension ChatSettingScene: ChatSettingSceneWorkerOutput {
     func workerDidUpdateTitleWithError(_ error: Error) {
         let _ = setup.formatHeaderView(headerView, withTitle: data.chat.title)
         tableView.tableHeaderView = headerView
+        showError(withMessage: "\(error)")
+    }
+    
+    func workerDidAddPeople(_ people: [Person]) {
+        let added = data.addParticipants(people)
+        tableView.reloadData()
+        delegate?.chatSettingSceneDidAddParticipants(added)
+    }
+    
+    func worderDidAddPeopleWithError(_ error: Error) {
+        showError(withMessage: "\(error)")
     }
 }
 
 extension ChatSettingScene: ContactSelectorSceneDelegate {
     
     func contactSelectorScene(_ scene: ContactSelectorScene, didSelectContacts contacts: [Contact]) {
-        
+        worker.addPeople(in: data.chat.id, people: contacts)
     }
 }

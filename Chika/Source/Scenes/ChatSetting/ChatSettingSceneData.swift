@@ -20,6 +20,7 @@ protocol ChatSettingSceneData: class {
     func headerTitle(in section: Int) -> String?
     func toggleShowAction() -> (ChatSettingSceneMemberItem.ShowState, [Int])
     func updateTitle(_ title: String)
+    func addParticipants(_ participants: [Person]) -> [Person]
 }
 
 extension ChatSettingScene {
@@ -124,6 +125,41 @@ extension ChatSettingScene {
         
         func updateTitle(_ title: String) {
             chat.title = title
+        }
+        
+        func addParticipants(_ participants: [Person]) -> [Person] {
+            let added = participants.filter({ !chat.participants.contains($0) && !$0.id.isEmpty && $0.id != meID })
+            chat.participants.append(contentsOf: added)
+            
+            let count = sections[0].count
+            if let item = sections[0][count-1] as? ChatSettingSceneMemberItem {
+                switch item.action {
+                case .showLess:
+                    let items: [ChatSettingSceneItem] = added.map({ ChatSettingSceneMemberItem(participant: $0) })
+                    sections[0].insert(contentsOf: items, at: count-1)
+                
+                case .none:
+                    let shownCount = count-1
+                    if shownCount < Int(participantShownLimit) {
+                        for i in 0..<Int(participantShownLimit)-shownCount {
+                            guard i >= 0, i < added.count else { continue }
+                            let item: ChatSettingSceneItem = ChatSettingSceneMemberItem(participant: added[0])
+                            sections[0].insert(item, at: count-1)
+                        }
+                    }
+                    
+                    if shownCount+added.count > participantShownLimit {
+                        var actionShowItem = ChatSettingSceneMemberItem(participant: Person())
+                        actionShowItem.action = .showMore
+                        sections[0].append(actionShowItem)
+                    }
+                
+                default:
+                    break
+                }
+            }
+            
+            return added
         }
     }
 }
