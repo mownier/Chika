@@ -13,6 +13,7 @@ protocol ChatSettingSceneData: class {
     var chat: Chat { get }
     var sectionCount: Int { get }
     var headerItem: ChatSettingSceneHeaderItem { get }
+    var excludedPersons: [Person] { get }
     
     func reuseID(in section: Int, at row: Int) -> String
     func item(in section: Int, at row: Int) -> ChatSettingSceneItem?
@@ -37,6 +38,9 @@ extension ChatSettingScene {
         var headerItem: ChatSettingSceneHeaderItem {
             let creatorName = chat.participants.filter({ $0.id == chat.creator }).first?.displayName ?? ""
             return ChatSettingSceneHeaderItem(creatorName: creatorName, title: chat.title, avatar: "")
+        }
+        var excludedPersons: [Person] {
+            return chat.participants.filter({ !$0.id.isEmpty && $0.id != meID })
         }
     
         init(meID: String = Auth.auth().currentUser?.uid ?? "", chat: Chat, participantShownLimit: UInt) {

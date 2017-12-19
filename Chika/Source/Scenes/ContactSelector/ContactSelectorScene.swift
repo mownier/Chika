@@ -22,6 +22,7 @@ protocol ContactSelectorSceneDelegate: class {
 class ContactSelectorScene: UIViewController {
 
     var tableView: UITableView!
+    var emptyView: ContactSelectorSceneEmptyView!
     
     weak var delegate: ContactSelectorSceneDelegate?
     
@@ -50,9 +51,9 @@ class ContactSelectorScene: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    convenience init() {
+    convenience init(excludedPersons: [Person]) {
         let theme = Theme()
-        let data = Data()
+        let data = Data(excludedPersons: excludedPersons.map({ $0.id }))
         let worker = Worker()
         let flow = Flow()
         let cellFactory = ContactSelectorSceneCell.Factory(theme: theme)
@@ -65,7 +66,7 @@ class ContactSelectorScene: UIViewController {
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
-        self.init()
+        self.init(excludedPersons: [])
     }
     
     override func loadView() {
@@ -83,6 +84,11 @@ class ContactSelectorScene: UIViewController {
         tableView.backgroundColor = theme.bgColor
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
+        
+        emptyView = ContactSelectorSceneEmptyView()
+        emptyView.titleLabel.text = "No contacts to select"
+        emptyView.titleLabel.textColor = theme.emptyTitleTextColor
+        emptyView.titleLabel.font = theme.emptyTitleFont
         
         view.addSubview(tableView)
     }
@@ -112,6 +118,7 @@ class ContactSelectorScene: UIViewController {
         
         rect = view.bounds
         tableView.frame = rect
+        emptyView.frame = tableView.bounds
     }
 }
 
@@ -132,10 +139,12 @@ extension ContactSelectorScene: ContactSelectorSceneWorkerOutput {
     func workerDidFetch(contacts: [Contact]) {
         data.removeAll()
         data.appendContacts(contacts)
+        tableView.backgroundView = data.itemCount == 0 ? emptyView : nil
         tableView.reloadData()
     }
     
     func workerDidFetchWithError(_ error: Error) {
+        tableView.backgroundView = data.itemCount == 0 ? emptyView : nil
         tableView.reloadData()
     }
 }

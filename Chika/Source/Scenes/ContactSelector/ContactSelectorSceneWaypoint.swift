@@ -10,7 +10,8 @@ import UIKit
 
 protocol ContactSelectorSceneEntryWaypoint {
     
-    func withDelegate(_ aDelegate: ContactSelectorSceneDelegate?) -> AppEntryWaypoint
+    func withDelegate(_ aDelegate: ContactSelectorSceneDelegate?) -> ContactSelectorSceneEntryWaypoint
+    func withExcludedPersons(_ persons: [Person]) -> AppEntryWaypoint
 }
 
 extension ContactSelectorScene {
@@ -24,9 +25,11 @@ extension ContactSelectorScene {
         
         var factory: Factory
         weak var delegate: ContactSelectorSceneDelegate?
+        var excludedPersons: [Person]
         
         init(factory: Factory) {
             self.factory = factory
+            self.excludedPersons = []
         }
         
         convenience init() {
@@ -40,15 +43,21 @@ extension ContactSelectorScene {
                 return false
             }
             
-            let scene = factory.scene.build(withDelegate: delegate)
+            let scene = factory.scene.build(withDelegate: delegate, excludedPersons: excludedPersons)
             nav.pushViewController(scene, animated: true)
             delegate = nil
+            excludedPersons.removeAll()
             
             return true
         }
         
-        func withDelegate(_ aDelegate: ContactSelectorSceneDelegate?) -> AppEntryWaypoint {
+        func withDelegate(_ aDelegate: ContactSelectorSceneDelegate?) -> ContactSelectorSceneEntryWaypoint {
             delegate = aDelegate
+            return self
+        }
+        
+        func withExcludedPersons(_ persons: [Person]) -> AppEntryWaypoint {
+            excludedPersons = persons
             return self
         }
     }

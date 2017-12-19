@@ -21,6 +21,7 @@ extension ContactSelectorScene {
     
     class Data: ContactSelectorSceneData {
     
+        var excludedPersons: [String]
         var items: [ContactSelectorSceneItem]
         var itemCount: Int {
             return items.count
@@ -29,8 +30,9 @@ extension ContactSelectorScene {
             return items.filter({ $0.isSelected }).map({ $0.contact })
         }
     
-        init() {
-            items = []
+        init(excludedPersons: [String]) {
+            self.items = []
+            self.excludedPersons = excludedPersons
         }
     
         func item(at row: Int) -> ContactSelectorSceneItem? {
@@ -41,7 +43,8 @@ extension ContactSelectorScene {
         func appendContacts(_ contacts: [Contact]) {
             let diff = contacts.filter { contact -> Bool in
                 return !items.contains(where: { contact.person.id == $0.contact.person.id })
-                }.map({ ContactSelectorSceneItem(contact: $0) })
+                }.map({ ContactSelectorSceneItem(contact: $0) }).filter({ !excludedPersons.contains($0.contact.person.id) })
+            
             items.append(contentsOf: diff)
             items.sort(by: { $0.contact.person.displayName.localizedStandardCompare($1.contact.person.displayName) == .orderedAscending })
         }

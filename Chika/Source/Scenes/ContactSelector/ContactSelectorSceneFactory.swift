@@ -10,15 +10,15 @@ import UIKit
 
 protocol ContactSelectorSceneFactory: class {
 
-    func build(withDelegate delegate: ContactSelectorSceneDelegate?) -> UIViewController
+    func build(withDelegate delegate: ContactSelectorSceneDelegate?, excludedPersons: [Person]) -> UIViewController
 }
 
 extension ContactSelectorScene {
     
     class Factory: ContactSelectorSceneFactory {
     
-        func build(withDelegate delegate: ContactSelectorSceneDelegate?) -> UIViewController {
-            let scene = ContactSelectorScene()
+        func build(withDelegate delegate: ContactSelectorSceneDelegate?, excludedPersons persons: [Person]) -> UIViewController {
+            let scene = ContactSelectorScene(excludedPersons: persons)
             scene.delegate = delegate
             return scene
         }

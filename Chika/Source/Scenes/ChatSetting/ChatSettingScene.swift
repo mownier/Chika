@@ -218,7 +218,7 @@ extension ChatSettingScene: UITableViewDelegate {
         }
         
         if memberItem.action == .add {
-            let _ = flow.goToContactSelector(withDelegate: self)
+            let _ = flow.goToContactSelector(withExcludedPersons: data.excludedPersons, delegate: self)
             return
         }
         
@@ -320,6 +320,7 @@ extension ChatSettingScene: ChatSettingSceneWorkerOutput {
 extension ChatSettingScene: ContactSelectorSceneDelegate {
     
     func contactSelectorScene(_ scene: ContactSelectorScene, didSelectContacts contacts: [Contact]) {
+        guard !contacts.isEmpty else { return }
         worker.addPeople(in: data.chat.id, people: contacts)
     }
 }

@@ -21,6 +21,9 @@ protocol ContactSelectorSceneTheme: class {
     var selectBGColor: UIColor { get }
     var selectTintColor: UIColor { get }
     var selectBorderColor: UIColor { get }
+    
+    var emptyTitleTextColor: UIColor { get }
+    var emptyTitleFont: UIFont? { get }
 }
 
 extension ContactSelectorScene {
@@ -38,5 +41,8 @@ extension ContactSelectorScene {
         var selectBGColor: UIColor = .white
         var selectBorderColor: UIColor = .black
         var selectTintColor: UIColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1.0)
+        
+        var emptyTitleTextColor: UIColor = .black
+        var emptyTitleFont: UIFont? = UIFont(name: "AvenirNext-Medium", size: 16.0)
     }
 }
