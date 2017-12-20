@@ -11,6 +11,7 @@ import UIKit
 protocol ConvoSceneFlow: class {
 
     func goToChatSetting(withChat: Chat, delegate: ChatSettingSceneDelegate?) -> Bool
+    func goToContactChatSetting(withContact: Contact, delegate: ContactChatSettingSceneDelegate?) -> Bool
 }
 
 extension ConvoScene {
@@ -20,6 +21,7 @@ extension ConvoScene {
         struct Waypoint {
             
             var chatSetting: ChatSettingSceneEntryWaypoint
+            var contactChatSetting: ContactChatSettingSceneEntryWaypoint
         }
         
         weak var scene: UIViewController?
@@ -31,7 +33,8 @@ extension ConvoScene {
         
         convenience init() {
             let chatSetting = ChatSettingScene.EntryWaypoint()
-            let waypoint = Waypoint(chatSetting: chatSetting)
+            let contactChatSetting = ContactChatSettingScene.EntryWaypoint()
+            let waypoint = Waypoint(chatSetting: chatSetting, contactChatSetting: contactChatSetting)
             self.init(waypoint: waypoint)
         }
         
@@ -41,6 +44,11 @@ extension ConvoScene {
             }
             
             return waypoint.chatSetting.withDelegate(delegate).withChat(chat).enter(from: scene!)
+        }
+        
+        func goToContactChatSetting(withContact contact: Contact, delegate: ContactChatSettingSceneDelegate?) -> Bool {
+            guard scene != nil else { return false }
+            return waypoint.contactChatSetting.withDelegate(delegate).withContact(contact).enter(from: scene!)
         }
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
-import UIKit
+import FirebaseAuth
 
 protocol ConvoSceneData: class {
     
@@ -16,16 +16,19 @@ protocol ConvoSceneData: class {
     func pushRear(list: [Message])
     func removeAll()
     func update(_ message: Message)
+    func contact(withChat: Chat) -> Contact?
 }
 
 extension ConvoScene {
     
     class Data: ConvoSceneData {
         
+        var meID: String
         var messages: [Message]
         
-        init() {
-            messages = []
+        init(meID: String = Auth.auth().currentUser?.uid ?? "") {
+            self.meID = meID
+            self.messages = []
         }
         
         func messageCount(in section: Int) -> Int {
@@ -60,6 +63,19 @@ extension ConvoScene {
             
             messages[index] = newMessage
             messages.sort(by: { $0.date.timeIntervalSince1970 < $1.date.timeIntervalSince1970 })
+        }
+        
+        func contact(withChat chat: Chat) -> Contact? {
+            guard chat.creator.isEmpty, chat.participants.count == 2,
+                let person = chat.participants.filter({ $0.id != meID }).first else {
+                    return nil
+            }
+    
+            var contact = Contact()
+            contact.chat = chat
+            contact.person = person
+            
+            return contact
         }
     }
 }

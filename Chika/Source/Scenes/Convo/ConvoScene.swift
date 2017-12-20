@@ -629,7 +629,12 @@ extension ConvoScene: ConvoSceneInteraction {
     }
     
     func didTapSetting() {
-        let _ = flow.goToChatSetting(withChat: chat, delegate: self)
+        guard let contact = data.contact(withChat: chat) else {
+            let _ = flow.goToChatSetting(withChat: chat, delegate: self)
+            return
+        }
+        
+        let _ = flow.goToContactChatSetting(withContact: contact, delegate: self)
     }
 }
 
@@ -653,7 +658,6 @@ extension ConvoScene: ChatSettingSceneDelegate {
     
     func chatSettingSceneDidAddParticipants(_ persons: [Person]) {
         chat.participants.append(contentsOf: persons)
-        print(persons)
     }
     
     func chatSettingSceneDidRemoveParticipant(_ person: Person) {
@@ -662,5 +666,13 @@ extension ConvoScene: ChatSettingSceneDelegate {
     
     func chatSettingSceneDidUpdateAvatar(withURL url: URL) {
         
+    }
+}
+
+extension ConvoScene: ContactChatSettingSceneDelegate {
+    
+    func contactChatSettingSceneDidUpdateTitle(_ title: String) {
+        titleView.nameLabel.text = title
+        chat.title = title
     }
 }
