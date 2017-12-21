@@ -61,7 +61,11 @@ extension ChatSettingScene {
             var actionAddItem = ChatSettingSceneMemberItem(participant: Person())
             actionAddItem.action = .add
             members.insert(actionAddItem, at: 0)
-            let options: [ChatSettingSceneItem] = [ ChatSettingSceneOptionItem(label: "Leave") ]
+            var options: [ChatSettingSceneItem] = []
+            if chat.creator == meID {
+                let item = ChatSettingSceneOptionItem(label: "Leave")
+                options.append(item)
+            }
             self.sections.append(members)
             self.sections.append(options)
         }
@@ -94,7 +98,7 @@ extension ChatSettingScene {
         func headerTitle(in section: Int) -> String? {
             switch section {
             case 0: return chat.participants.isEmpty ? nil : "\(chat.participants.count) MEMBERS"
-            case 1: return "OPTIONS"
+            case 1: return sections[1].isEmpty ? nil : "OPTIONS"
             default: return nil
             }
         }

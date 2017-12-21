@@ -180,7 +180,7 @@ extension ChatSettingScene: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 24
+        return data.headerTitle(in: section) == nil ? 0 : 24
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
