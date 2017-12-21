@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol ChatRemoteWriter: class {
     
-    func createGroupChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void)
+    func create(withTitle title: String, message: String, participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void)
     func updateTitle(of chatID: String, title: String, callback: @escaping (RemoteWriterResult<(String, String)>) -> Void)
     func addPeople(in chatID: String, persons: [Person], callback: @escaping (RemoteWriterResult<(String, [Person])>) -> Void)
 }
@@ -96,7 +96,7 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         }
     }
     
-    func createGroupChat(for participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void) {
+    func create(withTitle title: String, message: String, participantIDs: [String], callback: @escaping (RemoteWriterResult<Chat>) -> Void) {
         guard !meID.isEmpty else {
             callback(.err(RemoteWriterError("current user ID is empty")))
             return
@@ -106,7 +106,7 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         personIDs.append(meID)
         personIDs = Array(Set(personIDs))
         
-        guard personIDs.count > 2 else {
+        guard personIDs.count > 1 else {
             callback(.err(RemoteWriterError("not enough participants")))
             return
         }
@@ -114,24 +114,39 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         let chatsQuery = self.chatsQuery
         let rootRef = database.reference()
         let chatsRef = rootRef.child("chats")
-        let key = chatsRef.childByAutoId().key
+        let chatID = chatsRef.childByAutoId().key
         
+        var inboxValues: [String: Any] = [:]
         var participants: [String: Bool] = [:]
         for personID in personIDs {
             participants[personID] = true
+            inboxValues["person:inbox/\(personID)/\(chatID)/updated:on"] = ServerValue.timestamp()
         }
         
         let newChat: [String: Any] = [
             "created_on": ServerValue.timestamp(),
             "updated_on": ServerValue.timestamp(),
-            "id": key,
+            "id": chatID,
             "creator": meID,
-            "participants": participants
+            "participants": participants,
+            "title": title
         ]
         
-        let values: [String: Any] = [
-            "chats/\(key)": newChat
+        var values: [String: Any] = [
+            "chats/\(chatID)": newChat
         ]
+        
+        if !message.isEmpty {
+            let messageID = rootRef.child("messages").childByAutoId().key
+            let message: [String: Any] = [
+                "id": messageID,
+                "content": message.trimmingCharacters(in: .newlines),
+                "author": meID,
+                "created_on": ServerValue.timestamp()
+            ]
+            values["messages/\(messageID)"] = message
+            values["chat:messages/\(chatID)/\(messageID)"] = ServerValue.timestamp()
+        }
         
         rootRef.updateChildValues(values) { error, _ in
             guard error == nil else {
@@ -139,15 +154,17 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
                 return
             }
             
-            chatsQuery.getChats(for: [key]) { chats in
-                let chats = Array(Set(chats.filter({ $0.id == key })))
+            chatsQuery.getChats(for: [chatID]) { chats in
+                let chats = Array(Set(chats.filter({ $0.id == chatID })))
                 
                 guard chats.count == 1 else {
                     callback(.err(RemoteWriterError("chat not created")))
                     return
                 }
-
-                callback(.ok(chats[0]))
+                
+                rootRef.updateChildValues(inboxValues) { _, _ in
+                    callback(.ok(chats[0]))
+                }
             }
         }
     }

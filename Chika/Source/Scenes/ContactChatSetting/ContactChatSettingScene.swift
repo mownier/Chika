@@ -20,6 +20,7 @@ import UIKit
 protocol ContactChatSettingSceneDelegate: class {
     
     func contactChatSettingSceneDidUpdateTitle(_ title: String)
+    func contactChatSettingSceneDidCreatChat(_ chat: Chat)
 }
 
 class ContactChatSettingScene: UIViewController {
@@ -263,7 +264,7 @@ extension ContactChatSettingScene: ContactChatSettingSceneInteraction {
     }
     
     func didTapCreate() {
-        
+        let _ = flow.goToChatCreator(withDefaultParticipants: data.item.contact.chat.participants, minimumOtherParticipantLimit: 2, delegate: self)
     }
 }
 
@@ -281,5 +282,13 @@ extension ContactChatSettingScene: ContactChatSettingSceneWorkerOutput {
         titleLabel.text = data.item.contact.chat.title
         view.setNeedsLayout()
         view.layoutIfNeeded()
+    }
+}
+
+extension ContactChatSettingScene: ChatCreatorSceneDelegate {
+    
+    func chatCreatorSceneDidCreateChat(_ chat: Chat) {
+        delegate?.contactChatSettingSceneDidCreatChat(chat)
+        let _ = waypoint.exit()
     }
 }

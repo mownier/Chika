@@ -10,7 +10,6 @@
 
 class ChatRemoteServiceMock: ChatRemoteService {
 
-
     var isForcedError: Bool = false
     var chats: [Chat] = []
     
@@ -32,4 +31,7 @@ class ChatRemoteServiceMock: ChatRemoteService {
         
     }
     
+    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (ServiceResult<Chat>) -> Void) {
+        
+    }
 }

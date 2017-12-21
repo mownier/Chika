@@ -407,6 +407,32 @@ class ConvoScene: UIViewController {
         titleView.layoutIfNeeded()
     }
     
+    func updateChat(_ aChat: Chat) {
+        data.removeAll()
+        tableView.reloadData()
+        
+        worker.unlistenOnPresence()
+        worker.unlistenOnTypingStatus()
+        worker.unlisteOnRecentMessage()
+        
+        chat = aChat
+        (worker as? Worker)?.output = nil
+        let newWorker = Worker(chatID: chat.id, participantIDs: chat.participants.map({ $0.id }))
+        newWorker.output = self
+        worker = newWorker
+        
+        titleView.activeLabel.text = ""
+        titleView.nameLabel.text = chat.title
+        titleView.setNeedsLayout()
+        titleView.layoutIfNeeded()
+        
+        let _ = worker.fetchNewMessages()
+        
+        worker.listenOnRecentMessage()
+        worker.listenOnTypingStatus()
+        worker.listenOnPresence()
+    }
+    
     var prevOriginY: CGFloat = 0
     var prevBottomOffset: CGFloat = 0
     var prevCountOriginY: CGFloat = 0
@@ -674,5 +700,9 @@ extension ConvoScene: ContactChatSettingSceneDelegate {
     func contactChatSettingSceneDidUpdateTitle(_ title: String) {
         titleView.nameLabel.text = title
         chat.title = title
+    }
+    
+    func contactChatSettingSceneDidCreatChat(_ chat: Chat) {
+        updateChat(chat)
     }
 }

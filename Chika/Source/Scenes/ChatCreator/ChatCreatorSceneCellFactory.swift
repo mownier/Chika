@@ -1,36 +1,36 @@
 //
-//  ContactSelectorSceneCellFactory.swift
+//  ChatCreatorSceneCellFactory.swift
 //  Chika
 //
-//  Created Mounir Ybanez on 12/18/17.
+//  Created Mounir Ybanez on 12/20/17.
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
 import UIKit
 
-protocol ContactSelectorSceneCellFactory: class {
+protocol ChatCreatorSceneCellFactory: class {
     
     var prototype: UITableViewCell? { get }
     
     func build(using: UITableView, reuseID: String) -> UITableViewCell
 }
 
-extension ContactSelectorSceneCell {
+extension ChatCreatorSceneCell {
     
-    class Factory: ContactSelectorSceneCellFactory {
+    class Factory: ChatCreatorSceneCellFactory {
     
         var prototype: UITableViewCell?
-        var theme: ContactSelectorSceneTheme
+        var theme: ChatCreatorSceneTheme
         
-        init(theme: ContactSelectorSceneTheme) {
+        init(theme: ChatCreatorSceneTheme) {
             self.theme = theme
-            self.prototype = ContactSelectorSceneCell()
+            self.prototype = ChatCreatorSceneCell()
         }
         
         func build(using tableView: UITableView, reuseID: String) -> UITableViewCell {
             var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: reuseID)
             if cell == nil {
-                let aCell = ContactSelectorSceneCell(style: .default, reuseIdentifier: reuseID)
+                let aCell =  ChatCreatorSceneCell(style: .default, reuseIdentifier: reuseID)
                 aCell.avatar.backgroundColor = theme.avatarBGColor
                 aCell.nameLabel.textColor = theme.contactNameTextColor
                 aCell.nameLabel.font = theme.contactNameFont

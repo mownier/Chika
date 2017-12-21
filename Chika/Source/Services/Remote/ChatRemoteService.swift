@@ -13,6 +13,7 @@ protocol ChatRemoteService: class {
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void)
     func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (ServiceResult<([Message], Double?)>) -> Void)
     func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (ServiceResult<Message>) -> Void)
+    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (ServiceResult<Chat>) -> Void)
 }
 
 class ChatRemoteServiceProvider: ChatRemoteService {
@@ -20,11 +21,13 @@ class ChatRemoteServiceProvider: ChatRemoteService {
     var inboxQuery: InboxRemoteQuery
     var chatMessagesQuery: ChatMessagesRemoteQuery
     var messageWriter: MessageRemoteWriter
+    var chatWriter: ChatRemoteWriter
     
-    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider(), chatMessagesQuery: ChatMessagesRemoteQuery = ChatMessagesRemoteQueryProvider(), messageWriter: MessageRemoteWriter = MessageRemoteWriterProvider()) {
+    init(inboxQuery: InboxRemoteQuery = InboxRemoteQueryProvider(), chatMessagesQuery: ChatMessagesRemoteQuery = ChatMessagesRemoteQueryProvider(), messageWriter: MessageRemoteWriter = MessageRemoteWriterProvider(), chatWriter: ChatRemoteWriter = ChatRemoteWriterProvider()) {
         self.inboxQuery = inboxQuery
         self.chatMessagesQuery = chatMessagesQuery
         self.messageWriter = messageWriter
+        self.chatWriter = chatWriter
     }
     
     func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void) {
@@ -34,7 +37,7 @@ class ChatRemoteServiceProvider: ChatRemoteService {
                 return
             }
             
-            completion(.ok(chats.reversed()))
+            completion(.ok(chats.sorted(by: { $0.recent.date.timeIntervalSince1970 > $1.recent.date.timeIntervalSince1970 })))
         }
     }
     
@@ -57,6 +60,18 @@ class ChatRemoteServiceProvider: ChatRemoteService {
             
             case .ok(let message):
                 completion(.ok(message))
+            }
+        }
+    }
+    
+    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (ServiceResult<Chat>) -> Void) {
+        chatWriter.create(withTitle: title, message: message, participantIDs: participantIDs) { result in
+            switch result {
+            case .err(let info):
+                completion(.err(info))
+            
+            case .ok(let chat):
+                completion(.ok(chat))
             }
         }
     }
