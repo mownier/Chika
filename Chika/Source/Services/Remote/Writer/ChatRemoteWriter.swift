@@ -49,7 +49,7 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         var inboxValues: [String: Any] = [:]
         for person in persons {
             participantValues["chats/\(chatID)/participants/\(person.id)"] = true
-            inboxValues["person:inbox/\(person.id)/\(chatID)/updated:on"] = ServerValue.timestamp()
+            inboxValues["person:inbox/\(person.id)/\(chatID)/updated_on"] = ServerValue.timestamp()
         }
         rootRef.updateChildValues(participantValues) { error, _ in
             guard error == nil else {
@@ -120,7 +120,7 @@ class ChatRemoteWriterProvider: ChatRemoteWriter {
         var participants: [String: Bool] = [:]
         for personID in personIDs {
             participants[personID] = true
-            inboxValues["person:inbox/\(personID)/\(chatID)/updated:on"] = ServerValue.timestamp()
+            inboxValues["person:inbox/\(personID)/\(chatID)/updated_on"] = ServerValue.timestamp()
         }
         
         let newChat: [String: Any] = [

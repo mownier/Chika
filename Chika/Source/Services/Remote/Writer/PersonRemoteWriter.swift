@@ -55,7 +55,7 @@ class PersonRemoteWriterProvider: PersonRemoteWriter {
             "persons/\(id)": personValue,
             "person:email/\(id)/email": email,
             "person:contacts/\(id)/contact:default:id/chat": "chat:default:id",
-            "person:inbox/\(id)/chat:default:id/updated:on": 0
+            "person:inbox/\(id)/chat:default:id/updated_on": 0
         ]
         if !personsSearchValue.isEmpty {
             values["persons:search/\(id)"] = personsSearchValue
