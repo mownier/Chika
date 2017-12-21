@@ -17,12 +17,19 @@ import FirebaseAuth
     func didTapSetting()
 }
 
+protocol ConvoSceneDelegate: class {
+    
+    func convoSceneDidUpdateChatModel(_ chat: Chat)
+}
+
 class ConvoScene: UIViewController {
 
     var tableView: UITableView!
     var composerView: ConvoSceneComposerView!
     var newMessageCountLabel: UILabel!
     var titleView: ConvoSceneTitleView!
+    
+    weak var delegate: ConvoSceneDelegate?
     
     var theme: ConvoSceneTheme
     var worker: ConvoSceneWorker
@@ -714,5 +721,6 @@ extension ConvoScene: ContactChatSettingSceneDelegate {
     
     func contactChatSettingSceneDidCreatChat(_ chat: Chat) {
         updateChat(chat)
+        delegate?.convoSceneDidUpdateChatModel(chat)
     }
 }

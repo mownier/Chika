@@ -101,7 +101,7 @@ class InboxScene: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard var item = data.item(at: indexPath.row), flow.goToConvo(chat: item.chat) else {
+        guard var item = data.item(at: indexPath.row), flow.goToConvo(chat: item.chat, delegate: self) else {
             return
         }
         
@@ -165,5 +165,12 @@ extension InboxScene: InboxSceneWorkerOutput {
     func workerDidUpdateTitle(for chatID: String, title: String) {
         let _ = data.updateTitle(for: chatID, title: title)
         tableView.reloadData()
+    }
+}
+
+extension InboxScene: ConvoSceneDelegate {
+    
+    func convoSceneDidUpdateChatModel(_ chat: Chat) {
+        currentItem = data.item(for: chat)
     }
 }

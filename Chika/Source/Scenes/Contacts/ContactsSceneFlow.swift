@@ -40,7 +40,7 @@ extension ContactsScene {
                 return false
             }
             
-            return waypoint.convoScene.enter(from: scene, chat: chat)
+            return waypoint.convoScene.enter(from: scene, chat: chat, delegate: nil)
         }
     }
 }

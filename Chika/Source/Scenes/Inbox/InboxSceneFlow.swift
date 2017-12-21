@@ -10,7 +10,7 @@ import UIKit
 
 protocol InboxSceneFlow: class {
 
-    func goToConvo(chat: Chat?) -> Bool
+    func goToConvo(chat: Chat?, delegate: ConvoSceneDelegate?) -> Bool
 }
 
 extension InboxScene {
@@ -35,12 +35,12 @@ extension InboxScene {
             self.init(waypoint: waypoint)
         }
         
-        func goToConvo(chat: Chat?) -> Bool {
+        func goToConvo(chat: Chat?, delegate: ConvoSceneDelegate?) -> Bool {
             guard let scene = scene, let chat = chat else {
                 return false
             }
             
-            return waypoint.convoScene.enter(from: scene, chat: chat)
+            return waypoint.convoScene.enter(from: scene, chat: chat, delegate: delegate)
         }
     }
 }

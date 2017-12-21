@@ -43,7 +43,7 @@ extension PeopleSearchScene {
                 return false
             }
             
-            return waypoint.convo.enter(from: scene, chat: chat)
+            return waypoint.convo.enter(from: scene, chat: chat, delegate: nil)
         }
         
         func goToContactRequest() -> Bool {

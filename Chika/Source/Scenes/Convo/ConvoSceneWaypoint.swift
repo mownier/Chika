@@ -10,7 +10,7 @@ import UIKit
 
 protocol ConvoSceneEntryWaypoint {
     
-    func enter(from parent: UIViewController, chat: Chat)-> Bool
+    func enter(from parent: UIViewController, chat: Chat, delegate: ConvoSceneDelegate?)-> Bool
 }
 
 extension ConvoScene {
@@ -50,8 +50,9 @@ extension ConvoScene {
             self.init(factory: factory)
         }
         
-        func enter(from parent: UIViewController, chat: Chat) -> Bool {
+        func enter(from parent: UIViewController, chat: Chat, delegate: ConvoSceneDelegate?) -> Bool {
             let scene = factory.scene.build(chat: chat)
+            scene.delegate = delegate
             let nav = factory.nav.build(root: scene)
             DispatchQueue.main.async {
                 parent.present(nav, animated: true, completion: nil)
