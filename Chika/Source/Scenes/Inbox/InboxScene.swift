@@ -145,6 +145,7 @@ extension InboxScene: InboxSceneWorkerOutput {
         if !updateResult.isYours {
             updateBadge()
         }
+        data.tryToUpdateActiveStatus(for: chat)
         tableView.reloadData()
         
         worker.listenOnActiveStatus(for: chat)

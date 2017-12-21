@@ -37,6 +37,7 @@ protocol InboxSceneData: class {
     func updateTitle(for chatID: String, title: String) -> Int?
     func removeAll()
     func item(for chat: Chat) -> InboxSceneItem?
+    func tryToUpdateActiveStatus(for chat: Chat)
 }
 
 extension InboxScene {
@@ -187,6 +188,26 @@ extension InboxScene {
             }
             
             return items[index]
+        }
+        
+        func tryToUpdateActiveStatus(for chat: Chat) {
+            guard let index = items.index(where: { $0.chat.id == chat.id }) else {
+                return
+            }
+            
+            var active = [String: Bool]()
+            let participants = chat.participants.filter({ $0.id != meID })
+            let isOnline = items.contains { item -> Bool in
+                return participants.contains(where: { person -> Bool in
+                    let exists = item.active[person.id] != nil && item.active[person.id] == true
+                    if exists  {
+                        active[person.id] = true
+                    }
+                    return exists
+                })
+            }
+            items[index].active = active
+            items[index].isSomeoneOnline = isOnline
         }
     }
 }
