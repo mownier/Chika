@@ -8,8 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		218ABF5ED4E1B2C9500A1F95 /* Pods_ChikaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798D2482A0B997757AD6F52A /* Pods_ChikaUITests.framework */; };
+		4801BCA81FEA429F001781A0 /* ChatCreatorScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BC9D1FEA429F001781A0 /* ChatCreatorScene.swift */; };
+		4801BCA91FEA429F001781A0 /* ChatCreatorSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BC9E1FEA429F001781A0 /* ChatCreatorSceneCell.swift */; };
+		4801BCAA1FEA429F001781A0 /* ChatCreatorSceneCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BC9F1FEA429F001781A0 /* ChatCreatorSceneCellFactory.swift */; };
+		4801BCAB1FEA429F001781A0 /* ChatCreatorSceneData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA01FEA429F001781A0 /* ChatCreatorSceneData.swift */; };
+		4801BCAC1FEA429F001781A0 /* ChatCreatorSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA11FEA429F001781A0 /* ChatCreatorSceneFactory.swift */; };
+		4801BCAD1FEA429F001781A0 /* ChatCreatorSceneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA21FEA429F001781A0 /* ChatCreatorSceneFlow.swift */; };
+		4801BCAE1FEA429F001781A0 /* ChatCreatorSceneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA31FEA429F001781A0 /* ChatCreatorSceneItem.swift */; };
+		4801BCAF1FEA429F001781A0 /* ChatCreatorSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA41FEA429F001781A0 /* ChatCreatorSceneSetup.swift */; };
+		4801BCB01FEA429F001781A0 /* ChatCreatorSceneTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA51FEA429F001781A0 /* ChatCreatorSceneTheme.swift */; };
+		4801BCB11FEA429F001781A0 /* ChatCreatorSceneWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA61FEA429F001781A0 /* ChatCreatorSceneWaypoint.swift */; };
+		4801BCB21FEA429F001781A0 /* ChatCreatorSceneWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4801BCA71FEA429F001781A0 /* ChatCreatorSceneWorker.swift */; };
 		4802BFA41FC85FF00018D15C /* AppRootWaypointMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */; };
 		4802BFA61FC868270018D15C /* ConvoSceneSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */; };
+		4802D9381FEB7D2B00950825 /* ChatCreatorSceneHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802D9371FEB7D2B00950825 /* ChatCreatorSceneHeaderView.swift */; };
 		4803C2561FBBE10F0096E403 /* UserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2551FBBE10F0096E403 /* UserMock.swift */; };
 		4803C2591FBC00280096E403 /* SignInScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2581FBC00280096E403 /* SignInScene.swift */; };
 		4803C2611FBC2CD60096E403 /* SignInSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */; };
@@ -331,8 +343,20 @@
 
 /* Begin PBXFileReference section */
 		294EC67B0D5BE1CD728A6C40 /* Pods_ChikaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChikaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4801BC9D1FEA429F001781A0 /* ChatCreatorScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorScene.swift; sourceTree = "<group>"; };
+		4801BC9E1FEA429F001781A0 /* ChatCreatorSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneCell.swift; sourceTree = "<group>"; };
+		4801BC9F1FEA429F001781A0 /* ChatCreatorSceneCellFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneCellFactory.swift; sourceTree = "<group>"; };
+		4801BCA01FEA429F001781A0 /* ChatCreatorSceneData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneData.swift; sourceTree = "<group>"; };
+		4801BCA11FEA429F001781A0 /* ChatCreatorSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneFactory.swift; sourceTree = "<group>"; };
+		4801BCA21FEA429F001781A0 /* ChatCreatorSceneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneFlow.swift; sourceTree = "<group>"; };
+		4801BCA31FEA429F001781A0 /* ChatCreatorSceneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneItem.swift; sourceTree = "<group>"; };
+		4801BCA41FEA429F001781A0 /* ChatCreatorSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneSetup.swift; sourceTree = "<group>"; };
+		4801BCA51FEA429F001781A0 /* ChatCreatorSceneTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneTheme.swift; sourceTree = "<group>"; };
+		4801BCA61FEA429F001781A0 /* ChatCreatorSceneWaypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneWaypoint.swift; sourceTree = "<group>"; };
+		4801BCA71FEA429F001781A0 /* ChatCreatorSceneWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneWorker.swift; sourceTree = "<group>"; };
 		4802BFA31FC85FF00018D15C /* AppRootWaypointMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootWaypointMock.swift; sourceTree = "<group>"; };
 		4802BFA51FC868270018D15C /* ConvoSceneSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvoSceneSetup.swift; sourceTree = "<group>"; };
+		4802D9371FEB7D2B00950825 /* ChatCreatorSceneHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCreatorSceneHeaderView.swift; sourceTree = "<group>"; };
 		4803C2551FBBE10F0096E403 /* UserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMock.swift; sourceTree = "<group>"; };
 		4803C2581FBC00280096E403 /* SignInScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScene.swift; sourceTree = "<group>"; };
 		4803C2601FBC2CD60096E403 /* SignInSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSceneTests.swift; sourceTree = "<group>"; };
@@ -675,9 +699,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4801BC9C1FEA427C001781A0 /* ChatCreator */ = {
+			isa = PBXGroup;
+			children = (
+				4801BC9D1FEA429F001781A0 /* ChatCreatorScene.swift */,
+				4801BC9E1FEA429F001781A0 /* ChatCreatorSceneCell.swift */,
+				4801BC9F1FEA429F001781A0 /* ChatCreatorSceneCellFactory.swift */,
+				4801BCA01FEA429F001781A0 /* ChatCreatorSceneData.swift */,
+				4801BCA11FEA429F001781A0 /* ChatCreatorSceneFactory.swift */,
+				4801BCA21FEA429F001781A0 /* ChatCreatorSceneFlow.swift */,
+				4801BCA31FEA429F001781A0 /* ChatCreatorSceneItem.swift */,
+				4801BCA41FEA429F001781A0 /* ChatCreatorSceneSetup.swift */,
+				4801BCA51FEA429F001781A0 /* ChatCreatorSceneTheme.swift */,
+				4801BCA61FEA429F001781A0 /* ChatCreatorSceneWaypoint.swift */,
+				4801BCA71FEA429F001781A0 /* ChatCreatorSceneWorker.swift */,
+				4802D9371FEB7D2B00950825 /* ChatCreatorSceneHeaderView.swift */,
+			);
+			path = ChatCreator;
+			sourceTree = "<group>";
+		};
 		4803C2571FBBFFE20096E403 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4801BC9C1FEA427C001781A0 /* ChatCreator */,
 				48F1BC8C1FE269F40058AD71 /* About */,
 				48CA217E1FE4BA59003C2185 /* ChatSetting */,
 				4883D1DC1FE9515600F1AC23 /* ContactChatSetting */,
@@ -1735,6 +1779,7 @@
 				48A6930D1FD59F0F00ED4024 /* ContactsSceneCell.swift in Sources */,
 				48A6930B1FD59D4E00ED4024 /* ContactsScene.swift in Sources */,
 				486901961FDBBD43005053CD /* ContactRequestSceneSetup.swift in Sources */,
+				4801BCB11FEA429F001781A0 /* ChatCreatorSceneWaypoint.swift in Sources */,
 				488D87CF1FD6412200E690BD /* ContactsSceneData.swift in Sources */,
 				4876E30C1FE0239B004664E6 /* PeopleSearchScene.swift in Sources */,
 				48B37E8D1FCBD474004978F1 /* RecentMessageRemoteListener.swift in Sources */,
@@ -1768,6 +1813,7 @@
 				48AFB39D1FD7A5C70097E452 /* ContactsSceneAddPopoverTheme.swift in Sources */,
 				48814A741FCE596A0006A75D /* ConvoSceneTypingView.swift in Sources */,
 				4870A2851FE2B69000FB30E7 /* SupportScene.swift in Sources */,
+				4801BCAF1FEA429F001781A0 /* ChatCreatorSceneSetup.swift in Sources */,
 				4879B49C1FC29B0D00611DA3 /* Person.swift in Sources */,
 				48CFD57A1FD904D8007D7BCE /* ContactsSceneIndexView.swift in Sources */,
 				48CA218F1FE4BA7E003C2185 /* ChatSettingSceneFlow.swift in Sources */,
@@ -1784,6 +1830,7 @@
 				488DD2901FD6F91600AC2E42 /* ContactsSceneAddPopover.swift in Sources */,
 				48D9E2CD1FDA6CE700A37A3D /* ProfileSceneFlow.swift in Sources */,
 				488730CE1FC2AF44001F9876 /* InboxSceneCellManager.swift in Sources */,
+				4801BCA91FEA429F001781A0 /* ChatCreatorSceneCell.swift in Sources */,
 				4876E3101FE0239B004664E6 /* PeopleSearchSceneFactory.swift in Sources */,
 				4879B4921FC28E1600611DA3 /* InboxSceneTheme.swift in Sources */,
 				4883D1EE1FE9516B00F1AC23 /* ContactChatSettingSceneItem.swift in Sources */,
@@ -1807,10 +1854,12 @@
 				4876E3131FE0239B004664E6 /* PeopleSearchSceneSetup.swift in Sources */,
 				486901911FDBBD43005053CD /* ContactRequestSceneCellFactory.swift in Sources */,
 				48A743B81FC7F0A90019EDD8 /* ConvoSceneCell.swift in Sources */,
+				4801BCB21FEA429F001781A0 /* ChatCreatorSceneWorker.swift in Sources */,
 				4803C2631FBC2D6D0096E403 /* SignInSceneWorker.swift in Sources */,
 				48CA218E1FE4BA7E003C2185 /* ChatSettingSceneFactory.swift in Sources */,
 				48A743B61FC7E2250019EDD8 /* InboxSceneFlow.swift in Sources */,
 				4876E3121FE0239B004664E6 /* PeopleSearchSceneItem.swift in Sources */,
+				4801BCAD1FEA429F001781A0 /* ChatCreatorSceneFlow.swift in Sources */,
 				4876E3111FE0239B004664E6 /* PeopleSearchSceneFlow.swift in Sources */,
 				486901921FDBBD43005053CD /* ContactRequestSceneData.swift in Sources */,
 				4870A28D1FE2B69000FB30E7 /* SupportSceneTheme.swift in Sources */,
@@ -1826,6 +1875,7 @@
 				484A7AEE1FE39A4400CEBB32 /* SignOutSceneWaypoint.swift in Sources */,
 				487C4BEB1FE168650066DD41 /* ProfileEditSceneWorker.swift in Sources */,
 				48CA218D1FE4BA7E003C2185 /* ChatSettingSceneData.swift in Sources */,
+				4802D9381FEB7D2B00950825 /* ChatCreatorSceneHeaderView.swift in Sources */,
 				48B4D01D1FBADD2B008C78F6 /* Access.swift in Sources */,
 				4867F8C91FE237F000ADFD39 /* EmailUpdateSceneWaypoint.swift in Sources */,
 				48D9E2D11FDA6D2800A37A3D /* ProfileSceneSetup.swift in Sources */,
@@ -1845,6 +1895,7 @@
 				486931F41FD114BD000D3AD4 /* InboxSceneCellAvatar.swift in Sources */,
 				486901901FDBBD43005053CD /* ContactRequestSceneCell.swift in Sources */,
 				4883D1F21FE9516B00F1AC23 /* ContactChatSettingSceneWorker.swift in Sources */,
+				4801BCAE1FEA429F001781A0 /* ChatCreatorSceneItem.swift in Sources */,
 				4803C2681FBC2FBA0096E403 /* AppError.swift in Sources */,
 				48C55DD21FCE9D7700302DB2 /* TypingStatusRemoteWriter.swift in Sources */,
 				487C4BE61FE168650066DD41 /* ProfileEditSceneFlow.swift in Sources */,
@@ -1863,6 +1914,7 @@
 				488639311FCBAE4A003108A1 /* RemoteListenerResult.swift in Sources */,
 				488D87D31FD6418D00E690BD /* ContactsSceneSetup.swift in Sources */,
 				482FDF131FC0131A00ABA372 /* AppStatusBarFrameGetter.swift in Sources */,
+				4801BCAB1FEA429F001781A0 /* ChatCreatorSceneData.swift in Sources */,
 				4879B4981FC29A4A00611DA3 /* Chat.swift in Sources */,
 				48CA218C1FE4BA7E003C2185 /* ChatSettingSceneCellFactory.swift in Sources */,
 				48B4D01A1FBADC60008C78F6 /* Service.swift in Sources */,
@@ -1879,6 +1931,7 @@
 				4877BF881FC4691B00885C60 /* InboxRemoteQuery.swift in Sources */,
 				48CDD7661FBEC384009269A6 /* InitialSceneTheme.swift in Sources */,
 				487767011FC6AC4F008E865F /* ConvoSceneTheme.swift in Sources */,
+				4801BCAA1FEA429F001781A0 /* ChatCreatorSceneCellFactory.swift in Sources */,
 				48BFF7711FC4756F00BAE311 /* InboxSceneWorker.swift in Sources */,
 				4877BF841FC4643400885C60 /* ChatsRemoteQuery.swift in Sources */,
 				488730C91FC2A497001F9876 /* InboxSceneSetup.swift in Sources */,
@@ -1889,9 +1942,11 @@
 				4879B49E1FC29C4500611DA3 /* InboxSceneData.swift in Sources */,
 				48A6AB831FE817530068D2BB /* ContactSelectorSceneTheme.swift in Sources */,
 				489FE1CA1FC05DCA0062E1AB /* RegisterSceneTheme.swift in Sources */,
+				4801BCA81FEA429F001781A0 /* ChatCreatorScene.swift in Sources */,
 				4803C2591FBC00280096E403 /* SignInScene.swift in Sources */,
 				486901981FDBBD43005053CD /* ContactRequestSceneWaypoint.swift in Sources */,
 				48CA21931FE4BA7E003C2185 /* ChatSettingSceneWaypoint.swift in Sources */,
+				4801BCAC1FEA429F001781A0 /* ChatCreatorSceneFactory.swift in Sources */,
 				48CDD7681FBECE2C009269A6 /* InitialSceneFlow.swift in Sources */,
 				48A6930F1FD59F7100ED4024 /* ContactsSceneFactory.swift in Sources */,
 				4870A2891FE2B69000FB30E7 /* SupportSceneFactory.swift in Sources */,
@@ -1915,6 +1970,7 @@
 				487C4BE71FE168650066DD41 /* ProfileEditSceneItem.swift in Sources */,
 				487C4BED1FE180AC0066DD41 /* PersonRemoteWriter.swift in Sources */,
 				489270391FE255D00088CEA5 /* PasswordChangeScene.swift in Sources */,
+				4801BCB01FEA429F001781A0 /* ChatCreatorSceneTheme.swift in Sources */,
 				4877BF861FC466BE00885C60 /* RecentMessageRemoteQuery.swift in Sources */,
 				484629FC1FE11C3200346AA3 /* ContactSceneController.swift in Sources */,
 				487767031FC6ADD8008E865F /* ConvoSceneWorker.swift in Sources */,
