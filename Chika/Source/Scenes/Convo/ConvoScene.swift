@@ -223,7 +223,10 @@ class ConvoScene: UIViewController {
         
         worker.listenOnRecentMessage()
         worker.listenOnTypingStatus()
-        worker.listenOnPresence()
+        
+        if chat.participants.count == 2, chat.creator.isEmpty {
+            worker.listenOnPresence()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -411,6 +414,10 @@ class ConvoScene: UIViewController {
         data.removeAll()
         tableView.reloadData()
         
+        presence = nil
+        titleRefreshTimer?.invalidate()
+        titleRefreshTimer = nil
+        
         worker.unlistenOnPresence()
         worker.unlistenOnTypingStatus()
         worker.unlisteOnRecentMessage()
@@ -430,7 +437,10 @@ class ConvoScene: UIViewController {
         
         worker.listenOnRecentMessage()
         worker.listenOnTypingStatus()
-        worker.listenOnPresence()
+        
+        if chat.participants.count == 2, chat.creator.isEmpty {
+            worker.listenOnPresence()
+        }
     }
     
     var prevOriginY: CGFloat = 0
