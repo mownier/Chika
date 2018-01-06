@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol EmailUpdateSceneInteraction: class {
     
@@ -35,12 +36,12 @@ class EmailUpdateScene: UIViewController {
     var theme: EmailUpdateSceneTheme
     var worker: EmailUpdateSceneWorker
     var setup: EmailUpdateSceneSetup
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: EmailUpdateSceneTheme,
         worker: EmailUpdateSceneWorker,
         setup: EmailUpdateSceneSetup,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.worker = worker
         self.setup = setup
@@ -52,10 +53,10 @@ class EmailUpdateScene: UIViewController {
         let theme = Theme()
         let worker = Worker()
         let setup = Setup()
-        let waypoint = EmailUpdateScene.ExitWaypoint()
+        let waypoint = PushWaypointSource()
         self.init(theme: theme, worker: worker, setup: setup, waypoint: waypoint)
         worker.output = self
-        waypoint.scene = self
+        //waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -243,7 +244,7 @@ extension EmailUpdateScene: EmailUpdateSceneWorkerOutput {
         delegate?.emailUpdateDidChangeEmail(email)
     }
     
-    func workerDidChangeEmailWithError(_ error: Error) {
+    func workerDidChangeEmailWithError(_ error: Swift.Error) {
         changeToUpdateBarItem()
         showError(withMessage: "\(error)")
     }

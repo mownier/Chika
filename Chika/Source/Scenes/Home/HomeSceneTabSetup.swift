@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 protocol HomeSceneTabSetup: class {
 
@@ -21,7 +22,7 @@ extension HomeScene {
             
             var inbox: InboxSceneFactory
             var contacts: ContactSceneControllerFactory
-            var profile: ProfileSceneFactory
+            var profile: ProfileSceneFactory & SceneFactory
         }
         
         var factory: Factory

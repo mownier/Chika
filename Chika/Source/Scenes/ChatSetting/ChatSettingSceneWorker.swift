@@ -15,9 +15,9 @@ protocol ChatSettingSceneWorker: class {
 protocol ChatSettingSceneWorkerOutput: class {
 
     func workerDidUpdateTitle(_ title: String)
-    func workerDidUpdateTitleWithError(_ error: Error)
+    func workerDidUpdateTitleWithError(_ error: Swift.Error)
     func workerDidAddPeople(_ people: [Person])
-    func worderDidAddPeopleWithError(_ error: Error)
+    func worderDidAddPeopleWithError(_ error: Swift.Error)
 }
 
 extension ChatSettingScene {

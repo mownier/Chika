@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import TNCore
 
 protocol AboutSceneFactory: class {
 
-    func build() -> UIViewController
+    func withTheme(_ theme: AboutSceneTheme) -> AboutSceneFactory & SceneFactory
 }
 
 extension AboutScene {
     
-    class Factory: AboutSceneFactory {
-    
+    class Factory: AboutSceneFactory, SceneFactory {
+        
         func build() -> UIViewController {
             let scene = AboutScene()
             return scene
+        }
+        
+        func withTheme(_ theme: AboutSceneTheme) -> AboutSceneFactory & SceneFactory {
+            return self
         }
     }
 }

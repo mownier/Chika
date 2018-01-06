@@ -7,12 +7,7 @@
 //
 
 import UIKit
-
-@objc protocol RegisterSceneInteraction: class {
-
-    func didTapBack()
-    func didTapGo()
-}
+import TNCore
 
 class RegisterScene: UIViewController {
 
@@ -22,40 +17,10 @@ class RegisterScene: UIViewController {
     var titleLabel: UILabel!
     var indicator: UIActivityIndicatorView!
 
-    var worker: RegisterSceneWorker!
-    var theme: RegisterSceneTheme!
     var flow: RegisterSceneFlow!
-    var waypoint: AppExitWaypoint!
-    
-    init(theme: RegisterSceneTheme, worker: RegisterSceneWorker, flow: RegisterSceneFlow, waypoint: AppExitWaypoint) {
-        self.worker = worker
-        self.theme = theme
-        self.flow = flow
-        self.waypoint = waypoint
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        let theme = Theme()
-        let worker = Worker()
-        let flow = Flow()
-        let waypoint = ExitWaypoint()
-        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
-        worker.output = self
-        flow.scene = self
-        waypoint.scene = self
-    }
-    
-    convenience required init?(coder aDecoder: NSCoder) {
-        let theme = Theme()
-        let worker = Worker()
-        let flow = Flow()
-        let waypoint = ExitWaypoint()
-        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
-        worker.output = self
-        flow.scene = self
-        waypoint.scene = self
-    }
+    var theme: RegisterSceneTheme!
+    var worker: RegisterSceneWorker!
+    var interaction: RegisterSceneInteraction!
     
     override func loadView() {
         super.loadView()
@@ -92,7 +57,7 @@ class RegisterScene: UIViewController {
         goButton.titleLabel?.font = theme.buttonFont
         goButton.setTitle("Register", for: .normal)
         goButton.setTitleColor(theme.buttonTitleColor, for: .normal)
-        goButton.addTarget(self, action: #selector(self.didTapGo), for: .touchUpInside)
+        goButton.addTarget(interaction, action: #selector(interaction.didTapGo), for: .touchUpInside)
         goButton.backgroundColor = theme.buttonBGColor
         goButton.layer.cornerRadius = 4
         goButton.accessibilityLabel = "Register Button"
@@ -118,7 +83,7 @@ class RegisterScene: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back") , style: .plain, target: self, action: #selector(self.didTapBack))
+        let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back") , style: .plain, target: interaction, action: #selector(interaction.didTapBack))
         back.accessibilityLabel = "Back Button"
         navigationItem.leftBarButtonItem = back
     }
@@ -149,32 +114,13 @@ class RegisterScene: UIViewController {
     }
 }
 
-extension RegisterScene: RegisterSceneInteraction {
-    
-    func didTapBack() {
-        let _ = waypoint.exit()
-    }
-    
-    func didTapGo() {
-        indicator.startAnimating()
-        passInput.resignFirstResponder()
-        emailInput.resignFirstResponder()
-        emailInput.isUserInteractionEnabled = false
-        passInput.isUserInteractionEnabled = false
-        goButton.isUserInteractionEnabled = false
-        let email = emailInput.text
-        let pass = passInput.text
-        worker.register(email: email, pass: pass)
-    }
-}
-
 extension RegisterScene: RegisterSceneWorkerOutput {
     
     func workerDidRegisterOK() {
         let _ = flow.goToHome()
     }
     
-    func workerDidRegisterWithError(_ error: Error) {
+    func workerDidRegisterWithError(_ error: Swift.Error) {
         emailInput.isUserInteractionEnabled = true
         passInput.isUserInteractionEnabled = true
         goButton.isUserInteractionEnabled = true

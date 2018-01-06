@@ -7,12 +7,7 @@
 //
 
 import UIKit
-
-@objc protocol SignInSceneInteraction: class {
-    
-    func didTapGo()
-    func didTapBack()
-}
+import TNCore
 
 class SignInScene: UIViewController {
     
@@ -22,40 +17,10 @@ class SignInScene: UIViewController {
     var titleLabel: UILabel!
     var indicator: UIActivityIndicatorView!
     
-    var worker: SignInSceneWorker!
-    var theme: SignInSceneTheme!
     var flow: SignInSceneFlow!
-    var waypoint: AppExitWaypoint!
-    
-    init(theme: SignInSceneTheme, worker: SignInSceneWorker, flow: SignInSceneFlow, waypoint: AppExitWaypoint) {
-        self.worker = worker
-        self.theme = theme
-        self.flow = flow
-        self.waypoint = waypoint
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        let theme = Theme()
-        let worker = Worker()
-        let flow = Flow()
-        let waypoint = ExitWaypoint()
-        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
-        worker.output = self
-        flow.scene = self
-        waypoint.scene = self
-    }
-    
-    convenience required init?(coder aDecoder: NSCoder) {
-        let theme = Theme()
-        let worker = Worker()
-        let flow = Flow()
-        let waypoint = ExitWaypoint()
-        self.init(theme: theme, worker: worker, flow: flow, waypoint: waypoint)
-        worker.output = self
-        flow.scene = self
-        waypoint.scene = self
-    }
+    var theme: SignInSceneTheme!
+    var worker: SignInSceneWorker!
+    var interaction: SignInSceneInteraction!
     
     override func loadView() {
         super.loadView()
@@ -92,7 +57,7 @@ class SignInScene: UIViewController {
         goButton.titleLabel?.font = theme.buttonFont
         goButton.setTitle("Sign In", for: .normal)
         goButton.setTitleColor(theme.buttonTitleColor, for: .normal)
-        goButton.addTarget(self, action: #selector(self.didTapGo), for: .touchUpInside)
+        goButton.addTarget(interaction, action: #selector(interaction.didTapGo), for: .touchUpInside)
         goButton.backgroundColor = theme.buttonBGColor
         goButton.layer.cornerRadius = 4
         goButton.accessibilityLabel = "Sign In Button"
@@ -118,7 +83,7 @@ class SignInScene: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back") , style: .plain, target: self, action: #selector(self.didTapBack))
+        let back = UIBarButtonItem(image: #imageLiteral(resourceName: "button_back") , style: .plain, target: interaction, action: #selector(interaction.didTapBack))
         back.accessibilityLabel = "Back Button"
         navigationItem.leftBarButtonItem = back
     }
@@ -149,32 +114,13 @@ class SignInScene: UIViewController {
     }
 }
 
-extension SignInScene: SignInSceneInteraction {
-    
-    func didTapGo() {
-        indicator.startAnimating()
-        passInput.resignFirstResponder()
-        emailInput.resignFirstResponder()
-        emailInput.isUserInteractionEnabled = false
-        passInput.isUserInteractionEnabled = false
-        goButton.isUserInteractionEnabled = false
-        let email = emailInput.text
-        let pass = passInput.text
-        worker.signIn(email: email, pass: pass)
-    }
-    
-    func didTapBack() {
-        let _ = waypoint.exit()
-    }
-}
-
 extension SignInScene: SignInSceneWorkerOutput {
     
     func workerDidSignInOK() {
         let _ = flow.goToHome()
     }
     
-    func workerDidSignInWithError(_ error: Error) {
+    func workerDidSignInWithError(_ error: Swift.Error) {
         emailInput.isUserInteractionEnabled = true
         passInput.isUserInteractionEnabled = true
         goButton.isUserInteractionEnabled = true

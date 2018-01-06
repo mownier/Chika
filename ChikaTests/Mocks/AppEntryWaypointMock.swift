@@ -1,5 +1,5 @@
 //
-//  AppEntryWaypointMock.swift
+//  TNCore.EntryWaypointMock.swift
 //  ChikaTests
 //
 //  Created by Mounir Ybanez on 11/19/17.
@@ -9,7 +9,7 @@
 import UIKit
 @testable import Chika
 
-class AppEntryWaypointMock: AppEntryWaypoint {
+class TNCore.EntryWaypointMock: TNCore.EntryWaypoint {
 
     var isEnterCalled: Bool
     var isEnterOK: Bool

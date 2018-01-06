@@ -24,7 +24,7 @@ protocol InboxSceneWorker: class {
 protocol InboxSceneWorkerOutput: class {
     
     func workerDidFetch(chats: [Chat])
-    func workerDidFetchWithError(_ error: Error)
+    func workerDidFetchWithError(_ error: Swift.Error)
     func workerDidReceiveRecentChat(_ chat: Chat)
     func workerDidChangeActiveStatus(for participantID: String, isActive: Bool)
     func workerDidChangeTypingStatus(for chatID: String, participantID: String, isTyping: Bool)

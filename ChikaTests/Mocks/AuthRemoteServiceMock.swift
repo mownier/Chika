@@ -7,6 +7,7 @@
 //
 
 @testable import Chika
+import TNCore
 
 class AuthRemoteServiceMock: AuthRemoteService {
 
@@ -16,9 +17,9 @@ class AuthRemoteServiceMock: AuthRemoteService {
         self.isOK = true
     }
     
-    func register(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
+    func register(email: String, pass: String, completion: @escaping (Result<Access>) -> Void) {
         guard isOK else {
-            completion(.err(ServiceError("Auth remote service forced error")))
+            completion(.err(Error("Auth remote service forced error")))
             return
         }
         
@@ -26,9 +27,9 @@ class AuthRemoteServiceMock: AuthRemoteService {
         completion(.ok(access))
     }
     
-    func signIn(email: String, pass: String, completion: @escaping (ServiceResult<Access>) -> Void) {
+    func signIn(email: String, pass: String, completion: @escaping (Result<Access>) -> Void) {
         guard isOK else {
-            completion(.err(ServiceError("Auth remote service forced error")))
+            completion(.err(Error("Auth remote service forced error")))
             return
         }
         
@@ -36,19 +37,19 @@ class AuthRemoteServiceMock: AuthRemoteService {
         completion(.ok(access))
     }
     
-    func signOut(completion: @escaping (ServiceResult<String>) -> Void) {
+    func signOut(completion: @escaping (Result<String>) -> Void) {
         
     }
     
-    func refresh(completion: @escaping (ServiceResult<Access>) -> Void) {
+    func refresh(completion: @escaping (Result<Access>) -> Void) {
         
     }
     
-    func changeEmail(withNew: String, currentEmail: String, currentPassword: String, completion: @escaping (ServiceResult<String>) -> Void) {
+    func changeEmail(withNew: String, currentEmail: String, currentPassword: String, completion: @escaping (Result<String>) -> Void) {
         
     }
     
-    func changePassword(withNew: String, currentPassword: String, currentEmail: String, completion: @escaping (ServiceResult<String>) -> Void) {
+    func changePassword(withNew: String, currentPassword: String, currentEmail: String, completion: @escaping (Result<String>) -> Void) {
         
     }
 }

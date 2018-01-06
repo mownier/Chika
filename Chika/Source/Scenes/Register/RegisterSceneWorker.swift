@@ -6,6 +6,8 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import TNCore
+
 protocol RegisterSceneWorker: class {
     
     func register(email: String?, pass: String?)
@@ -14,7 +16,7 @@ protocol RegisterSceneWorker: class {
 protocol RegisterSceneWorkerOutput: class {
     
     func workerDidRegisterOK()
-    func workerDidRegisterWithError(_ error: Error)
+    func workerDidRegisterWithError(_ error: Swift.Error)
 }
 
 extension RegisterScene {
@@ -43,7 +45,7 @@ extension RegisterScene {
         
         func register(email: String?, pass: String?) {
             guard email != nil, pass != nil else {
-                let error = AppError("email and pass must not be empty")
+                let error = Error("email and pass must not be empty")
                 output?.workerDidRegisterWithError(error)
                 return
             }

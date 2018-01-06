@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 protocol InitialSceneFlow: class {
 
@@ -18,40 +19,44 @@ extension InitialScene {
     
     class Flow: InitialSceneFlow {
         
-        struct Waypoint {
+        class Factory {
             
-            var signIn: AppEntryWaypoint
-            var register: AppEntryWaypoint
+            func signIn(withWaypoint waypoint: ExitWaypoint) -> SignInSceneFactory & SceneFactory {
+                let factory = SignInScene.Factory(waypoint: waypoint)
+                return factory
+            }
+            
+            func register(withWaypoint waypoint: ExitWaypoint) -> RegisterSceneFactory & SceneFactory {
+                let factory = RegisterScene.Factory(waypoint: waypoint)
+                return factory
+            }
         }
         
-        var waypoint: Waypoint
         weak var scene: UIViewController?
+        var factory: Factory
+        var waypoint: PushWaypoint & EntryWaypoint & ExitWaypoint
         
-        init(waypoint: Waypoint) {
-            self.waypoint = waypoint
-        }
-        
-        convenience init() {
-            let signIn = SignInScene.EntryWaypoint()
-            let register = RegisterScene.EntryWaypoint()
-            let waypoint = Waypoint(signIn: signIn, register: register)
-            self.init(waypoint: waypoint)
+        init() {
+            self.factory = Factory()
+            self.waypoint = PushWaypointSource()
         }
         
         func goToSignIn() -> Bool {
-            guard let scene = scene else {
+            guard let parent = scene else {
                 return false
             }
             
-            return waypoint.signIn.enter(from: scene)
+            let vc = factory.signIn(withWaypoint: waypoint).build()
+            return waypoint.withScene(vc).enter(from: parent)
         }
         
         func goToRegister() -> Bool {
-            guard let scene = scene else {
+            guard let parent = scene else {
                 return false
             }
             
-            return waypoint.register.enter(from: scene)
+            let vc = factory.register(withWaypoint: waypoint).build()
+            return waypoint.withScene(vc).enter(from: parent)
         }
     }
 }

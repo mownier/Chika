@@ -135,7 +135,7 @@ extension InboxScene: InboxSceneWorkerOutput {
         }
     }
     
-    func workerDidFetchWithError(_ error: Error) {
+    func workerDidFetchWithError(_ error: Swift.Error) {
         worker.listenOnRecentChat()
         tableView.reloadData()
     }

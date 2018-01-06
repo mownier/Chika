@@ -12,12 +12,12 @@ import XCTest
 class ServiceErrorTests: XCTestCase {
     
     func testInit() {
-        let error = ServiceError("error occurred")
+        let error = Error("error occurred")
         XCTAssertEqual(error.message, "error occurred")
     }
     
     func testDescription() {
-        let error = ServiceError("error occurred")
+        let error = Error("error occurred")
         XCTAssertEqual("SERVICE_ERR: error occurred", "\(error)")
         XCTAssertEqual("SERVICE_ERR: error occurred", error.description)
     }

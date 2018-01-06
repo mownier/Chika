@@ -6,6 +6,8 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import TNCore
+
 protocol ChatCreatorSceneWorker: class {
 
     func fetchContacts()
@@ -15,9 +17,9 @@ protocol ChatCreatorSceneWorker: class {
 protocol ChatCreatorSceneWorkerOutput: class {
 
     func workerDidFetch(contacts: [Contact])
-    func workerDidFetchWithError(_ error: Error)
+    func workerDidFetchWithError(_ error: Swift.Error)
     func workerDidCreateChat(_ chat: Chat)
-    func workerDidCreateChatWithError(_ error: Error)
+    func workerDidCreateChatWithError(_ error: Swift.Error)
 }
 
 extension ChatCreatorScene {
@@ -58,17 +60,17 @@ extension ChatCreatorScene {
         
         func createChat(withTitle title: String, message: String, participants: [Person]) {
             if title.isEmpty && message.isEmpty {
-                output?.workerDidCreateChatWithError(AppError("Chat title and short message are empty"))
+                output?.workerDidCreateChatWithError(Error("Chat title and short message are empty"))
                 return
             }
             
             if title.isEmpty {
-                output?.workerDidCreateChatWithError(AppError("Chat title is empty"))
+                output?.workerDidCreateChatWithError(Error("Chat title is empty"))
                 return
             }
             
             if message.isEmpty {
-                output?.workerDidCreateChatWithError(AppError("Short message is empty"))
+                output?.workerDidCreateChatWithError(Error("Short message is empty"))
                 return
             }
             

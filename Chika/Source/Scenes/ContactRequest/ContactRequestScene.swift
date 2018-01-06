@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ContactRequestSceneInteraction: class {
     
@@ -23,7 +24,7 @@ class ContactRequestScene: UIViewController {
     var flow: ContactRequestSceneFlow
     var setup: ContactRequestSceneSetup
     var cellFactory: ContactRequestSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: ContactRequestSceneTheme,
         data: ContactRequestSceneData,
@@ -31,7 +32,7 @@ class ContactRequestScene: UIViewController {
         flow: ContactRequestSceneFlow,
         setup: ContactRequestSceneSetup,
         cellFactory: ContactRequestSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -49,11 +50,11 @@ class ContactRequestScene: UIViewController {
         let flow = Flow()
         let cellFactory = ContactRequestSceneCell.Factory()
         let setup = Setup()
-        let waypoint = ContactRequestScene.ExitWaypoint()
+        let waypoint = PushWaypointSource()
         self.init(theme: theme, data: data, worker: worker, flow: flow, setup: setup, cellFactory: cellFactory, waypoint: waypoint)
         worker.output = self
         flow.scene = self
-        waypoint.scene = self
+        //waypoint.scene = self
         setup.theme = theme
     }
     
@@ -142,13 +143,13 @@ extension ContactRequestScene: ContactRequestSceneWorkerOutput {
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
-    func workerDidAcceptPendingRequest(withError error: Error, id: String) {
+    func workerDidAcceptPendingRequest(withError error: Swift.Error, id: String) {
         guard let row = data.updateAcceptStatus(for: id, status: .retry) else { return }
         let indexPath = IndexPath(row: row, section: 0)
         tableView.reloadRows(at: [indexPath], with: .fade)
     }
     
-    func workerDidIgnorePendingRequest(withError error: Error, id: String) {
+    func workerDidIgnorePendingRequest(withError error: Swift.Error, id: String) {
         guard let row = data.updateIgnoreStatus(for: id, status: .retry) else { return }
         let indexPath = IndexPath(row: row, section: 0)
         tableView.reloadRows(at: [indexPath], with: .fade)

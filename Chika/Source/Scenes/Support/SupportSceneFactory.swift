@@ -7,19 +7,24 @@
 //
 
 import UIKit
+import TNCore
 
 protocol SupportSceneFactory: class {
 
-    func build() -> UIViewController
+    func withTheme(_ theme: SupportSceneTheme) -> SceneFactory & SupportSceneFactory
 }
 
 extension SupportScene {
     
-    class Factory: SupportSceneFactory {
+    class Factory: SupportSceneFactory, SceneFactory {
     
         func build() -> UIViewController {
             let scene = SupportScene()
             return scene
+        }
+        
+        func withTheme(_ theme: SupportSceneTheme) -> SceneFactory & SupportSceneFactory {
+            return self
         }
     }
 }

@@ -14,7 +14,7 @@ protocol ContactChatSettingSceneWorker: class {
 protocol ContactChatSettingSceneWorkerOutput: class {
 
     func workerDidUpdateTitle(_ title: String)
-    func workerDidUpdateTitleWithError(_ error: Error)
+    func workerDidUpdateTitleWithError(_ error: Swift.Error)
 }
 
 extension ContactChatSettingScene {

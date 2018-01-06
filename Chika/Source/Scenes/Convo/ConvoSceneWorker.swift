@@ -26,9 +26,9 @@ protocol ConvoSceneWorkerOutput: class {
     
     func workerDidFetchNew(messages: [Message])
     func workerDidFetchNext(messages: [Message])
-    func workerDidFetchWithError(_ error: Error)
+    func workerDidFetchWithError(_ error: Swift.Error)
     func workerDidSend(message: Message)
-    func workerDidSendWithError(_ error: Error)
+    func workerDidSendWithError(_ error: Swift.Error)
     func workerDidUpdateConvo(message: Message)
     func workerDidUpdateTypingStatus(for personID: String, isTyping: Bool)
     func workerDidChangePresence(_ presence: Presence)

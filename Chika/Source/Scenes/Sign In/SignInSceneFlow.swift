@@ -7,33 +7,39 @@
 //
 
 import UIKit
+import TNCore
 
 protocol SignInSceneFlow: class {
     
     func goToHome() -> Bool
-    func showError(_ error: Error)
+    func showError(_ error: Swift.Error)
 }
 
 extension SignInScene {
     
     class Flow: SignInSceneFlow {
         
-        struct Waypoint {
+        class Factory {
             
-            var home: AppRootWaypoint
+            var home: HomeSceneFactory & SceneFactory {
+                return HomeScene.Factory()
+            }
+        }
+        
+        class Theme {
+            
+            var home: HomeSceneTheme {
+                return HomeScene.Theme()
+            }
         }
         
         weak var scene: UIViewController?
-        var waypoint: Waypoint
+        var factory: Factory
+        var theme: Theme
         
-        init(waypoint: Waypoint) {
-            self.waypoint = waypoint
-        }
-        
-        convenience init() {
-            let home = HomeScene.RootWaypoint()
-            let waypoint = Waypoint(home: home)
-            self.init(waypoint: waypoint)
+        init() {
+            self.factory = Factory()
+            self.theme = Theme()
         }
         
         func goToHome() -> Bool {
@@ -41,14 +47,22 @@ extension SignInScene {
                 return false
             }
             
-            return waypoint.home.makeRoot(from: scene.view.window)
+            let homeScene = factory.home.build()
+            let waypoint = WindowWaypointSource()
+            return waypoint.withWindow(scene.view.window).withScene(homeScene).makeRoot()
         }
         
-        func showError(_ error: Error) {
+        func showError(_ error: Swift.Error) {
+            guard let scene = scene else {
+                return
+            }
+            
+            let waypoint = PresentWaypointSource()
             let alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(action)
-            scene?.present(alert, animated: true, completion: nil)
+            
+            let _ = waypoint.withScene(alert).enter(from: scene)
         }
     }
 }

@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import TNCore
 
 protocol SignOutSceneEntryWaypoint: class {
     
-    func withDelegate(_ aDelegate: SignOutSceneDelegate?) -> AppEntryWaypoint
+    func withDelegate(_ aDelegate: SignOutSceneDelegate?) -> TNCore.EntryWaypoint
 }
 
 extension SignOutScene {
 
-    class EntryWaypoint: AppEntryWaypoint, SignOutSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, SignOutSceneEntryWaypoint {
         
         var factory: SignOutSceneFactory
         weak var delegate: SignOutSceneDelegate?
@@ -34,7 +35,7 @@ extension SignOutScene {
             return true
         }
         
-        func withDelegate(_ aDelegate: SignOutSceneDelegate?) -> AppEntryWaypoint {
+        func withDelegate(_ aDelegate: SignOutSceneDelegate?) -> TNCore.EntryWaypoint {
             delegate = aDelegate
             return self
         }

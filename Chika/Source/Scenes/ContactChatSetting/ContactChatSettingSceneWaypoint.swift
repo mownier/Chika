@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ContactChatSettingSceneEntryWaypoint: class {
     
-    func withContact(_ aContact: Contact) -> AppEntryWaypoint
+    func withContact(_ aContact: Contact) -> TNCore.EntryWaypoint
     func withDelegate(_ aDelegate: ContactChatSettingSceneDelegate?) -> ContactChatSettingSceneEntryWaypoint
 }
 
 extension ContactChatSettingScene {
     
-    class EntryWaypoint: AppEntryWaypoint, ContactChatSettingSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, ContactChatSettingSceneEntryWaypoint {
         
         struct Factory {
             
@@ -46,7 +47,7 @@ extension ContactChatSettingScene {
             return true
         }
         
-        func withContact(_ aContact: Contact) -> AppEntryWaypoint {
+        func withContact(_ aContact: Contact) -> TNCore.EntryWaypoint {
             contact = aContact
             return self
         }
@@ -57,7 +58,7 @@ extension ContactChatSettingScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

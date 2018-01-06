@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import TNCore
 
 extension HomeScene {
     
-    class RootWaypoint: AppRootWaypoint {
+    class RootWaypoint: TNCore.RootWaypoint {
         
         var home: HomeSceneFactory
         
         init(home: HomeSceneFactory = HomeScene.Factory()) {
             self.home = home
+        }
+        
+        func makeRoot() -> Bool {
+            return true
         }
         
         func makeRoot(from window: UIWindow?) -> Bool {

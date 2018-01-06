@@ -95,7 +95,7 @@ class InboxSceneTests: XCTestCase {
     func testWorkerDidFetchWithErrorA() {
         let scene = InboxScene()
         let tableView = TableViewMock()
-        let error = ServiceError("inbox is empty")
+        let error = Error("inbox is empty")
         scene.tableView = tableView
         scene.workerDidFetchWithError(error)
         XCTAssertTrue(tableView.isReloadDataCalled)

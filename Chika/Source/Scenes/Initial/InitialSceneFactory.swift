@@ -7,18 +7,41 @@
 //
 
 import UIKit
+import TNCore
 
 protocol InitialSceneFactory: class {
     
-    func build() -> InitialScene
+    func withTheme(_ theme: InitialSceneTheme) -> SceneFactory
 }
 
 extension InitialScene {
     
-    class Factory: InitialSceneFactory {
+    class Factory: InitialSceneFactory, SceneFactory {
         
-        func build() -> InitialScene {
+        var theme: InitialSceneTheme
+        var flow: InitialSceneFlow
+        var interaction: InitialSceneInteraction
+        
+        init() {
+            let flow = Flow()
+            let theme = Theme()
+            let interaction = Interaction(flow: flow)
+            
+            self.flow = flow
+            self.theme = theme
+            self.interaction = interaction
+        }
+        
+        func withTheme(_ aTheme: InitialSceneTheme) -> SceneFactory {
+            theme = aTheme
+            return self
+        }
+        
+        func build() -> UIViewController {
             let scene = InitialScene()
+            scene.flow = flow
+            scene.theme = theme
+            scene.interaction = interaction
             return scene
         }
     }

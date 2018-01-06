@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol AboutSceneInteraction: class {
     
@@ -19,13 +20,13 @@ class AboutScene: UITableViewController {
     var data: AboutSceneData
     var setup: AboutSceneSetup
     var cellFactory: AboutSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: ExitWaypoint
     
     init(theme: AboutSceneTheme,
         data: AboutSceneData,
         setup: AboutSceneSetup,
         cellFactory: AboutSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.cellFactory = cellFactory
@@ -39,9 +40,9 @@ class AboutScene: UITableViewController {
         let data = Data()
         let cellFactory = CellFactory()
         let setup = Setup()
-        let waypoint = AboutScene.ExitWaypoint()
+        let waypoint = PushWaypointSource()
         self.init(theme: theme, data: data, setup: setup, cellFactory: cellFactory, waypoint: waypoint)
-        waypoint.scene = self
+        //waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {

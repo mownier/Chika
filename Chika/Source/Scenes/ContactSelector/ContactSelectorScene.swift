@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ContactSelectorSceneInteraction: class {
     
@@ -32,7 +33,7 @@ class ContactSelectorScene: UIViewController {
     var flow: ContactSelectorSceneFlow
     var setup: ContactSelectorSceneSetup
     var cellFactory: ContactSelectorSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: ContactSelectorSceneTheme,
         data: ContactSelectorSceneData,
@@ -40,7 +41,7 @@ class ContactSelectorScene: UIViewController {
         flow: ContactSelectorSceneFlow,
         setup: ContactSelectorSceneSetup,
         cellFactory: ContactSelectorSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -143,7 +144,7 @@ extension ContactSelectorScene: ContactSelectorSceneWorkerOutput {
         tableView.reloadData()
     }
     
-    func workerDidFetchWithError(_ error: Error) {
+    func workerDidFetchWithError(_ error: Swift.Error) {
         tableView.backgroundView = data.itemCount == 0 ? emptyView : nil
         tableView.reloadData()
     }

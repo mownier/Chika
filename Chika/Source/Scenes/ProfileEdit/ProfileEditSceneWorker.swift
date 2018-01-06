@@ -14,7 +14,7 @@ protocol ProfileEditSceneWorker: class {
 protocol ProfileEditSceneWorkerOutput: class {
 
     func workerDidSaveWithNewValue(_ person: Person)
-    func workerDidSaveWithError(_ error: Error)
+    func workerDidSaveWithError(_ error: Swift.Error)
 }
 
 extension ProfileEditScene {

@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import TNCore
 
 extension AboutScene {
     
-    class EntryWaypoint: AppEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint {
         
         struct Factory {
             
             var scene: AboutSceneFactory
-            var nav: AppNavigationControllerFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
@@ -41,7 +42,7 @@ extension AboutScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

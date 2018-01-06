@@ -7,18 +7,37 @@
 //
 
 import UIKit
+import TNCore
 
-protocol HomeSceneFactory {
+protocol HomeSceneFactory: class {
 
-    func build() -> HomeScene
+    func withTheme(_ theme: HomeSceneTheme) -> HomeSceneFactory & SceneFactory
 }
 
 extension HomeScene {
     
-    class Factory: HomeSceneFactory {
+    class Factory: HomeSceneFactory, SceneFactory {
         
-        func build() -> HomeScene {
+        var theme: HomeSceneTheme
+        var setup: HomeSceneTabSetup
+        
+        init() {
+            let theme = Theme()
+            let setup = TabSetup()
+            
+            self.theme = theme
+            self.setup = setup
+        }
+        
+        func withTheme(_ aTheme: HomeSceneTheme) -> HomeSceneFactory & SceneFactory {
+            theme = aTheme
+            return self
+        }
+        
+        func build() -> UIViewController {
             let scene = HomeScene()
+            scene.theme = theme
+            scene.setup = setup
             return scene
         }
     }

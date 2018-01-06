@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import TNCore
 
 extension SupportScene {
     
-    class EntryWaypoint: AppEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint {
         
         struct Factory {
             
-            var scene: SupportSceneFactory
-            var nav: AppNavigationControllerFactory
+            var scene: SupportSceneFactory & SceneFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
@@ -33,7 +34,7 @@ extension SupportScene {
         
         func enter(from parent: UIViewController) -> Bool {
             let scene = factory.scene.build()
-            let nav = factory.nav.build(root: scene)
+            let nav = factory.nav.withRoot(scene).build()
             DispatchQueue.main.async {
                 parent.present(nav, animated: true, completion: nil)
             }
@@ -41,7 +42,7 @@ extension SupportScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

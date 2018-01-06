@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import Chika
+import TNCore
 
 class SignInSceneTests: XCTestCase {
     

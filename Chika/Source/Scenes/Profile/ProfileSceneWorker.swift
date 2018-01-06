@@ -17,11 +17,11 @@ protocol ProfileSceneWorker: class {
 protocol ProfileSceneWorkerOutput: class {
     
     func workerDidFetchProfile(_ person: Person)
-    func workerDidFetchProfileWithError(_ error: Error)
+    func workerDidFetchProfileWithError(_ error: Swift.Error)
     func workerDidReceiveContactRequest()
     func workerDidRemoveContactRequest()
     func workerDidSignOut()
-    func workerDidSignOutWithError(_ error: Error)
+    func workerDidSignOutWithError(_ error: Swift.Error)
 }
 
 extension ProfileScene {

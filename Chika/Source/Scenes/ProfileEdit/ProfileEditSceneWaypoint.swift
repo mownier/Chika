@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ProfileEditSceneEntryWaypoint: class {
     
     func withDelegate(_ : ProfileEditSceneDelegate?) -> ProfileEditSceneEntryWaypoint
-    func withPerson(_ : Person) -> AppEntryWaypoint
+    func withPerson(_ : Person) -> TNCore.EntryWaypoint
 }
 
 extension ProfileEditScene {
     
-    class EntryWaypoint: AppEntryWaypoint, ProfileEditSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, ProfileEditSceneEntryWaypoint {
         
         struct Factory {
             
@@ -52,7 +53,7 @@ extension ProfileEditScene {
             return true
         }
         
-        func withPerson(_ person: Person) -> AppEntryWaypoint {
+        func withPerson(_ person: Person) -> TNCore.EntryWaypoint {
             me = person
             return self
         }
@@ -63,7 +64,7 @@ extension ProfileEditScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

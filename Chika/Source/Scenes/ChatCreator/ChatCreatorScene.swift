@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ChatCreatorSceneInteraction: class {
     
@@ -32,7 +33,7 @@ class ChatCreatorScene: UIViewController {
     var flow: ChatCreatorSceneFlow
     var setup: ChatCreatorSceneSetup
     var cellFactory: ChatCreatorSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: ChatCreatorSceneTheme,
         data: ChatCreatorSceneData,
@@ -40,7 +41,7 @@ class ChatCreatorScene: UIViewController {
         flow: ChatCreatorSceneFlow,
         setup: ChatCreatorSceneSetup,
         cellFactory: ChatCreatorSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -166,7 +167,7 @@ extension ChatCreatorScene: ChatCreatorSceneWorkerOutput {
         let _ = waypoint.exit()
     }
     
-    func workerDidCreateChatWithError(_ error: Error) {
+    func workerDidCreateChatWithError(_ error: Swift.Error) {
         changeToDoneBarItem()
     }
     
@@ -176,7 +177,7 @@ extension ChatCreatorScene: ChatCreatorSceneWorkerOutput {
         tableView.reloadData()
     }
     
-    func workerDidFetchWithError(_ error: Error) {
+    func workerDidFetchWithError(_ error: Swift.Error) {
         tableView.reloadData()
     }
 }

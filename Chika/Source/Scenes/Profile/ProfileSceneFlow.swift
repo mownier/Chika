@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ProfileSceneFlow: class {
 
@@ -22,100 +23,102 @@ protocol ProfileSceneFlow: class {
 
 extension ProfileScene {
     
-    class Flow: ProfileSceneFlow {
+    class Flow: ProfileSceneFlow, SceneInjectable {
         
-        struct Waypoint {
+        class Factory {
             
-            var contactRequest: AppEntryWaypoint
-            var profileEdit: ProfileEditSceneEntryWaypoint
-            var emailUpdate: EmailUpdateSceneEntryWaypoint
-            var passwordChange: AppEntryWaypoint
-            var initial: AppRootWaypoint
-            var about: AppEntryWaypoint
-            var support: AppEntryWaypoint
-            var signOut: SignOutSceneEntryWaypoint
+            func about(withWaypoint waypoint: ExitWaypoint) -> AboutSceneFactory & SceneFactory {
+                let factory = AboutScene.Factory()
+                return factory
+            }
+            
+            func support(withWaypoint waypoint: ExitWaypoint) -> SupportSceneFactory & SceneFactory {
+                let factory = SupportScene.Factory()
+                return factory
+            }
+            
+            func signOut(withWaypoint waypoint: PresentWaypoint & ExitWaypoint) -> SignOutSceneFactory & SceneFactory {
+                let factory = SignOutScene.Factory()
+                return factory
+            }
+            
+            var initial: InitialSceneFactory & SceneFactory {
+                let factory = InitialScene.Factory()
+                return factory
+            }
         }
         
+//        struct Waypoint {
+//
+//            var contactRequest: TNCore.EntryWaypoint
+//            var profileEdit: ProfileEditSceneEntryWaypoint
+//            var emailUpdate: EmailUpdateSceneEntryWaypoint
+//            var passwordChange: TNCore.EntryWaypoint
+//        }
+        
         weak var scene: UIViewController?
-        var waypoint: Waypoint
+        var factory: Factory
         var application: UIApplication
         
-        init(waypoint: Waypoint, application: UIApplication) {
-            self.waypoint = waypoint
+        init(application: UIApplication = .shared) {
+            self.factory = Factory()
             self.application = application
         }
         
-        convenience init() {
-            let contactRequest = ContactRequestScene.EntryWaypoint()
-            let profileEdit = ProfileEditScene.EntryWaypoint()
-            let emailUpdate = EmailUpdateScene.EntryWaypoint()
-            let passwordChange = PasswordChangeScene.EntryWaypoint()
-            let initial = InitialScene.RootWaypoint()
-            let about = AboutScene.EntryWaypoint()
-            let support = SupportScene.EntryWaypoint()
-            let signOut = SignOutScene.EntryWaypoint()
-            let waypoint = Waypoint(contactRequest: contactRequest, profileEdit: profileEdit, emailUpdate: emailUpdate, passwordChange: passwordChange, initial: initial, about: about, support: support, signOut: signOut)
-            self.init(waypoint: waypoint, application: UIApplication.shared)
-        }
-        
         func goToContactRequest() -> Bool {
-            guard let scene = scene else {
-                return false
-            }
-            
-            return waypoint.contactRequest.enter(from: scene)
+            return true
         }
         
         func goToProfileEdit(withPerson me: Person, delegate: ProfileEditSceneDelegate?) -> Bool {
-            guard let scene = scene else {
-                return false
-            }
-            
-            return waypoint.profileEdit.withDelegate(delegate).withPerson(me).enter(from: scene)
+            return true
         }
         
         func goToEmailUpdate(withDelegate delegate: EmailUpdateSceneDelegate?) -> Bool {
-            guard let scene = scene else {
-                return false
-            }
-            
-            return waypoint.emailUpdate.withDelegate(delegate).enter(from: scene)
+            return true
         }
         
-        func goToPasswordChange() -> Bool {
-            guard let scene = scene else {
-                return false
-            }
-            
-            return waypoint.passwordChange.enter(from: scene)
+        func goToPasswordChange() -> Bool {            
+            return true
         }
         
         func goToInitial() -> Bool {
-            return waypoint.initial.makeRoot(from: application.keyWindow)
+            let waypoint = WindowWaypointSource()
+            let initialScene = factory.initial.build()
+            return waypoint.withWindow(scene?.view.window).withScene(initialScene).makeRoot()
         }
         
         func goToAbout() -> Bool {
-            guard let scene = scene else {
+            guard let parent = scene else {
                 return false
             }
             
-            return waypoint.about.enter(from: scene)
+            let waypoint = PushWaypointSource()
+            let aboutScene = factory.about(withWaypoint: waypoint).build()
+            return waypoint.withScene(aboutScene).enter(from: parent)
         }
         
         func goToSupport() -> Bool {
-            guard let scene = scene else {
+            guard let parent = scene else {
                 return false
             }
             
-            return waypoint.support.enter(from: scene)
+            let waypoint = PushWaypointSource()
+            let aboutScene = factory.support(withWaypoint: waypoint).build()
+            return waypoint.withScene(aboutScene).enter(from: parent)
         }
         
         func goToSignOut(withDelegate delegate: SignOutSceneDelegate?) -> Bool {
-            guard let scene = scene else {
+            guard let parent = scene else {
                 return false
             }
             
-            return waypoint.signOut.withDelegate(delegate).enter(from: scene)
+            let waypoint = PresentWaypointSource()
+            let aboutScene = factory.signOut(withWaypoint: waypoint).build()
+            return waypoint.withScene(aboutScene).enter(from: parent)
+        }
+        
+        func injectScene(_ aScene: UIViewController) {
+            scene = aScene
         }
     }
 }

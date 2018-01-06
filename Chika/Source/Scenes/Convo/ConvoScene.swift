@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import TNCore
 
 @objc protocol ConvoSceneInteraction: class {
     
@@ -34,7 +35,7 @@ class ConvoScene: UIViewController {
     var theme: ConvoSceneTheme
     var worker: ConvoSceneWorker
     var flow: ConvoSceneFlow
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     var chat: Chat
     var cellManager: ConvoSceneCellManager
     var data: ConvoSceneData
@@ -122,7 +123,7 @@ class ConvoScene: UIViewController {
         notifCenter.removeObserver(self)
     }
     
-    init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: AppExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData, setup: ConvoSceneSetup) {
+    init(theme: ConvoSceneTheme, worker: ConvoSceneWorker, flow: ConvoSceneFlow, waypoint: TNCore.ExitWaypoint, chat: Chat, cellManager: CellManager, data: ConvoSceneData, setup: ConvoSceneSetup) {
         self.theme = theme
         self.worker = worker
         self.flow = flow
@@ -594,7 +595,7 @@ extension ConvoScene: ConvoSceneWorkerOutput {
         tableView.setContentOffset(newOffset, animated: false)
     }
     
-    func workerDidFetchWithError(_ error: Error) {
+    func workerDidFetchWithError(_ error: Swift.Error) {
         tableView.reloadData()
     }
     
@@ -604,7 +605,7 @@ extension ConvoScene: ConvoSceneWorkerOutput {
         scrollToBottom()
     }
     
-    func workerDidSendWithError(_ error: Error) {
+    func workerDidSendWithError(_ error: Swift.Error) {
         tableView.reloadData()
     }
     

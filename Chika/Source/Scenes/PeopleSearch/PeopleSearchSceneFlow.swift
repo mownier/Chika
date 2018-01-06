@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 protocol PeopleSearchSceneFlow: class {
 
@@ -21,7 +22,7 @@ extension PeopleSearchScene {
         struct Waypoint {
     
             var convo: ConvoSceneEntryWaypoint
-            var contactRequest: AppEntryWaypoint
+            var contactRequest: TNCore.EntryWaypoint
         }
     
         weak var scene: UIViewController?
@@ -33,7 +34,7 @@ extension PeopleSearchScene {
     
         convenience init() {
             let convo = ConvoScene.EntryWaypoint()
-            let contactRequest = ContactRequestScene.EntryWaypoint()
+            let contactRequest = PresentWaypointSource()
             let waypoint = Waypoint(convo: convo, contactRequest: contactRequest)
             self.init(waypoint: waypoint)
         }

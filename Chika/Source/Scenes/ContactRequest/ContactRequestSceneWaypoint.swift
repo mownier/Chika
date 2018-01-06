@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import TNCore
 
 extension ContactRequestScene {
     
-    class EntryWaypoint: AppEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint {
         
         struct Factory {
             
             var scene: ContactRequestSceneFactory
-            var nav: AppNavigationControllerFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
@@ -39,7 +40,7 @@ extension ContactRequestScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

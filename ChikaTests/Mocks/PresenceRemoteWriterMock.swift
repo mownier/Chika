@@ -14,7 +14,7 @@ class PresenceRemoteWriterMock: PresenceRemoteWriter {
     
     func makeOnline(callback: @escaping (RemoteWriterResult<String>) -> Void) {
         guard !hasError else {
-            callback(.err(ServiceError("forced error")))
+            callback(.err(Error("forced error")))
             return
         }
         
@@ -23,7 +23,7 @@ class PresenceRemoteWriterMock: PresenceRemoteWriter {
     
     func makeOffline(callback: @escaping (RemoteWriterResult<String>) -> Void) {
         guard !hasError else {
-            callback(.err(ServiceError("forced error")))
+            callback(.err(Error("forced error")))
             return
         }
         

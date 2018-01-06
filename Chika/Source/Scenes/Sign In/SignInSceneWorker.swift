@@ -6,6 +6,8 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import TNCore
+
 protocol SignInSceneWorker: class {
     
     func signIn(email: String?, pass: String?)
@@ -14,7 +16,7 @@ protocol SignInSceneWorker: class {
 protocol SignInSceneWorkerOutput: class {
     
     func workerDidSignInOK()
-    func workerDidSignInWithError(_ error: Error)
+    func workerDidSignInWithError(_ error: Swift.Error)
 }
 
 extension SignInScene {
@@ -30,7 +32,7 @@ extension SignInScene {
         
         func signIn(email: String?, pass: String?) {
             guard email != nil, pass != nil else {
-                output?.workerDidSignInWithError(AppError("email and pass must not be empty"))
+                output?.workerDidSignInWithError(Error("email and pass must not be empty"))
                 return
             }
             

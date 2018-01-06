@@ -18,7 +18,7 @@ protocol ContactsSceneWorker: class {
 protocol ContactsSceneWorkerOutput: class {
     
     func workerDidFetch(contacts: [Contact])
-    func workerDidFetchWithError(_ error: Error)
+    func workerDidFetchWithError(_ error: Swift.Error)
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
     func workerDidAddContact(_ contact: Contact)
     func workerDidRemoveContact(_ personID: String)

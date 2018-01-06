@@ -39,7 +39,7 @@ class FirebaseDatabaseRefMock: DatabaseReference {
     
     override func updateChildValues(_ values: [AnyHashable : Any], withCompletionBlock block: @escaping (Error?, DatabaseReference) -> Void) {
         guard isOK else {
-            block(ServiceError("forced error"), self)
+            block(Error("forced error"), self)
             return
         }
         

@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ContactSelectorSceneEntryWaypoint {
     
     func withDelegate(_ aDelegate: ContactSelectorSceneDelegate?) -> ContactSelectorSceneEntryWaypoint
-    func withExcludedPersons(_ persons: [Person]) -> AppEntryWaypoint
+    func withExcludedPersons(_ persons: [Person]) -> TNCore.EntryWaypoint
 }
 
 extension ContactSelectorScene {
     
-    class EntryWaypoint: AppEntryWaypoint, ContactSelectorSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, ContactSelectorSceneEntryWaypoint {
         
         struct Factory {
             
@@ -56,13 +57,13 @@ extension ContactSelectorScene {
             return self
         }
         
-        func withExcludedPersons(_ persons: [Person]) -> AppEntryWaypoint {
+        func withExcludedPersons(_ persons: [Person]) -> TNCore.EntryWaypoint {
             excludedPersons = persons
             return self
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

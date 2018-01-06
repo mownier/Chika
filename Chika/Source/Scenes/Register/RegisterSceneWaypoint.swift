@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import TNCore
 
 extension RegisterScene {
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         
@@ -24,7 +25,7 @@ extension RegisterScene {
         }
     }
     
-    class EntryWaypoint: AppEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint {
         
         var sceneFactory: RegisterSceneFactory
         

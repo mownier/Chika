@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ConvoSceneEntryWaypoint {
     
@@ -15,7 +16,7 @@ protocol ConvoSceneEntryWaypoint {
 
 extension ConvoScene {
 
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         
@@ -34,7 +35,7 @@ extension ConvoScene {
         struct Factory {
             
             var scene: ConvoSceneFactory
-            var nav: AppNavigationControllerFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
@@ -53,7 +54,7 @@ extension ConvoScene {
         func enter(from parent: UIViewController, chat: Chat, delegate: ConvoSceneDelegate?) -> Bool {
             let scene = factory.scene.build(chat: chat)
             scene.delegate = delegate
-            let nav = factory.nav.build(root: scene)
+            let nav = factory.nav.withRoot(scene).build()
             DispatchQueue.main.async {
                 parent.present(nav, animated: true, completion: nil)
             }

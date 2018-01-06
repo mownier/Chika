@@ -7,29 +7,50 @@
 //
 
 import UIKit
+import TNCore
 
 protocol SignOutSceneFactory: class {
 
-    func build(withDelegate: SignOutSceneDelegate?) -> UIViewController
+    func withTheme(_ theme: SignOutSceneTheme) -> SignOutSceneFactory & SceneFactory
+    func withDelegate(_ delegate: SignOutSceneDelegate?) -> SignOutSceneFactory & SceneFactory
 }
 
 extension SignOutScene {
     
-    class Factory: SignOutSceneFactory {
+    class Factory: SignOutSceneFactory, SceneFactory {
+        
+        var theme: SignOutSceneTheme
+        var delegate: SignOutSceneDelegate?
         
         var title: String
         var message: String
         
-        init(title: String = "Sign Out", message: String = "Are you sure?") {
-            self.title = title
-            self.message = message
+        init() {
+            let theme = Theme()
+            
+            self.theme = theme
+            
+            self.title = "Sign Out"
+            self.message = "Are you sure?"
         }
         
-        func build(withDelegate delegate: SignOutSceneDelegate?) -> UIViewController {
+        func build() -> UIViewController {
             let scene = SignOutScene(title: title, message: message, preferredStyle: .actionSheet)
             scene.delegate = delegate
             scene.buildActions()
             return scene
         }
+        
+        func withTheme(_ aTheme: SignOutSceneTheme) -> SignOutSceneFactory & SceneFactory {
+            theme = aTheme
+            return self
+        }
+        
+        func withDelegate(_ aDelegate: SignOutSceneDelegate?) -> SignOutSceneFactory & SceneFactory {
+            delegate = aDelegate
+            return self
+        }
     }
 }
+
+

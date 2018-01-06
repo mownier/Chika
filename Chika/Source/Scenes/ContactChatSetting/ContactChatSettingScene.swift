@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ContactChatSettingSceneInteraction: class {
     
@@ -40,7 +41,7 @@ class ContactChatSettingScene: UIViewController {
     var worker: ContactChatSettingSceneWorker
     var flow: ContactChatSettingSceneFlow
     var setup: ContactChatSettingSceneSetup
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     var isEditingTitle: Bool = false {
         didSet {
@@ -58,7 +59,7 @@ class ContactChatSettingScene: UIViewController {
         worker: ContactChatSettingSceneWorker,
         flow: ContactChatSettingSceneFlow,
         setup: ContactChatSettingSceneSetup,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -278,7 +279,7 @@ extension ContactChatSettingScene: ContactChatSettingSceneWorkerOutput {
         delegate?.contactChatSettingSceneDidUpdateTitle(title)
     }
     
-    func workerDidUpdateTitleWithError(_ error: Error) {
+    func workerDidUpdateTitleWithError(_ error: Swift.Error) {
         titleLabel.text = data.item.contact.chat.title
         view.setNeedsLayout()
         view.layoutIfNeeded()

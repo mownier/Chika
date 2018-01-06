@@ -1,5 +1,5 @@
 //
-//  AppExitWaypointMock.swift
+//  TNCore.ExitWaypointMock.swift
 //  ChikaTests
 //
 //  Created by Mounir Ybanez on 11/19/17.
@@ -7,8 +7,9 @@
 //
 
 @testable import Chika
+import TNCore
 
-class AppExitWaypointMock: AppExitWaypoint {
+class AppExitWaypointMock: TNCore.ExitWaypoint {
 
     var isExitCalled: Bool
     var isExitOK: Bool

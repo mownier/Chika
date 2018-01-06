@@ -20,7 +20,7 @@ class SignInSceneWorkerOutputMock: SignInSceneWorkerOutput {
         self.exp = exp
     }
     
-    func workerDidSignInWithError(_ error: Error) {
+    func workerDidSignInWithError(_ error: Swift.Error) {
         err?(error)
         exp.fulfill()
     }

@@ -1,5 +1,5 @@
 //
-//  AppRootWaypointMock.swift
+//  TNCore.RootWaypointMock.swift
 //  ChikaTests
 //
 //  Created by Mounir Ybanez on 11/24/17.
@@ -9,7 +9,7 @@
 import UIKit
 @testable import Chika
 
-class AppRootWaypointMock: AppRootWaypoint {
+class TNCore.RootWaypointMock: TNCore.RootWaypoint {
 
     var isMakeRootCalled: Bool = false
     var isMakeRootOK: Bool = false

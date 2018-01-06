@@ -6,6 +6,8 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import TNCore
+
 protocol PeopleSearchSceneWorker: class {
 
     func listenOnActiveStatus(for personIDs: [String])
@@ -22,10 +24,10 @@ protocol PeopleSearchSceneWorker: class {
 protocol PeopleSearchSceneWorkerOutput: class {
 
     func workerDidChangeActiveStatus(for personID: String, isActive: Bool)
-    func workerDidRequestContactWithError(_ error: Error, personID: String)
+    func workerDidRequestContactWithError(_ error: Swift.Error, personID: String)
     func workerDidRequestContactOK(_ personID: String)
     func workerDidSearchPeopleWithObjects(_ objects: [PersonSearchObject])
-    func workerDidSearchPeopleWithError(_ error: Error)
+    func workerDidSearchPeopleWithError(_ error: Swift.Error)
     func workerDidAddContact(person: Person, chat: Chat)
     func workerDidRemoveContact(withPersonID: String)
     func workerDidReceiveContactRequest(from personID: String)
@@ -117,7 +119,7 @@ extension PeopleSearchScene {
         
         func searchPeople(withKeyword keyword: String?) {
             guard let keyword = keyword, !keyword.isEmpty else {
-                let error = AppError("no search keyword")
+                let error = Error("no search keyword")
                 output?.workerDidSearchPeopleWithError(error)
                 return
             }

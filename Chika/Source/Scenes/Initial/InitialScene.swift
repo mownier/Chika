@@ -8,39 +8,15 @@
 
 import UIKit
 
-@objc protocol InitialSceneInteraction: class {
-    
-    func didTapSignIn()
-    func didTapRegister()
-}
-
 class InitialScene: UIViewController {
 
     var appNameLabel: UILabel!
-    
     var signInButton: UIButton!
     var registerButton: UIButton!
     
-    var theme: InitialSceneTheme!
     var flow: InitialSceneFlow!
-    
-    init(theme: InitialSceneTheme, flow: InitialSceneFlow) {
-        self.theme = theme
-        self.flow = flow
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        let flow = Flow()
-        self.init(theme: Theme(), flow: flow)
-        flow.scene = self
-    }
-    
-    convenience required init?(coder aDecoder: NSCoder) {
-        let flow = Flow()
-        self.init(theme: Theme(), flow: flow)
-        flow.scene = self
-    }
+    var theme: InitialSceneTheme!
+    var interaction: InitialSceneInteraction!
     
     override func loadView() {
         super.loadView()
@@ -55,7 +31,7 @@ class InitialScene: UIViewController {
         signInButton.layer.borderColor = theme.signInBorderColor.cgColor
         signInButton.layer.borderWidth = theme.signInBorderWidth
         signInButton.layer.cornerRadius = 4
-        signInButton.addTarget(self, action: #selector(self.didTapSignIn), for: .touchUpInside)
+        signInButton.addTarget(interaction, action: #selector(interaction.didTapSignIn), for: .touchUpInside)
         
         registerButton = UIButton()
         registerButton.setTitle("Register", for: .normal)
@@ -65,7 +41,7 @@ class InitialScene: UIViewController {
         registerButton.layer.borderColor = theme.registerBorderColor.cgColor
         registerButton.layer.borderWidth = theme.registerBorderWidth
         registerButton.layer.cornerRadius = 4
-        registerButton.addTarget(self, action: #selector(self.didTapRegister), for: .touchUpInside)
+        registerButton.addTarget(interaction, action: #selector(interaction.didTapRegister), for: .touchUpInside)
         
         appNameLabel = UILabel()
         appNameLabel.text = "Chika"
@@ -94,16 +70,5 @@ class InitialScene: UIViewController {
         
         rect.origin.y = view.statusBarFrame().height
         appNameLabel.frame = rect
-    }
-}
-
-extension InitialScene: InitialSceneInteraction {
-    
-    func didTapSignIn() {
-        let _ = flow.goToSignIn()
-    }
-    
-    func didTapRegister() {
-        let _ = flow.goToRegister()
     }
 }

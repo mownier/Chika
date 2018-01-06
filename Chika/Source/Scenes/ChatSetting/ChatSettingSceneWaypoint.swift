@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ChatSettingSceneEntryWaypoint: class {
     
-    func withChat(_ chat: Chat) -> AppEntryWaypoint
+    func withChat(_ chat: Chat) -> TNCore.EntryWaypoint
     func withParticipantShownLimit(_ limit: UInt) -> ChatSettingSceneEntryWaypoint
     func withDelegate(_ delegate: ChatSettingSceneDelegate?) -> ChatSettingSceneEntryWaypoint
 }
 
 extension ChatSettingScene {
     
-    class EntryWaypoint: AppEntryWaypoint, ChatSettingSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, ChatSettingSceneEntryWaypoint {
         
         struct Factory {
             
@@ -52,7 +53,7 @@ extension ChatSettingScene {
             return true
         }
         
-        func withChat(_ aChat: Chat) -> AppEntryWaypoint {
+        func withChat(_ aChat: Chat) -> TNCore.EntryWaypoint {
             chat = aChat
             return self
         }
@@ -68,7 +69,7 @@ extension ChatSettingScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

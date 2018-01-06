@@ -14,7 +14,7 @@ protocol EmailUpdateSceneWorker: class {
 protocol EmailUpdateSceneWorkerOutput: class {
 
     func workerDidChangeEmail(_ email: String)
-    func workerDidChangeEmailWithError(_ error: Error)
+    func workerDidChangeEmailWithError(_ error: Swift.Error)
 }
 
 extension EmailUpdateScene {

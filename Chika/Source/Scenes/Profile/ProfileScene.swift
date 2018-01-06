@@ -16,12 +16,12 @@ import UIKit
 
 class ProfileScene: UIViewController {
 
-    var theme: ProfileSceneTheme
-    var worker: ProfileSceneWorker
-    var data: ProfileSceneData
-    var flow: ProfileSceneFlow
-    var setup: ProfileSceneSetup
-    var cellFactory: ProfileSceneCellFactory
+    var flow: ProfileSceneFlow!
+    var data: ProfileSceneData!
+    var theme: ProfileSceneTheme!
+    var setup: ProfileSceneSetup!
+    var worker: ProfileSceneWorker!
+    var cellFactory: ProfileSceneCellFactory!
     
     var headerView: ProfileSceneHeaderView!
     var tableView: UITableView!
@@ -30,32 +30,6 @@ class ProfileScene: UIViewController {
     var badge: UILabel!
     
     var isAppeared: Bool = false
-    
-    init(theme: ProfileSceneTheme, worker: ProfileSceneWorker, data: ProfileSceneData, flow: ProfileSceneFlow, setup: ProfileSceneSetup, cellFactory: ProfileSceneCellFactory) {
-        self.theme = theme
-        self.worker = worker
-        self.data = data
-        self.flow = flow
-        self.setup = setup
-        self.cellFactory = cellFactory
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        let theme = Theme()
-        let worker = Worker()
-        let data = Data()
-        let flow = Flow()
-        let setup = Setup()
-        let cellFactory = CellFactory()
-        self.init(theme: theme, worker: worker, data: data, flow: flow, setup: setup, cellFactory: cellFactory)
-        worker.output = self
-        flow.scene = self
-    }
-    
-    convenience required init?(coder aDecoder: NSCoder) {
-        self.init()
-    }
     
     override func loadView() {
         super.loadView()
@@ -218,7 +192,7 @@ extension ProfileScene: ProfileSceneWorkerOutput {
         tableView.reloadData()
     }
     
-    func workerDidFetchProfileWithError(_ error: Error) {
+    func workerDidFetchProfileWithError(_ error: Swift.Error) {
         tableView.reloadData()
     }
     
@@ -247,7 +221,7 @@ extension ProfileScene: ProfileSceneWorkerOutput {
         let _ = flow.goToInitial()
     }
     
-    func workerDidSignOutWithError(_ error: Error) {
+    func workerDidSignOutWithError(_ error: Swift.Error) {
         tableView.reloadData()
         showError(withMessage: "\(error)")
     }

@@ -8,13 +8,14 @@
 
 import FirebaseDatabase
 import FirebaseAuth
+import TNCore
 
 protocol PersonRemoteService: class {
     
-    func add(email: String, id: String, completion: @escaping (ServiceResult<String>) -> Void)
-    func getProfile(of personID: String, completion: @escaping(ServiceResult<Person>) -> Void)
-    func getMyProfile(completion: @escaping(ServiceResult<Person>) -> Void)
-    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (ServiceResult<Person>) -> Void)
+    func add(email: String, id: String, completion: @escaping (Result<String>) -> Void)
+    func getProfile(of personID: String, completion: @escaping(Result<Person>) -> Void)
+    func getMyProfile(completion: @escaping(Result<Person>) -> Void)
+    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (Result<Person>) -> Void)
 }
 
 class PersonRemoteServiceProvider: PersonRemoteService {
@@ -29,7 +30,7 @@ class PersonRemoteServiceProvider: PersonRemoteService {
         self.personWriter = personWriter
     }
     
-    func add(email: String, id: String, completion: @escaping (ServiceResult<String>) -> Void) {
+    func add(email: String, id: String, completion: @escaping (Result<String>) -> Void) {
         personWriter.add(email: email, id: id) { result in
             switch result {
             case .err(let info):
@@ -41,9 +42,9 @@ class PersonRemoteServiceProvider: PersonRemoteService {
         }
     }
     
-    func getProfile(of personID: String, completion: @escaping (ServiceResult<Person>) -> Void) {
+    func getProfile(of personID: String, completion: @escaping (Result<Person>) -> Void) {
         guard !personID.isEmpty else {
-            completion(.err(ServiceError("person ID is empty")))
+            completion(.err(Error("person ID is empty")))
             return
         }
         
@@ -51,7 +52,7 @@ class PersonRemoteServiceProvider: PersonRemoteService {
             let persons = Array(Set(persons.filter({ $0.id == personID })))
             
             guard !persons.isEmpty else {
-                completion(.err(ServiceError("person not found")))
+                completion(.err(Error("person not found")))
                 return
             }
             
@@ -59,38 +60,38 @@ class PersonRemoteServiceProvider: PersonRemoteService {
         }
     }
     
-    func getMyProfile(completion: @escaping (ServiceResult<Person>) -> Void) {
+    func getMyProfile(completion: @escaping (Result<Person>) -> Void) {
         getProfile(of: meID, completion: completion)
     }
     
-    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (ServiceResult<Person>) -> Void) {
+    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (Result<Person>) -> Void) {
         guard !meID.isEmpty else {
-            completion(.err(ServiceError("current user ID is empty")))
+            completion(.err(Error("current user ID is empty")))
             return
         }
         
         guard oldValue.id == meID else {
-            completion(.err(ServiceError("old personal info is not yours")))
+            completion(.err(Error("old personal info is not yours")))
             return
         }
         
         guard newValue.id == meID else {
-            completion(.err(ServiceError("new personal info is not yours")))
+            completion(.err(Error("new personal info is not yours")))
             return
         }
         
         if newValue.displayName.isEmpty, newValue.name.isEmpty {
-            completion(.err(ServiceError("chika name and display name are empty")))
+            completion(.err(Error("chika name and display name are empty")))
             return
         }
         
         if newValue.displayName.isEmpty {
-            completion(.err(ServiceError("display name is empty")))
+            completion(.err(Error("display name is empty")))
             return
         }
         
         if newValue.displayName.isEmpty {
-            completion(.err(ServiceError("chika name is empty")))
+            completion(.err(Error("chika name is empty")))
             return
         }
         

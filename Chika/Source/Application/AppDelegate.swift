@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import TNCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         presenceSwitcher = PresenceSwitcher()
         
-        let waypoint = RootWaypoint()
-        let _ = waypoint.makeRoot(from: window)
+//        let waypoint = RootWaypoint()
+//        let _ = waypoint.makeRoot(from: window)
         
         return true
     }

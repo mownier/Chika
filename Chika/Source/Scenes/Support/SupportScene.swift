@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol SupportSceneInteraction: class {
     
@@ -20,14 +21,14 @@ class SupportScene: UITableViewController {
     var flow: SupportSceneFlow
     var setup: SupportSceneSetup
     var cellFactory: SupportSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: SupportSceneTheme,
         data: SupportSceneData,
         flow: SupportSceneFlow,
         setup: SupportSceneSetup,
         cellFactory: SupportSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.flow = flow

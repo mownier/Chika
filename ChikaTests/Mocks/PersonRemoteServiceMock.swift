@@ -7,29 +7,30 @@
 //
 
 @testable import Chika
+import TNCore
 
 class PersonRemoteServiceMock: PersonRemoteService {
 
     var isOK: Bool = true
     
-    func add(email: String, id: String, completion: @escaping (ServiceResult<String>) -> Void) {
+    func add(email: String, id: String, completion: @escaping (Result<String>) -> Void) {
         if isOK {
             completion(.ok("OK"))
         
         } else {
-            completion(.err(ServiceError("Person Remote Service Error")))
+            completion(.err(Error("Person Remote Service Error")))
         }
     }
     
-    func getProfile(of personID: String, completion: @escaping (ServiceResult<Person>) -> Void) {
+    func getProfile(of personID: String, completion: @escaping (Result<Person>) -> Void) {
         
     }
     
-    func getMyProfile(completion: @escaping (ServiceResult<Person>) -> Void) {
+    func getMyProfile(completion: @escaping (Result<Person>) -> Void) {
         
     }
     
-    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (ServiceResult<Person>) -> Void) {
+    func saveMyInfo(newValue: Person, oldValue: Person, completion: @escaping (Result<Person>) -> Void) {
         
     }
 }

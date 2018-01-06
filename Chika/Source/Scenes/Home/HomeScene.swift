@@ -13,22 +13,6 @@ class HomeScene: UITabBarController {
     var theme: HomeSceneTheme!
     var setup: HomeSceneTabSetup!
     
-    init(theme: HomeSceneTheme, setup: HomeSceneTabSetup) {
-        self.theme = theme
-        self.setup = setup
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init() {
-        let theme = Theme()
-        let setup = TabSetup()
-        self.init(theme: theme, setup: setup)
-    }
-    
-    convenience required init?(coder aDecoder: NSCoder) {
-        self.init()
-    }
-    
     override func loadView() {
         super.loadView()
         

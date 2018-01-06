@@ -31,8 +31,8 @@ class InitialSceneFlowTests: XCTestCase {
     // CONTEXT: goToSignIn function should call the enter
     // function in waypoint.signIn given that there is a scene
     func testGoToSignInB() {
-        let signIn = AppEntryWaypointMock()
-        let register = AppEntryWaypointMock()
+        let signIn = TNCore.EntryWaypointMock()
+        let register = TNCore.EntryWaypointMock()
         let waypoint = InitialScene.Flow.Waypoint(signIn: signIn, register: register)
         let flow = InitialScene.Flow(waypoint: waypoint)
         let scene = UIViewController()
@@ -54,8 +54,8 @@ class InitialSceneFlowTests: XCTestCase {
     // CONTEXT: goToRegister function should call the enter
     // function in waypoint.register given that there is a scene
     func testGoToRegisterB() {
-        let signIn = AppEntryWaypointMock()
-        let register = AppEntryWaypointMock()
+        let signIn = TNCore.EntryWaypointMock()
+        let register = TNCore.EntryWaypointMock()
         let waypoint = InitialScene.Flow.Waypoint(signIn: signIn, register: register)
         let flow = InitialScene.Flow(waypoint: waypoint)
         let scene = UIViewController()

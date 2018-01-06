@@ -7,22 +7,23 @@
 //
 
 import UIKit
+import TNCore
 
 protocol ChatCreatorSceneEntryWaypoint: class {
     
     func withDelegate(_ what: ChatCreatorSceneDelegate?) -> ChatCreatorSceneEntryWaypoint
     func withMinimumOtherParticipantLimit(_ what: UInt) -> ChatCreatorSceneEntryWaypoint
-    func withDefaultParticipants(_ what: [Person]) -> AppEntryWaypoint
+    func withDefaultParticipants(_ what: [Person]) -> TNCore.EntryWaypoint
 }
 
 extension ChatCreatorScene {
     
-    class EntryWaypoint: AppEntryWaypoint, ChatCreatorSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, ChatCreatorSceneEntryWaypoint {
         
         struct Factory {
             
             var scene: ChatCreatorSceneFactory
-            var nav: AppNavigationControllerFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
@@ -45,12 +46,12 @@ extension ChatCreatorScene {
         
         func enter(from parent: UIViewController) -> Bool {
             let scene = factory.scene.build(withDefaultParticipants: participants, minimumOtherParticipantLimit: limit, delegate: delegate)
-            let nav = factory.nav.build(root: scene)
+            let nav = factory.nav.withRoot(scene).build()
             parent.present(nav, animated: true, completion: nil)
             return true
         }
         
-        func withDefaultParticipants(_ what: [Person]) -> AppEntryWaypoint {
+        func withDefaultParticipants(_ what: [Person]) -> TNCore.EntryWaypoint {
             participants = what
             return self
         }
@@ -66,7 +67,7 @@ extension ChatCreatorScene {
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

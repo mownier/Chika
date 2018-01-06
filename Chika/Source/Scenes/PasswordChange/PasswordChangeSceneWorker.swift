@@ -14,7 +14,7 @@ protocol PasswordChangeSceneWorker: class {
 protocol PasswordChangeSceneWorkerOutput: class {
 
     func workerDidChangePassword()
-    func workerDidChangePasswordWithError(_ error: Error)
+    func workerDidChangePasswordWithError(_ error: Swift.Error)
 }
 
 extension PasswordChangeScene {

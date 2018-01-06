@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import TNCore
 
 extension InitialScene {
     
-    class RootWaypoint: AppRootWaypoint {
+    class RootWaypoint: WindowWaypoint, TNCore.RootWaypoint {        
         
         struct Factory {
             
             var initial: InitialSceneFactory
-            var nav: AppNavigationControllerFactory
+            var nav: NavigationControllerFactory
         }
         
         var factory: Factory
+        var window: UIWindow?
         
         init(factory: Factory) {
             self.factory = factory
@@ -26,19 +28,25 @@ extension InitialScene {
         
         convenience init() {
             let initial = InitialScene.Factory()
-            let nav = UINavigationController.Factory(navBarTheme: UINavigationBar.Theme.Empty())
+            let nav = UINavigationController.Factory()
             let factory = Factory(initial: initial, nav: nav)
             self.init(factory: factory)
         }
         
-        func makeRoot(from window: UIWindow?) -> Bool {
-            guard let window = window else {
-                return false
-            }
-            
+        func withWindow(_ aWindow: UIWindow?) -> WindowWaypoint {
+            window = aWindow
+            return self
+        }
+        
+        func withScene(_ scene: UIViewController) -> RootWaypoint {
+            return self
+        }
+        
+        func makeRoot() -> Bool {
             let scene = factory.initial.build()
-            let nav = factory.nav.build(root: scene)
-            window.rootViewController = nav
+            let nav = factory.nav.withRoot(scene).build()
+            window?.rootViewController = nav
+            window = nil
             return true
         }
     }

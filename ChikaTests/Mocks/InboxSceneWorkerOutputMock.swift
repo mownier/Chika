@@ -17,7 +17,7 @@ class InboxSceneWorkerOutputMock: InboxSceneWorkerOutput {
         self.chats = chats
     }
     
-    func workerDidFetchWithError(_ error: Error) {
+    func workerDidFetchWithError(_ error: Swift.Error) {
         self.error = error
     }
     

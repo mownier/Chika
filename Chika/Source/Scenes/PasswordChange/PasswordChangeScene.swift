@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol PasswordChangeSceneInteraction: class {
     
@@ -28,12 +29,12 @@ class PasswordChangeScene: UIViewController {
     var theme: PasswordChangeSceneTheme
     var worker: PasswordChangeSceneWorker
     var setup: PasswordChangeSceneSetup
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: PasswordChangeSceneTheme,
         worker: PasswordChangeSceneWorker,
         setup: PasswordChangeSceneSetup,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.worker = worker
         self.setup = setup
@@ -236,7 +237,7 @@ extension PasswordChangeScene: PasswordChangeSceneWorkerOutput {
         showToast(withText: "PASSWORD CHANGED")
     }
     
-    func workerDidChangePasswordWithError(_ error: Error) {
+    func workerDidChangePasswordWithError(_ error: Swift.Error) {
         changeToUpdateBarItem()
         showError(withMessage: "\(error)")
     }

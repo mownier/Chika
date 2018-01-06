@@ -7,13 +7,14 @@
 //
 
 import FirebaseDatabase
+import TNCore
 
 protocol ChatRemoteService: class {
 
-    func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void)
-    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (ServiceResult<([Message], Double?)>) -> Void)
-    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (ServiceResult<Message>) -> Void)
-    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (ServiceResult<Chat>) -> Void)
+    func getInbox(for userID: String, completion: @escaping (Result<[Chat]>) -> Void)
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (Result<([Message], Double?)>) -> Void)
+    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (Result<Message>) -> Void)
+    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (Result<Chat>) -> Void)
 }
 
 class ChatRemoteServiceProvider: ChatRemoteService {
@@ -30,10 +31,10 @@ class ChatRemoteServiceProvider: ChatRemoteService {
         self.chatWriter = chatWriter
     }
     
-    func getInbox(for userID: String, completion: @escaping (ServiceResult<[Chat]>) -> Void) {
+    func getInbox(for userID: String, completion: @escaping (Result<[Chat]>) -> Void) {
         inboxQuery.getInbox(for: userID) { chats in
             guard !chats.isEmpty else {
-                completion(.err(ServiceError("can not get inbox")))
+                completion(.err(Error("can not get inbox")))
                 return
             }
             
@@ -41,10 +42,10 @@ class ChatRemoteServiceProvider: ChatRemoteService {
         }
     }
     
-    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (ServiceResult<([Message], Double?)>) -> Void) {
+    func getMessages(for chatID: String, offset: Double, limit: UInt, completion: @escaping (Result<([Message], Double?)>) -> Void) {
         chatMessagesQuery.getMessages(for: chatID, offset: offset, limit: limit) { messages, nextOffset in
             guard !messages.isEmpty else {
-                completion(.err(ServiceError("no chat messages")))
+                completion(.err(Error("no chat messages")))
                 return
             }
             
@@ -52,7 +53,7 @@ class ChatRemoteServiceProvider: ChatRemoteService {
         }
     }
     
-    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (ServiceResult<Message>) -> Void) {
+    func writeMessage(for chatID: String, participantIDs: [String], content: String, completion: @escaping (Result<Message>) -> Void) {
         messageWriter.postMessage(for: chatID, participantIDs: participantIDs, content: content) { result in
             switch result {
             case .err(let info):
@@ -64,7 +65,7 @@ class ChatRemoteServiceProvider: ChatRemoteService {
         }
     }
     
-    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (ServiceResult<Chat>) -> Void) {
+    func create(withTitle title: String, message: String, participantIDs: [String], completion: @escaping (Result<Chat>) -> Void) {
         chatWriter.create(withTitle: title, message: message, participantIDs: participantIDs) { result in
             switch result {
             case .err(let info):

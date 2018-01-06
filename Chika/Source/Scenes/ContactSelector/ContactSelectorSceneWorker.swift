@@ -14,7 +14,7 @@ protocol ContactSelectorSceneWorker: class {
 protocol ContactSelectorSceneWorkerOutput: class {
 
     func workerDidFetch(contacts: [Contact])
-    func workerDidFetchWithError(_ error: Error)
+    func workerDidFetchWithError(_ error: Swift.Error)
 }
 
 extension ContactSelectorScene {

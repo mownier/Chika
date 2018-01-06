@@ -30,7 +30,7 @@ class RegisterSceneFlowMock: RegisterSceneFlow {
         return true
     }
     
-    func showError(_ error: Error) {
+    func showError(_ error: Swift.Error) {
         callback.showError?(error)
         isShowErrorCalled = true
     }

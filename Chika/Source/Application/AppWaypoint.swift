@@ -8,48 +8,56 @@
 
 import UIKit
 import FirebaseAuth
-
-protocol AppEntryWaypoint: class {
-    
-    func enter(from parent: UIViewController) -> Bool
-}
-
-protocol AppExitWaypoint: class {
-    
-    func exit() -> Bool
-}
-
-protocol AppRootWaypoint: class {
-    
-    func makeRoot(from window: UIWindow?) -> Bool
-}
+import TNCore
 
 extension AppDelegate {
     
-    class RootWaypoint: AppRootWaypoint {
+    class Flow {
         
-        var userID: String?
-        var initial: AppRootWaypoint
-        var home: AppRootWaypoint
-        var isForceInitialScene: Bool
-        
-        init(userID: String? = Auth.auth().currentUser?.uid, initial: AppRootWaypoint = InitialScene.RootWaypoint(), home: AppRootWaypoint = HomeScene.RootWaypoint(), processInfo: ProcessInfo = ProcessInfo.processInfo) {
-            self.userID = userID
-            self.initial = initial
-            self.home = home
-            self.isForceInitialScene = processInfo.arguments.contains("ForceInitialScene")
+        struct Factory {
+            
+            var nav: NavigationControllerFactory
+            var initialScene: InitialSceneFactory
         }
         
-        func makeRoot(from window: UIWindow?) -> Bool {
-            guard let window = window else {
-                return false
-            }
+        struct Theme {
             
-            guard let userID = userID, !userID.isEmpty, !isForceInitialScene else {
-                return initial.makeRoot(from: window)
-            }
-            
-            return home.makeRoot(from: window)
+            var nav: NavigationControllerTheme
+            var initialScene: InitialSceneTheme
         }
+        
+        weak var window: UIWindow?
+        var factory: Factory
+        var waypoint: WindowWaypoint
+        var theme: Theme
+        
+        init(window: UIWindow?) {
+            let waypoint = WindowWaypointSource()
+            let navTheme = UINavigationController.Theme()
+            let navFactory = UINavigationController.Factory()
+            let initialSceneTheme = InitialScene.Theme()
+            let initialSceneFactory = InitialScene.Factory()
+            
+            let theme = Theme(nav: navTheme, initialScene: initialSceneTheme)
+            let factory = Factory(nav: navFactory, initialScene: initialSceneFactory)
+            
+            self.theme = theme
+            self.window = window
+            self.factory = factory
+            self.waypoint = waypoint
+        }
+
+//        func makeRoot(from window: UIWindow?) -> Bool {
+//            guard let window = window else {
+//                return false
+//            }
+//
+//            guard let userID = userID, !userID.isEmpty, !isForceInitialScene else {
+//                // TODO:
+//                return initial.withWindow(window)makeRoot(from: window)
+//            }
+//
+//            return home.makeRoot(from: window)
+//        }
     }
 }

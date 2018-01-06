@@ -20,7 +20,7 @@ class RegisterSceneWorkerOutputMock: RegisterSceneWorkerOutput {
         self.exp = exp
     }
     
-    func workerDidRegisterWithError(_ error: Error) {
+    func workerDidRegisterWithError(_ error: Swift.Error) {
         err?(error)
         exp.fulfill()
     }

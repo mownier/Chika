@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import TNCore
 
 protocol EmailUpdateSceneEntryWaypoint: class {
     
-    func withDelegate(_ delegate: EmailUpdateSceneDelegate?) -> AppEntryWaypoint
+    func withDelegate(_ delegate: EmailUpdateSceneDelegate?) -> TNCore.EntryWaypoint
 }
 
 extension EmailUpdateScene {
     
-    class EntryWaypoint: AppEntryWaypoint, EmailUpdateSceneEntryWaypoint {
+    class EntryWaypoint: TNCore.EntryWaypoint, EmailUpdateSceneEntryWaypoint {
         
         struct Factory {
             
@@ -49,13 +50,13 @@ extension EmailUpdateScene {
             return true
         }
         
-        func withDelegate(_ aDelegate: EmailUpdateSceneDelegate?) -> AppEntryWaypoint {
+        func withDelegate(_ aDelegate: EmailUpdateSceneDelegate?) -> TNCore.EntryWaypoint {
             delegate = aDelegate
             return self
         }
     }
     
-    class ExitWaypoint: AppExitWaypoint {
+    class ExitWaypoint: TNCore.ExitWaypoint {
         
         weak var scene: UIViewController?
         

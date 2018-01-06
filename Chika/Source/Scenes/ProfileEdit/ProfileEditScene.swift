@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ProfileEditSceneInteraction: class {
     
@@ -36,7 +37,7 @@ class ProfileEditScene: UIViewController {
     var flow: ProfileEditSceneFlow
     var setup: ProfileEditSceneSetup
     var cellFactory: ProfileEditSceneCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(person: Person,
         theme: ProfileEditSceneTheme,
@@ -45,7 +46,7 @@ class ProfileEditScene: UIViewController {
         flow: ProfileEditSceneFlow,
         setup: ProfileEditSceneSetup,
         cellFactory: ProfileEditSceneCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -64,11 +65,11 @@ class ProfileEditScene: UIViewController {
         let flow = Flow()
         let cellFactory = ProfileEditSceneCell.Factory()
         let setup = Setup()
-        let waypoint = ProfileEditScene.ExitWaypoint()
+        let waypoint = PushWaypointSource()
         self.init(person: person, theme: theme, data: data, worker: worker, flow: flow, setup: setup, cellFactory: cellFactory, waypoint: waypoint)
         worker.output = self
         flow.scene = self
-        waypoint.scene = self
+        //waypoint.scene = self
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -239,7 +240,7 @@ extension ProfileEditScene: ProfileEditSceneWorkerOutput {
         delegate?.profileEditSceneDidEdit(withPerson: data.me)
     }
     
-    func workerDidSaveWithError(_ error: Error) {
+    func workerDidSaveWithError(_ error: Swift.Error) {
         changeToSaveBarItem()
         chikaNameInput.text = data.me.name
         displayNameInput.text = data.me.displayName

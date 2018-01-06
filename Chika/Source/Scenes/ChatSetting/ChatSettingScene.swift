@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNCore
 
 @objc protocol ChatSettingSceneInteraction: class {
     
@@ -37,7 +38,7 @@ class ChatSettingScene: UIViewController {
     var flow: ChatSettingSceneFlow
     var setup: ChatSettingSceneSetup
     var cellFactory: ChatSettingSceneMultipleCellFactory
-    var waypoint: AppExitWaypoint
+    var waypoint: TNCore.ExitWaypoint
     
     init(theme: ChatSettingSceneTheme,
         data: ChatSettingSceneData,
@@ -45,7 +46,7 @@ class ChatSettingScene: UIViewController {
         flow: ChatSettingSceneFlow,
         setup: ChatSettingSceneSetup,
         cellFactory: ChatSettingSceneMultipleCellFactory,
-        waypoint: AppExitWaypoint) {
+        waypoint: TNCore.ExitWaypoint) {
         self.theme = theme
         self.data = data
         self.worker = worker
@@ -300,7 +301,7 @@ extension ChatSettingScene: ChatSettingSceneWorkerOutput {
         delegate?.chatSettingSceneDidUpdateTitle(title)
     }
     
-    func workerDidUpdateTitleWithError(_ error: Error) {
+    func workerDidUpdateTitleWithError(_ error: Swift.Error) {
         let _ = setup.formatHeaderView(headerView, withTitle: data.chat.title)
         tableView.tableHeaderView = headerView
         showError(withMessage: "\(error)")
@@ -312,7 +313,7 @@ extension ChatSettingScene: ChatSettingSceneWorkerOutput {
         delegate?.chatSettingSceneDidAddParticipants(added)
     }
     
-    func worderDidAddPeopleWithError(_ error: Error) {
+    func worderDidAddPeopleWithError(_ error: Swift.Error) {
         showError(withMessage: "\(error)")
     }
 }

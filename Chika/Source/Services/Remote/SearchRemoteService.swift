@@ -6,9 +6,11 @@
 //  Copyright © 2017 Nir. All rights reserved.
 //
 
+import TNCore
+
 protocol SearchRemoteService: class {
 
-    func searchPeople(withKeyword keyword: String, callback: @escaping (ServiceResult<[PersonSearchObject]>) -> Void)
+    func searchPeople(withKeyword keyword: String, callback: @escaping (Result<[PersonSearchObject]>) -> Void)
 }
 
 class SearchRemoteServiceProvider: SearchRemoteService {
@@ -19,10 +21,10 @@ class SearchRemoteServiceProvider: SearchRemoteService {
         self.personSearch = personSearch
     }
     
-    func searchPeople(withKeyword keyword: String, callback: @escaping (ServiceResult<[PersonSearchObject]>) -> Void) {
+    func searchPeople(withKeyword keyword: String, callback: @escaping (Result<[PersonSearchObject]>) -> Void) {
         personSearch.search(withKeyword: keyword) { object in
             guard !object.isEmpty else {
-                callback(.err(ServiceError("no persons found")))
+                callback(.err(Error("no persons found")))
                 return
             }
             

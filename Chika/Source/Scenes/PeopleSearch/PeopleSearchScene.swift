@@ -201,7 +201,7 @@ extension PeopleSearchScene: PeopleSearchSceneWorkerOutput {
         tableView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
     }
     
-    func workerDidRequestContactWithError(_ error: Error, personID: String) {
+    func workerDidRequestContactWithError(_ error: Swift.Error, personID: String) {
         guard let row = data.updateRequestStatus(for: personID, status: .retry) else {
             return
         }
@@ -234,7 +234,7 @@ extension PeopleSearchScene: PeopleSearchSceneWorkerOutput {
         worker.listenOnReceivedContactRequest()
     }
     
-    func workerDidSearchPeopleWithError(_ error: Error) {
+    func workerDidSearchPeopleWithError(_ error: Swift.Error) {
         input.isRequesting = false
         data.removeAll()
         tableView.backgroundView = emptyView

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TNExtensions
 
 protocol ContactRequestSceneSetup: class {
 
@@ -22,9 +23,9 @@ extension ContactRequestScene {
     class Setup: ContactRequestSceneSetup {
         
         weak var theme: ContactRequestSceneTheme!
-        var imageCreator: AppImageCreator
+        var imageCreator: ImageCreation
         
-        init(imageCreator: AppImageCreator = ImageCreator()) {
+        init(imageCreator: ImageCreation = ImageCreation()) {
             self.imageCreator = imageCreator
         }
         
@@ -210,6 +211,6 @@ fileprivate extension ContactRequestScene.Setup {
         label.textColor = UIColor.black
         label.backgroundColor = .clear
         label.text = text
-        return imageCreator.create(for: label)
+        return imageCreator.create(using: label)
     }
 }
